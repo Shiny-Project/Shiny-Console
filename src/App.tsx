@@ -1,13 +1,12 @@
 import * as React from 'react';
-// import { Button } from 'antd';
+// import Menu from './components/Menu/Index';
+import Login from './components/User/Login/Login';
 import './App.css';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        Hello World
-      </div>
+      <Login />
     );
   }
 }
