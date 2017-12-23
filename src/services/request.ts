@@ -1,4 +1,14 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
+
+const isAxiosResponse = (e: AxiosError | AxiosResponse): e is AxiosResponse => {
+    return !!((<AxiosResponse> e).status);
+};
+
+export interface RequestError {
+    name: string;
+    message: string;
+}
+
 class Fetch {
     private base: string = '/API';
     private instance: AxiosInstance;
@@ -31,9 +41,13 @@ class Fetch {
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await this.instance.request(options);
-                resolve(response.data);
+                if (response.status === 200) {
+                    resolve(response.data);
+                } else {
+                    reject(this.parseError(response));
+                }
             } catch (e) {
-                reject(Response.error);
+                reject(this.parseError(e));
             }
         });
     }
@@ -44,6 +58,27 @@ class Fetch {
      */
     get(path: string = '/', payload: object = {}): Promise<object> {
         return this.request('GET', path, payload);
+    }
+    /**
+     * HTTP POST
+     * @param path 
+     * @param payload 
+     */
+    post(path: string = '/', payload: object = {}): Promise<object> {
+        return this.request('POST', path, payload);
+    }
+    parseError(e: AxiosError | AxiosResponse): RequestError {
+        if (isAxiosResponse(e)) {
+            return {
+                name: e.data.name,
+                message: e.data.message,
+            };
+        } else {
+            return {
+                name: 'unknown_error',
+                message: '未知错误',
+            };
+        }
     }
 }
 
