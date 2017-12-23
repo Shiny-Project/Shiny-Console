@@ -6,8 +6,15 @@ import LoginForm from './LoginForm';
 import './Login.css';
 const { Content } = Layout;
 
-class Login extends React.Component {
+export interface Props {
+    isLogin: boolean;
+    userName: string;
+    onLogin?: () => void;
+}
+
+class Login extends React.Component<Props, {}> {
     render() {
+        // const {isLogin, userName, onLogin} = this.props;
         return (
             <Layout>
                 <Content>

@@ -7,9 +7,10 @@ import {
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './stores/configureStore';
+import initState from './stores/initState';
 import './index.css';
 
-const store = configureStore();
+const store = configureStore(initState);
 
 ReactDOM.render(
   <Provider store={store}>
