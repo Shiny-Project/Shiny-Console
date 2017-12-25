@@ -1,4 +1,7 @@
-export interface StoreState {
+export interface UserState {
     isLogin: boolean;
-    userName: string;
+    userName?: string;
+}
+export interface StoreState {
+    user: UserState;
 }

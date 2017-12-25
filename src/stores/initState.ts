@@ -1,4 +1,6 @@
 export default {
-    isLogin: false,
-    userName: ''
+    user: {
+        isLogin: false,
+        userName: ''
+    }
 };

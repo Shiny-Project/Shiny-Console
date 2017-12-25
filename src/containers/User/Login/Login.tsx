@@ -11,7 +11,7 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
     };
 }
 
-export function mapStateToProps({isLogin, userName}: StoreState) {
+export function mapStateToProps({user: {isLogin, userName}}: StoreState) {
     return {
         isLogin,
         userName
