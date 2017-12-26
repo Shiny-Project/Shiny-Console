@@ -1,5 +1,5 @@
 import Login from '../../../components/User/Login/Login';
-import * as actions from '../../../actions/auth';
+import * as actions from '../../../actions/user';
 import { StoreState } from '../../../types/index';
 import { connect, Dispatch } from 'react-redux';
 
@@ -11,16 +11,17 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
     };
 }
 
-export function mapStateToProps({user: {isLogin, userName}}: StoreState) {
+export function mapStateToProps({user: {isLogin, userName, loading}}: StoreState) {
     return {
         isLogin,
-        userName
+        userName,
+        loading
     };
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.AuthAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.UserAction>) {
     return {
-        onLogin: () => dispatch(actions.login()),
+        login: () => dispatch(actions.login()),
     };
 }
 
