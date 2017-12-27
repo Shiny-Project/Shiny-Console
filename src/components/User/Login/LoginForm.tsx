@@ -37,7 +37,7 @@ class LoginForm extends React.Component<Props, State> {
         return (
             <Form>
                 <FormItem>
-                    <Input placeholder="Username" onChange={e => this.handleUsernameChange(e)} />
+                    <Input placeholder="Email" onChange={e => this.handleUsernameChange(e)} />
                 </FormItem>
                 <FormItem>
                     <Input placeholder="Password" type="password" onChange={e => this.handlePasswordChange(e)} />

@@ -74,6 +74,20 @@ class Fetch {
                 message: e.data.message,
             };
         } else {
+            if (e.request.response) {
+                try {
+                    const error = JSON.parse(e.request.responseText);
+                    return {
+                        name: error.error.code,
+                        message: error.error.info,
+                    };
+                } catch (e) {
+                    return {
+                        name: 'unknown_error',
+                        message: '未知错误',
+                    };
+                }
+            }
             return {
                 name: 'unknown_error',
                 message: '未知错误',
