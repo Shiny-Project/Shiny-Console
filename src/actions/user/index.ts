@@ -2,6 +2,7 @@ import * as constants from '../../constants/index';
 import { StoreState } from '../../types/index';
 import { ThunkAction } from 'redux-thunk';
 import request from '../../services/request';
+import { message } from 'antd';
 
 export interface Login {
     type: constants.LOGIN;
@@ -13,7 +14,6 @@ export interface LoginSuccess {
 
 export interface LoginFailure {
     type: constants.LOGIN_FAILURE;
-    message: string;
 }
 
 export type UserAction = Login | LoginSuccess | LoginFailure;
@@ -28,7 +28,8 @@ export function login(userName: string, password: string): ThunkAction<void, Sto
             });
             dispatch(loginSuccess());
         } catch (e) {
-            dispatch(loginFailure(e.message));
+            message.error(e.message);
+            dispatch(loginFailure());
         }
     };
 }
@@ -45,9 +46,8 @@ export function loginSuccess(): LoginSuccess {
     };
 }
 
-export function loginFailure(message: string): LoginFailure {
+export function loginFailure(): LoginFailure {
     return {
         type: constants.LOGIN_FAILURE,
-        message
     };
 }
