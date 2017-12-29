@@ -1,5 +1,5 @@
 const tsImportPluginFactory = require('ts-import-plugin')
-const { getLoader } = require("react-app-rewired");
+const { getLoader, injectBabelPlugin } = require("react-app-rewired");
 const path = require('path');
 
 function resolve(dir) {
@@ -11,6 +11,8 @@ module.exports = function override(config, env) {
         ...config.resolve.alias,
         '@': resolve('src')
     }
+
+    config = injectBabelPlugin('syntax-dynamic-import', config);
 
     const tsLoader = getLoader(
         config.module.rules,
