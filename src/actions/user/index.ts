@@ -1,8 +1,9 @@
-import * as constants from '../../constants/index';
-import { StoreState } from '../../types/index';
+import * as constants from '@/constants/index';
+import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
-import request from '../../services/request';
+import request from '@/services/request';
 import { message } from 'antd';
+import Auth from '@/services/auth';
 
 export interface Login {
     type: constants.LOGIN;
@@ -22,10 +23,11 @@ export function login(userName: string, password: string): ThunkAction<void, Sto
     return async (dispatch) => {
         dispatch(loginStart());
         try {
-            await request.post('/User/login', {
+            const response = await request.post('/User/login', {
                 email: userName,
                 password
             });
+            Auth.login(<number> (response.uid));
             dispatch(loginSuccess());
         } catch (e) {
             message.error(e.message);

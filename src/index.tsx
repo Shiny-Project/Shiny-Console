@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import configureStore from './stores/configureStore';
-import initState from './stores/initState';
+import configureStore from '@/stores/configureStore';
+import initState from '@/stores/initState';
 import './index.css';
 
 const store = configureStore(initState);

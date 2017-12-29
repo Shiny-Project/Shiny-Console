@@ -9,6 +9,10 @@ export interface RequestError {
     message: string;
 }
 
+export interface Response {
+    [key: string]: Response | string | number;
+}
+
 class Fetch {
     private base: string = '/API';
     private instance: AxiosInstance;
@@ -24,7 +28,8 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    request(method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET', path: string = '/', payload: object = {}) {
+    // tslint:disable-next-line:max-line-length
+    request(method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET', path: string = '/', payload: object = {}): Promise<Response> {
         console.log(`[${new Date().toISOString()}] ${method} ${path}`);
         let options = {
             method: method,
@@ -42,7 +47,7 @@ class Fetch {
             try {
                 const response = await this.instance.request(options);
                 if (response.status === 200) {
-                    resolve(response.data);
+                    resolve(response.data.data);
                 } else {
                     reject(this.parseError(response));
                 }
@@ -56,7 +61,7 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    get(path: string = '/', payload: object = {}): Promise<object> {
+    get(path: string = '/', payload: object = {}): Promise<Response> {
         return this.request('GET', path, payload);
     }
     /**
@@ -64,7 +69,7 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    post(path: string = '/', payload: object = {}): Promise<object> {
+    post(path: string = '/', payload: object = {}): Promise<Response> {
         return this.request('POST', path, payload);
     }
     parseError(e: AxiosError | AxiosResponse): RequestError {

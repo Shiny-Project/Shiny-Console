@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Layout, Row, Col, Card, Spin, message } from 'antd';
 import LoginForm from './LoginForm';
 import './Login.css';
+import Auth from '@/services/auth';
 const { Content } = Layout;
 
 export interface Props {
@@ -11,7 +13,14 @@ export interface Props {
     loading?: boolean;
 }
 
-class Login extends React.Component<Props, {}> {
+export interface State {
+    isLogin: boolean;
+}
+
+class Login extends React.Component<Props, State> {
+    state = {
+        isLogin: false
+    };
     constructor(props: Props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -22,7 +31,24 @@ class Login extends React.Component<Props, {}> {
         }
         return this.props.login && this.props.login(userName, password);
     }
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.isLogin) {
+            this.setState({
+                isLogin: true
+            });
+        }
+    }
     render() {
+        if (this.state.isLogin) {
+            return (
+                <Redirect to="/dashboard" />
+            );
+        }
+        if (Auth.isLogin()) {
+            return (
+                <Redirect to="/dashboard" />
+            );
+        }
         return (
             <Layout>
                 <Content>

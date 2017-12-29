@@ -1,8 +1,8 @@
-import Login from '../../../components/User/Login/Login';
-import * as actions from '../../../actions/user';
-import { StoreState } from '../../../types/index';
+import Login from '@/components/User/Login/Login';
+import * as actions from '@/actions/user';
+import { StoreState } from '@/types/index';
 import { connect } from 'react-redux';
-import { UserAction } from '../../../actions/user';
+import { UserAction } from '@/actions/user';
 import { ThunkAction } from 'redux-thunk';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
