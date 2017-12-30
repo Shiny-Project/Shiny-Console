@@ -1,4 +1,5 @@
 import React from 'react';
+import ErrorPage from '@/components/Common/Error';
 
 export interface LoadingProps {
     isLoading: boolean;
@@ -10,7 +11,7 @@ const Loading = ({ isLoading, error }: LoadingProps) => {
     if (isLoading) {
         return <div>Loading...</div>;
     } else if (error) {
-        return <div>Sorry, there was a problem loading the page.</div>;
+        return <ErrorPage message="组件加载出现错误" />;
     } else {
         return null;
     }

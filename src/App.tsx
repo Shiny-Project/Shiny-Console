@@ -7,10 +7,19 @@ import {
 import Loadable from 'react-loadable';
 import Loading from '@/components/Common/Loading';
 import Login from '@/containers/User/Login/Login';
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
 import './App.css';
 
 const AsyncDashboard = Loadable({
-  loader: () => import('@/components/Dashboard/Index'),
+  loader: () => {
+    const promise = import('@/components/Dashboard/Index');
+    nprogress.start();
+    promise.then(() => {
+      nprogress.done();
+    });
+    return promise;
+  },
   loading: Loading
 });
 
