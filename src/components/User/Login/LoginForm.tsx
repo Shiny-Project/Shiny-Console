@@ -33,18 +33,26 @@ class LoginForm extends React.Component<Props, State> {
         });
     }
 
+    public handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+        event.preventDefault();
+        this.props.handleLogin(this.state.userName, this.state.password);
+    }
+
     render() {
         return (
-            <Form>
+            <Form onSubmit={e => this.handleSubmit(e)} >
                 <FormItem>
-                    <Input placeholder="Email" onChange={e => this.handleUsernameChange(e)} />
+                    <Input 
+                           placeholder="Email" 
+                           onChange={e => this.handleUsernameChange(e)} 
+                    />
                 </FormItem>
                 <FormItem>
                     <Input placeholder="Password" type="password" onChange={e => this.handlePasswordChange(e)} />
                 </FormItem>
                 <FormItem>
                     <Button 
-                        onClick={() => {this.props.handleLogin(this.state.userName, this.state.password); }}
+                        htmlType="submit"
                     >
                         Login
                     </Button>
