@@ -3,5 +3,8 @@ export default {
         isLogin: false,
         userName: '',
         loading: false,
+    },
+    dashboard: {
+        
     }
 };

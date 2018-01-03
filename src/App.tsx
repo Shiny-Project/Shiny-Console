@@ -13,7 +13,7 @@ import './App.css';
 
 const AsyncDashboard = Loadable({
   loader: () => {
-    const promise = import('@/components/Dashboard/Index');
+    const promise = import('@/containers/Dashboard/Index');
     nprogress.start();
     promise.then(() => {
       nprogress.done();
@@ -24,6 +24,9 @@ const AsyncDashboard = Loadable({
 });
 
 class App extends React.Component {
+  componentDidCatch(error: Error) {
+    console.log(error);
+  }
   render() {
     return (
       <Router>

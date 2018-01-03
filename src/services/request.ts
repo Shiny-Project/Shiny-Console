@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
+import auth from './auth';
 
 const isAxiosResponse = (e: AxiosError | AxiosResponse): e is AxiosResponse => {
     return !!((<AxiosResponse> e).status);
@@ -74,6 +75,10 @@ class Fetch {
     }
     parseError(e: AxiosError | AxiosResponse): RequestError {
         if (isAxiosResponse(e)) {
+            if (e.data.name === 'need_login') {
+                // 登录失效
+                auth.logout();
+            }
             return {
                 name: e.data.name,
                 message: e.data.message,

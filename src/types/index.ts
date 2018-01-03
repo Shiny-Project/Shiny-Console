@@ -3,6 +3,10 @@ export interface UserState {
     userName?: string;
     loading: boolean;
 }
+export interface DashboardState {
+
+}
 export interface StoreState {
     user: UserState;
+    dashboard: DashboardState;
 }
