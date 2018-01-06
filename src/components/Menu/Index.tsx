@@ -10,13 +10,11 @@ export interface Props {
 class Sider extends React.Component<Props, {}> {
   constructor(props: Props, context: object) {
     super(props);
-    console.log(context);
   }
   render() {
     return (
       <Menu
         style={{ width: '100%' }}
-        defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
       >

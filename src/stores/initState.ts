@@ -5,6 +5,6 @@ export default {
         loading: false,
     },
     dashboard: {
-        
+        error: new Error('未知错误'),
     }
 };

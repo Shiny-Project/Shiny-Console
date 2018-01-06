@@ -4,7 +4,7 @@ export interface UserState {
     loading: boolean;
 }
 export interface DashboardState {
-
+    error?: Error;
 }
 export interface StoreState {
     user: UserState;
