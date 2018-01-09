@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Menu, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
 
@@ -20,7 +21,9 @@ class Sider extends React.Component<Props, {}> {
       >
         <SubMenu key="sub1" title={<span><Icon type="cloud" /><span>服务器</span></span>}>
           {/* <MenuItemGroup key="g1" title="TS处理"> */}
-            <Menu.Item key="1">服务器节点管理</Menu.Item>
+            <Menu.Item key="1">
+              <Link to="/dashboard/server/nodes">服务器节点管理</Link>
+            </Menu.Item>
             <Menu.Item key="2">API 密钥对管理</Menu.Item>
           {/* </MenuItemGroup> */}
           {/* <MenuItemGroup key="g2" title="--">

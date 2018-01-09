@@ -2,3 +2,6 @@
     color: white;
     user-select: none;
 }
+.dashboard-main-container{
+    margin-top: 1rem;
+}

@@ -5,6 +5,10 @@ import request from '@/services/request';
 import { message } from 'antd';
 import Auth from '@/services/auth';
 
+export interface LoginResponse {
+    uid: number;
+}
+
 export interface Login {
     type: constants.LOGIN;
 }
@@ -23,11 +27,11 @@ export function login(userName: string, password: string): ThunkAction<void, Sto
     return async (dispatch) => {
         dispatch(loginStart());
         try {
-            const response = await request.post('/User/login', {
+            const response = await request.post<LoginResponse>('/User/login', {
                 email: userName,
                 password
             });
-            Auth.login(<number> (response.uid));
+            Auth.login(response.uid);
             dispatch(loginSuccess());
         } catch (e) {
             message.error(e.message);

@@ -1,3 +1,7 @@
 .login-container{
     height: 100vh;
 }
+.lyric {
+    font-size: smaller;
+    color: #aaa;
+}

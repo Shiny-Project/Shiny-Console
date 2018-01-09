@@ -57,6 +57,11 @@ class LoginForm extends React.Component<Props, State> {
                         Login
                     </Button>
                 </FormItem>
+                <FormItem>
+                    <span className="lyric">
+                    名もなき若者よ 夢ならここにある
+                    </span>
+                </FormItem>
             </Form>
         );
     }

@@ -5,13 +5,15 @@ const isAxiosResponse = (e: AxiosError | AxiosResponse): e is AxiosResponse => {
     return !!((<AxiosResponse> e).status);
 };
 
-export interface RequestError {
-    name: string;
-    message: string;
+export interface Response {
+    [key: string]: Response | string | number | Response[];
 }
 
-export interface Response {
-    [key: string]: Response | string | number;
+export class RequestError extends Error {
+    constructor(name: string, message: string) {
+        super(message);
+        this.name = name;
+    }
 }
 
 class Fetch {
@@ -30,7 +32,7 @@ class Fetch {
      * @param payload 
      */
     // tslint:disable-next-line:max-line-length
-    request(method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET', path: string = '/', payload: object = {}): Promise<Response> {
+    request<T>(method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET', path: string = '/', payload: object = {}): Promise<T> {
         console.log(`[${new Date().toISOString()}] ${method} ${path}`);
         let options = {
             method: method,
@@ -62,7 +64,7 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    get(path: string = '/', payload: object = {}): Promise<Response> {
+    get<T>(path: string = '/', payload: object = {}): Promise<T> {
         return this.request('GET', path, payload);
     }
     /**
@@ -70,7 +72,7 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    post(path: string = '/', payload: object = {}): Promise<Response> {
+    post<T>(path: string = '/', payload: object = {}): Promise<T> {
         return this.request('POST', path, payload);
     }
     parseError(e: AxiosError | AxiosResponse): RequestError {
@@ -79,29 +81,17 @@ class Fetch {
                 // 登录失效
                 auth.logout();
             }
-            return {
-                name: e.data.name,
-                message: e.data.message,
-            };
+            return new RequestError(e.data.name, e.data.message);
         } else {
             if (e.request.response) {
                 try {
                     const error = JSON.parse(e.request.responseText);
-                    return {
-                        name: error.error.code,
-                        message: error.error.info,
-                    };
+                    return new RequestError(error.error.code, error.error.info);
                 } catch (e) {
-                    return {
-                        name: 'unknown_error',
-                        message: '未知错误',
-                    };
+                    return new RequestError('unknown_error', '未知错误');
                 }
             }
-            return {
-                name: 'unknown_error',
-                message: '未知错误',
-            };
+            return new RequestError('unknown_error', '未知错误');
         }
     }
 }
