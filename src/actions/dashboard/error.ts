@@ -6,7 +6,7 @@ export interface RaiseError {
     error: Error;
 }
 
-export type DashboardAction = RaiseError;
+export type ErrorAction = RaiseError;
 
 export function raiseError(error: Error): RaiseError {
     return {

@@ -1,7 +1,7 @@
 import * as constants from '@/constants/index';
 import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard';
+import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { StatisticsResponse } from '@/types/dashboard';
 
@@ -11,7 +11,7 @@ export interface GetStatistic {
 
 export interface GetStatisticSuccess {
     type: constants.GET_STATISTICS_SUCCESS;
-    data: object;
+    statistics: StatisticsResponse;
 }
 
 export interface GetStatisticFailure {
@@ -38,10 +38,10 @@ export function getStatisticsStart(): GetStatistic {
     };
 }
 
-export function getStatisticsSuccess(data: StatisticsResponse): GetStatisticSuccess {
+export function getStatisticsSuccess(statistics: StatisticsResponse): GetStatisticSuccess {
     return {
         type: constants.GET_STATISTICS_SUCCESS,
-        data
+        statistics
     };
 }
 

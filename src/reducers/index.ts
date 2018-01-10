@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
 import { user } from './user';
-import { dashboard } from './dashboard';
+import { error } from './Dashboard/error';
+import { overview } from './Dashboard/overview';
 const rootReducer = combineReducers({
     user,
-    dashboard
+    dashboard: combineReducers({
+        error,
+        overview
+    }),
+    overview
 });
 
 export default rootReducer;

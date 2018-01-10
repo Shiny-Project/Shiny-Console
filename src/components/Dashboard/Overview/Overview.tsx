@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Table } from 'antd';
+import { StatisticsResponse } from '@/types/dashboard';
 
 export interface SpiderCount {
     publisher: string;
@@ -17,7 +18,24 @@ const recentTableColumns = [{
     dataIndex: 'count',
     key: 'count',
 }];
-class Overview extends React.Component<{}, {}> {
+
+interface State {
+    spiderRecentRanking: StatisticsResponse;
+}
+
+interface Props {
+    isLoading: boolean;
+    statistics: StatisticsResponse;
+    getStatistics: () => void;
+}
+
+class Overview extends React.Component<Props, State> {
+    componentDidMount() {
+        this.props.getStatistics();
+    }
+    componentWillReceiveProps(nextProps: Props) {
+        console.log(nextProps);
+    }
     render() {
         return (
             <Card title="Overview">

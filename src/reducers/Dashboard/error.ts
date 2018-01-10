@@ -1,9 +1,9 @@
-import { DashboardAction } from '@/actions/dashboard';
-import { DashboardState } from '@/types/index';
+import { ErrorAction } from '@/actions/dashboard/error';
+import { ErrorState } from '@/types/index';
 import { RAISE_ERROR } from '@/constants/index';
 import initState from '@/stores/initState';
 
-export function dashboard(state: DashboardState = initState.dashboard, action: DashboardAction) {
+export function error(state: ErrorState = initState.dashboard.error, action: ErrorAction) {
     switch (action.type) {
         case RAISE_ERROR:
             return {

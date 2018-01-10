@@ -1,8 +1,8 @@
 import Dashboard from '@/components/Dashboard/Index';
-import * as actions from '@/actions/dashboard';
+import * as actions from '@/actions/dashboard/error';
 import { StoreState } from '@/types/index';
 import { connect } from 'react-redux';
-import { DashboardAction } from '@/actions/dashboard';
+import { ErrorAction } from '@/actions/dashboard/error';
 import { ThunkAction } from 'redux-thunk';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
@@ -13,15 +13,15 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
     };
 }
 
-export function mapStateToProps({dashboard: {error}}: StoreState) {
+export function mapStateToProps(state: StoreState) {
     return {
-      error,
+      error: state.dashboard.error
     };
 }
 
 // Hack 第二弹 自己弄了个接口 
 interface Dispatch {
-    (action: DashboardAction | ThunkAction<void, StoreState, null>): void;
+    (action: ErrorAction | ThunkAction<void, StoreState, null>): void;
 }
 
 // 原来代码: dispatch: Dispatch<actions.UserAction>

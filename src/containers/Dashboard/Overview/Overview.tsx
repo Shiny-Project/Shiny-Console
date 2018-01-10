@@ -13,9 +13,9 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
     };
 }
 
-export function mapStateToProps({}: StoreState) {
+export function mapStateToProps(state: StoreState) {
     return {
-      
+      statistics: state.dashboard.overview.statistics
     };
 }
 
@@ -28,7 +28,7 @@ interface Dispatch {
 // 加上 redux-thunk 之后这个类型不知道咋配 先 Hack 掉了
 export function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        getStatistics: (error: Error) => {
+        getStatistics: () => {
             dispatch(actions.getStatistics());
         }
     };

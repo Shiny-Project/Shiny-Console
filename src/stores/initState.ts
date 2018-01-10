@@ -5,7 +5,9 @@ export default {
         loading: false,
     },
     dashboard: {
-        error: new Error('未知错误'),
+        error: {
+            error: new Error('未知错误')
+        },
         overview: {
             isLoading: false
         }
