@@ -53,7 +53,7 @@ class Login extends React.Component<Props, State> {
             <Layout>
                 <Content>
                     <Row type="flex" justify="space-around" align="middle" className="login-container">
-                        <Col span={8}>
+                        <Col lg={8} xs={24}>
                             <Spin spinning={this.props.loading}>
                                 <Card title="Login">
                                     <LoginForm handleLogin={this.handleLogin} />

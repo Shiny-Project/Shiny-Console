@@ -50,7 +50,7 @@ class Overview extends React.Component<Props, State> {
         return (
             <Card title="Overview">
                 <Row gutter={16}>
-                    <Col span={8}>
+                    <Col lg={8} xs={24}>
                         <Card title="近1日" bordered={false}>
                             <Table
                                 dataSource={this.state.spiderRecentRanking['1day']}
@@ -60,7 +60,7 @@ class Overview extends React.Component<Props, State> {
                             />
                         </Card>
                     </Col>
-                    <Col span={8}>
+                    <Col lg={8} xs={24}>
                         <Card title="近3日" bordered={false}>
                             <Table
                                 dataSource={this.state.spiderRecentRanking['3days']}
@@ -70,7 +70,7 @@ class Overview extends React.Component<Props, State> {
                             />
                         </Card>
                     </Col>
-                    <Col span={8}>
+                    <Col lg={8} xs={24}>
                         <Card title="近21日" bordered={false}>
                             <Table
                                 dataSource={this.state.spiderRecentRanking['21days']}

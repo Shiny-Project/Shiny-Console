@@ -30,10 +30,10 @@ class Dashboard extends React.Component<Props, {}> {
                     </Header>
                     <Content>
                         <Row gutter={16}>
-                            <Col span={4}>
+                            <Col lg={4} xs={24}>
                                 <Menu />
                             </Col>
-                            <Col span={20} className="dashboard-main-container">
+                            <Col lg={20} xs={24} className="dashboard-main-container">
                                 <Switch>
                                     <Route exact={true} path="/dashboard" component={RedirectToOverview} />
                                     {/* Overview */}
