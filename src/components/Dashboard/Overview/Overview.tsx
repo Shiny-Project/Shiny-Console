@@ -53,7 +53,7 @@ class Overview extends React.Component<Props, State> {
                     <Col span={8}>
                         <Card title="近1日" bordered={false}>
                             <Table
-                                dataSource={this.state.spiderRecentRanking['1days']}
+                                dataSource={this.state.spiderRecentRanking['1day']}
                                 columns={recentTableColumns}
                                 pagination={false}
                                 rowKey="publisher"
