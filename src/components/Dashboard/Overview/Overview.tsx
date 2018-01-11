@@ -7,8 +7,6 @@ export interface SpiderCount {
     count: number;
 }
 
-const dataSource: SpiderCount[] = [];
-
 const recentTableColumns = [{
     title: 'Spider Name',
     dataIndex: 'publisher',
@@ -30,11 +28,23 @@ interface Props {
 }
 
 class Overview extends React.Component<Props, State> {
+    state = {
+        spiderRecentRanking: {
+            '1day': [],
+            '3days': [],
+            '21days': [],
+        }
+    };
+
     componentDidMount() {
         this.props.getStatistics();
     }
     componentWillReceiveProps(nextProps: Props) {
-        console.log(nextProps);
+        if (nextProps.statistics) {
+            this.setState({
+                spiderRecentRanking: nextProps.statistics
+            });
+        }
     }
     render() {
         return (
@@ -42,17 +52,32 @@ class Overview extends React.Component<Props, State> {
                 <Row gutter={16}>
                     <Col span={8}>
                         <Card title="近1日" bordered={false}>
-                            <Table dataSource={dataSource} columns={recentTableColumns} pagination={false} />
+                            <Table
+                                dataSource={this.state.spiderRecentRanking['1days']}
+                                columns={recentTableColumns}
+                                pagination={false}
+                                rowKey="publisher"
+                            />
                         </Card>
                     </Col>
                     <Col span={8}>
                         <Card title="近3日" bordered={false}>
-                            <Table dataSource={dataSource} columns={recentTableColumns} pagination={false} />
+                            <Table
+                                dataSource={this.state.spiderRecentRanking['3days']}
+                                columns={recentTableColumns}
+                                pagination={false}
+                                rowKey="publisher"
+                            />
                         </Card>
                     </Col>
                     <Col span={8}>
                         <Card title="近21日" bordered={false}>
-                            <Table dataSource={dataSource} columns={recentTableColumns} pagination={false} />
+                            <Table
+                                dataSource={this.state.spiderRecentRanking['21days']}
+                                columns={recentTableColumns}
+                                pagination={false}
+                                rowKey="publisher"
+                            />
                         </Card>
                     </Col>
                 </Row>
