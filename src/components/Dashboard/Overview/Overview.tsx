@@ -39,13 +39,24 @@ class Overview extends React.Component<Props, State> {
         levelRanking: []
     };
 
+    scale = [{
+        dataKey: 'count',
+        min: 0,
+    }, {
+        dataKey: 'level',
+        min: 0,
+        max: 1,
+    }];
+
     componentDidMount() {
         this.props.getStatistics();
     }
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.statistics) {
+            console.log(nextProps.statistics.levelRanking);
             this.setState({
-                spiderRanking: nextProps.statistics.spiderRanking
+                spiderRanking: nextProps.statistics.spiderRanking,
+                levelRanking: nextProps.statistics.levelRanking,
             });
         }
     }
@@ -53,13 +64,13 @@ class Overview extends React.Component<Props, State> {
         return (
             <Card title="Overview">
                 <Row gutter={16}>
-                    <Col lg={12} xs={24}>
+                    <Col lg={24} xs={24}>
                         <Card title="本月事件等级分布">
-                            {/* <Chart forceFit={true} height={400} data={this.props.statistics.levelRanking}>
+                            <Chart forceFit={true} height={400} scale={this.scale} data={this.state.levelRanking}>
                                 <Tooltip />
                                 <Axis />
-                                <Bar position="year*sales" />
-                            </Chart> */}
+                                <Bar position="level*count" />
+                            </Chart>
                         </Card>
                     </Col>
                 </Row>
