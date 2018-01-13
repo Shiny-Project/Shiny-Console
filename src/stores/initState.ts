@@ -1,3 +1,5 @@
+const initialError = new Error('初始化占位错误');
+initialError.name = 'initial_error';
 export default {
     user: {
         isLogin: false,
@@ -5,8 +7,8 @@ export default {
         loading: false,
     },
     dashboard: {
-        error: {
-            error: new Error('未知错误')
+        errors: {
+            lastError: initialError
         },
         overview: {
             isLoading: false

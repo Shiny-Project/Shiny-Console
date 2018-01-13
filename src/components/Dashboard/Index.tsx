@@ -1,10 +1,11 @@
 import React from 'react';
-import { Row, Col, Layout } from 'antd';
+import { Row, Col, Layout, message } from 'antd';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from '@/components/Menu/Index';
 import ServerNodes from './Server/Node';
 import Overview from '@/containers/Dashboard/Overview/Overview';
 import './Index.css';
+import { ErrorState } from '@/types';
 const { Header, Content } = Layout;
 
 class RedirectToOverview extends React.Component {
@@ -16,11 +17,16 @@ class RedirectToOverview extends React.Component {
 }
 
 export interface Props {
-    error?: Error;
+    errors?: ErrorState;
     raiseError: (error: Error) => void;
 }
 
 class Dashboard extends React.Component<Props, {}> {
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.errors.lastError.name !== 'initial_error') {
+            message.error(nextProps.errors.lastError.message);
+        }
+    }
     render() {
         return (
             <div>

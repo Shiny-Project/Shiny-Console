@@ -91,6 +91,9 @@ class Fetch {
                     return new RequestError('unknown_error', '未知错误');
                 }
             }
+            if (e.request.status) {
+                return new RequestError('netword_error', e.request.statusText);
+            }
             return new RequestError('unknown_error', '未知错误');
         }
     }

@@ -15,7 +15,7 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 
 export function mapStateToProps(state: StoreState) {
     return {
-      error: state.dashboard.error
+      errors: state.dashboard.errors
     };
 }
 

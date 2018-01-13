@@ -7,11 +7,11 @@ export interface UserState {
 }
 // Dashboard
 export interface DashboardState {
-    error?: ErrorState;
+    errors?: ErrorState;
     overview: OverviewState;
 }
 export interface ErrorState {
-    error: Error;
+    lastError: Error;
 }
 export interface OverviewState {
     isLoading: boolean;
