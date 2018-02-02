@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@antv/data-set": "^0.8.5",
     "antd": "^3.0.2",
     "axios": "^0.17.1",
     "nprogress": "^0.2.0",

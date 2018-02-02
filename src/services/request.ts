@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import auth from './auth';
 
 const isAxiosResponse = (e: AxiosError | AxiosResponse): e is AxiosResponse => {
-    return !!((<AxiosResponse> e).status);
+    return !!((e as AxiosResponse).status);
 };
 
 export interface Response {
@@ -92,7 +92,7 @@ class Fetch {
                 }
             }
             if (e.request.status) {
-                return new RequestError('netword_error', e.request.statusText);
+                return new RequestError('netword_error', `网络错误: ${e.request.statusText}`);
             }
             return new RequestError('unknown_error', '未知错误');
         }

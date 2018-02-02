@@ -1,6 +1,12 @@
 export interface StatisticsResponse {
     spiderRanking: SpiderRanking;
     levelRanking: LevelRankingItem[];
+    jobStatus: StatusItem[];
+}
+
+export interface StatusItem {
+    status: string;
+    count: number;
 }
 
 export interface SpiderRanking {

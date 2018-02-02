@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, Row, Col, Table } from 'antd';
 import * as DashboardTypes from '@/types/dashboard';
-import { Chart, Tooltip, Axis, Bar } from 'viser-react';
+import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from 'viser-react';
+const DataSet = require('@antv/data-set');
 
 export interface SpiderCount {
     publisher: string;
@@ -21,6 +22,7 @@ const spiderRankingColumns = [{
 interface State {
     spiderRanking: DashboardTypes.SpiderRanking;
     levelRanking: DashboardTypes.LevelRankingItem[];
+    jobStatus: DashboardTypes.StatusItem[];
 }
 
 interface Props {
@@ -36,10 +38,11 @@ class Overview extends React.Component<Props, State> {
             '3days': [],
             '21days': [],
         },
-        levelRanking: []
+        levelRanking: [],
+        jobStatus: [],
     };
 
-    scale = [{
+    levelRankingScale = [{
         dataKey: 'count',
         min: 0,
     }, {
@@ -48,15 +51,32 @@ class Overview extends React.Component<Props, State> {
         max: 1,
     }];
 
+    jobStatusScale = [{
+        dataKey: 'percent',
+        min: 0,
+        formatter: '.0%',
+    }];
+
+    processJobStatusData = () => {
+        const dv = new DataSet.View().source(this.state.jobStatus);
+        dv.transform({
+            type: 'percent',
+            field: 'count',
+            dimension: 'status',
+            as: 'percent'
+        });
+        return dv.rows;
+    }
+
     componentDidMount() {
         this.props.getStatistics();
     }
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.statistics) {
-            console.log(nextProps.statistics.levelRanking);
             this.setState({
                 spiderRanking: nextProps.statistics.spiderRanking,
                 levelRanking: nextProps.statistics.levelRanking,
+                jobStatus: nextProps.statistics.jobStatus,
             });
         }
     }
@@ -64,12 +84,42 @@ class Overview extends React.Component<Props, State> {
         return (
             <Card title="Overview">
                 <Row gutter={16}>
-                    <Col lg={24} xs={24}>
-                        <Card title="本月事件等级分布">
-                            <Chart forceFit={true} height={400} scale={this.scale} data={this.state.levelRanking}>
+                    <Col lg={12} xs={24}>
+                        <Card title="本月事件等级分布" bordered={false}>
+                            <Chart
+                                forceFit={true}
+                                height={300}
+                                scale={this.levelRankingScale}
+                                data={this.state.levelRanking}
+                            >
                                 <Tooltip />
                                 <Axis />
                                 <Bar position="level*count" />
+                            </Chart>
+                        </Card>
+                    </Col>
+                    <Col lg={12} xs={24}>
+                        <Card title="本日任务处理情况" bordered={false}>
+                            <Chart 
+                                forceFit={true} 
+                                height={300} 
+                                data={this.processJobStatusData()} 
+                                scale={this.jobStatusScale}
+                            >
+                                <Tooltip showTitle={false} />
+                                <Coord type="theta" />
+                                <Axis />
+                                <Legend dataKey="status" />
+                                <Pie
+                                    position="percent"
+                                    color="status"
+                                    style={{ stroke: '#fff', lineWidth: 1 }}
+                                    label={['percent', {
+                                        formatter: (val: string, item: {point: {status: string}}) => {
+                                            return item.point.status + ': ' + val;
+                                        }
+                                    }]}
+                                />
                             </Chart>
                         </Card>
                     </Col>
