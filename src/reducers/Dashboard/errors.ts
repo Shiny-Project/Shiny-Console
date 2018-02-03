@@ -8,7 +8,8 @@ export function errors(state: ErrorState = initState.dashboard.errors, action: E
         case RAISE_ERROR:
             return {
                 ...state,
-                lastError: action.error
+                lastError: action.error,
+                errorId: action.errorId
             };
         default:
             return {

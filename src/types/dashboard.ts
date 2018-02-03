@@ -1,3 +1,4 @@
+// Dashboard/Overview
 export interface StatisticsResponse {
     spiderRanking: SpiderRanking;
     levelRanking: LevelRankingItem[];
@@ -24,3 +25,26 @@ export interface LevelRankingItem {
     level: string;
     count: number;
 }
+
+// Dashboard/Realtime
+
+export type RecentEventsResponse = ShinyEvent[];
+
+export interface ShinyEvent {
+    id: number;
+    data: ShinyEventData;
+    level: ShinyEventLevel;
+    publisher: string;
+    hash: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ShinyEventData {
+    content: string;
+    cover: string;
+    link: string;
+    title: string;
+}
+
+export type ShinyEventLevel = 1 | 2 | 3 | 4 | 5;

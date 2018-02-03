@@ -1,5 +1,10 @@
-import { StatisticsResponse } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse } from '@/types/dashboard';
 
+export interface StoreState {
+    user: UserState;
+    dashboard: DashboardState;
+}
+// User
 export interface UserState {
     isLogin: boolean;
     userName?: string;
@@ -9,15 +14,19 @@ export interface UserState {
 export interface DashboardState {
     errors?: ErrorState;
     overview: OverviewState;
+    realtime: RealtimeState;
 }
 export interface ErrorState {
     lastError: Error;
+    errorId: number;
 }
+// Dashboard/Overview
 export interface OverviewState {
     isLoading: boolean;
     statistics?: StatisticsResponse;
 }
-export interface StoreState {
-    user: UserState;
-    dashboard: DashboardState;
+// Dashboard/Realtime
+export interface RealtimeState {
+    isLoading: boolean;
+    recentEvents?: RecentEventsResponse;
 }

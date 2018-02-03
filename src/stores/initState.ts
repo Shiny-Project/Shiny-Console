@@ -8,10 +8,14 @@ export default {
     },
     dashboard: {
         errors: {
-            lastError: initialError
+            lastError: initialError,
+            errorId: Math.random()
         },
         overview: {
             isLoading: false
+        },
+        realtime: {
+            isLoading: false
         }
-    }
+    },
 };

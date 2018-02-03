@@ -27,7 +27,8 @@ export function getStatistics(): ThunkAction<void, StoreState, null> {
             const response = await request.get<StatisticsResponse>('/Data/statistics');
             dispatch(getStatisticsSuccess(response));
         } catch (e) {
-            dispatch(getStatisticsFailure(e));
+            dispatch(raiseError(e));
+            dispatch(getStatisticsFailure());
         }
     };
 }
@@ -45,6 +46,8 @@ export function getStatisticsSuccess(statistics: StatisticsResponse): GetStatist
     };
 }
 
-export function getStatisticsFailure(e: Error): RaiseError {
-    return raiseError(e);
+export function getStatisticsFailure(): GetStatisticFailure {
+    return {
+        type: constants.GET_STATISTIC_FAILURE,
+    };
 }

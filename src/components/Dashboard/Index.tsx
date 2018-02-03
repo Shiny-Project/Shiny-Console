@@ -23,7 +23,8 @@ export interface Props {
 
 class Dashboard extends React.Component<Props, {}> {
     componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.errors.lastError.name !== 'initial_error') {
+        // tslint:disable-next-line:max-line-length
+        if (nextProps.errors.lastError.name !== 'initial_error' && nextProps.errors.errorId !== this.props.errors.errorId) {
             message.error(nextProps.errors.lastError.message);
         }
     }

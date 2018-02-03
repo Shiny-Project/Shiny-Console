@@ -88,11 +88,11 @@ class Fetch {
                     const error = JSON.parse(e.request.responseText);
                     return new RequestError(error.error.code, error.error.info);
                 } catch (e) {
-                    return new RequestError('unknown_error', '未知错误');
+                    // Fail to parse response, do nothing
                 }
             }
             if (e.request.status) {
-                return new RequestError('netword_error', `网络错误: ${e.request.statusText}`);
+                return new RequestError('netword_error', `网络错误: ${e.request.status} ${e.request.statusText}`);
             }
             return new RequestError('unknown_error', '未知错误');
         }
