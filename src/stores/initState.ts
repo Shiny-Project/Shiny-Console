@@ -15,7 +15,8 @@ export default {
             isLoading: false
         },
         realtime: {
-            isLoading: false
+            isLoading: false,
+            recentEvents: []
         }
     },
 };

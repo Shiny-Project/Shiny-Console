@@ -22,7 +22,7 @@ export type RealtimeAction = GetRecentEvent | GetRecentEventSuccess | GetRecentE
 
 export function getRecentEvents(): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
-        dispatch(getRecentEvents());
+        dispatch(getRecentEventsStart());
         try {
             const recentEvents = await request.get<RecentEventsResponse>('/Data/recent');
             dispatch(getRecentEventsSuccess(recentEvents));

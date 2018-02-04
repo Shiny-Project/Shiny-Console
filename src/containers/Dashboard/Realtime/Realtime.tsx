@@ -15,7 +15,8 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 
 export function mapStateToProps(state: StoreState) {
     return {
-      recentEvents: state.dashboard.realtime.recentEvents
+      recentEvents: state.dashboard.realtime.recentEvents,
+      isLoading: state.dashboard.realtime.isLoading
     };
 }
 
@@ -28,7 +29,7 @@ interface Dispatch {
 // 加上 redux-thunk 之后这个类型不知道咋配 先 Hack 掉了
 export function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        getStatistics: () => {
+        getRecentEvents: () => {
             dispatch(actions.getRecentEvents());
         }
     };

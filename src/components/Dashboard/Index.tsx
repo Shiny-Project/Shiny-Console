@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from '@/components/Menu/Index';
 import ServerNodes from './Server/Node';
 import Overview from '@/containers/Dashboard/Overview/Overview';
+import Realtime from '@/containers/Dashboard/Realtime/Realtime';
 import './Index.css';
 import { ErrorState } from '@/types';
 const { Header, Content } = Layout;
@@ -47,6 +48,7 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route path="/dashboard/overview" component={Overview} />
                                     {/* Server Control */}
                                     <Route path="/dashboard/server/nodes" component={ServerNodes}/>
+                                    <Route path="/dashboard/realtime" component={Realtime} />
                                 </Switch>
                             </Col>
                         </Row>
