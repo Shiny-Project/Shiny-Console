@@ -31,13 +31,13 @@ export interface LevelRankingItem {
 export type RecentEventsResponse = ShinyEvent[];
 
 export interface ShinyEvent {
-    id: number;
+    id?: number;
     data: ShinyEventData;
     level: ShinyEventLevel;
     publisher: string;
     hash: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface ShinyEventData {

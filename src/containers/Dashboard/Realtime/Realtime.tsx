@@ -31,6 +31,9 @@ export function mapDispatchToProps(dispatch: Dispatch) {
     return {
         getRecentEvents: () => {
             dispatch(actions.getRecentEvents());
+        },
+        listenNewEvents: () => {
+            dispatch(actions.listenNewEvents());
         }
     };
 }

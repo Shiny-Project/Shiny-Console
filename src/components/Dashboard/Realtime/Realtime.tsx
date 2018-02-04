@@ -8,6 +8,7 @@ const { Meta } = Card;
 
 export interface Props {
     getRecentEvents: () => void;
+    listenNewEvents: () => void;
     recentEvents: RecentEventsResponse;
     isLoading: boolean;
 }
@@ -21,10 +22,10 @@ const renderEventList = (recentEvents: RecentEventsResponse) => {
         return (
             <div key={event.id} onClick={(e) => { window.open(event.data.link); }}>
                 <Card 
-                    className="event-item"
+                    className={['event-item', `event-border-${event.level}`].join(' ')}
                     type="inner"
                     hoverable={true}
-                    key={event.id}
+                    key={event.hash}
                 >
                     <Meta
                         title={event.data.title}
@@ -44,6 +45,7 @@ class Realtime extends React.Component<Props, State> {
     };
     componentDidMount() {
         this.props.getRecentEvents();
+        this.props.listenNewEvents();
     }
     componentWillReceiveProps(nextProps: Props) {
         this.setState({

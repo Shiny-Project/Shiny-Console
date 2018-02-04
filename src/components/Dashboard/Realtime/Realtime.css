@@ -1,3 +1,12 @@
 .event-item {
     margin: .5rem auto;
 }
+.event-border-1, .event-border-2, .event-border-3 {
+    border: 1px solid #e8e8e8;
+}
+.event-border-4 {
+    border: 2px solid #ffa600;
+}
+.event-border-5 {
+    border: 2px solid #ff3300;
+}
