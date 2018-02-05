@@ -35,3 +35,9 @@ export type GET_RECENT_EVENTS_FAILURE = typeof GET_RECENT_EVENTS_FAILURE;
 
 export const ADD_RECENT_EVENT = 'ADD_RECENT_EVENT';
 export type ADD_RECENT_EVENT = typeof ADD_RECENT_EVENT;
+
+export const ADD_JOB = 'ADD_JOB';
+export type ADD_JOB = typeof ADD_JOB;
+
+export const UPDATE_JOB = 'UPDATE_JOB';
+export type UPDATE_JOB = typeof UPDATE_JOB;

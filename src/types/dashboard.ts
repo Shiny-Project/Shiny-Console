@@ -30,6 +30,7 @@ export interface LevelRankingItem {
 
 export type RecentEventsResponse = ShinyEvent[];
 
+// Shiny 事件
 export interface ShinyEvent {
     id?: number;
     data: ShinyEventData;
@@ -40,6 +41,7 @@ export interface ShinyEvent {
     updatedAt?: string;
 }
 
+// Shiny 事件数据
 export interface ShinyEventData {
     content: string;
     cover: string;
@@ -47,4 +49,32 @@ export interface ShinyEventData {
     title: string;
 }
 
+// Shiny 事件等级
 export type ShinyEventLevel = 1 | 2 | 3 | 4 | 5;
+
+// Shiny Websocket 广播消息
+export interface EventSocketMessage {
+    level: ShinyEventLevel;
+    spiderName: string;
+    hash: string;
+    data: ShinyEventData;
+}
+
+export interface DataRefreshJob {
+    id: number;
+    type: 'data_refresh';
+    spider: string;
+    path: string;
+    info?: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export type Job = DataRefreshJob;
+
+// 任务状态广播信息
+export interface JobStatusMessage {
+    type: 'create' | 'update';
+    job: Job;
+}

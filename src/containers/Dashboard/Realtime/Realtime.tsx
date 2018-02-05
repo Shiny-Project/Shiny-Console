@@ -16,6 +16,7 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
       recentEvents: state.dashboard.realtime.recentEvents,
+      recentJobs: state.dashboard.realtime.recentJobs,
       isLoading: state.dashboard.realtime.isLoading
     };
 }
@@ -34,6 +35,9 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         },
         listenNewEvents: () => {
             dispatch(actions.listenNewEvents());
+        },
+        listenJobStatus: () => {
+            dispatch(actions.listenJobStatus());
         }
     };
 }

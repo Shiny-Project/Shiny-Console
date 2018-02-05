@@ -29,6 +29,30 @@ export function realtime(state: RealtimeState = initState.dashboard.realtime, ac
                     ...state.recentEvents
                 ]
             };
+        case ActionTypes.ADD_JOB:
+            return {
+                ...state,
+                recentJobs: [
+                    actions.job,
+                    ...state.recentJobs
+                ]
+            };
+        case ActionTypes.UPDATE_JOB:
+            const index = state.recentJobs.findIndex(job => job.id === actions.job.id);
+            if (index !== -1) {
+                return {
+                    ...state,
+                    recentJobs: [
+                        ...state.recentJobs.slice(0, index),
+                        actions.job,
+                        ...state.recentJobs.slice(index + 1)
+                    ]
+                };
+            } else {
+                return {
+                    ...state
+                };
+            }
         default:
             return {
                 ...state

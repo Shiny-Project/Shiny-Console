@@ -3,7 +3,7 @@ import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
-import { RecentEventsResponse, ShinyEvent, ShinyEventLevel, ShinyEventData } from '@/types/dashboard';
+import * as DashboardTypes from '@/types/dashboard';
 import io from 'socket.io-client';
 
 export interface GetRecentEvent {
@@ -12,7 +12,7 @@ export interface GetRecentEvent {
 
 export interface GetRecentEventSuccess {
     type: constants.GET_RECENT_EVENTS_SUCCESS;
-    recentEvents: RecentEventsResponse;
+    recentEvents: DashboardTypes.RecentEventsResponse;
 }
 
 export interface GetRecentEventFailure {
@@ -21,17 +21,31 @@ export interface GetRecentEventFailure {
 
 export interface AddRecentEvent {
     type: constants.ADD_RECENT_EVENT;
-    event: ShinyEvent;
+    event: DashboardTypes.ShinyEvent;
+}
+
+export interface AddJob {
+    type: constants.ADD_JOB;
+    job: DashboardTypes.Job;
+}
+
+export interface UpdateJob {
+    type: constants.UPDATE_JOB;
+    job: DashboardTypes.Job;
 }
 
 export type RealtimeAction = 
-    GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure | AddRecentEvent | RaiseError;
+    GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure | AddRecentEvent | 
+    AddJob | UpdateJob | RaiseError;
 
+/**
+ * 获得最近事件
+ */
 export function getRecentEvents(): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(getRecentEventsStart());
         try {
-            const recentEvents = await request.get<RecentEventsResponse>('/Data/recent');
+            const recentEvents = await request.get<DashboardTypes.RecentEventsResponse>('/Data/recent');
             dispatch(getRecentEventsSuccess(recentEvents));
         } catch (e) {
             dispatch(raiseError(e));
@@ -40,18 +54,14 @@ export function getRecentEvents(): ThunkAction<void, StoreState, null> {
     };
 }
 
-interface EventSocketMessage {
-    level: ShinyEventLevel;
-    spiderName: string;
-    hash: string;
-    data: ShinyEventData;
-}
-
+/**
+ * 开始监听新事件
+ */
 export function listenNewEvents(): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         const socketClient = io('http://websocket.shiny.kotori.moe:3737');
         socketClient.on('event', (event: string) => {
-            const message = JSON.parse(event) as EventSocketMessage;
+            const message = JSON.parse(event) as DashboardTypes.EventSocketMessage;
             dispatch(addRecentEvent({
                 level: message.level,
                 data: message.data,
@@ -62,13 +72,33 @@ export function listenNewEvents(): ThunkAction<void, StoreState, null> {
     };
 }
 
+/**
+ * 监听任务执行状态
+ */
+export function listenJobStatus(): ThunkAction<void, StoreState, null> {
+    return async (dispatch) => {
+        const socketClient = io('/', {
+            path: '/API/socket.io'
+        });
+        socketClient.on('job', (message: DashboardTypes.JobStatusMessage) => {
+            if (message.type === 'create') {
+                dispatch(addJob(message.job));
+            } else if (message.type === 'update') {
+                dispatch(updateJob(message.job));
+            } else {
+                //
+            }
+        });
+    };
+}
+
 export function getRecentEventsStart(): GetRecentEvent {
     return {
         type: constants.GET_RECENT_EVENTS
     };
 }
 
-export function getRecentEventsSuccess(recentEvents: RecentEventsResponse): GetRecentEventSuccess {
+export function getRecentEventsSuccess(recentEvents: DashboardTypes.RecentEventsResponse): GetRecentEventSuccess {
     return {
         type: constants.GET_RECENT_EVENTS_SUCCESS,
         recentEvents
@@ -81,9 +111,23 @@ export function getRecentEventsFailure(): GetRecentEventFailure {
     };
 }
 
-export function addRecentEvent(event: ShinyEvent): AddRecentEvent {
+export function addRecentEvent(event: DashboardTypes.ShinyEvent): AddRecentEvent {
     return {
         type: constants.ADD_RECENT_EVENT,
         event
+    };
+}
+
+export function addJob(job: DashboardTypes.Job): AddJob {
+    return {
+        type: constants.ADD_JOB,
+        job
+    };
+}
+
+export function updateJob(job: DashboardTypes.Job): UpdateJob {
+    return {
+        type: constants.UPDATE_JOB,
+        job
     };
 }

@@ -19,6 +19,9 @@ class Sider extends React.Component<Props, {}> {
         defaultOpenKeys={['sub1']}
         mode="inline"
       >
+        <Menu.Item key="0">
+          <Link to="/dashboard/overview">概览</Link>
+        </Menu.Item>
         <SubMenu key="sub1" title={<span><Icon type="cloud" /><span>服务器</span></span>}>
             <Menu.Item key="1">
               <Link to="/dashboard/server/nodes">服务器节点管理(开发中)</Link>

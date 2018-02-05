@@ -1,4 +1,4 @@
-import { StatisticsResponse, RecentEventsResponse } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job } from '@/types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -29,4 +29,5 @@ export interface OverviewState {
 export interface RealtimeState {
     isLoading: boolean;
     recentEvents?: RecentEventsResponse;
+    recentJobs?: Job[];
 }
