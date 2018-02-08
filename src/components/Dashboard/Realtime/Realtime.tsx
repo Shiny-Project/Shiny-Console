@@ -37,18 +37,12 @@ const renderEventList = (recentEvents: RecentEventsResponse) => {
     });
     return eventList;
 };
-const data = [
-    {
-        spider: '123',
-        path: '1234',
-        status: 'success'
-    },
-    {
-        spider: '123',
-        path: '1234',
-        status: 'failed'
-    }
-];
+
+const JobStatus = ({status}: {status: string}): JSX.Element => {
+    return (
+        <span className={`status-${status}`}>{status}</span>
+    );
+};
 
 class Realtime extends React.Component<Props, State> {
     state: State = {
@@ -81,7 +75,7 @@ class Realtime extends React.Component<Props, State> {
                                             title={<a href="https://ant.design">{item.spider}</a>}
                                             description={item.createdAt.toString()}
                                         />
-                                        <div>{item.status}</div>
+                                        <div>{JobStatus({status: item.status})}</div>
                                     </List.Item>
                                 )}
                             />

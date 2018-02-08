@@ -10,3 +10,25 @@
 .event-border-5 {
     border: 2px solid #ff3300;
 }
+.status-success {
+    color: #0ab618;
+}
+.status-failed, .status-timeout {
+    color: #ff3300;
+}
+.status-processing {
+    animation-duration: 1.5s;
+    animation-name: flicking;
+    animation-iteration-count: infinite;
+}
+@keyframes flicking{
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
