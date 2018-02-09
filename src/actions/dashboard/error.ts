@@ -1,4 +1,4 @@
-import * as constants from '@/constants/index';
+import * as constants from '@/constants/Dashboard/index';
 // import { StoreState } from '@/types/index';
 
 export interface RaiseError {

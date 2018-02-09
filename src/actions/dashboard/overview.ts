@@ -1,4 +1,4 @@
-import * as constants from '@/constants/index';
+import * as constants from '@/constants/Dashboard/overview';
 import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';

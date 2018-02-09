@@ -1,6 +1,6 @@
 import { ErrorAction } from '@/actions/dashboard/error';
 import { ErrorState } from '@/types/index';
-import { RAISE_ERROR } from '@/constants/index';
+import { RAISE_ERROR } from '@/constants/Dashboard/index';
 import initState from '@/stores/initState';
 
 export function errors(state: ErrorState = initState.dashboard.errors, action: ErrorAction) {
