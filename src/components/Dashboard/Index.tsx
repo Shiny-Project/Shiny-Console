@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Layout, message } from 'antd';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from '@/components/Menu/Index';
-import ServerNodes from './Server/Node';
+import ServerNodes from '@/containers/Dashboard/Server/Node';
 import Overview from '@/containers/Dashboard/Overview/Overview';
 import Realtime from '@/containers/Dashboard/Realtime/Realtime';
 import './Index.css';

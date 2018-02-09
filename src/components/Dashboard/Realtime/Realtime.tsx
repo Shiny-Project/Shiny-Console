@@ -72,7 +72,7 @@ class Realtime extends React.Component<Props, State> {
                                 renderItem={(item: Job) => (
                                     <List.Item>
                                         <List.Item.Meta
-                                            title={<a href="https://ant.design">{item.spider}</a>}
+                                            title={<span>数据刷新:{item.spider}</span>}
                                             description={item.createdAt.toString()}
                                         />
                                         <div>{JobStatus({status: item.status})}</div>

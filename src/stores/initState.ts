@@ -18,6 +18,12 @@ export default {
             isLoading: false,
             recentEvents: [],
             recentJobs: []
+        },
+        server: {
+            node: {
+                isLoading: false,
+                serverList: []
+            }
         }
     },
 };

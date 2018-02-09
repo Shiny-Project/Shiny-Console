@@ -18,7 +18,7 @@ export interface GetStatisticFailure {
     type: constants.GET_STATISTIC_FAILURE;
 }
 
-export type OverviewAction = GetStatistic | GetStatisticSuccess | GetStatisticFailure | RaiseError;
+export type OverviewAction = GetStatistic | GetStatisticSuccess | GetStatisticFailure;
 
 export function getStatistics(): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {

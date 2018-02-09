@@ -78,3 +78,16 @@ export interface JobStatusMessage {
     type: 'create' | 'update';
     job: Job;
 }
+
+// Dashboard/Server/Node
+
+export type ServerListResponse = ServerNode[];
+
+export interface ServerNode {
+    id: number;
+    name: string;
+    type: string;
+    host: string;
+    createdAt: string;
+    updatedAt: string;
+}
