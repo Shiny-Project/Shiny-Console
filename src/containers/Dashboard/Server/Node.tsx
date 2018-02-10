@@ -16,7 +16,9 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
       serverList: state.dashboard.server.node.serverList,
-      isLoading: state.dashboard.server.node.isLoading
+      isLoading: state.dashboard.server.node.isLoading,
+      modalLoading: state.dashboard.server.node.modalLoading,
+      modalVisible: state.dashboard.server.node.modalVisible,
     };
 }
 
@@ -32,6 +34,18 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         getServerList: () => {
             dispatch(actions.getServerList());
         },
+        deleteServer: (serverId: number) => {
+            dispatch(actions.deleteServer(serverId));
+        },
+        addServer: (type: string, name: string, host: string) => {
+            dispatch(actions.addServer(type, name, host));
+        },
+        showModal: () => {
+            dispatch(actions.showCreateServerModal());
+        },
+        closeModal: () => {
+            dispatch(actions.closeCreateServerModal());
+        }
     };
 }
 

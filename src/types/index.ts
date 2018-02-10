@@ -42,5 +42,7 @@ export interface ServerState {
 // Dashboard/Server/Node
 export interface ServerNodeState {
     isLoading: boolean;
+    modalVisible: boolean;
+    modalLoading: boolean;
     serverList: ServerListResponse;
 }

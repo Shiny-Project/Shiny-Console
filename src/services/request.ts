@@ -50,7 +50,7 @@ class Fetch {
             try {
                 const response = await this.instance.request(options);
                 if (response.status === 200) {
-                    resolve(response.data.data);
+                    resolve(response.data.data as T);
                 } else {
                     reject(this.parseError(response));
                 }
@@ -64,16 +64,16 @@ class Fetch {
      * @param path 
      * @param payload 
      */
-    get<T>(path: string = '/', payload: object = {}): Promise<T> {
-        return this.request('GET', path, payload);
+    get<T>(path: string = '/', payload: object = {}) {
+        return this.request<T>('GET', path, payload);
     }
     /**
      * HTTP POST
      * @param path 
      * @param payload 
      */
-    post<T>(path: string = '/', payload: object = {}): Promise<T> {
-        return this.request('POST', path, payload);
+    post<T>(path: string = '/', payload: object = {}) {
+        return this.request<T>('POST', path, payload);
     }
     parseError(e: AxiosError | AxiosResponse): RequestError {
         if (isAxiosResponse(e)) {

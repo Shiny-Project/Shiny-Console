@@ -22,6 +22,8 @@ export default {
         server: {
             node: {
                 isLoading: false,
+                modalVisible: false,
+                modalLoading: false,
                 serverList: []
             }
         }
