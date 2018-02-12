@@ -7,6 +7,7 @@ import Overview from '@/containers/Dashboard/Overview/Overview';
 import Realtime from '@/containers/Dashboard/Realtime/Realtime';
 import './Index.css';
 import { ErrorState } from '@/types';
+import Auth from '@/services/auth';
 const { Header, Content } = Layout;
 
 class RedirectToOverview extends React.Component {
@@ -20,6 +21,9 @@ class RedirectToOverview extends React.Component {
 export interface Props {
     errors?: ErrorState;
     raiseError: (error: Error) => void;
+    history: {
+        push: (path: string) => void;
+    };
 }
 
 class Dashboard extends React.Component<Props, {}> {
@@ -27,6 +31,10 @@ class Dashboard extends React.Component<Props, {}> {
         // tslint:disable-next-line:max-line-length
         if (nextProps.errors.lastError.name !== 'initial_error' && nextProps.errors.errorId !== this.props.errors.errorId) {
             message.error(nextProps.errors.lastError.message);
+            if (['need_login', 'need_admin'].includes(nextProps.errors.lastError.name)) {
+                Auth.logout();
+                this.props.history.push('/');
+            }
         }
     }
     render() {

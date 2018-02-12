@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select } from 'antd';
+import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconfirm } from 'antd';
 import { ServerListResponse, ServerNode } from '@/types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
@@ -59,15 +59,19 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         render: (text: string, record: ServerNode) => {
             return (
                 <div>
-                    <Button 
-                        type="danger" 
-                        size={'small'} 
-                        onClick={() => {
-                            this.props.deleteServer(record.id);
-                        }} 
+                    <Popconfirm 
+                        title="危险操作确认"  
+                        onConfirm={() => {
+                                this.props.deleteServer(record.id);
+                            }}
                     >
-                        删除
-                    </Button>
+                        <Button 
+                            type="danger" 
+                            size={'small'} 
+                        >
+                            删除
+                        </Button>
+                    </Popconfirm>
                 </div>
             );
         }
