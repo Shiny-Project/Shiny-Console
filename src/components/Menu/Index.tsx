@@ -26,7 +26,9 @@ class Sider extends React.Component<Props, {}> {
             <Menu.Item key="1">
               <Link to="/dashboard/server/nodes">服务器节点管理</Link>
             </Menu.Item>
-            <Menu.Item key="2">API 密钥对管理(开发中)</Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/dashboard/server/applications">API 密钥对管理(开发中)</Link>
+            </Menu.Item>
         </SubMenu>
         <Menu.Item key="3">
           <Link to="/dashboard/realtime">实时</Link>

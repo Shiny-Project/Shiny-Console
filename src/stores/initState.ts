@@ -1,3 +1,5 @@
+import { StoreState } from '@/types';
+
 const initialError = new Error('初始化占位错误');
 initialError.name = 'initial_error';
 export default {
@@ -25,7 +27,11 @@ export default {
                 modalVisible: false,
                 modalLoading: false,
                 serverList: []
+            },
+            application: {
+                isLoading: false,
+                keyPairs: []
             }
         }
     },
-};
+} as StoreState;

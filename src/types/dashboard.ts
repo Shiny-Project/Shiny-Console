@@ -91,3 +91,14 @@ export interface ServerNode {
     createdAt: string;
     updatedAt: string;
 }
+
+// Dashboard/Server/Application
+
+export type APIKeyPairsResponse = APIKeyPair[];
+
+export interface APIKeyPair {
+    id: number;
+    api_key: string;
+    api_secret_key: string;
+    tag: string;
+}

@@ -11,17 +11,21 @@ import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 import './App.css';
 
-const AsyncDashboard = Loadable({
-  loader: () => {
-    const promise = import('@/containers/Dashboard/Index');
-    nprogress.start();
-    promise.then(() => {
-      nprogress.done();
-    });
-    return promise;
-  },
-  loading: Loading
-});
+const createAsyncComp = (path: string) => {
+  return Loadable({
+    loader: () => {
+      const promise = import(`./containers/${path}`);
+      nprogress.start();
+      promise.then(() => {
+        nprogress.done();
+      });
+      return promise;
+    },
+    loading: Loading,
+  });
+};
+
+const AsyncDashboard = createAsyncComp('Dashboard/Index');
 
 class App extends React.Component {
   componentDidCatch(error: Error) {

@@ -1,4 +1,4 @@
-import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse } from '@/types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -38,6 +38,7 @@ export interface RealtimeState {
 // Dashboard/Server
 export interface ServerState {
     node: ServerNodeState;
+    application: ApplicationState;
 }
 // Dashboard/Server/Node
 export interface ServerNodeState {
@@ -45,4 +46,9 @@ export interface ServerNodeState {
     modalVisible: boolean;
     modalLoading: boolean;
     serverList: ServerListResponse;
+}
+// Dashboard/Server/Application
+export interface ApplicationState {
+    isLoading: boolean;
+    keyPairs: APIKeyPairsResponse;
 }

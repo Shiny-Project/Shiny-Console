@@ -3,6 +3,7 @@ import { Row, Col, Layout, message } from 'antd';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from '@/components/Menu/Index';
 import ServerNodes from '@/containers/Dashboard/Server/Node';
+import ServerApplication from '@/containers/Dashboard/Server/Application';
 import Overview from '@/containers/Dashboard/Overview/Overview';
 import Realtime from '@/containers/Dashboard/Realtime/Realtime';
 import './Index.css';
@@ -56,6 +57,7 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route path="/dashboard/overview" component={Overview} />
                                     {/* Server Control */}
                                     <Route path="/dashboard/server/nodes" component={ServerNodes}/>
+                                    <Route path="/dashboard/server/applications" component={ServerApplication}/>
                                     <Route path="/dashboard/realtime" component={Realtime} />
                                 </Switch>
                             </Col>
