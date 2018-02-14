@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse } from '@/types/dashboard';
 
 export interface StoreState {
@@ -50,5 +51,7 @@ export interface ServerNodeState {
 // Dashboard/Server/Application
 export interface ApplicationState {
     isLoading: boolean;
+    createModalVisible: boolean;
+    createModalLoading: boolean;
     keyPairs: APIKeyPairsResponse;
 }

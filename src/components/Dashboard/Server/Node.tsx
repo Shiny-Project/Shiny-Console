@@ -32,10 +32,6 @@ const ServerNodeType = function ({ type }: { type: string }): JSX.Element {
 };
 
 class Node extends React.Component<Props & FormComponentProps, State> {
-    state: State = {
-        showModal: false
-    };
-
     serverListColumns = [{
         title: 'ID',
         dataIndex: 'id',

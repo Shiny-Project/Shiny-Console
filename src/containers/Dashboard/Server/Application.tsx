@@ -16,6 +16,8 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
         isLoading: state.dashboard.server.application.isLoading,
+        createModalVisible: state.dashboard.server.application.createModalVisible,
+        createModalLoading: state.dashboard.server.application.createModalLoading,
         keyPairs: state.dashboard.server.application.keyPairs
     };
 }
@@ -32,6 +34,18 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         getKeyPairs: () => {
             dispatch(actions.getKeyPairs());
         },
+        deleteKeyPair: (applicationId: number) => {
+            dispatch(actions.deleteKeyPair(applicationId));
+        },
+        createKeyPair: (tag: string) => {
+            dispatch(actions.createKeyPair(tag));
+        },
+        showCreateModal: () => {
+            dispatch(actions.showCreateModal());
+        },
+        closeCreateModal: () => {
+            dispatch(actions.closeCreateModal());
+        }
     };
 }
 
