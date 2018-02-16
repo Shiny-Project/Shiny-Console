@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Spin, Table, Divider, Button, Popconfirm, Form, Modal, Input } from 'antd';
-import { APIKeyPairsResponse, APIKeyPair } from '@/types/dashboard';
+import { Card, Spin, Table, Divider, Button, Popconfirm, Form, Modal, Input, Select } from 'antd';
+import { APIKeyPairsResponse, APIKeyPair, ServerNode } from '@/types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
 export interface Props {
@@ -10,7 +10,8 @@ export interface Props {
     showCreateModal: () => void;
     closeCreateModal: () => void;
     isLoading: boolean;
-    keyPairs: APIKeyPairsResponse;
+    keyPairs: APIKeyPair[];
+    serverList: ServerNode[];
     createModalVisible: boolean;
     createModalLoading: boolean;
 }
@@ -28,6 +29,18 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
         title: 'API_SECRET_KEY',
         dataIndex: 'api_secret_key',
         key: 'api_secret_key'
+    }, {
+        title: 'Tag',
+        key: 'tag',
+        render: (text: string, record: APIKeyPair) => {
+            return (
+                <span>
+                    {`${record.tag[0] && record.tag[0].name} / 
+                    ${record.tag[0] && record.tag[0].type} / 
+                    ${record.tag[0] && record.tag[0].host}`}
+                </span>
+            );
+        }
     }, {
         title: 'Action',
         key: 'action',
@@ -91,7 +104,20 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                             {getFieldDecorator('tag', {
                                 rules: [{ required: true }]
                             })(
-                                <Input />
+                                <Select>
+                                    {this.props.serverList.filter(serverNode => {
+                                        return serverNode.key_pair === 0;
+                                    }).map(serverNode => {
+                                        return (
+                                            <Select.Option 
+                                                value={serverNode.id} 
+                                                key={serverNode.id}
+                                            >
+                                                {serverNode.name} / {serverNode.type} / {serverNode.host}
+                                            </Select.Option>
+                                        );
+                                    })}
+                                </Select>
                             )}
                         </Form.Item>
                     </Form>

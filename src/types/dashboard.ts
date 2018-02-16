@@ -81,7 +81,7 @@ export interface JobStatusMessage {
 
 // Dashboard/Server/Node
 
-export type ServerListResponse = ServerNode[];
+export type ServerListResponse = ServerNodeWithKeyPair[];
 
 export interface ServerNode {
     id: number;
@@ -90,15 +90,23 @@ export interface ServerNode {
     host: string;
     createdAt: string;
     updatedAt: string;
+    key_pair: number | APIKeyPair;
+}
+
+export interface ServerNodeWithKeyPair extends ServerNode {
+    key_pair: APIKeyPair;
 }
 
 // Dashboard/Server/Application
 
-export type APIKeyPairsResponse = APIKeyPair[];
+export interface APIKeyPairsResponse {
+    keyPairs: APIKeyPair[];
+    serverList: ServerNode[];
+}
 
 export interface APIKeyPair {
     id: number;
     api_key: string;
     api_secret_key: string;
-    tag: string;
+    tag: ServerNode[];
 }

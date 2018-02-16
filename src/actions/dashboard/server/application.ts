@@ -3,7 +3,7 @@ import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
-import { APIKeyPairsResponse, APIKeyPair } from '@/types/dashboard';
+import { APIKeyPairsResponse, APIKeyPair, ServerNode } from '@/types/dashboard';
 
 export interface GetKeyPairs {
     type: constants.GET_KEY_PAIRS;
@@ -11,7 +11,8 @@ export interface GetKeyPairs {
 
 export interface GetKeyPairsSuccess {
     type: constants.GET_KEY_PAIRS_SUCCESS;
-    keyPairs: APIKeyPairsResponse;
+    keyPairs: APIKeyPair[];
+    serverList: ServerNode[];
 }
 
 export interface GetKeyPairsFailure {
@@ -37,7 +38,7 @@ export interface CreateKeyPair {
 
 export interface CreateKeyPairSuccess {
     type: constants.CREATE_KEY_PAIR_SUCCESS;
-    keyPair: APIKeyPair;
+    keyPair: APIKeyPair[];
 }
 
 export interface CreateKeyPairFailure {
@@ -63,10 +64,11 @@ export function getKeyPairsStart(): GetKeyPairs {
     };
 }
 
-export function getKeyPairsSuccess(keyPairs: APIKeyPairsResponse): GetKeyPairsSuccess {
+export function getKeyPairsSuccess(keyPairs: APIKeyPair[], serverList: ServerNode[]): GetKeyPairsSuccess {
     return {
         type: constants.GET_KEY_PAIRS_SUCCESS,
-        keyPairs
+        keyPairs,
+        serverList
     };
 }
 
@@ -101,7 +103,7 @@ export function createKeyPairStart(): CreateKeyPair {
     };
 }
 
-export function createKeyPairSuccess(keyPair: APIKeyPair): CreateKeyPairSuccess {
+export function createKeyPairSuccess(keyPair: APIKeyPair[]): CreateKeyPairSuccess {
     return {
         type: constants.CREATE_KEY_PAIR_SUCCESS,
         keyPair
@@ -134,7 +136,7 @@ export function getKeyPairs(): ThunkAction<void, StoreState, null> {
         dispatch(getKeyPairsStart());
         try {
             const result = await request.get<APIKeyPairsResponse>('/Application/list');
-            dispatch(getKeyPairsSuccess(result));
+            dispatch(getKeyPairsSuccess(result.keyPairs, result.serverList));
         } catch (e) {
             dispatch(raiseError(e));
             dispatch(getKeyPairsFailure());
@@ -169,7 +171,7 @@ export function createKeyPair(tag: string):  ThunkAction<void, StoreState, null>
     return async (dispatch) => {
         dispatch(createKeyPairStart());
         try {
-            const result = await request.post<APIKeyPair>('/Application/createAPIKeyPairs', {
+            const result = await request.post<APIKeyPair[]>('/Application/createAPIKeyPairs', {
                 tag
             });
             dispatch(createKeyPairSuccess(result));

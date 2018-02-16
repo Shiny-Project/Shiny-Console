@@ -16,7 +16,8 @@ export function application(state: ApplicationState = initState.dashboard.server
             return {
                 ...state,
                 isLoading: false,
-                keyPairs: actions.keyPairs
+                keyPairs: actions.keyPairs,
+                serverList: actions.serverList
             };
         case ActionTypes.GET_KEY_PAIRS_FAILURE:
             return {
@@ -54,8 +55,7 @@ export function application(state: ApplicationState = initState.dashboard.server
                 createModalLoading: false,
                 createModalVisible: false,
                 keyPairs: [
-                    ...state.keyPairs,
-                    actions.keyPair
+                    ...actions.keyPair
                 ]
             };
         case ActionTypes.CREATE_KEY_PAIR_FAILURE: 

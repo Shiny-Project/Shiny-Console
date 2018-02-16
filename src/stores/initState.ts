@@ -30,7 +30,10 @@ export default {
             },
             application: {
                 isLoading: false,
-                keyPairs: []
+                keyPairs: [],
+                serverList: [],
+                createModalVisible: false,
+                createModalLoading: false
             }
         }
     },

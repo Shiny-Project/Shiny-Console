@@ -18,7 +18,8 @@ export function mapStateToProps(state: StoreState) {
         isLoading: state.dashboard.server.application.isLoading,
         createModalVisible: state.dashboard.server.application.createModalVisible,
         createModalLoading: state.dashboard.server.application.createModalLoading,
-        keyPairs: state.dashboard.server.application.keyPairs
+        keyPairs: state.dashboard.server.application.keyPairs,
+        serverList: state.dashboard.server.application.serverList
     };
 }
 
