@@ -38,9 +38,9 @@ const renderEventList = (recentEvents: RecentEventsResponse) => {
     return eventList;
 };
 
-const JobStatus = ({status}: {status: string}): JSX.Element => {
+const JobStatus = ({job}: {job: Job}): JSX.Element => {
     return (
-        <span className={`status-${status}`}>{status}</span>
+        <span className={`status-${job.status}`}>{job.status === 'success' ? job.done_by : job.status}</span>
     );
 };
 
@@ -75,7 +75,7 @@ class Realtime extends React.Component<Props, State> {
                                             title={<span>数据刷新:{item.spider}</span>}
                                             description={item.createdAt.toString()}
                                         />
-                                        <div>{JobStatus({status: item.status})}</div>
+                                        <div>{JobStatus({job: item})}</div>
                                     </List.Item>
                                 )}
                             />

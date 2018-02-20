@@ -17,13 +17,13 @@ export interface SpiderRanking {
 }
 
 export interface SpiderRankingItem {
-    publisher: string;
-    count: number;
+    publisher: string; // 发布者
+    count: number; // 事件数
 }
 
 export interface LevelRankingItem {
-    level: string;
-    count: number;
+    level: string; // 事件等级
+    count: number; // 事件数
 }
 
 // Dashboard/Realtime
@@ -32,21 +32,21 @@ export type RecentEventsResponse = ShinyEvent[];
 
 // Shiny 事件
 export interface ShinyEvent {
-    id?: number;
-    data: ShinyEventData;
-    level: ShinyEventLevel;
-    publisher: string;
-    hash: string;
+    id?: number; // 事件 ID
+    data: ShinyEventData; // 事件详细数据
+    level: ShinyEventLevel; // 事件等级
+    publisher: string; // 事件发布者
+    hash: string; // 事件 Hash
     createdAt?: string;
     updatedAt?: string;
 }
 
 // Shiny 事件数据
 export interface ShinyEventData {
-    content: string;
-    cover: string;
-    link: string;
-    title: string;
+    content: string; // 内容
+    cover: string; // 封面
+    link: string; // 链接
+    title: string; // 标题
 }
 
 // Shiny 事件等级
@@ -54,19 +54,20 @@ export type ShinyEventLevel = 1 | 2 | 3 | 4 | 5;
 
 // Shiny Websocket 广播消息
 export interface EventSocketMessage {
-    level: ShinyEventLevel;
-    spiderName: string;
-    hash: string;
-    data: ShinyEventData;
+    level: ShinyEventLevel; // 事件等级
+    spiderName: string; // 爬虫名
+    hash: string; // 事件 Hash
+    data: ShinyEventData; // 事件详细数据
 }
 
 export interface DataRefreshJob {
-    id: number;
-    type: 'data_refresh';
-    spider: string;
-    path: string;
-    info?: string;
-    status: string;
+    id: number; // 任务 ID
+    type: 'data_refresh'; // 任务类型
+    spider: string; // 任务爬虫
+    path: string; // 爬虫路径
+    info?: string; // 任务附加信息
+    status: string; // 任务状态
+    done_by: string; // 完成者
     createdAt: string;
     updatedAt: string;
 }
@@ -75,8 +76,8 @@ export type Job = DataRefreshJob;
 
 // 任务状态广播信息
 export interface JobStatusMessage {
-    type: 'create' | 'update';
-    job: Job;
+    type: 'create' | 'update'; // 状态更新类型
+    job: Job; // 更新事件
 }
 
 // Dashboard/Server/Node
@@ -84,29 +85,29 @@ export interface JobStatusMessage {
 export type ServerListResponse = ServerNodeWithKeyPair[];
 
 export interface ServerNode {
-    id: number;
-    name: string;
-    type: string;
-    host: string;
+    id: number; // ID
+    name: string; // 服务器节点名
+    type: string; // 服务器节点类型
+    host: string; // 服务器节点地址
     createdAt: string;
     updatedAt: string;
-    key_pair: number | APIKeyPair;
+    key_pair: number | APIKeyPair; // 服务器密钥对 展开或不展开
 }
 
 export interface ServerNodeWithKeyPair extends ServerNode {
-    key_pair: APIKeyPair;
+    key_pair: APIKeyPair; // 服务器密钥对 展开
 }
 
 // Dashboard/Server/Application
 
 export interface APIKeyPairsResponse {
-    keyPairs: APIKeyPair[];
-    serverList: ServerNode[];
+    keyPairs: APIKeyPair[]; // 全部服务器密钥对
+    serverList: ServerNode[]; // 全部服务器节点列表
 }
 
 export interface APIKeyPair {
     id: number;
-    api_key: string;
-    api_secret_key: string;
-    tag: ServerNode[];
+    api_key: string; // API_KEY
+    api_secret_key: string; // API_SECRET_KEY
+    tag: ServerNode[]; // 绑定服务器标签
 }
