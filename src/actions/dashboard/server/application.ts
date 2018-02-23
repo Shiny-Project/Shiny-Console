@@ -39,6 +39,7 @@ export interface CreateKeyPair {
 export interface CreateKeyPairSuccess {
     type: constants.CREATE_KEY_PAIR_SUCCESS;
     keyPair: APIKeyPair[];
+    tag: number;
 }
 
 export interface CreateKeyPairFailure {
@@ -103,10 +104,11 @@ export function createKeyPairStart(): CreateKeyPair {
     };
 }
 
-export function createKeyPairSuccess(keyPair: APIKeyPair[]): CreateKeyPairSuccess {
+export function createKeyPairSuccess(keyPair: APIKeyPair[], tag: number): CreateKeyPairSuccess {
     return {
         type: constants.CREATE_KEY_PAIR_SUCCESS,
-        keyPair
+        keyPair,
+        tag
     };
 }
 
@@ -167,14 +169,14 @@ export function deleteKeyPair(applicationId: number): ThunkAction<void, StoreSta
  * 生成新密钥对
  * @param tag 标签 
  */
-export function createKeyPair(tag: string):  ThunkAction<void, StoreState, null> {
+export function createKeyPair(tag: number):  ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(createKeyPairStart());
         try {
             const result = await request.post<APIKeyPair[]>('/Application/createAPIKeyPairs', {
                 tag
             });
-            dispatch(createKeyPairSuccess(result));
+            dispatch(createKeyPairSuccess(result, tag));
         } catch (e) {
             dispatch(raiseError(e));
             dispatch(createKeyPairFailure());

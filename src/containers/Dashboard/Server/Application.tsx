@@ -38,7 +38,7 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         deleteKeyPair: (applicationId: number) => {
             dispatch(actions.deleteKeyPair(applicationId));
         },
-        createKeyPair: (tag: string) => {
+        createKeyPair: (tag: number) => {
             dispatch(actions.createKeyPair(tag));
         },
         showCreateModal: () => {

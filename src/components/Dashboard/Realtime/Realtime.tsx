@@ -75,7 +75,9 @@ class Realtime extends React.Component<Props, State> {
                                             title={<span>数据刷新:{item.spider}</span>}
                                             description={item.createdAt.toString()}
                                         />
-                                        <div>{JobStatus({job: item})}</div>
+                                        <div>
+                                            <JobStatus job={item} />
+                                        </div>
                                     </List.Item>
                                 )}
                             />

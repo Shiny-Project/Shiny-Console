@@ -6,7 +6,7 @@ import { FormComponentProps } from 'antd/lib/form';
 export interface Props {
     getKeyPairs: () => void;
     deleteKeyPair: (applicationId: number) => void;
-    createKeyPair: (tag: string) => void;
+    createKeyPair: (tag: number) => void;
     showCreateModal: () => void;
     closeCreateModal: () => void;
     isLoading: boolean;
@@ -72,9 +72,9 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
     handleCreateSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-          if (!err) {
-            this.props.createKeyPair(values.tag);
-          }
+            if (!err) {
+                this.props.createKeyPair(values.tag as number);
+            }
         });
     }
 
@@ -90,11 +90,17 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                         rowKey={'id'}
                     />
                     <Divider />
-                    <Button onClick={this.props.showCreateModal}>生成新密钥</Button>
+                    <Button
+                        onClick={() => {
+                            this.props.form.resetFields();
+                            this.props.showCreateModal();
+                        }}
+                    >生成新密钥
+                    </Button>
                 </Card>
-                <Modal 
-                    visible={this.props.createModalVisible} 
-                    title="生成密钥对" 
+                <Modal
+                    visible={this.props.createModalVisible}
+                    title="生成密钥对"
                     confirmLoading={this.props.createModalLoading}
                     onOk={this.handleCreateSubmit}
                     onCancel={this.props.closeCreateModal}
@@ -109,8 +115,8 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                                         return serverNode.key_pair === 0;
                                     }).map(serverNode => {
                                         return (
-                                            <Select.Option 
-                                                value={serverNode.id} 
+                                            <Select.Option
+                                                value={serverNode.id}
                                                 key={serverNode.id}
                                             >
                                                 {serverNode.name} / {serverNode.type} / {serverNode.host}
