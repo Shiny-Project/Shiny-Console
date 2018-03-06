@@ -35,6 +35,12 @@ export default {
                 createModalVisible: false,
                 createModalLoading: false
             }
+        },
+        spider: {
+            list: {
+                spiderList: [],
+                isLoading: false
+            }
         }
     },
 } as StoreState;

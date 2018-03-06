@@ -111,3 +111,14 @@ export interface APIKeyPair {
     api_secret_key: string; // API_SECRET_KEY
     tag: ServerNode[]; // 绑定服务器标签
 }
+
+export interface Spider {
+    id: number;
+    name: string;
+    path: string;
+    info: string;
+    trigger_count: number;
+    trigger_time: string;
+}
+
+export type SpiderListResponse = Spider[];
