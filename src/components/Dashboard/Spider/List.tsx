@@ -1,11 +1,12 @@
 import React from 'react';
 import { SpiderListResponse, Spider } from '@/types/dashboard';
-import { Spin, Card, Table } from 'antd';
+import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
 
 export interface Props {
     spiderList: SpiderListResponse;
     isLoading: boolean;
     getSpiderList: () => void;
+    deleteSpider: (spiderId: number) => void;
 }
 export interface State {
 
@@ -30,6 +31,25 @@ class List extends React.Component<Props, State> {
         render: (text: string, record: Spider) => {
             const spiderInfo = JSON.parse(record.info);
             return <span>{spiderInfo.expires}秒</span>;
+        }
+    }, {
+        title: '操作',
+        key: 'actions',
+        render: (text: string, record: Spider): JSX.Element => {
+            return (
+                <div>
+                    <a>修改刷新频率</a>
+                    <Divider type="vertical" />
+                    <Popconfirm
+                        title="危险操作确认"
+                        onConfirm={() => {
+                          this.props.deleteSpider(record.id);
+                        }}
+                    >
+                        <a href="javascript:;" className="danger-text">删除</a>
+                    </Popconfirm>
+                </div>
+            );
         }
     }];
     componentDidMount() {

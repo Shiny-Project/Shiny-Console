@@ -31,6 +31,9 @@ export function mapDispatchToProps(dispatch: Dispatch) {
     return {
         getSpiderList: () => {
             dispatch(actions.getSpiderList());
+        },
+        deleteSpider: (spiderId: number) => {
+            dispatch(actions.deleteSpider(spiderId));
         }
     };
 }

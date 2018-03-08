@@ -22,6 +22,27 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
                 ...state,
                 isLoading: false
             };
+        case ActionTypes.DELETE_SPIDER:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case ActionTypes.DELETE_SPIDER_SUCCESS: {
+            const index = state.spiderList.findIndex(spider => spider.id === actions.spiderId);
+            return {
+                ...state,
+                spiderList: [
+                    ...state.spiderList.slice(0, index),
+                    ...state.spiderList.slice(index + 1)
+                ],
+                isLoading: false
+            };
+        }
+        case ActionTypes.DELETE_SPIDER_FAILURE: 
+            return {
+                ...state,
+                isLoading: false
+            };
         default:
             return {
                 ...state
