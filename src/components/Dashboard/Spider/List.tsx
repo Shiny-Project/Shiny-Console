@@ -1,18 +1,59 @@
 import React from 'react';
 import { SpiderListResponse, Spider } from '@/types/dashboard';
-import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
+import { Spin, Card, Table, Button, Divider, Popconfirm, Form, Modal, Input } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 
 export interface Props {
     spiderList: SpiderListResponse;
     isLoading: boolean;
+    frequencyUpdateModalVisible: boolean;
+    frequencyUpdateLoading: boolean;
+    nowEditingSpider: Spider;
     getSpiderList: () => void;
     deleteSpider: (spiderId: number) => void;
+    showFrequencyUpdateModal: (spiderId: number) => void;
+    hideFrequencyUpdateModal: () => void;
 }
 export interface State {
 
 }
 
-class List extends React.Component<Props, State> {
+export interface FrequencyUpdateFormProps {
+    visible: boolean;
+    frequency: number;
+    onCancel: () => void;
+    onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+class FrequencyUpdateForm extends React.Component<FrequencyUpdateFormProps & FormComponentProps> {
+    render() {
+        const { visible, onCancel, onSubmit, frequency, form } = this.props;
+        const { getFieldDecorator } = form;
+        return (
+            <Modal
+                visible={visible}
+                onCancel={onCancel}
+                onOk={onSubmit}
+                title="修改刷新频率"
+            >
+                <Form layout="vertical">
+                    <Form.Item label="刷新频率(秒)">
+                        {getFieldDecorator('frequency', {
+                            rules: [{ required: true }],
+                            initialValue: frequency
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
+                </Form>
+            </Modal>
+        );
+    }
+}
+
+const WrappedFrequencyUpdateForm = Form.create<FrequencyUpdateFormProps>()(FrequencyUpdateForm);
+
+class List extends React.Component<Props & FormComponentProps, State> {
     spiderListColumns = [{
         title: 'ID',
         dataIndex: 'id',
@@ -38,12 +79,18 @@ class List extends React.Component<Props, State> {
         render: (text: string, record: Spider): JSX.Element => {
             return (
                 <div>
-                    <a>修改刷新频率</a>
+                    <a 
+                        onClick={() => {
+                            this.props.showFrequencyUpdateModal(record.id);
+                    }}
+                    >
+                        修改刷新频率
+                    </a>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
                         onConfirm={() => {
-                          this.props.deleteSpider(record.id);
+                            this.props.deleteSpider(record.id);
                         }}
                     >
                         <a href="javascript:;" className="danger-text">删除</a>
@@ -54,6 +101,10 @@ class List extends React.Component<Props, State> {
     }];
     componentDidMount() {
         this.props.getSpiderList();
+    }
+    handleFrequencyUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        console.log(this.props.form.getFieldsValue());
     }
     render() {
         return (
@@ -66,9 +117,24 @@ class List extends React.Component<Props, State> {
                         rowKey={'id'}
                     />
                 </Card>
+                <WrappedFrequencyUpdateForm
+                    // @ts-ignore
+                    form={this.props.form}
+                    visible={this.props.frequencyUpdateModalVisible} 
+                    onSubmit={this.handleFrequencyUpdate}
+                    onCancel={this.props.hideFrequencyUpdateModal}
+                    frequency={(() => {
+                        if (this.props.nowEditingSpider.info !== undefined) {
+                            const spiderInfo = JSON.parse(this.props.nowEditingSpider.info);
+                            return spiderInfo.expires as number;
+                        } else {
+                            return 0;
+                        }
+                    })()}
+                />
             </Spin>
         );
     }
 }
 
-export default List;
+export default Form.create<Props>()(List);

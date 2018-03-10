@@ -39,7 +39,10 @@ export default {
         spider: {
             list: {
                 spiderList: [],
-                isLoading: false
+                isLoading: false,
+                frequencyUpdateModalVisible: false,
+                frequencyUpdateLoading: false,
+                nowEditingSpider: {}
             }
         }
     },

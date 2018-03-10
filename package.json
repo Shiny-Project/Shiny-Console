@@ -4,19 +4,20 @@
   "private": true,
   "dependencies": {
     "@antv/data-set": "^0.8.5",
-    "antd": "^3.0.2",
+    "antd": "^3.2.3",
     "axios": "^0.17.1",
     "nprogress": "^0.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",
-    "react-redux": "^5.0.6",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.8.0",
+    "react-scripts-ts": "^2.13.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "socket.io-client": "^2.0.4",
-    "viser-react": "^2.0.1"
+    "typescript": "^2.7.2",
+    "viser-react": "^2.2.1"
   },
   "scripts": {
     "start": "react-app-rewired start --scripts-version react-scripts-ts",
@@ -26,17 +27,17 @@
   },
   "devDependencies": {
     "@types/jest": "^21.1.10",
-    "@types/node": "^8.5.8",
+    "@types/node": "^8.9.5",
     "@types/nprogress": "^0.0.29",
-    "@types/react": "^16.0.34",
-    "@types/react-dom": "^16.0.3",
-    "@types/react-loadable": "^5.3.1",
-    "@types/react-redux": "^5.0.14",
-    "@types/react-router-dom": "^4.2.3",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-loadable": "^5.3.3",
+    "@types/react-redux": "^5.0.15",
+    "@types/react-router-dom": "^4.2.4",
     "@types/socket.io-client": "^1.4.32",
-    "@types/webpack-env": "^1.13.3",
+    "@types/webpack-env": "^1.13.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "react-app-rewired": "^1.4.0",
-    "ts-import-plugin": "^1.4.3"
+    "react-app-rewired": "^1.5.0",
+    "ts-import-plugin": "^1.4.4"
   }
 }

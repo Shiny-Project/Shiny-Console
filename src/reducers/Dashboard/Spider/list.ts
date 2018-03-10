@@ -43,6 +43,20 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
                 ...state,
                 isLoading: false
             };
+        case ActionTypes.UPDATE_FREQUENCY_SHOW_MODAL: {
+            const editingSpider = state.spiderList.find(spider => spider.id === actions.spiderId);
+            return {
+                ...state,
+                frequencyUpdateModalVisible: true,
+                nowEditingSpider: editingSpider
+            };
+        }
+        case ActionTypes.UPDATE_FREQUENCY_CANCEL: {
+            return {
+                ...state,
+                frequencyUpdateModalVisible: false
+            };
+        }
         default:
             return {
                 ...state

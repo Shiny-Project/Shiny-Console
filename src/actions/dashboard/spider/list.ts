@@ -32,8 +32,31 @@ export interface DeleteSpiderFailure {
     type: constants.DELETE_SPIDER_FAILURE;
 }
 
+export interface UpdateFrequencyShowModal {
+    type: constants.UPDATE_FREQUENCY_SHOW_MODAL;
+    spiderId: number;
+}
+
+export interface UpdateFrequencyStart {
+    type: constants.UPDATE_FREQUENCY_START;
+}
+
+export interface UpdateFrequencySuccess {
+    type: constants.UPDATE_FREQUENCY_SUCCESS;
+}
+
+export interface UpdateFrequencyFailure {
+    type: constants.UPDATE_FREQUENCY_FAILURE;
+}
+
+export interface UpdateFrequencyCancel {
+    type: constants.UPDATE_FREQUENCY_CANCEL;
+}
+
 export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure | 
                                DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure |
+                               UpdateFrequencyShowModal | UpdateFrequencyStart | UpdateFrequencySuccess | 
+                               UpdateFrequencyFailure | UpdateFrequencyCancel |
                                RaiseError;
 
 /**
@@ -68,6 +91,23 @@ export function deleteSpider(spiderId: number): ThunkAction<void, StoreState, nu
             dispatch(raiseError(e));
             dispatch(deleteSpiderFailure());
         }
+    };
+}
+
+/**
+ * 显示修改频率的面板
+ * @param spiderId 
+ */
+export function showFrequencyUpdateModal(spiderId: number): UpdateFrequencyShowModal {
+    return {
+        type: constants.UPDATE_FREQUENCY_SHOW_MODAL,
+        spiderId
+    };
+}
+
+export function hideFrequencyUpdateModal(): UpdateFrequencyCancel {
+    return {
+        type: constants.UPDATE_FREQUENCY_CANCEL
     };
 }
 

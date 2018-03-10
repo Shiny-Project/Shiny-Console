@@ -16,7 +16,9 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
         spiderList: state.dashboard.spider.list.spiderList,
-        isLoading: state.dashboard.spider.list.isLoading
+        isLoading: state.dashboard.spider.list.isLoading,
+        frequencyUpdateModalVisible: state.dashboard.spider.list.frequencyUpdateModalVisible,
+        nowEditingSpider: state.dashboard.spider.list.nowEditingSpider
     };
 }
 
@@ -34,6 +36,12 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         },
         deleteSpider: (spiderId: number) => {
             dispatch(actions.deleteSpider(spiderId));
+        },
+        showFrequencyUpdateModal: (spiderId: number) => {
+            dispatch(actions.showFrequencyUpdateModal(spiderId));
+        },
+        hideFrequencyUpdateModal: () => {
+            dispatch(actions.hideFrequencyUpdateModal());
         }
     };
 }

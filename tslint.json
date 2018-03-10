@@ -1,5 +1,9 @@
 {
     "extends": ["tslint-react"],
+    "rulesDirectory": ["./src"],
+    "linterOptions": {
+        "exclude": ["**/node_modules/**"]
+    },
     "rules": {
         "align": [
             true,
