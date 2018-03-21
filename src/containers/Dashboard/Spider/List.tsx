@@ -17,6 +17,7 @@ export function mapStateToProps(state: StoreState) {
     return {
         spiderList: state.dashboard.spider.list.spiderList,
         isLoading: state.dashboard.spider.list.isLoading,
+        confirmLoading: state.dashboard.spider.list.comfirmLoading,
         frequencyUpdateModalVisible: state.dashboard.spider.list.frequencyUpdateModalVisible,
         nowEditingSpider: state.dashboard.spider.list.nowEditingSpider
     };
@@ -42,6 +43,9 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         },
         hideFrequencyUpdateModal: () => {
             dispatch(actions.hideFrequencyUpdateModal());
+        },
+        updateFrequency: (spiderId: number, frequency: number) => {
+            dispatch(actions.updateFrequency(spiderId, frequency));
         }
     };
 }

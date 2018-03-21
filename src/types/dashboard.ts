@@ -112,11 +112,15 @@ export interface APIKeyPair {
     tag: ServerNode[]; // 绑定服务器标签
 }
 
+export interface SpiderInfo {
+    expires: number;
+}
+
 export interface Spider {
     id: number;
     name: string;
     path: string;
-    info: string;
+    info: SpiderInfo;
     trigger_count: number;
     trigger_time: string;
 }

@@ -24,7 +24,8 @@ export interface Props {
     errors?: ErrorState;
     raiseError: (error: Error) => void;
     history: {
-        push: (path: string) => void;
+        location: string;
+        push: (path: string, state?: object) => void;
     };
 }
 

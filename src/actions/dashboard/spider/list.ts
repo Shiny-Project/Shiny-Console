@@ -43,6 +43,8 @@ export interface UpdateFrequencyStart {
 
 export interface UpdateFrequencySuccess {
     type: constants.UPDATE_FREQUENCY_SUCCESS;
+    spiderId: number;
+    frequency: number;
 }
 
 export interface UpdateFrequencyFailure {
@@ -105,6 +107,22 @@ export function showFrequencyUpdateModal(spiderId: number): UpdateFrequencyShowM
     };
 }
 
+export function updateFrequency(spiderId: number, frequency: number): ThunkAction<void, StoreState, null> {
+    return async (dispatch) => {
+        dispatch(updateFrequencyStart());
+        try {
+            const response = await request.post('/Spider/updateFrequency', {
+                spiderId,
+                frequency
+            });
+            dispatch(updateFrequencySuccess(spiderId, frequency));
+        } catch (e) {
+            dispatch(raiseError(e));
+            dispatch(updateFrequencyFailure());
+        }
+    };
+}
+
 export function hideFrequencyUpdateModal(): UpdateFrequencyCancel {
     return {
         type: constants.UPDATE_FREQUENCY_CANCEL
@@ -147,5 +165,25 @@ export function deleteSpiderSuccess(spiderId: number): DeleteSpiderSuccess {
 export function deleteSpiderFailure(): DeleteSpiderFailure {
     return {
         type: constants.DELETE_SPIDER_FAILURE
+    };
+}
+
+export function updateFrequencyStart(): UpdateFrequencyStart {
+    return {
+        type: constants.UPDATE_FREQUENCY_START,
+    };
+}
+
+export function updateFrequencyFailure(): UpdateFrequencyFailure {
+    return {
+        type: constants.UPDATE_FREQUENCY_FAILURE
+    };
+}
+
+export function updateFrequencySuccess(spiderId: number, frequency: number): UpdateFrequencySuccess {
+    return {
+        type: constants.UPDATE_FREQUENCY_SUCCESS,
+        spiderId,
+        frequency
     };
 }

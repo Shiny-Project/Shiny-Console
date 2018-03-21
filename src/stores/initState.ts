@@ -40,6 +40,7 @@ export default {
             list: {
                 spiderList: [],
                 isLoading: false,
+                comfirmLoading: false,
                 frequencyUpdateModalVisible: false,
                 frequencyUpdateLoading: false,
                 nowEditingSpider: {}
