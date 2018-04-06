@@ -55,10 +55,20 @@ export interface UpdateFrequencyCancel {
     type: constants.UPDATE_FREQUENCY_CANCEL;
 }
 
+export interface EditSpiderShowModal {
+    type: constants.EDIT_SPIDER_SHOW_MODAL;
+    spiderId: number;
+}
+
+export interface EditSpiderCancel {
+    type: constants.EDIT_SPIDER_CANCEL;
+}
+
 export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure | 
                                DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure |
                                UpdateFrequencyShowModal | UpdateFrequencyStart | UpdateFrequencySuccess | 
                                UpdateFrequencyFailure | UpdateFrequencyCancel |
+                               EditSpiderShowModal | EditSpiderCancel | 
                                RaiseError;
 
 /**
@@ -185,5 +195,18 @@ export function updateFrequencySuccess(spiderId: number, frequency: number): Upd
         type: constants.UPDATE_FREQUENCY_SUCCESS,
         spiderId,
         frequency
+    };
+}
+
+export function showEditSpiderModal(spiderId: number): EditSpiderShowModal {
+    return {
+        type: constants.EDIT_SPIDER_SHOW_MODAL,
+        spiderId
+    };
+}
+
+export function hideEditSpiderModal(): EditSpiderCancel {
+    return {
+        type: constants.EDIT_SPIDER_CANCEL
     };
 }

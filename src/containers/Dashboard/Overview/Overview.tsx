@@ -15,7 +15,8 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 
 export function mapStateToProps(state: StoreState) {
     return {
-      statistics: state.dashboard.overview.statistics
+      statistics: state.dashboard.overview.statistics,
+      isLoading: state.dashboard.overview.isLoading
     };
 }
 

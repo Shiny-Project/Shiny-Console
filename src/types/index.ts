@@ -67,6 +67,7 @@ export interface SpiderListState {
     isLoading: boolean;
     comfirmLoading: boolean;
     frequencyUpdateModalVisible: boolean;
+    editSpiderModalVisible: boolean;
     frequencyUpdateLoading: boolean;
     nowEditingSpider: Spider;
 }

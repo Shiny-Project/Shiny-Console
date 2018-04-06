@@ -91,6 +91,20 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
                 comfirmLoading: false,
             };
         }
+        case ActionTypes.EDIT_SPIDER_SHOW_MODAL: {
+            const editingSpider = state.spiderList.find(spider => spider.id === actions.spiderId);
+            return {
+                ...state,
+                editSpiderModalVisible: true,
+                nowEditingSpider: editingSpider
+            };
+        }
+        case ActionTypes.EDIT_SPIDER_CANCEL: {
+            return {
+                ...state,
+                editSpiderModalVisible: false
+            };
+        }
         default:
             return {
                 ...state

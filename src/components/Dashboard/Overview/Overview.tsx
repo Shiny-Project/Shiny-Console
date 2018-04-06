@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Table } from 'antd';
+import { Card, Row, Col, Table, Spin } from 'antd';
 import * as DashboardTypes from '@/types/dashboard';
 import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from 'viser-react';
 const DataSet = require('@antv/data-set');
@@ -82,81 +82,83 @@ class Overview extends React.Component<Props, State> {
     }
     render() {
         return (
-            <Card title="Overview">
-                <Row gutter={16}>
-                    <Col lg={12} xs={24}>
-                        <Card title="本月事件等级分布" bordered={false}>
-                            <Chart
-                                forceFit={true}
-                                height={300}
-                                scale={this.levelRankingScale}
-                                data={this.state.levelRanking}
-                            >
-                                <Tooltip />
-                                <Axis />
-                                <Bar position="level*count" />
-                            </Chart>
-                        </Card>
-                    </Col>
-                    <Col lg={12} xs={24}>
-                        <Card title="本日任务处理情况" bordered={false}>
-                            <Chart 
-                                forceFit={true} 
-                                height={300} 
-                                data={this.processJobStatusData()} 
-                                scale={this.jobStatusScale}
-                            >
-                                <Tooltip showTitle={false} />
-                                <Coord type="theta" />
-                                <Axis />
-                                <Legend dataKey="status" />
-                                <Pie
-                                    position="percent"
-                                    color="status"
-                                    style={{ stroke: '#fff', lineWidth: 1 }}
-                                    label={['percent', {
-                                        formatter: (val: string, item: {point: {status: string}}) => {
-                                            return item.point.status + ': ' + val;
-                                        }
-                                    }]}
+            <Spin spinning={this.props.isLoading}>
+                <Card title="Overview">
+                    <Row gutter={16}>
+                        <Col lg={12} xs={24}>
+                            <Card title="本月事件等级分布" bordered={false}>
+                                <Chart
+                                    forceFit={true}
+                                    height={300}
+                                    scale={this.levelRankingScale}
+                                    data={this.state.levelRanking}
+                                >
+                                    <Tooltip />
+                                    <Axis />
+                                    <Bar position="level*count" />
+                                </Chart>
+                            </Card>
+                        </Col>
+                        <Col lg={12} xs={24}>
+                            <Card title="本日任务处理情况" bordered={false}>
+                                <Chart 
+                                    forceFit={true} 
+                                    height={300} 
+                                    data={this.processJobStatusData()} 
+                                    scale={this.jobStatusScale}
+                                >
+                                    <Tooltip showTitle={false} />
+                                    <Coord type="theta" />
+                                    <Axis />
+                                    <Legend dataKey="status" />
+                                    <Pie
+                                        position="percent"
+                                        color="status"
+                                        style={{ stroke: '#fff', lineWidth: 1 }}
+                                        label={['percent', {
+                                            formatter: (val: string, item: {point: {status: string}}) => {
+                                                return item.point.status + ': ' + val;
+                                            }
+                                        }]}
+                                    />
+                                </Chart>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col lg={8} xs={24}>
+                            <Card title="近1日" bordered={false}>
+                                <Table
+                                    dataSource={this.state.spiderRanking['1day']}
+                                    columns={spiderRankingColumns}
+                                    pagination={false}
+                                    rowKey="publisher"
                                 />
-                            </Chart>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col lg={8} xs={24}>
-                        <Card title="近1日" bordered={false}>
-                            <Table
-                                dataSource={this.state.spiderRanking['1day']}
-                                columns={spiderRankingColumns}
-                                pagination={false}
-                                rowKey="publisher"
-                            />
-                        </Card>
-                    </Col>
-                    <Col lg={8} xs={24}>
-                        <Card title="近3日" bordered={false}>
-                            <Table
-                                dataSource={this.state.spiderRanking['3days']}
-                                columns={spiderRankingColumns}
-                                pagination={false}
-                                rowKey="publisher"
-                            />
-                        </Card>
-                    </Col>
-                    <Col lg={8} xs={24}>
-                        <Card title="近21日" bordered={false}>
-                            <Table
-                                dataSource={this.state.spiderRanking['21days']}
-                                columns={spiderRankingColumns}
-                                pagination={false}
-                                rowKey="publisher"
-                            />
-                        </Card>
-                    </Col>
-                </Row>
-            </Card>
+                            </Card>
+                        </Col>
+                        <Col lg={8} xs={24}>
+                            <Card title="近3日" bordered={false}>
+                                <Table
+                                    dataSource={this.state.spiderRanking['3days']}
+                                    columns={spiderRankingColumns}
+                                    pagination={false}
+                                    rowKey="publisher"
+                                />
+                            </Card>
+                        </Col>
+                        <Col lg={8} xs={24}>
+                            <Card title="近21日" bordered={false}>
+                                <Table
+                                    dataSource={this.state.spiderRanking['21days']}
+                                    columns={spiderRankingColumns}
+                                    pagination={false}
+                                    rowKey="publisher"
+                                />
+                            </Card>
+                        </Col>
+                    </Row>
+                </Card>
+            </Spin>
         );
     }
 }

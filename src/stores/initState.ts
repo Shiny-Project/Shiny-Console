@@ -42,6 +42,7 @@ export default {
                 isLoading: false,
                 comfirmLoading: false,
                 frequencyUpdateModalVisible: false,
+                editSpiderModalVisible: false,
                 frequencyUpdateLoading: false,
                 nowEditingSpider: {}
             }

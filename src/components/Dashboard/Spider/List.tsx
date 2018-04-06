@@ -4,30 +4,16 @@ import { Spin, Card, Table, Button, Divider, Popconfirm, Form, Modal, Input } fr
 import { FormComponentProps } from 'antd/lib/form';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 
-export interface Props {
-    spiderList: SpiderListResponse;
-    isLoading: boolean;
-    confirmLoading: boolean;
-    frequencyUpdateModalVisible: boolean;
-    frequencyUpdateLoading: boolean;
-    nowEditingSpider: Spider;
-    getSpiderList: () => void;
-    deleteSpider: (spiderId: number) => void;
-    showFrequencyUpdateModal: (spiderId: number) => void;
-    hideFrequencyUpdateModal: () => void;
-    updateFrequency: (spiderId: number, frequency: number) => void;
-}
-export interface State {
-
-}
-
-export interface FrequencyUpdateFormProps {
+interface FormModalProps {
     visible: boolean;
-    frequency: number;
     form: WrappedFormUtils;
-    confirmLoading: boolean;
+    confirmLoading?: boolean;
     onCancel: () => void;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface FrequencyUpdateFormProps extends FormModalProps {
+    frequency: number;
 }
 
 class FrequencyUpdateForm extends React.Component<FrequencyUpdateFormProps> {
@@ -55,6 +41,47 @@ class FrequencyUpdateForm extends React.Component<FrequencyUpdateFormProps> {
             </Modal>
         );
     }
+}
+
+interface EditSpiderFormProps extends FormModalProps {
+    spiderInfo: Spider;
+}
+
+class EditSpiderForm extends React.Component<EditSpiderFormProps> {
+    render() {
+        const { visible, onCancel, onSubmit, spiderInfo, confirmLoading, form } = this.props;
+        const { getFieldDecorator } = form;
+        return (
+            <Modal
+                visible={visible}
+                onCancel={onCancel}
+                onOk={onSubmit}
+                confirmLoading={confirmLoading}
+                title="编辑"
+            />
+        );
+    }
+}
+
+export interface Props {
+    spiderList: SpiderListResponse;
+    isLoading: boolean;
+    confirmLoading: boolean;
+    frequencyUpdateModalVisible: boolean;
+    frequencyUpdateLoading: boolean;
+    editSpiderModalVisible: boolean;
+    nowEditingSpider: Spider;
+    getSpiderList: () => void;
+    deleteSpider: (spiderId: number) => void;
+    showFrequencyUpdateModal: (spiderId: number) => void;
+    hideFrequencyUpdateModal: () => void;
+    showEditSpiderModal: (spider: number) => void;
+    hideEditSpiderModal: () => void;
+    updateFrequency: (spiderId: number, frequency: number) => void;
+    showEditModal: (spiderId: number) => void;
+}
+export interface State {
+
 }
 
 class List extends React.Component<Props & FormComponentProps, State> {
@@ -90,6 +117,14 @@ class List extends React.Component<Props & FormComponentProps, State> {
                         修改刷新频率
                     </a>
                     <Divider type="vertical" />
+                    <a
+                        onClick={() => {
+                            this.props.showEditSpiderModal(record.id);
+                        }}
+                    >
+                        编辑
+                    </a>
+                    <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
                         onConfirm={() => {
@@ -113,6 +148,9 @@ class List extends React.Component<Props & FormComponentProps, State> {
             }
         });
     }
+    handleEditFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+    }
     render() {
         return (
             <Spin spinning={this.props.isLoading}>
@@ -131,6 +169,13 @@ class List extends React.Component<Props & FormComponentProps, State> {
                     onCancel={this.props.hideFrequencyUpdateModal}
                     confirmLoading={this.props.confirmLoading}
                     frequency={this.props.nowEditingSpider.info && this.props.nowEditingSpider.info.expires}
+                />
+                <EditSpiderForm
+                    form={this.props.form}
+                    visible={this.props.editSpiderModalVisible}
+                    onSubmit={this.handleEditFormSubmit}
+                    onCancel={this.props.hideEditSpiderModal}
+                    spiderInfo={this.props.nowEditingSpider}
                 />
             </Spin>
         );
