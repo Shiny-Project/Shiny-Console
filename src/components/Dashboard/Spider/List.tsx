@@ -58,7 +58,26 @@ class EditSpiderForm extends React.Component<EditSpiderFormProps> {
                 onOk={onSubmit}
                 confirmLoading={confirmLoading}
                 title="编辑"
-            />
+            >
+                <Form layout="vertical">
+                    <Form.Item label="爬虫名">
+                        {getFieldDecorator('name', {
+                            rules: [{ required: true }],
+                            initialValue: spiderInfo.name
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
+                    <Form.Item label="爬虫路径">
+                        {getFieldDecorator('path', {
+                            rules: [{ required: true }],
+                            initialValue: spiderInfo.path
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
+                </Form>
+            </Modal>
         );
     }
 }
@@ -70,6 +89,7 @@ export interface Props {
     frequencyUpdateModalVisible: boolean;
     frequencyUpdateLoading: boolean;
     editSpiderModalVisible: boolean;
+    editSpiderLoading: boolean;
     nowEditingSpider: Spider;
     getSpiderList: () => void;
     deleteSpider: (spiderId: number) => void;
@@ -78,6 +98,7 @@ export interface Props {
     showEditSpiderModal: (spider: number) => void;
     hideEditSpiderModal: () => void;
     updateFrequency: (spiderId: number, frequency: number) => void;
+    editSpider: (spiderId: number, name: string, path: string) => void;
     showEditModal: (spiderId: number) => void;
 }
 export interface State {
@@ -111,6 +132,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
                 <div>
                     <a
                         onClick={() => {
+                            this.props.form.resetFields();
                             this.props.showFrequencyUpdateModal(record.id);
                         }}
                     >
@@ -119,6 +141,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
                     <Divider type="vertical" />
                     <a
                         onClick={() => {
+                            this.props.form.resetFields();
                             this.props.showEditSpiderModal(record.id);
                         }}
                     >
@@ -150,6 +173,11 @@ class List extends React.Component<Props & FormComponentProps, State> {
     }
     handleEditFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                this.props.editSpider(this.props.nowEditingSpider.id, values.name, values.path);
+            }
+        });
     }
     render() {
         return (
@@ -175,6 +203,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
                     visible={this.props.editSpiderModalVisible}
                     onSubmit={this.handleEditFormSubmit}
                     onCancel={this.props.hideEditSpiderModal}
+                    confirmLoading={this.props.editSpiderLoading}
                     spiderInfo={this.props.nowEditingSpider}
                 />
             </Spin>

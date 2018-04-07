@@ -6,18 +6,18 @@ import * as ActionTypes from '@/constants/Spider/list';
 export function list(state: SpiderListState = initState.dashboard.spider.list, actions: SpiderListAction)
     : SpiderListState {
     switch (actions.type) {
-        case ActionTypes.GET_SPIDER_LIST: 
+        case ActionTypes.GET_SPIDER_LIST:
             return {
                 ...state,
                 isLoading: true
             };
-        case ActionTypes.GET_SPIDER_LIST_SUCCESS: 
+        case ActionTypes.GET_SPIDER_LIST_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 spiderList: actions.spiderList
             };
-        case ActionTypes.GET_SPIDER_LIST_FAILURE: 
+        case ActionTypes.GET_SPIDER_LIST_FAILURE:
             return {
                 ...state,
                 isLoading: false
@@ -38,7 +38,7 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
                 isLoading: false
             };
         }
-        case ActionTypes.DELETE_SPIDER_FAILURE: 
+        case ActionTypes.DELETE_SPIDER_FAILURE:
             return {
                 ...state,
                 isLoading: false
@@ -67,7 +67,7 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
             const index = state.spiderList.findIndex((spider) => {
                 return spider.id === actions.spiderId;
             });
-            
+
             return {
                 ...state,
                 spiderList: [
@@ -103,6 +103,33 @@ export function list(state: SpiderListState = initState.dashboard.spider.list, a
             return {
                 ...state,
                 editSpiderModalVisible: false
+            };
+        }
+        case ActionTypes.EDIT_SPIDER_START: {
+            return {
+                ...state,
+                editSpiderLoading: true
+            };
+        }
+        case ActionTypes.EDIT_SPIDER_SUCCESS: {
+            const index = state.spiderList.findIndex((spider) => {
+                return spider.id === actions.spiderId;
+            });
+            return {
+                ...state,
+                spiderList: [
+                    ...state.spiderList.slice(0, index),
+                    actions.spider,
+                    ...state.spiderList.slice(index + 1)
+                ],
+                editSpiderLoading: false,
+                editSpiderModalVisible: false
+            };
+        }
+        case ActionTypes.EDIT_SPIDER_FAILURE: {
+            return {
+                ...state,
+                editSpiderLoading: false
             };
         }
         default:

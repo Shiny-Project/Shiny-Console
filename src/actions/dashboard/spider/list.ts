@@ -3,7 +3,7 @@ import { StoreState } from '@/types/index';
 import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
-import { SpiderListResponse } from '@/types/dashboard';
+import { SpiderListResponse, Spider } from '@/types/dashboard';
 
 export interface GetSpiderList {
     type: constants.GET_SPIDER_LIST;
@@ -64,11 +64,26 @@ export interface EditSpiderCancel {
     type: constants.EDIT_SPIDER_CANCEL;
 }
 
+export interface EditSpiderStart {
+    type: constants.EDIT_SPIDER_START;
+}
+
+export interface EditSpiderSuccess {
+    type: constants.EDIT_SPIDER_SUCCESS;
+    spiderId: number;
+    spider: Spider;
+}
+
+export interface EditSpiderFailure {
+    type: constants.EDIT_SPIDER_FAILURE;
+}
+
 export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure | 
                                DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure |
                                UpdateFrequencyShowModal | UpdateFrequencyStart | UpdateFrequencySuccess | 
                                UpdateFrequencyFailure | UpdateFrequencyCancel |
-                               EditSpiderShowModal | EditSpiderCancel | 
+                               EditSpiderShowModal | EditSpiderCancel | EditSpiderStart | EditSpiderFailure |
+                               EditSpiderSuccess |
                                RaiseError;
 
 /**
@@ -208,5 +223,48 @@ export function showEditSpiderModal(spiderId: number): EditSpiderShowModal {
 export function hideEditSpiderModal(): EditSpiderCancel {
     return {
         type: constants.EDIT_SPIDER_CANCEL
+    };
+}
+
+/**
+ * 编辑爬虫信息
+ * @param spiderId 爬虫ID
+ * @param name 爬虫名
+ * @param path 爬虫路径
+ */
+export function editSpider(spiderId: number, name: string, path: string): ThunkAction<void, StoreState, null> {
+    return async (dispatch) => {
+        dispatch(editSpiderStart());
+        try {
+            const result = await request.post<Spider>('/Spider/update', {
+                spiderId,
+                name,
+                path
+            });
+            dispatch(editSpiderSuccess(spiderId, result));
+        } catch (e) {
+            dispatch(raiseError(e));
+            dispatch(editSpiderFailure());
+        }
+    };
+}
+
+export function editSpiderStart(): EditSpiderStart {
+    return {
+        type: constants.EDIT_SPIDER_START
+    };
+}
+
+export function editSpiderSuccess(spiderId: number, spider: Spider): EditSpiderSuccess {
+    return {
+        type: constants.EDIT_SPIDER_SUCCESS,
+        spiderId,
+        spider
+    };
+}
+
+export function editSpiderFailure(): EditSpiderFailure {
+    return {
+        type: constants.EDIT_SPIDER_FAILURE,
     };
 }
