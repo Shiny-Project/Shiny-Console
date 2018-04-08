@@ -76,6 +76,14 @@ class EditSpiderForm extends React.Component<EditSpiderFormProps> {
                             <Input />
                         )}
                     </Form.Item>
+                    <Form.Item label="描述">
+                        {getFieldDecorator('description', {
+                            rules: [{ required: true }],
+                            initialValue: spiderInfo.description
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
                 </Form>
             </Modal>
         );
@@ -98,7 +106,7 @@ export interface Props {
     showEditSpiderModal: (spider: number) => void;
     hideEditSpiderModal: () => void;
     updateFrequency: (spiderId: number, frequency: number) => void;
-    editSpider: (spiderId: number, name: string, path: string) => void;
+    editSpider: (spiderId: number, name: string, description: string, path: string) => void;
     showEditModal: (spiderId: number) => void;
 }
 export interface State {
@@ -118,6 +126,10 @@ class List extends React.Component<Props & FormComponentProps, State> {
         title: '路径',
         dataIndex: 'path',
         key: 'path'
+    }, {
+        title: '描述',
+        dataIndex: 'description',
+        key: 'description'
     }, {
         title: '刷新间隔(秒)',
         key: 'interval',
@@ -175,7 +187,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.editSpider(this.props.nowEditingSpider.id, values.name, values.path);
+                this.props.editSpider(this.props.nowEditingSpider.id, values.name, values.description, values.path);
             }
         });
     }

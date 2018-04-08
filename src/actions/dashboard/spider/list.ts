@@ -78,13 +78,13 @@ export interface EditSpiderFailure {
     type: constants.EDIT_SPIDER_FAILURE;
 }
 
-export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure | 
-                               DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure |
-                               UpdateFrequencyShowModal | UpdateFrequencyStart | UpdateFrequencySuccess | 
-                               UpdateFrequencyFailure | UpdateFrequencyCancel |
-                               EditSpiderShowModal | EditSpiderCancel | EditSpiderStart | EditSpiderFailure |
-                               EditSpiderSuccess |
-                               RaiseError;
+export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure |
+    DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure |
+    UpdateFrequencyShowModal | UpdateFrequencyStart | UpdateFrequencySuccess |
+    UpdateFrequencyFailure | UpdateFrequencyCancel |
+    EditSpiderShowModal | EditSpiderCancel | EditSpiderStart | EditSpiderFailure |
+    EditSpiderSuccess |
+    RaiseError;
 
 /**
  * 获得 Spider 列表
@@ -232,7 +232,9 @@ export function hideEditSpiderModal(): EditSpiderCancel {
  * @param name 爬虫名
  * @param path 爬虫路径
  */
-export function editSpider(spiderId: number, name: string, path: string): ThunkAction<void, StoreState, null> {
+export function editSpider(
+    spiderId: number, name: string, description: string, path: string
+): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(editSpiderStart());
         try {

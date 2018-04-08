@@ -48,11 +48,11 @@ class Dashboard extends React.Component<Props, {}> {
                         <h2 className="logo">Shiny-Console</h2>
                     </Header>
                     <Content>
-                        <Row gutter={16}>
-                            <Col lg={4} xs={24}>
+                        <Row gutter={8}>
+                            <Col lg={3} xs={24}>
                                 <Menu />
                             </Col>
-                            <Col lg={20} xs={24} className="dashboard-main-container">
+                            <Col lg={21} xs={24} className="dashboard-main-container">
                                 <Switch>
                                     <Route exact={true} path="/dashboard" component={RedirectToOverview} />
                                     {/* Overview */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Icon, Spin, List } from 'antd';
+import { Card, Row, Col, Icon, Spin, List, Tabs } from 'antd';
 import { RecentEventsResponse, Job } from '@/types/dashboard';
 import { Link } from 'react-router-dom';
 import './Realtime.css';
@@ -28,7 +28,7 @@ const renderEventList = (recentEvents: RecentEventsResponse) => {
                 >
                     <Meta
                         title={event.data.title}
-                        description={<div dangerouslySetInnerHTML={{__html: event.data.content}} />}
+                        description={<div dangerouslySetInnerHTML={{ __html: event.data.content }} />}
                         avatar={<img src={event.data.cover} />}
                     />
                 </Card>
@@ -38,7 +38,7 @@ const renderEventList = (recentEvents: RecentEventsResponse) => {
     return eventList;
 };
 
-const JobStatus = ({job}: {job: Job}): JSX.Element => {
+const JobStatus = ({ job }: { job: Job }): JSX.Element => {
     return (
         <span className={`status-${job.status}`}>{job.status === 'success' ? job.done_by : job.status}</span>
     );
@@ -55,16 +55,16 @@ class Realtime extends React.Component<Props, State> {
     }
     render() {
         return (
-            <Card title="实时">
-                <Row gutter={16}>
-                    <Col lg={18} xs={24}>
+            <div>
+                <Tabs defaultActiveKey="1">
+                    <Tabs.TabPane tab="Recent Events" key="1">
                         <Card title="最近事件">
                             <Spin spinning={this.props.isLoading}>
                                 {renderEventList(this.props.recentEvents)}
                             </Spin>
                         </Card>
-                    </Col>
-                    <Col lg={6} xs={24}>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab="Realtime Job Status" key="2">
                         <Card title="任务执行">
                             <List
                                 itemLayout="horizontal"
@@ -82,9 +82,9 @@ class Realtime extends React.Component<Props, State> {
                                 )}
                             />
                         </Card>
-                    </Col>
-                </Row>
-            </Card>
+                    </Tabs.TabPane>
+                </Tabs>
+            </div>
         );
     }
 }

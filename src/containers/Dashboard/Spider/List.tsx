@@ -55,8 +55,8 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         hideEditSpiderModal: () => {
             dispatch(actions.hideEditSpiderModal());
         },
-        editSpider: (spiderId: number, name: string, path: string) => {
-            dispatch(actions.editSpider(spiderId, name, path));
+        editSpider: (spiderId: number, name: string, description: string, path: string) => {
+            dispatch(actions.editSpider(spiderId, name, description, path));
         }
     };
 }
