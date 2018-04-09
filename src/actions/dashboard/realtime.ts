@@ -34,18 +34,24 @@ export interface UpdateJob {
     job: DashboardTypes.Job;
 }
 
-export type RealtimeAction = 
-    GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure | AddRecentEvent | 
+export type RealtimeAction =
+    GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure | AddRecentEvent |
     AddJob | UpdateJob | RaiseError;
 
 /**
  * 获得最近事件
  */
-export function getRecentEvents(): ThunkAction<void, StoreState, null> {
+export function getRecentEvents(publishers?: string[]): ThunkAction<void, StoreState, null> {
+    console.log(publishers);
     return async (dispatch) => {
         dispatch(getRecentEventsStart());
         try {
-            const recentEvents = await request.get<DashboardTypes.RecentEventsResponse>('/Data/recent');
+            const recentEvents = await request.get<DashboardTypes.RecentEventsResponse>(
+                '/Data/recent', 
+                publishers ? { 
+                    publishers: publishers.join(',')
+                } : {}
+            );
             dispatch(getRecentEventsSuccess(recentEvents));
         } catch (e) {
             dispatch(raiseError(e));

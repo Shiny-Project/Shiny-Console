@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import './Realtime.css';
 
 export interface Props {
-    getRecentEvents: () => void;
+    getRecentEvents: (publishers?: string[]) => void;
     listenNewEvents: () => void;
     listenJobStatus: () => void;
     recentEvents: RecentEventsResponse;
@@ -40,7 +40,10 @@ class Realtime extends React.Component<Props, State> {
                     <Tabs.TabPane tab="Recent Events" key="1">
                         <Card title="最近事件">
                             <Spin spinning={this.props.isLoading}>
-                                <EventList recentEvents={this.props.recentEvents} />
+                                <EventList 
+                                    recentEvents={this.props.recentEvents} 
+                                    getRecentEvents={this.props.getRecentEvents}
+                                />
                             </Spin>
                         </Card>
                     </Tabs.TabPane>

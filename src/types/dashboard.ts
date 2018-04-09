@@ -60,7 +60,11 @@ export interface EventSocketMessage {
     data: ShinyEventData; // 事件详细数据
 }
 
-export interface DataRefreshJob {
+export interface BaseJob {
+    type: string;
+}
+
+export interface DataRefreshJob extends BaseJob {
     id: number; // 任务 ID
     type: 'data_refresh'; // 任务类型
     spider: string; // 任务爬虫
