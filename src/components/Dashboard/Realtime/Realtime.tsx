@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Row, Col, Icon, Spin, List, Tabs } from 'antd';
-import { RecentEventsResponse, Job } from '@/types/dashboard';
+import { RecentEventsResponse, Job, ShinyEvent } from '@/types/dashboard';
+import JobStatus from './JobStatus';
+import EventList from './EventList';
 import { Link } from 'react-router-dom';
 import './Realtime.css';
-
-const { Meta } = Card;
 
 export interface Props {
     getRecentEvents: () => void;
@@ -15,43 +15,23 @@ export interface Props {
     isLoading: boolean;
 }
 
-export interface State { }
-
-const renderEventList = (recentEvents: RecentEventsResponse) => {
-    const eventList = recentEvents.map((event) => {
-        return (
-            <div key={event.hash} onClick={(e) => { window.open(event.data.link); }}>
-                <Card
-                    className={['event-item', `event-border-${event.level}`].join(' ')}
-                    type="inner"
-                    hoverable={true}
-                >
-                    <Meta
-                        title={event.data.title}
-                        description={<div dangerouslySetInnerHTML={{ __html: event.data.content }} />}
-                        avatar={<img src={event.data.cover} />}
-                    />
-                </Card>
-            </div>
-        );
-    });
-    return eventList;
-};
-
-const JobStatus = ({ job }: { job: Job }): JSX.Element => {
-    return (
-        <span className={`status-${job.status}`}>{job.status === 'success' ? job.done_by : job.status}</span>
-    );
-};
+export interface State {
+    recentEvents: ShinyEvent[];
+    listening: boolean;
+ }
 
 class Realtime extends React.Component<Props, State> {
     state: State = {
-        recentEvents: []
+        recentEvents: [],
+        listening: false
     };
     componentDidMount() {
         this.props.getRecentEvents();
-        this.props.listenNewEvents();
-        this.props.listenJobStatus();
+        if (!this.state.listening) {
+            this.props.listenNewEvents();
+            this.props.listenJobStatus();
+            this.setState({listening: true});
+        }
     }
     render() {
         return (
@@ -60,28 +40,12 @@ class Realtime extends React.Component<Props, State> {
                     <Tabs.TabPane tab="Recent Events" key="1">
                         <Card title="最近事件">
                             <Spin spinning={this.props.isLoading}>
-                                {renderEventList(this.props.recentEvents)}
+                                <EventList recentEvents={this.props.recentEvents} />
                             </Spin>
                         </Card>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Realtime Job Status" key="2">
-                        <Card title="任务执行">
-                            <List
-                                itemLayout="horizontal"
-                                dataSource={this.props.recentJobs}
-                                renderItem={(item: Job) => (
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            title={<span>数据刷新:{item.spider}</span>}
-                                            description={item.createdAt.toString()}
-                                        />
-                                        <div>
-                                            <JobStatus job={item} />
-                                        </div>
-                                    </List.Item>
-                                )}
-                            />
-                        </Card>
+                        <JobStatus recentJobs={this.props.recentJobs} />
                     </Tabs.TabPane>
                 </Tabs>
             </div>

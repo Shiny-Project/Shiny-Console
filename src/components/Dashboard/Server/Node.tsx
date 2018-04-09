@@ -3,6 +3,23 @@ import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconf
 import { ServerListResponse, ServerNode } from '@/types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
+interface ServerNodeProps {
+    type: string;
+}
+class ServerNodeType extends React.Component<ServerNodeProps> {
+    render() {
+        if (this.props.type === 'central') {
+            return <span>中控</span>;
+        } else if (this.props.type === 'websocket') {
+            return <span>消息分发</span>;
+        } else if (this.props.type === 'spider') {
+            return <span>爬虫</span>;
+        } else {
+            return <span>{this.props.type}</span>;
+        }
+    }
+}
+
 export interface Props {
     getServerList: () => void;
     deleteServer: (serverId: number) => void;
@@ -18,18 +35,6 @@ export interface Props {
 export interface State {
     showModal: boolean;
 }
-
-const ServerNodeType = function ({ type }: { type: string }): JSX.Element {
-    if (type === 'central') {
-        return <span>中控</span>;
-    } else if (type === 'websocket') {
-        return <span>消息分发</span>;
-    } else if (type === 'spider') {
-        return <span>爬虫</span>;
-    } else {
-        return <span>{type}</span>;
-    }
-};
 
 class Node extends React.Component<Props & FormComponentProps, State> {
     serverListColumns = [{
@@ -55,15 +60,15 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         render: (text: string, record: ServerNode) => {
             return (
                 <div>
-                    <Popconfirm 
-                        title="危险操作确认"  
+                    <Popconfirm
+                        title="危险操作确认"
                         onConfirm={() => {
-                                this.props.deleteServer(record.id);
-                            }}
+                            this.props.deleteServer(record.id);
+                        }}
                     >
-                        <Button 
-                            type="danger" 
-                            size={'small'} 
+                        <Button
+                            type="danger"
+                            size={'small'}
                         >
                             删除
                         </Button>
@@ -80,9 +85,9 @@ class Node extends React.Component<Props & FormComponentProps, State> {
     handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-          if (!err) {
-            this.props.addServer(values.type, values.name, values.host);
-          }
+            if (!err) {
+                this.props.addServer(values.type, values.name, values.host);
+            }
         });
     }
 
@@ -99,19 +104,19 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                             rowKey={'id'}
                         />
                         <Divider />
-                        <Button 
+                        <Button
                             onClick={() => {
                                 this.props.form.resetFields();
                                 this.props.showModal();
-                            }} 
+                            }}
                         >
                             添加
                         </Button>
                     </Card>
                 </Spin>
-                <Modal 
-                    visible={this.props.modalVisible} 
-                    title="添加服务器" 
+                <Modal
+                    visible={this.props.modalVisible}
+                    title="添加服务器"
                     confirmLoading={this.props.modalLoading}
                     onOk={this.handleSubmit}
                     onCancel={this.props.closeModal}
@@ -126,7 +131,7 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                         </Form.Item>
                         <Form.Item label="服务器类型">
                             {getFieldDecorator('type', {
-                                rules: [{required: true}]
+                                rules: [{ required: true }]
                             })(
                                 <Select>
                                     <Select.Option value="central">中控</Select.Option>
@@ -137,7 +142,7 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                         </Form.Item>
                         <Form.Item label="服务器地址">
                             {getFieldDecorator('host', {
-                                rules: [{required: true}]
+                                rules: [{ required: true }]
                             })(
                                 <Input />
                             )}
