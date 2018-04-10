@@ -30,8 +30,8 @@ interface Dispatch {
 // 加上 redux-thunk 之后这个类型不知道咋配 先 Hack 掉了
 export function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        getRecentEvents: (publishers?: string[]) => {
-            dispatch(actions.getRecentEvents(publishers));
+        getRecentEvents: (publishers?: string[], page?: number) => {
+            dispatch(actions.getRecentEvents(publishers, page));
         },
         listenNewEvents: () => {
             dispatch(actions.listenNewEvents());

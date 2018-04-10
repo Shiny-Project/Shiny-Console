@@ -32,3 +32,6 @@
         opacity: 0;
     }
 }
+.filter-apply-button {
+    margin-left: 1rem;
+}

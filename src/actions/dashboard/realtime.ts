@@ -41,15 +41,15 @@ export type RealtimeAction =
 /**
  * 获得最近事件
  */
-export function getRecentEvents(publishers?: string[]): ThunkAction<void, StoreState, null> {
-    console.log(publishers);
+export function getRecentEvents(publishers?: string[], page?: number): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(getRecentEventsStart());
         try {
             const recentEvents = await request.get<DashboardTypes.RecentEventsResponse>(
                 '/Data/recent', 
                 publishers ? { 
-                    publishers: publishers.join(',')
+                    publishers: publishers.join(','),
+                    page: page || 1
                 } : {}
             );
             dispatch(getRecentEventsSuccess(recentEvents));

@@ -31,7 +31,7 @@ class Sider extends React.Component<Props, State> {
     return (
         <Menu
           style={{ marginTop: '1rem' }}
-          defaultOpenKeys={['server-menu', 'spider-menu']}
+          defaultOpenKeys={['server-menu', 'spider-menu', 'push-menu']}
           mode="inline"
         >
           <Menu.Item key="0">
@@ -53,6 +53,11 @@ class Sider extends React.Component<Props, State> {
           <Menu.Item key="3">
             <Link to="/dashboard/realtime">实时</Link>
           </Menu.Item>
+          <SubMenu key="push-menu" title={<span>推送</span>}>
+            <Menu.Item key="push-history">
+                <Link to="/dashboard/push/history">推送历史</Link>
+              </Menu.Item>
+          </SubMenu>
         </Menu>
     );
   }

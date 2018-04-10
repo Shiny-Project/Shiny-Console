@@ -16,13 +16,11 @@ export interface Props {
 }
 
 export interface State {
-    recentEvents: ShinyEvent[];
     listening: boolean;
  }
 
 class Realtime extends React.Component<Props, State> {
     state: State = {
-        recentEvents: [],
         listening: false
     };
     componentDidMount() {

@@ -28,7 +28,10 @@ export interface LevelRankingItem {
 
 // Dashboard/Realtime
 
-export type RecentEventsResponse = ShinyEvent[];
+export type RecentEventsResponse = {
+    total: number;
+    events: ShinyEvent[];
+};
 
 // Shiny 事件
 export interface ShinyEvent {

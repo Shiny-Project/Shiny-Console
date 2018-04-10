@@ -18,7 +18,10 @@ export default {
         },
         realtime: {
             isLoading: false,
-            recentEvents: [],
+            recentEvents: {
+                total: 0,
+                events: []
+            },
             recentJobs: []
         },
         server: {

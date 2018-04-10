@@ -3,6 +3,7 @@ import { SpiderListResponse, Spider } from '@/types/dashboard';
 import { Spin, Card, Table, Button, Divider, Popconfirm, Form, Modal, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
+import TimeDiff from '@/components/Common/TimeDiff';
 
 interface FormModalProps {
     visible: boolean;
@@ -124,12 +125,20 @@ class List extends React.Component<Props & FormComponentProps, State> {
         key: 'name'
     }, {
         title: '路径',
-        dataIndex: 'path',
-        key: 'path'
+        key: 'path',
+        render: (text: string, record: Spider) => {
+            return record.path || '外部爬虫';
+        }
     }, {
         title: '描述',
         dataIndex: 'description',
         key: 'description'
+    }, {
+        title: '最后刷新',
+        key: 'trigger_time',
+        render: (text: string, record: Spider) => {
+            return <TimeDiff time={record.trigger_time} />;
+        }
     }, {
         title: '刷新间隔(秒)',
         key: 'interval',

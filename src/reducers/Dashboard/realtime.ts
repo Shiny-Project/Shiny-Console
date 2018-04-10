@@ -24,10 +24,13 @@ export function realtime(state: RealtimeState = initState.dashboard.realtime, ac
         case ActionTypes.ADD_RECENT_EVENT:
             return {
                 ...state,
-                recentEvents: [
-                    actions.event,
-                    ...state.recentEvents
-                ]
+                recentEvents: {
+                    total: state.recentEvents.total + 1,
+                    events: [
+                        actions.event,
+                        ...state.recentEvents.events
+                    ]
+                }
             };
         case ActionTypes.ADD_JOB:
             return {
