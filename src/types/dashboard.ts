@@ -65,6 +65,10 @@ export interface EventSocketMessage {
 
 export interface BaseJob {
     type: string;
+    status: string; // 任务状态
+    done_by: string; // 完成者
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface DataRefreshJob extends BaseJob {
@@ -73,10 +77,18 @@ export interface DataRefreshJob extends BaseJob {
     spider: string; // 任务爬虫
     path: string; // 爬虫路径
     info?: string; // 任务附加信息
-    status: string; // 任务状态
-    done_by: string; // 完成者
-    createdAt: string;
-    updatedAt: string;
+}
+
+export interface PushJob extends BaseJob {
+    type: 'push';
+    info: PushJobInfo;
+}
+
+export interface PushJobInfo {
+    channel: string; // 推送渠道
+    account: string; // 推送账号
+    text: string; // 推送内容
+    response: string; // 推送返回结果
 }
 
 export type Job = DataRefreshJob;
@@ -134,3 +146,8 @@ export interface Spider {
 }
 
 export type SpiderListResponse = Spider[];
+
+export interface PushHistoryResponse {
+    total: number;
+    jobs: PushJob[];
+}

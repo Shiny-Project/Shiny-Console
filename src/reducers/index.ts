@@ -6,6 +6,7 @@ import { realtime } from './Dashboard/realtime';
 import { node } from './Dashboard/Server/node';
 import { application } from './Dashboard/Server/application';
 import { list } from './Dashboard/Spider/list';
+import { pushHistory } from './Dashboard/Push/history';
 const rootReducer = combineReducers({
     user,
     dashboard: combineReducers({
@@ -18,6 +19,9 @@ const rootReducer = combineReducers({
         }),
         spider: combineReducers({
             list
+        }),
+        push: combineReducers({
+            history: pushHistory
         })
     }),
 });

@@ -16,7 +16,7 @@ class TimeDiff extends React.Component<Props, State> {
         let suffix = diff <= 0 ? '后' : '前';
         diff = Math.abs(Math.round(diff / 1000));
         if (diff < 60) {
-            result = diff.toString();
+            result = `${diff.toString()}秒`;
             return `${result}${suffix}`;
         } else if (diff >= 60 && diff < 3600) {
             result = `${Math.floor(diff / 60)}分${diff - Math.floor(diff / 60) * 60}秒`;

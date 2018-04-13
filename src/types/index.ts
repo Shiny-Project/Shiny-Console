@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse } from '@/types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -20,6 +20,7 @@ export interface DashboardState {
     realtime: RealtimeState;
     server: ServerState;
     spider: SpiderState;
+    push: PushState;
 }
 export interface ErrorState {
     lastError: Error;
@@ -71,4 +72,17 @@ export interface SpiderListState {
     editSpiderLoading: boolean;
     frequencyUpdateLoading: boolean;
     nowEditingSpider: Spider;
+}
+
+// Dashboard/Push
+
+export interface PushState {
+    history: PushHistoryState;
+}
+
+// Dashboard/Push/History
+
+export interface PushHistoryState {
+    isLoading: boolean;
+    pushHistory: PushHistoryResponse;
 }

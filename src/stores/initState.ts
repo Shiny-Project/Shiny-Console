@@ -50,6 +50,15 @@ export default {
                 frequencyUpdateLoading: false,
                 nowEditingSpider: {}
             }
+        },
+        push: {
+            history: {
+                isLoading: false,
+                pushHistory: {
+                    total: 0,
+                    jobs: []
+                }
+            }
         }
     },
 } as StoreState;
