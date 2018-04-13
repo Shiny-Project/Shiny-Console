@@ -2,6 +2,7 @@ import React from 'react';
 import { Spin, Card, Table, Button, Popover, Modal } from 'antd';
 import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
 import PushJobStatus from './PushJobStatus';
+import PushChannel from '@/components/Dashboard/Push/PushChannel';
 
 interface Props {
     isLoading: boolean;
@@ -34,8 +35,14 @@ class PushHistory extends React.Component<Props, State> {
         key: 'info.text'
     }, {
         title: '渠道',
-        dataIndex: 'info.channel',
-        key: 'info.channel'
+        key: 'info.channel',
+        render: (text: string, record: PushJob) => {
+            return <PushChannel channel={record.info.channel} />;
+        }
+    }, {
+        title: '账号',
+        dataIndex: 'info.account',
+        key: 'info.account'
     }, {
         title: '响应',
         key: 'response',
@@ -62,6 +69,10 @@ class PushHistory extends React.Component<Props, State> {
                 </a>
             );
         }
+    }, {
+        title: '推送时间',
+        dataIndex: 'createdAt',
+        key: 'createdAt'
     }];
     componentDidMount() {
         this.props.getPushHistory();
