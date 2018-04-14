@@ -3,6 +3,7 @@ import { Spin, Card, Table, Button, Popover, Modal } from 'antd';
 import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
 import PushJobStatus from './PushJobStatus';
 import PushChannel from '@/components/Dashboard/Push/PushChannel';
+import TimeDiff from '@/components/Common/TimeDiff';
 
 interface Props {
     isLoading: boolean;
@@ -71,8 +72,10 @@ class PushHistory extends React.Component<Props, State> {
         }
     }, {
         title: '推送时间',
-        dataIndex: 'createdAt',
-        key: 'createdAt'
+        key: 'createdAt',
+        render: (text: string, record: PushJob) => {
+            return <TimeDiff time={record.createdAt} />;
+        }
     }];
     componentDidMount() {
         this.props.getPushHistory();
