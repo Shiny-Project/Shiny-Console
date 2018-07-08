@@ -44,6 +44,9 @@ class Sider extends React.Component<Props, State> {
               <Menu.Item key="2">
                 <Link to="/dashboard/server/applications">API 密钥对管理</Link>
               </Menu.Item>
+              <Menu.Item key="server-config">
+                <Link to="/dashboard/server/config">全局设置项管理</Link>
+              </Menu.Item>
           </SubMenu>
           <SubMenu key="spider-menu" title={<span>爬虫</span>}>
             <Menu.Item key="spider-list">

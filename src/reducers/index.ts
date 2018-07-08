@@ -5,6 +5,7 @@ import { overview } from './Dashboard/overview';
 import { realtime } from './Dashboard/realtime';
 import { node } from './Dashboard/Server/node';
 import { application } from './Dashboard/Server/application';
+import { config } from './Dashboard/Server/config';
 import { list } from './Dashboard/Spider/list';
 import { pushHistory } from './Dashboard/Push/history';
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
         realtime,
         server: combineReducers({
             node,
-            application
+            application,
+            config
         }),
         spider: combineReducers({
             list

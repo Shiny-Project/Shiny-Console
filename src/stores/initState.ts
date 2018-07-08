@@ -37,6 +37,18 @@ export default {
                 serverList: [],
                 createModalVisible: false,
                 createModalLoading: false
+            },
+            config: {
+                configList: [],
+                nowEditingConfig: {
+                    key: '',
+                    value: ''
+                },
+                isLoading: false,
+                createConfigModalVisible: false,
+                createConfigModalLoading: false,
+                editConfigModalVisible: false,
+                editConfigModalLoading: false
             }
         },
         spider: {

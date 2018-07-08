@@ -135,6 +135,15 @@ export interface SpiderInfo {
     expires: number;
 }
 
+// Dashboard/Server/Config
+
+export interface ConfigItem {
+    key: string;
+    value: string;
+}
+
+export type ConfigListResponse = ConfigItem[];
+
 export interface Spider {
     id: number;
     name: string;

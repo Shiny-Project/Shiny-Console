@@ -73,7 +73,7 @@ export function getKeyPairsSuccess(keyPairs: APIKeyPair[], serverList: ServerNod
     };
 }
 
-export function getKeyPairsFailure():  GetKeyPairsFailure {
+export function getKeyPairsFailure(): GetKeyPairsFailure {
     return {
         type: constants.GET_KEY_PAIRS_FAILURE
     };

@@ -58,9 +58,11 @@ class LoginForm extends React.Component<Props, State> {
                     </Button>
                 </FormItem>
                 <FormItem>
-                    <span className="lyric">
-                    名もなき若者よ 夢ならここにある
-                    </span>
+                    <div className="lyric">
+                        "ありがとう" 廻る地球 貴方と私は進む<br />
+                        握る手離れても 終わらない絆がある<br />
+                        幾千も 永遠を重ね
+                    </div>
                 </FormItem>
             </Form>
         );
