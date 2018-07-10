@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem } from '@/types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -72,6 +72,7 @@ export interface ConfigState {
 // Dashboard/Spider
 export interface SpiderState {
     list: SpiderListState;
+    identity: SpiderIdentityState;
 }
 // Dashboard/Spider/list
 export interface SpiderListState {
@@ -83,6 +84,17 @@ export interface SpiderListState {
     editSpiderLoading: boolean;
     frequencyUpdateLoading: boolean;
     nowEditingSpider: Spider;
+}
+
+// Dashboard/Spider/Identity
+export interface SpiderIdentityState {
+    identityList: SpiderIdentityItem[];
+    isLoading: boolean;
+    nowEditingIdentity: SpiderIdentityItem;
+    createIdentityModalVisible: boolean;
+    createIdentityModalLoading: boolean;
+    editIdentityModalVisible: boolean;
+    editIdentityModalLoading: boolean;
 }
 
 // Dashboard/Push

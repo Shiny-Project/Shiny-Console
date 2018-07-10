@@ -7,6 +7,7 @@ import ServerApplication from '@/containers/Dashboard/Server/Application';
 import Overview from '@/containers/Dashboard/Overview/Overview';
 import Realtime from '@/containers/Dashboard/Realtime/Realtime';
 import SpiderList from '@/containers/Dashboard/Spider/List';
+import SpiderIdentity from '@/containers/Dashboard/Spider/Identity';
 import PushHistory from '@/containers/Dashboard/Push/History';
 import Config from '@/containers/Dashboard/Server/Config';
 import './Index.css';
@@ -66,6 +67,7 @@ class Dashboard extends React.Component<Props, {}> {
                                     {/**/}
                                     <Route path="/dashboard/realtime" component={Realtime} />
                                     <Route path="/dashboard/spider/list" component={SpiderList} />
+                                    <Route path="/dashboard/spider/identity" component={SpiderIdentity} />
                                     <Route path="/dashboard/push/history" component={PushHistory} />
                                 </Switch>
                             </Col>

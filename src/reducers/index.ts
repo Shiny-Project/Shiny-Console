@@ -7,6 +7,7 @@ import { node } from './Dashboard/Server/node';
 import { application } from './Dashboard/Server/application';
 import { config } from './Dashboard/Server/config';
 import { list } from './Dashboard/Spider/list';
+import { identity } from './Dashboard/Spider/identity';
 import { pushHistory } from './Dashboard/Push/history';
 const rootReducer = combineReducers({
     user,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
             config
         }),
         spider: combineReducers({
-            list
+            list,
+            identity
         }),
         push: combineReducers({
             history: pushHistory

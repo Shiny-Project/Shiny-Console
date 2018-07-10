@@ -61,6 +61,15 @@ export default {
                 editSpiderLoading: false,
                 frequencyUpdateLoading: false,
                 nowEditingSpider: {}
+            },
+            identity: {
+                identityList: [],
+                isLoading: false,
+                nowEditingIdentity: {},
+                createIdentityModalLoading: false,
+                createIdentityModalVisible: false,
+                editIdentityModalLoading: false,
+                editIdentityModalVisible: false
             }
         },
         push: {

@@ -144,6 +144,16 @@ export interface ConfigItem {
 
 export type ConfigListResponse = ConfigItem[];
 
+// Dashboard/Spider/Identity
+
+export interface SpiderIdentityItem {
+    id: number;
+    name: string;
+    identity: object;
+}
+
+export type SpiderIdentityListResponse = SpiderIdentityItem[];
+
 export interface Spider {
     id: number;
     name: string;
