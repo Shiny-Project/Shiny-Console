@@ -28,6 +28,9 @@ class CreateConfigForm extends React.Component<CreateConfigFormProps & FormCompo
                 onOk={this.handleSubmitClick}
                 onCancel={this.props.onCancel}
                 confirmLoading={this.props.loading}
+                afterClose={() => {
+                    this.props.form.resetFields();
+                }}
             >
                 <Form layout="vertical">
                     <Form.Item label="Key">
@@ -137,14 +140,13 @@ class Config extends React.Component<Props & FormComponentProps, State> {
         render: (text: string, record: ConfigItem) => {
             return (
                 <div>
-                    <Button 
-                        size="small"
+                    <a 
                         onClick={() => {
                             this.props.showEditConfigModal(record);
                         }}
                     >
                         编辑
-                    </Button>
+                    </a>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -152,12 +154,11 @@ class Config extends React.Component<Props & FormComponentProps, State> {
                             this.props.deleteConfig(record.key);
                         }}
                     >
-                        <Button
-                            type="danger"
-                            size={'small'}
+                        <a
+                            className="danger-text"
                         >
                             删除
-                        </Button>
+                        </a>
                     </Popconfirm>
                 </div>
             );

@@ -66,12 +66,11 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                             this.props.deleteServer(record.id);
                         }}
                     >
-                        <Button
-                            type="danger"
-                            size={'small'}
+                        <a
+                            className="danger-text"
                         >
                             删除
-                        </Button>
+                        </a>
                     </Popconfirm>
                 </div>
             );

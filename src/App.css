@@ -4,3 +4,6 @@
 .danger-text {
   color: red;
 }
+.danger-text:hover {
+  color: #b50000;
+}

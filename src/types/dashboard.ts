@@ -133,6 +133,7 @@ export interface APIKeyPair {
 
 export interface SpiderInfo {
     expires: number;
+    identity: string;
 }
 
 // Dashboard/Server/Config

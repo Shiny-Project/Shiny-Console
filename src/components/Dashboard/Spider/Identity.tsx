@@ -27,6 +27,9 @@ class CreateIdentityForm extends React.Component<CreateIdentityFormProps & FormC
                 onOk={this.handleSubmitClick}
                 onCancel={this.props.onCancel}
                 confirmLoading={this.props.loading}
+                afterClose={() => {
+                    this.props.form.resetFields();
+                }}
             >
                 <Form layout="vertical">
                     <Form.Item label="Name">
@@ -163,14 +166,13 @@ class Identity extends React.Component<Props> {
         render: (text: string, record: SpiderIdentityItem) => {
             return (
                 <div>
-                    <Button
-                        size="small"
+                    <a
                         onClick={() => {
                             this.props.showEditIdentityModal(record);
                         }}
                     >
                         编辑
-                    </Button>
+                    </a>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -178,12 +180,11 @@ class Identity extends React.Component<Props> {
                             this.props.deleteIdentity(record.id);
                         }}
                     >
-                        <Button
-                            type="danger"
-                            size={'small'}
+                        <a
+                            className="danger-text"
                         >
                             删除
-                        </Button>
+                        </a>
                     </Popconfirm>
                 </div>
             );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SpiderListResponse, Spider } from '@/types/dashboard';
-import { Spin, Card, Table, Button, Divider, Popconfirm, Form, Modal, Input } from 'antd';
+import { Spin, Card, Table, Divider, Popconfirm, Form, Modal, Input, Row, Col } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import TimeDiff from '@/components/Common/TimeDiff';
@@ -114,6 +114,24 @@ export interface State {
 
 }
 
+export interface SpiderDetailProps {
+    spider: Spider;
+}
+class SpiderDetail extends React.Component<SpiderDetailProps> {
+    render() {
+        return (
+            <Row>
+                <Col span={12}>
+                    <div>刷新间隔：{this.props.spider.info.expires}秒</div>
+                </Col>
+                <Col span={12}>
+                    <div>凭证：{this.props.spider.info.identity || '无'}</div>
+                </Col>
+            </Row>
+        );
+    }
+}
+
 class List extends React.Component<Props & FormComponentProps, State> {
     spiderListColumns = [{
         title: 'ID',
@@ -209,6 +227,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
                         columns={this.spiderListColumns}
                         pagination={false}
                         rowKey={'id'}
+                        expandedRowRender={(record: Spider) => <SpiderDetail spider={record} />}
                     />
                 </Card>
                 <FrequencyUpdateForm

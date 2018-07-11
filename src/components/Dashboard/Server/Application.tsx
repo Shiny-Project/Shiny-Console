@@ -53,12 +53,11 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                             this.props.deleteKeyPair(record.id);
                         }}
                     >
-                        <Button
-                            type="danger"
-                            size={'small'}
+                        <a
+                            className="danger-text"
                         >
                             吊销
-                        </Button>
+                        </a>
                     </Popconfirm>
                 </div>
             );
