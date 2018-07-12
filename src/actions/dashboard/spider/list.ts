@@ -233,7 +233,7 @@ export function hideEditSpiderModal(): EditSpiderCancel {
  * @param path 爬虫路径
  */
 export function editSpider(
-    spiderId: number, name: string, description: string, path: string
+    spiderId: number, name: string, description: string, group: string, path: string
 ): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(editSpiderStart());
@@ -241,7 +241,9 @@ export function editSpider(
             const result = await request.post<Spider>('/Spider/update', {
                 spiderId,
                 name,
-                path
+                path,
+                description,
+                group
             });
             dispatch(editSpiderSuccess(spiderId, result));
         } catch (e) {

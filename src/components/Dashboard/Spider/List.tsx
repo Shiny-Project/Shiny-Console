@@ -77,6 +77,14 @@ class EditSpiderForm extends React.Component<EditSpiderFormProps> {
                             <Input />
                         )}
                     </Form.Item>
+                    <Form.Item label="Group">
+                        {getFieldDecorator('group', {
+                            rules: [{ required: true }],
+                            initialValue: spiderInfo.group
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
                     <Form.Item label="描述">
                         {getFieldDecorator('description', {
                             rules: [{ required: true }],
@@ -107,7 +115,7 @@ export interface Props {
     showEditSpiderModal: (spider: number) => void;
     hideEditSpiderModal: () => void;
     updateFrequency: (spiderId: number, frequency: number) => void;
-    editSpider: (spiderId: number, name: string, description: string, path: string) => void;
+    editSpider: (spiderId: number, name: string, description: string, group: string, path: string) => void;
     showEditModal: (spiderId: number) => void;
 }
 export interface State {
@@ -121,11 +129,19 @@ class SpiderDetail extends React.Component<SpiderDetailProps> {
     render() {
         return (
             <Row>
-                <Col span={12}>
-                    <div>刷新间隔：{this.props.spider.info.expires}秒</div>
+                <Col span={2}>
+                    <div className="column-label">刷新间隔</div>
                 </Col>
-                <Col span={12}>
-                    <div>凭证：{this.props.spider.info.identity || '无'}</div>
+                <Col span={10}>
+                    <div>
+                        <span>{this.props.spider.info.expires}秒</span>
+                    </div>
+                </Col>
+                <Col span={2}>
+                    <div className="column-label">凭证</div>
+                </Col>
+                <Col span={10}>
+                    <div>{this.props.spider.info.identity || '无'}</div>
                 </Col>
             </Row>
         );
@@ -158,10 +174,10 @@ class List extends React.Component<Props & FormComponentProps, State> {
             return <TimeDiff time={record.trigger_time} />;
         }
     }, {
-        title: '刷新间隔(秒)',
-        key: 'interval',
+        title: 'Group',
+        key: 'group',
         render: (text: string, record: Spider) => {
-            return <span>{record.info.expires}秒</span>;
+            return <span>{record.group || 'default'}</span>;
         }
     }, {
         title: '操作',
@@ -214,7 +230,9 @@ class List extends React.Component<Props & FormComponentProps, State> {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.editSpider(this.props.nowEditingSpider.id, values.name, values.description, values.path);
+                this.props.editSpider(
+                    this.props.nowEditingSpider.id, values.name, values.description, values.group, values.path
+                );
             }
         });
     }

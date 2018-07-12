@@ -7,3 +7,7 @@
 .danger-text:hover {
   color: #b50000;
 }
+.column-label {
+  font-weight: bold;
+  user-select: none;
+}

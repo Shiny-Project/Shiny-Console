@@ -159,6 +159,7 @@ export interface Spider {
     id: number;
     name: string;
     path: string;
+    group: string;
     description: string;
     info: SpiderInfo;
     trigger_count: number;
