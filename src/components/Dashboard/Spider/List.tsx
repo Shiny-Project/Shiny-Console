@@ -143,6 +143,12 @@ class SpiderDetail extends React.Component<SpiderDetailProps> {
                 <Col span={10}>
                     <div>{this.props.spider.info.identity || '无'}</div>
                 </Col>
+                <Col span={2}>
+                    <div className="column-label">冷却</div>
+                </Col>
+                <Col span={10}>
+                    <div>{this.props.spider.info.cooldown || '0'}秒</div>
+                </Col>
             </Row>
         );
     }
