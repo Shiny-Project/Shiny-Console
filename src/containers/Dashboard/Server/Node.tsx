@@ -37,8 +37,8 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         deleteServer: (serverId: number) => {
             dispatch(actions.deleteServer(serverId));
         },
-        addServer: (type: string, name: string, host: string) => {
-            dispatch(actions.addServer(type, name, host));
+        addServer: (type: string, name: string, host: string, group: string[]) => {
+            dispatch(actions.addServer(type, name, host, group));
         },
         showModal: () => {
             dispatch(actions.showCreateServerModal());

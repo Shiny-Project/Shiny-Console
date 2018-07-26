@@ -111,7 +111,7 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                             })(
                                 <Select>
                                     {this.props.serverList.filter(serverNode => {
-                                        return serverNode.key_pair === 0;
+                                        return serverNode.key_pair === null;
                                     }).map(serverNode => {
                                         return (
                                             <Select.Option

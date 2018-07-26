@@ -166,14 +166,16 @@ export function deleteServer(id: number): ThunkAction<void, StoreState, null> {
  * @param name 服务器节点名
  * @param host 服务器地址
  */
-export function addServer(type: string, name: string, host: string): ThunkAction<void, StoreState, null> {
+export function addServer(type: string, name: string, host: string, group: string[]): 
+    ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(addServerStart());
         try {
             const result = await request.post<ServerNode>('/Server/add', {
                 serverName: name,
                 serverType: type,
-                serverHost: host
+                serverHost: host,
+                serverGroup: JSON.stringify(group)
             });
             dispatch(addServerSuccess(result));
         } catch (e) {

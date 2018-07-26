@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconfirm } from 'antd';
+import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconfirm, Tag } from 'antd';
 import { ServerListResponse, ServerNode } from '@/types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
@@ -20,10 +20,21 @@ class ServerNodeType extends React.Component<ServerNodeProps> {
     }
 }
 
+interface ServerGroupProps {
+    group: string[];
+}
+class ServerGroup extends React.Component<ServerGroupProps> {
+    render() {
+        return this.props.group.map(group => {
+            return (<Tag key={group}>{group}</Tag>);
+        });
+    }
+}
+
 export interface Props {
     getServerList: () => void;
     deleteServer: (serverId: number) => void;
-    addServer: (type: string, name: string, host: string) => void;
+    addServer: (type: string, name: string, host: string, group: string[]) => void;
     showModal: () => void;
     closeModal: () => void;
     serverList: ServerListResponse;
@@ -55,6 +66,12 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         dataIndex: 'host',
         key: 'host',
     }, {
+        title: 'Group',
+        key: 'group',
+        render: (text: string, record: ServerNode) => {
+            return <ServerGroup group={record.group || []} />;
+        },
+    }, {
         title: 'Action',
         key: 'action',
         render: (text: string, record: ServerNode) => {
@@ -85,7 +102,7 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.addServer(values.type, values.name, values.host);
+                this.props.addServer(values.type, values.name, values.host, values.group);
             }
         });
     }
@@ -144,6 +161,21 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                                 rules: [{ required: true }]
                             })(
                                 <Input />
+                            )}
+                        </Form.Item>
+                        <Form.Item label="服务器组">
+                            {getFieldDecorator('group', {
+                                rules: [{ required: true }],
+                                initialValue: ['default']
+                            })(
+                                <Select
+                                    mode="multiple"
+                                    style={{ width: '100%' }}
+                                    placeholder="Please select"
+                                >
+                                    <Select.Option key="default">default</Select.Option>
+                                    <Select.Option key="china_mainland">china_mainland</Select.Option>
+                                </Select>,
                             )}
                         </Form.Item>
                     </Form>

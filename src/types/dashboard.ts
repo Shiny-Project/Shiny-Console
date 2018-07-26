@@ -108,6 +108,7 @@ export interface ServerNode {
     name: string; // 服务器节点名
     type: string; // 服务器节点类型
     host: string; // 服务器节点地址
+    group: string[]; // 服务器组
     createdAt: string;
     updatedAt: string;
     key_pair: number | APIKeyPair; // 服务器密钥对 展开或不展开
