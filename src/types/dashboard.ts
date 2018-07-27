@@ -174,3 +174,12 @@ export interface PushHistoryResponse {
     total: number;
     jobs: PushJob[];
 }
+
+export type PushAccountList = PushAccount[];
+
+export interface PushAccount {
+    id: number;
+    platform: string;
+    name: string;
+    credential: object;
+}

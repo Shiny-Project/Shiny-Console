@@ -79,6 +79,10 @@ export default {
                     total: 0,
                     jobs: []
                 }
+            },
+            account: {
+                isLoading: false,
+                accounts: []
             }
         }
     },
