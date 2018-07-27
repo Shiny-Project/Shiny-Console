@@ -201,14 +201,14 @@ export function getAccountList(): ThunkAction<void, StoreState, null> {
 /**
  * 创建账号
  */
-export function createAccount(platform: string, name: string, account: string): ThunkAction<void, StoreState, null> {
+export function createAccount(platform: string, name: string, credential: string): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(createAccountStart());
         try {
             const response = await request.post<PushAccount>('/PushAccount/create', {
                 platform,
                 name,
-                account
+                credential
             });
             dispatch(createAccountSuccess(response));
         } catch (e) {
@@ -244,7 +244,7 @@ export function deleteAccount(id: number): ThunkAction<void, StoreState, null> {
  * @param account
  */
 export function editAccount(
-    id: number, platform: string, name: string, account: string
+    id: number, platform: string, name: string, credential: string
 ): ThunkAction<void, StoreState, null> {
     return async (dispatch) => {
         dispatch(editAccountStart());
@@ -253,7 +253,7 @@ export function editAccount(
                 accountId: id,
                 platform,
                 name,
-                account
+                credential
             });
             dispatch(editAccountSuccess(response));
         } catch (e) {

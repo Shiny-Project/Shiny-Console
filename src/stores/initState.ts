@@ -82,7 +82,12 @@ export default {
             },
             account: {
                 isLoading: false,
-                accounts: []
+                accounts: [],
+                createAccountModalLoading: false,
+                createAccountModalVisible: false,
+                editAccountModalLoading: false,
+                editAccountModalVisible: false,
+                nowEditingAccount: {}
             }
         }
     },
