@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Spin, Table, Button, Divider, Form, Modal, Input, Popconfirm } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { SpiderIdentityItem } from '@/types/dashboard';
+import JSONViewer from '@/components/Common/JSONViewer';
 
 export interface CreateIdentityFormProps {
     visible: boolean;
@@ -146,19 +147,7 @@ class Identity extends React.Component<Props> {
         title: '凭据',
         key: 'identity',
         render: (text: string, record: SpiderIdentityItem) => {
-            return (
-                <a
-                    style={{
-                        fontFamily: 'Consola'
-                    }}
-                >
-                    {
-                        JSON.stringify(record.identity).length > 20
-                            ? JSON.stringify(record.identity).slice(0, 20) + '...'
-                            : JSON.stringify(record.identity)
-                    }
-                </a>
-            );
+            return <JSONViewer json={record.identity} />;
         }
     }, {
         title: '操作',

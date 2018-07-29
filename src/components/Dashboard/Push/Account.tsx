@@ -3,6 +3,7 @@ import { Card, Spin, Table, Popconfirm, Modal, Form, Input, Divider, Button } fr
 import { FormComponentProps } from 'antd/lib/form';
 import { PushAccountList, PushAccount } from '@/types/dashboard';
 import PushChannel from '@/components/Dashboard/Push/PushChannel';
+import JSONViewer from '@/components/Common/JSONViewer';
 
 export interface CreateAccountFormProps {
     visible: boolean;
@@ -169,19 +170,7 @@ class Account extends React.Component<Props> {
         title: '账号凭据',
         key: 'credential',
         render: (text: string, record: PushAccount) => {
-            return (
-                <a
-                    style={{
-                        fontFamily: 'Consola'
-                    }}
-                >
-                    {
-                        JSON.stringify(record.credential).length > 20
-                            ? JSON.stringify(record.credential).slice(0, 20) + '...'
-                            : JSON.stringify(record.credential)
-                    }
-                </a>
-            );
+            return <JSONViewer json={record.credential} />;
         }
     }, {
         title: '操作',
