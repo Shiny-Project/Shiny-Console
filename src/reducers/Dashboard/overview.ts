@@ -1,5 +1,5 @@
 import { OverviewAction } from '@/actions/dashboard/overview';
-import { OverviewState } from '@/types/index';
+import { OverviewState } from '@/types';
 import { GET_STATISTICS, GET_STATISTICS_SUCCESS, GET_STATISTIC_FAILURE } from '@/constants/Dashboard/overview';
 import initState from '@/stores/initState';
 

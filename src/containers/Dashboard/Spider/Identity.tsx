@@ -1,6 +1,6 @@
 import Identity from '@/components/Dashboard/Spider/Identity';
 import * as actions from '@/actions/dashboard/spider/identity';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { IdentityAction } from '@/actions/dashboard/spider/identity';
 import { ThunkAction } from 'redux-thunk';

@@ -1,5 +1,5 @@
 import { ServerNodeAction } from '@/actions/dashboard/server/node';
-import { ServerNodeState } from '@/types/index';
+import { ServerNodeState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Server/node';
 

@@ -1,6 +1,6 @@
 import Overview from '@/components/Dashboard/Overview/Overview';
 import * as actions from '@/actions/dashboard/overview';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { OverviewAction } from '@/actions/dashboard/overview';
 import { ThunkAction } from 'redux-thunk';

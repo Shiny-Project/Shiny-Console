@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from '../reducers';
-import { StoreState } from '../types/index';
+import reducers from '@/reducers';
+import { StoreState } from '@/types';
 export default function configureStore(initialState: StoreState) {
   // const store = createStore<StoreState>(reducers, initialState);
   // 该泛型定义似乎由于 Redux 定义文件 Bug 无法使用

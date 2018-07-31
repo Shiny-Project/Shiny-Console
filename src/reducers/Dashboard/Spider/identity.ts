@@ -1,5 +1,5 @@
 import { IdentityAction } from '@/actions/dashboard/spider/identity';
-import { SpiderIdentityState } from '@/types/index';
+import { SpiderIdentityState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Spider/identity';
 

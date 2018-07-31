@@ -1,6 +1,6 @@
 import Account from '@/components/Dashboard/Push/Account';
 import * as actions from '@/actions/dashboard/push/account';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { AccountAction } from '@/actions/dashboard/push/account';
 import { ThunkAction } from 'redux-thunk';

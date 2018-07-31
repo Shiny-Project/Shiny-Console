@@ -1,6 +1,6 @@
 import Application from '@/components/Dashboard/Server/Application';
 import * as actions from '@/actions/dashboard/server/application';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { ApplicationAction } from '@/actions/dashboard/server/application';
 import { ThunkAction } from 'redux-thunk';

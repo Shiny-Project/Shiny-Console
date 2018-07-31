@@ -1,5 +1,5 @@
 import { SpiderListAction } from '@/actions/dashboard/spider/list';
-import { SpiderListState } from '@/types/index';
+import { SpiderListState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Spider/list';
 

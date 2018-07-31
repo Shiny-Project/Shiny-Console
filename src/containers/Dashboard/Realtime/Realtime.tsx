@@ -1,6 +1,6 @@
 import Realtime from '@/components/Dashboard/Realtime/Realtime';
 import * as actions from '@/actions/dashboard/realtime';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { RealtimeAction } from '@/actions/dashboard/realtime';
 import { ThunkAction } from 'redux-thunk';

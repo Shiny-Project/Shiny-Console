@@ -1,5 +1,5 @@
 import { ConfigAction } from '@/actions/dashboard/server/config';
-import { ConfigState } from '@/types/index';
+import { ConfigState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Server/config';
 

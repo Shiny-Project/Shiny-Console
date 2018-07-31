@@ -1,6 +1,6 @@
 import Login from '@/components/User/Login/Login';
 import * as actions from '@/actions/user';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { UserAction } from '@/actions/user';
 import { ThunkAction } from 'redux-thunk';

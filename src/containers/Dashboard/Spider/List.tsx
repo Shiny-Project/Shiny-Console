@@ -1,6 +1,6 @@
 import List from '@/components/Dashboard/Spider/List';
 import * as actions from '@/actions/dashboard/spider/list';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { SpiderListAction } from '@/actions/dashboard/spider/list';
 import { ThunkAction } from 'redux-thunk';

@@ -27,7 +27,8 @@ class JSONViewer extends React.Component<Props> {
                             />
                         ),
                         width: '80vw',
-                        iconType: ''
+                        iconType: 'code',
+                        maskClosable: true,
                     });
                 }}
             >

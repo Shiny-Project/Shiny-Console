@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
-import { user } from './user';
-import { errors } from './Dashboard/errors';
-import { overview } from './Dashboard/overview';
-import { realtime } from './Dashboard/realtime';
-import { node } from './Dashboard/Server/node';
-import { application } from './Dashboard/Server/application';
-import { config } from './Dashboard/Server/config';
-import { list } from './Dashboard/Spider/list';
-import { identity } from './Dashboard/Spider/identity';
-import { pushAccount } from './Dashboard/Push/account';
-import { pushHistory } from './Dashboard/Push/history';
+import { user } from '@/reducers/user';
+import { errors } from '@/reducers/Dashboard/errors';
+import { overview } from '@/reducers/Dashboard/overview';
+import { realtime } from '@/reducers/Dashboard/realtime';
+import { node } from '@/reducers/Dashboard/Server/node';
+import { application } from '@/reducers/Dashboard/Server/application';
+import { config } from '@/reducers/Dashboard/Server/config';
+import { list } from '@/reducers/Dashboard/Spider/list';
+import { identity } from '@/reducers/Dashboard/Spider/identity';
+import { pushAccount } from '@/reducers/Dashboard/Push/account';
+import { pushHistory } from '@/reducers/Dashboard/Push/history';
 const rootReducer = combineReducers({
     user,
     dashboard: combineReducers({

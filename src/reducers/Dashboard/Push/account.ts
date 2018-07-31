@@ -1,5 +1,5 @@
 import { AccountAction } from '@/actions/dashboard/push/account';
-import { PushAccountState } from '@/types/index';
+import { PushAccountState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Push/account';
 

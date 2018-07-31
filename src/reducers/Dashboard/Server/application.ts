@@ -1,5 +1,5 @@
 import { ApplicationAction } from '@/actions/dashboard/server/application';
-import { ApplicationState } from '@/types/index';
+import { ApplicationState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Server/application';
 

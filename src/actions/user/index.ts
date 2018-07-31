@@ -1,5 +1,5 @@
-import * as constants from '@/constants/index';
-import { StoreState } from '@/types/index';
+import * as constants from '@/constants';
+import { StoreState } from '@/types';
 import { ThunkAction } from 'redux-thunk';
 import request from '@/services/request';
 import { message } from 'antd';

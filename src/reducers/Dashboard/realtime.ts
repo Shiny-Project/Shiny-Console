@@ -1,5 +1,5 @@
 import { RealtimeAction } from '@/actions/dashboard/realtime';
-import { RealtimeState } from '@/types/index';
+import { RealtimeState } from '@/types';
 import * as ActionTypes from '@/constants/Dashboard/realtime';
 import initState from '@/stores/initState';
 

@@ -1,5 +1,5 @@
 import * as constants from '@/constants/Dashboard/overview';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';

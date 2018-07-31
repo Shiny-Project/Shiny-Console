@@ -1,6 +1,6 @@
 import History from '@/components/Dashboard/Push/History';
 import * as actions from '@/actions/dashboard/push/history';
-import { StoreState } from '@/types/index';
+import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { HistoryAction } from '@/actions/dashboard/push/history';
 import { ThunkAction } from 'redux-thunk';

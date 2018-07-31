@@ -1,5 +1,5 @@
 import { HistoryAction } from '@/actions/dashboard/push/history';
-import { PushHistoryState } from '@/types/index';
+import { PushHistoryState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Push/history';
 

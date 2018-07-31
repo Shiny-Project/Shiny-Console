@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin, Card, Table, Button, Popover, Modal } from 'antd';
 import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
-import PushJobStatus from './PushJobStatus';
+import PushJobStatus from '@/components/Dashboard/Push/PushJobStatus';
 import PushChannel from '@/components/Dashboard/Push/PushChannel';
 import TimeDiff from '@/components/Common/TimeDiff';
 
