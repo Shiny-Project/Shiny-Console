@@ -157,6 +157,8 @@ export interface SpiderIdentityItem {
 
 export type SpiderIdentityListResponse = SpiderIdentityItem[];
 
+// Dashboard/Spider/List
+
 export interface Spider {
     id: number;
     name: string;
@@ -169,6 +171,8 @@ export interface Spider {
 }
 
 export type SpiderListResponse = Spider[];
+
+// Dashboard/Push/History
 
 export interface PushHistoryResponse {
     total: number;
@@ -183,3 +187,15 @@ export interface PushAccount {
     name: string;
     credential: object;
 }
+
+// Dashboard/Push/Rule
+
+export interface PushRuleItem {
+    id: number;
+    spider_name: string;
+    rule: PushRule;
+}
+
+export interface PushRule {}
+
+export type PushRuleList = PushRuleItem[];

@@ -10,6 +10,7 @@ import SpiderList from '@/containers/Dashboard/Spider/List';
 import SpiderIdentity from '@/containers/Dashboard/Spider/Identity';
 import PushHistory from '@/containers/Dashboard/Push/History';
 import PushAccount from '@/containers/Dashboard/Push/Account';
+import PushRule from '@/containers/Dashboard/Push/Rule';
 import Config from '@/containers/Dashboard/Server/Config';
 import './Index.css';
 import { ErrorState } from '@/types';
@@ -72,6 +73,7 @@ class Dashboard extends React.Component<Props, {}> {
                                     {/* Push */}
                                     <Route path="/dashboard/push/history" component={PushHistory} />
                                     <Route path="/dashboard/push/account" component={PushAccount} />
+                                    <Route path="/dashboard/push/rule" component={PushRule} />
                                 </Switch>
                             </Col>
                         </Row>

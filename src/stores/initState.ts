@@ -88,6 +88,14 @@ export default {
                 editAccountModalLoading: false,
                 editAccountModalVisible: false,
                 nowEditingAccount: {}
+            },
+            rule: {
+                isLoading: false,
+                rules: [],
+                createRuleModalLoading: false,
+                createRuleModalVisible: false,
+                editRuleModalLoading: false,
+                editRuleModalVisible: false
             }
         }
     },
