@@ -67,12 +67,12 @@ export function pushAccount(
             };
         }
         case ActionTypes.DELETE_ACCOUNT_SUCCESS: {
-            const identityItemIndex = state.accounts.findIndex(identityItem => identityItem.id === actions.id);
+            const accountItemIndex = state.accounts.findIndex(accountItem => accountItem.id === actions.id);
             return {
                 ...state,
                 accounts: [
-                    ...state.accounts.slice(0, identityItemIndex),
-                    ...state.accounts.slice(identityItemIndex + 1)
+                    ...state.accounts.slice(0, accountItemIndex),
+                    ...state.accounts.slice(accountItemIndex + 1)
                 ],
                 isLoading: false
             };
@@ -97,21 +97,21 @@ export function pushAccount(
             };
         }
         case ActionTypes.EDIT_ACCOUNT_SUCCESS: {
-            const identityItemIndex = 
-                state.accounts.findIndex(account => account.id === actions.account.id);
+            const accountItemIndex = 
+                state.accounts.findIndex(accountItem => accountItem.id === actions.account.id);
             return {
                 ...state,
                 editAccountModalLoading: false,
                 editAccountModalVisible: false,
                 accounts: [
-                    ...state.accounts.slice(0, identityItemIndex),
+                    ...state.accounts.slice(0, accountItemIndex),
                     {
-                        ...state.accounts[identityItemIndex],
+                        ...state.accounts[accountItemIndex],
                         name: actions.account.name,
                         platform: actions.account.platform,
                         credential: actions.account.credential
                     },
-                    ...state.accounts.slice(identityItemIndex + 1)
+                    ...state.accounts.slice(accountItemIndex + 1)
                 ]
             };
         }

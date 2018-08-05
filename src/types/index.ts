@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem, PushAccountList, PushAccount, PushRuleList } from '@/types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem, PushAccountList, PushAccount, PushRuleList, PushRuleItem } from '@/types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -129,7 +129,7 @@ export interface PushAccountState {
 export interface PushRuleState {
     isLoading: boolean;
     rules: PushRuleList;
-    nowEditingRule: PushAccount;
+    nowEditingRule: PushRuleItem;
     createRuleModalVisible: boolean;
     createRuleModalLoading: boolean;
     editRuleModalVisible: boolean;
