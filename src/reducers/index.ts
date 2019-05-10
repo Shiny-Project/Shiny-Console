@@ -10,6 +10,7 @@ import { list } from '@/reducers/Dashboard/Spider/list';
 import { identity } from '@/reducers/Dashboard/Spider/identity';
 import { pushAccount } from '@/reducers/Dashboard/Push/account';
 import { pushHistory } from '@/reducers/Dashboard/Push/history';
+import { pushRule } from '@/reducers/Dashboard/Push/rule';
 const rootReducer = combineReducers({
     user,
     dashboard: combineReducers({
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
         }),
         push: combineReducers({
             history: pushHistory,
-            account: pushAccount
+            account: pushAccount,
+            rule: pushRule
         })
     }),
 });

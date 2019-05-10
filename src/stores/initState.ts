@@ -95,7 +95,8 @@ export default {
                 createRuleModalLoading: false,
                 createRuleModalVisible: false,
                 editRuleModalLoading: false,
-                editRuleModalVisible: false
+                editRuleModalVisible: false,
+                nowEditingRule: {}
             }
         }
     },
