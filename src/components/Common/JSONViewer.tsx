@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 
 export interface Props {
     json: object;
+    text?: string;
 }
 
 /**
@@ -27,15 +28,15 @@ class JSONViewer extends React.Component<Props> {
                             />
                         ),
                         width: '80vw',
-                        iconType: 'code',
+                        icon: 'code',
                         maskClosable: true,
                     });
                 }}
             >
                 {
-                    JSON.stringify(this.props.json).length > 20
+                    this.props.text || (JSON.stringify(this.props.json).length > 20
                         ? JSON.stringify(this.props.json).slice(0, 20) + '...'
-                        : JSON.stringify(this.props.json)
+                        : JSON.stringify(this.props.json))
                 }
             </a>
         );
