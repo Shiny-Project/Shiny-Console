@@ -3,6 +3,7 @@ import { Card, Select, Spin, Button, Pagination } from 'antd';
 import { RecentEventsResponse, Spider, SpiderListResponse } from '@/types/dashboard';
 import request from '@/services/request';
 import debounce from 'lodash/debounce';
+import EventListItem from './EventListItem';
 const Option = Select.Option;
 
 interface EventListProps {
@@ -81,19 +82,7 @@ class EventList extends React.Component<EventListProps, EventListState> {
     render() {
         const eventList = this.props.recentEvents.events.map((event) => {
             return (
-                <div key={event.hash} onClick={(e) => { window.open(event.data.link); }}>
-                    <Card
-                        className={['event-item', `event-border-${event.level}`].join(' ')}
-                        type="inner"
-                        hoverable={true}
-                    >
-                        <Card.Meta
-                            title={event.data.title}
-                            description={<div dangerouslySetInnerHTML={{ __html: event.data.content }} />}
-                            avatar={<img src={event.data.cover} />}
-                        />
-                    </Card>
-                </div>
+                <EventListItem event={event} key={event.hash} />
             );
         });
         const { fetching, data, value } = this.state;

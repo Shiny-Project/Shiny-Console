@@ -132,4 +132,4 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
     }
 }
 
-export default Form.create<Props>()(APIKeys);
+export default Form.create<Props & FormComponentProps>()(APIKeys);

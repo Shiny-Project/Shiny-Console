@@ -53,7 +53,7 @@ class CreateIdentityForm extends React.Component<CreateIdentityFormProps & FormC
     }
 }
 
-const WrappedCreateIdentityForm = Form.create<CreateIdentityFormProps>()(CreateIdentityForm);
+const WrappedCreateIdentityForm = Form.create<CreateIdentityFormProps & FormComponentProps>()(CreateIdentityForm);
 
 export interface EditIdentityFormProps {
     visible: boolean;
@@ -114,7 +114,7 @@ class EditIdentityForm extends React.Component<EditIdentityFormProps & FormCompo
     }
 }
 
-const WrappedEditIdentityForm = Form.create<CreateIdentityFormProps>()(EditIdentityForm);
+const WrappedEditIdentityForm = Form.create<EditIdentityFormProps & FormComponentProps>()(EditIdentityForm);
 
 export interface Props {
     isLoading: boolean;

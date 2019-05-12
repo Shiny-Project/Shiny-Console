@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@antv/data-set": "^0.8.6",
-    "antd": "^3.4.1",
+    "antd": "^3.17.0",
     "axios": "^0.17.1",
     "nprogress": "^0.2.0",
     "react": "^16.3.1",
@@ -16,7 +16,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "socket.io-client": "^2.1.0",
-    "typescript": "^2.8.1",
+    "typescript": "^3.4.3",
     "viser-react": "^2.2.2"
   },
   "scripts": {

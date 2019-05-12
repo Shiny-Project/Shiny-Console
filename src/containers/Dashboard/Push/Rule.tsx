@@ -21,6 +21,8 @@ export function mapStateToProps(state: StoreState) {
         nowEditingRule: state.dashboard.push.rule.nowEditingRule,
         editRuleModalVisible: state.dashboard.push.rule.editRuleModalVisible,
         editRuleModalLoading: state.dashboard.push.rule.editRuleModalLoading,
+        createRuleModalVisible: state.dashboard.push.rule.createRuleModalVisible,
+        createRuleModalLoading: state.dashboard.push.rule.createRuleModalLoading
     };
 }
 
@@ -42,11 +44,17 @@ export function mapDispatchToProps(dispatch: Dispatch) {
         deleteRule: (ruleId: number) => {
             dispatch(actions.deleteRule(ruleId));
         },
-        showEditRuleModel: (rule: PushRuleItem) => {
+        showEditRuleModal: (rule: PushRuleItem) => {
             dispatch(actions.showEditRuleModal(rule));
         },
-        hideEditRuleModel: () => {
+        hideEditRuleModal: () => {
             dispatch(actions.hideEditRuleModal());
+        },
+        showCreateRuleModal: () => {
+            dispatch(actions.showCreateRuleModal());
+        },
+        hideCreateRuleModal: () => {
+            dispatch(actions.hideCreateRuleModal());
         }
     };
 }

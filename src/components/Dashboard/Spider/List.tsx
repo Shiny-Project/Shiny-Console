@@ -275,4 +275,4 @@ class List extends React.Component<Props & FormComponentProps, State> {
     }
 }
 
-export default Form.create<Props>()(List);
+export default Form.create<Props & FormComponentProps>()(List);

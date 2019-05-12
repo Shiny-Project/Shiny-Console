@@ -21,6 +21,23 @@
     animation-name: flicking;
     animation-iteration-count: infinite;
 }
+.event-cover {
+    max-width: 128px;
+}
+.event-detail-loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.event-detail .column-label {
+    padding: 3px 0;
+}
+.text-fail {
+    color: #ff3300;
+}
+.text-success {
+    color: #0ab618;
+}
 @keyframes flicking{
     0% {
         opacity: 0;

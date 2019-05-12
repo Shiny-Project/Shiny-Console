@@ -61,7 +61,7 @@ class CreateAccountForm extends React.Component<CreateAccountFormProps & FormCom
     }
 }
 
-const WrappedCreateAccountForm = Form.create<CreateAccountFormProps>()(CreateAccountForm);
+const WrappedCreateAccountForm = Form.create<CreateAccountFormProps & FormComponentProps>()(CreateAccountForm);
 
 export interface EditAccountFormProps {
     account: PushAccount;
@@ -130,7 +130,7 @@ class EditAccountForm extends React.Component<EditAccountFormProps & FormCompone
     }
 }
 
-const WrappedEditAccountForm = Form.create<EditAccountFormProps>()(EditAccountForm);
+const WrappedEditAccountForm = Form.create<EditAccountFormProps & FormComponentProps>()(EditAccountForm);
 
 export interface Props {
     isLoading: boolean;

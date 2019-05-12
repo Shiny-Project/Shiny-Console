@@ -2,13 +2,14 @@ import React from 'react';
 
 interface Props {
     time: Date | string;
+    diffMode?: boolean;
 }
 interface State {
     diffMode: boolean;
 }
 class TimeDiff extends React.Component<Props, State> {
     state: State = {
-        diffMode: true
+        diffMode: this.props.diffMode === undefined ? true : this.props.diffMode
     };
     diffText = (time: Date) => {
         let result = '';

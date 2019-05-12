@@ -1,8 +1,59 @@
 import React from 'react';
-import { Spin, Card, Table, Popconfirm, Form, Modal, Input, Divider } from 'antd';
+import { Spin, Card, Table, Popconfirm, Form, Modal, Input, Divider, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { PushRuleItem } from '@/types/dashboard';
 import JSONViewer from '@/components/Common/JSONViewer';
+
+export interface CreateRuleFormProps {
+    visible: boolean;
+    loading: boolean;
+    onSubmit: (spiderName: string, rule: string) => void;
+    onCancel: () => void;
+}
+
+class CreateRuleForm extends React.Component<CreateRuleFormProps & FormComponentProps> {
+    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                this.props.onSubmit(values.spider_name, values.rule);
+            }
+        });
+    }
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        return (
+            <Modal
+                visible={this.props.visible}
+                onOk={this.handleSubmitClick}
+                onCancel={this.props.onCancel}
+                confirmLoading={this.props.loading}
+                afterClose={() => {
+                    this.props.form.resetFields();
+                }}
+            >
+                <Form layout="vertical">
+                    <Form.Item label="Spider Name">
+                        {getFieldDecorator('spider_name', {
+                            rules: [{ required: true }]
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
+                    <Form.Item label="规则 (JSON)">
+                        {getFieldDecorator('rule', {
+                            rules: [{ required: true }]
+                        })(
+                            <Input.TextArea />
+                        )}
+                    </Form.Item>
+                </Form>
+            </Modal>
+        );
+    }
+}
+
+const WrappedCreateRuleForm = Form.create<CreateRuleFormProps & FormComponentProps>()(CreateRuleForm);
 
 export interface EditRuleFormProps {
     rule: PushRuleItem;
@@ -63,7 +114,7 @@ class EditRuleForm extends React.Component<EditRuleFormProps & FormComponentProp
     }
 }
 
-const WrappedEditRuleForm = Form.create<EditRuleFormProps>()(EditRuleForm);
+const WrappedEditRuleForm = Form.create<EditRuleFormProps & FormComponentProps>()(EditRuleForm);
 
 export interface Props {
     isLoading: boolean;
@@ -73,9 +124,12 @@ export interface Props {
     editRuleModalLoading: boolean;
     rules: PushRuleItem[];
     nowEditingRule: PushRuleItem;
-    showEditRuleModel: (rule: PushRuleItem) => void;
-    hideEditRuleModel: () => void;
+    showEditRuleModal: (rule: PushRuleItem) => void;
+    hideEditRuleModal: () => void;
+    showCreateRuleModal: () => void;
+    hideCreateRuleModal: () => void;
     getRuleList: () => void;
+    createRule: (spiderName: string, rule: string) => void;
     editRule: (ruleId: number, spiderName: string, rule: string) => void;
     deleteRule: (ruleId: number) => void;
 }
@@ -103,7 +157,7 @@ class PushRule extends React.Component<Props> {
                 <div>
                     <a
                         onClick={() => {
-                            this.props.showEditRuleModel(record);
+                            this.props.showEditRuleModal(record);
                         }}
                     >
                         编辑
@@ -138,12 +192,26 @@ class PushRule extends React.Component<Props> {
                         rowKey="id"
                         pagination={false}
                     />
+                    <Divider />
+                    <Button 
+                        onClick={() => {
+                            this.props.showCreateRuleModal();
+                        }}
+                    >
+                        创建新项
+                    </Button>
                     <WrappedEditRuleForm
                         visible={this.props.editRuleModalVisible}
                         loading={this.props.editRuleModalLoading}
                         rule={this.props.nowEditingRule}
                         onSubmit={this.props.editRule}
-                        onCancel={this.props.hideEditRuleModel}
+                        onCancel={this.props.hideEditRuleModal}
+                    />
+                    <WrappedCreateRuleForm
+                        visible={this.props.createRuleModalVisible}
+                        loading={this.props.createRuleModalLoading}
+                        onSubmit={this.props.createRule}
+                        onCancel={this.props.hideCreateRuleModal}
                     />
                 </Card>
             </Spin>

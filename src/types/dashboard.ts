@@ -33,23 +33,69 @@ export type RecentEventsResponse = {
     events: ShinyEvent[];
 };
 
-// Shiny 事件
+/** Shiny 事件  */
 export interface ShinyEvent {
-    id?: number; // 事件 ID
-    data: ShinyEventData; // 事件详细数据
-    level: ShinyEventLevel; // 事件等级
-    publisher: string; // 事件发布者
-    hash: string; // 事件 Hash
+    /** 事件ID */
+    id?: number;
+    /** 事件详细数据 */
+    data: ShinyEventData;
+    /** 事件等级 */
+    level: ShinyEventLevel;
+    /** 事件发布者 */
+    publisher: string;
+    /** 事件发布频道 */
+    channel?: string;
+    /** 事件 Hash */
+    hash: string;
     createdAt?: string;
     updatedAt?: string;
+}
+/** Shiny 事件关联信息 */
+export interface ShinyEventDetail {
+    /** 事件ID */
+    id: number;
+    jobs: ShinyPushJob[];
+}
+
+/** Shiny 推送任务（新） */
+export interface ShinyPushJob {
+    /** 任务ID  */
+    id: number;
+    /** 推送渠道  */
+    channel: string;
+    /** 任务状态 */
+    status: 'success' | 'fail';
+    info: string;
+    text: string;
+    image?: string;
+    logs: ShinyPushJobLog[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+/** Shiny 推送任务日志 */
+export interface ShinyPushJobLog {
+    /** 日志ID */
+    id: number;
+    /** 推送渠道  */
+    channel: string;
+    /** 状态 */
+    status: string;
+    info: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 // Shiny 事件数据
 export interface ShinyEventData {
-    content: string; // 内容
-    cover: string; // 封面
-    link: string; // 链接
-    title: string; // 标题
+    /** 内容 */
+    content: string;
+    /** 封面 */
+    cover: string;
+    /** 链接 */
+    link: string;
+    /** 标题 */
+    title: string;
 }
 
 // Shiny 事件等级

@@ -53,7 +53,7 @@ class CreateConfigForm extends React.Component<CreateConfigFormProps & FormCompo
     }
 }
 
-const WrappedCreateConfigForm = Form.create<CreateConfigFormProps>()(CreateConfigForm);
+const WrappedCreateConfigForm = Form.create<CreateConfigFormProps & FormComponentProps>()(CreateConfigForm);
 
 export interface EditConfigFormProps {
     visible: boolean;
@@ -104,7 +104,7 @@ class EditConfigForm extends React.Component<EditConfigFormProps & FormComponent
     }
 }
 
-const WrappedEditConfigForm = Form.create<EditConfigFormProps>()(EditConfigForm);
+const WrappedEditConfigForm = Form.create<EditConfigFormProps & FormComponentProps>()(EditConfigForm);
 
 interface Props {
     isLoading: boolean;
@@ -204,4 +204,4 @@ class Config extends React.Component<Props & FormComponentProps, State> {
     }
 }
 
-export default Form.create<Props>()(Config);
+export default Form.create<Props & FormComponentProps>()(Config);

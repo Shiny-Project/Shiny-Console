@@ -185,4 +185,4 @@ class Node extends React.Component<Props & FormComponentProps, State> {
     }
 }
 
-export default Form.create<Props>()(Node);
+export default Form.create<Props & FormComponentProps>()(Node);
