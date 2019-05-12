@@ -1,9 +1,8 @@
 import * as constants from '@/constants';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
 import request from '@/services/request';
 import { message } from 'antd';
 import Auth from '@/services/auth';
+import { DeferredAction } from '@/types/action';
 
 export interface LoginResponse {
     uid: number;
@@ -23,7 +22,7 @@ export interface LoginFailure {
 
 export type UserAction = Login | LoginSuccess | LoginFailure;
 
-export function login(userName: string, password: string): ThunkAction<void, StoreState, null> {
+export function login(userName: string, password: string): DeferredAction<Login | LoginSuccess | LoginFailure> {
     return async (dispatch) => {
         dispatch(loginStart());
         try {

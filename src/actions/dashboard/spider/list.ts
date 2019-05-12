@@ -4,6 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { RaiseError, raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { SpiderListResponse, Spider } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetSpiderList {
     type: constants.GET_SPIDER_LIST;
@@ -89,7 +90,7 @@ export type SpiderListAction = GetSpiderList | GetSpiderListSuccess | GetSpiderL
 /**
  * 获得 Spider 列表
  */
-export function getSpiderList(): ThunkAction<void, StoreState, null> {
+export function getSpiderList(): DeferredAction<GetSpiderList | GetSpiderListSuccess | GetSpiderListFailure> {
     return async (dispatch) => {
         dispatch(getSpiderListStart());
         try {
@@ -106,7 +107,8 @@ export function getSpiderList(): ThunkAction<void, StoreState, null> {
  * 删除 Spider
  * @param spiderId 
  */
-export function deleteSpider(spiderId: number): ThunkAction<void, StoreState, null> {
+export function deleteSpider(spiderId: number):
+    DeferredAction<DeleteSpider | DeleteSpiderSuccess | DeleteSpiderFailure> {
     return async (dispatch) => {
         dispatch(deleteSpiderStart(spiderId));
         try {
@@ -132,7 +134,8 @@ export function showFrequencyUpdateModal(spiderId: number): UpdateFrequencyShowM
     };
 }
 
-export function updateFrequency(spiderId: number, frequency: number): ThunkAction<void, StoreState, null> {
+export function updateFrequency(spiderId: number, frequency: number):
+    DeferredAction<UpdateFrequencyStart | UpdateFrequencySuccess | UpdateFrequencyFailure> {
     return async (dispatch) => {
         dispatch(updateFrequencyStart());
         try {
@@ -234,7 +237,7 @@ export function hideEditSpiderModal(): EditSpiderCancel {
  */
 export function editSpider(
     spiderId: number, name: string, description: string, group: string, path: string
-): ThunkAction<void, StoreState, null> {
+): DeferredAction<EditSpiderStart | EditSpiderSuccess | EditSpiderFailure> {
     return async (dispatch) => {
         dispatch(editSpiderStart());
         try {

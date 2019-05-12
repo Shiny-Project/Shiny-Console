@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Push/account';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { PushAccountList, PushAccount } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetAccountList {
     type: constants.GET_ACCOUNT_LIST;
@@ -185,7 +184,8 @@ export function editAccountFailure(): EditAccountFailure {
 /**
  * 获得账号列表
  */
-export function getAccountList(): ThunkAction<void, StoreState, null> {
+export function getAccountList():
+    DeferredAction<GetAccountList | GetAccountListSuccess | GetAccountListFailure> {
     return async (dispatch) => {
         dispatch(getAccountListStart());
         try {
@@ -201,7 +201,8 @@ export function getAccountList(): ThunkAction<void, StoreState, null> {
 /**
  * 创建账号
  */
-export function createAccount(platform: string, name: string, credential: string): ThunkAction<void, StoreState, null> {
+export function createAccount(platform: string, name: string, credential: string):
+    DeferredAction<CreateAccount | CreateAccountSuccess | CreateAccountFailure> {
     return async (dispatch) => {
         dispatch(createAccountStart());
         try {
@@ -221,7 +222,8 @@ export function createAccount(platform: string, name: string, credential: string
  * 删除账号
  * @param id
  */
-export function deleteAccount(id: number): ThunkAction<void, StoreState, null> {
+export function deleteAccount(id: number):
+    DeferredAction<DeleteAccount | DeleteAccountSuccess | DeleteAccountFailure> {
     return async (dispatch) => {
         dispatch(deleteAccountStart());
         try {
@@ -245,7 +247,7 @@ export function deleteAccount(id: number): ThunkAction<void, StoreState, null> {
  */
 export function editAccount(
     id: number, platform: string, name: string, credential: string
-): ThunkAction<void, StoreState, null> {
+): DeferredAction<EditAccount | EditAccountSuccess | EditAccountFailure> {
     return async (dispatch) => {
         dispatch(editAccountStart());
         try {

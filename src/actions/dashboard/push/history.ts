@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Push/history';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { PushHistoryResponse } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetPushHistory {
     type: constants.GET_PUSH_HISTORY;
@@ -42,7 +41,8 @@ export function getPushHistoryFailure(): GetPushHistoryFailure {
 /**
  * 获得最近推送任务列表
  */
-export function getPushHistory(): ThunkAction<void, StoreState, null> {
+export function getPushHistory():
+    DeferredAction<GetPushHistory | GetPushHistorySuccess | GetPushHistoryFailure> {
     return async (dispatch) => {
         dispatch(getPushHistoryStart());
         try {

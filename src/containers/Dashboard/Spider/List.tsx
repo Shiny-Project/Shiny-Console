@@ -2,8 +2,8 @@ import List from '@/components/Dashboard/Spider/List';
 import * as actions from '@/actions/dashboard/spider/list';
 import { StoreState } from '@/types';
 import { connect } from 'react-redux';
+import { Dispatch } from '@/types/action';
 import { SpiderListAction } from '@/actions/dashboard/spider/list';
-import { ThunkAction } from 'redux-thunk';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -25,14 +25,7 @@ export function mapStateToProps(state: StoreState) {
     };
 }
 
-// Hack 第二弹 自己弄了个接口 
-interface Dispatch {
-    (action: SpiderListAction | ThunkAction<void, StoreState, null>): void;
-}
-
-// 原来代码: dispatch: Dispatch<actions.UserAction>
-// 加上 redux-thunk 之后这个类型不知道咋配 先 Hack 掉了
-export function mapDispatchToProps(dispatch: Dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch<SpiderListAction>) {
     return {
         getSpiderList: () => {
             dispatch(actions.getSpiderList());

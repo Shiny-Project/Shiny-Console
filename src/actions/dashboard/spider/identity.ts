@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Spider/identity';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { SpiderIdentityItem, SpiderIdentityListResponse } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetIdentityList {
     type: constants.GET_IDENTITY_LIST;
@@ -185,7 +184,7 @@ export function editIdentityFailure(): EditIdentityFailure {
 /**
  * 获得凭据项列表
  */
-export function getIdentityList(): ThunkAction<void, StoreState, null> {
+export function getIdentityList(): DeferredAction<GetIdentityList | GetIdentityListFailure | GetIdentityListSuccess> {
     return async (dispatch) => {
         dispatch(getIdentityListStart());
         try {
@@ -201,7 +200,8 @@ export function getIdentityList(): ThunkAction<void, StoreState, null> {
 /**
  * 创建凭据项
  */
-export function createIdentity(name: string, identity: string): ThunkAction<void, StoreState, null> {
+export function createIdentity(name: string, identity: string): 
+    DeferredAction<CreateIdentity | CreateIdentitySuccess | CreateIdentityFailure> {
     return async (dispatch) => {
         dispatch(createIdentityStart());
         try {
@@ -220,7 +220,8 @@ export function createIdentity(name: string, identity: string): ThunkAction<void
  * 删除凭据项
  * @param id
  */
-export function deleteIdentity(id: number): ThunkAction<void, StoreState, null> {
+export function deleteIdentity(id: number): 
+    DeferredAction<DeleteIdentity | DeleteIdentitySuccess | DeleteIdentityFailure> {
     return async (dispatch) => {
         dispatch(deleteIdentityStart());
         try {
@@ -241,7 +242,8 @@ export function deleteIdentity(id: number): ThunkAction<void, StoreState, null> 
  * @param name 
  * @param identity
  */
-export function editIdentity(id: number, name: string, identity: string): ThunkAction<void, StoreState, null> {
+export function editIdentity(id: number, name: string, identity: string): 
+    DeferredAction<EditIdentity | EditIdentitySuccess | EditIdentityFailure> {
     return async (dispatch) => {
         dispatch(editIdentityStart());
         try {

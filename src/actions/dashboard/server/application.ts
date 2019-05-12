@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Server/application';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { APIKeyPairsResponse, APIKeyPair, ServerNode } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetKeyPairs {
     type: constants.GET_KEY_PAIRS;
@@ -133,7 +132,8 @@ export function closeCreateModal(): CloseCreateModal {
 /** 
  * 获得应用密钥对列表
  */
-export function getKeyPairs(): ThunkAction<void, StoreState, null> {
+export function getKeyPairs(): 
+    DeferredAction<GetKeyPairs | GetKeyPairsSuccess | GetKeyPairsFailure> {
     return async (dispatch) => {
         dispatch(getKeyPairsStart());
         try {
@@ -150,7 +150,8 @@ export function getKeyPairs(): ThunkAction<void, StoreState, null> {
  * 删除应用密钥对
  * @param applicationId 应用 ID
  */
-export function deleteKeyPair(applicationId: number): ThunkAction<void, StoreState, null> {
+export function deleteKeyPair(applicationId: number): 
+    DeferredAction<DeleteKeyPair | DeleteKeyPairSuccess | DeleteKeyPairFailure> {
     return async (dispatch) => {
         dispatch(deleteKeyPairStart());
         try {
@@ -160,7 +161,7 @@ export function deleteKeyPair(applicationId: number): ThunkAction<void, StoreSta
             dispatch(deleteKeyPairSuccess(applicationId));
         } catch (e) {
             dispatch(raiseError(e));
-            dispatch(getKeyPairsFailure());
+            dispatch(deleteKeyPairFailure());
         }
     };
 }
@@ -169,7 +170,8 @@ export function deleteKeyPair(applicationId: number): ThunkAction<void, StoreSta
  * 生成新密钥对
  * @param tag 标签 
  */
-export function createKeyPair(tag: number):  ThunkAction<void, StoreState, null> {
+export function createKeyPair(tag: number): 
+    DeferredAction<CreateKeyPair | CreateKeyPairSuccess | CreateKeyPairFailure> {
     return async (dispatch) => {
         dispatch(createKeyPairStart());
         try {

@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Server/config';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { ConfigItem, ConfigListResponse } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetConfigList {
     type: constants.GET_CONFIG_LIST;
@@ -185,7 +184,7 @@ export function editConfigFailure(): EditConfigFailure {
 /**
  * 获得设置项列表
  */
-export function getConfigList(): ThunkAction<void, StoreState, null> {
+export function getConfigList(): DeferredAction<GetConfigList | GetConfigListSuccess | GetConfigListFailure> {
     return async (dispatch) => {
         dispatch(getConfigListStart());
         try {
@@ -201,7 +200,8 @@ export function getConfigList(): ThunkAction<void, StoreState, null> {
 /**
  * 创建设置项
  */
-export function createConfig(key: string, value: string): ThunkAction<void, StoreState, null> {
+export function createConfig(key: string, value: string): 
+    DeferredAction<CreateConfig | CreateConfigSuccess | CreateConfigFailure> {
     return async (dispatch) => {
         dispatch(createConfigStart());
         try {
@@ -220,7 +220,8 @@ export function createConfig(key: string, value: string): ThunkAction<void, Stor
  * 删除设置项
  * @param key 
  */
-export function deleteConfig(key: string): ThunkAction<void, StoreState, null> {
+export function deleteConfig(key: string): 
+    DeferredAction<DeleteConfig | DeleteConfigSuccess | DeleteConfigFailure> {
     return async (dispatch) => {
         dispatch(deleteConfigStart());
         try {
@@ -240,7 +241,8 @@ export function deleteConfig(key: string): ThunkAction<void, StoreState, null> {
  * @param key 
  * @param value 
  */
-export function editConfig(key: string, value: string): ThunkAction<void, StoreState, null> {
+export function editConfig(key: string, value: string): 
+    DeferredAction<EditConfig | EditConfigSuccess | EditConfigFailure> {
     return async (dispatch) => {
         dispatch(editConfigStart());
         try {

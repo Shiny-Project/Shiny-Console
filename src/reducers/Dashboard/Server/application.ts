@@ -29,8 +29,7 @@ export function application(state: ApplicationState = initState.dashboard.server
                 ...state,
                 isLoading: true
             };
-        case ActionTypes.DELETE_KEY_PAIR_SUCCESS:
-            {
+        case ActionTypes.DELETE_KEY_PAIR_SUCCESS: {
                 const index = state.keyPairs.findIndex(keyPair => keyPair.id === actions.applicationId);
                 return {
                     ...state,
@@ -51,8 +50,7 @@ export function application(state: ApplicationState = initState.dashboard.server
                 ...state,
                 createModalLoading: true
             };
-        case ActionTypes.CREATE_KEY_PAIR_SUCCESS:
-            {
+        case ActionTypes.CREATE_KEY_PAIR_SUCCESS: {
                 const index = state.serverList.findIndex(server => server.id === actions.tag);
                 const keyIndex = state.keyPairs.findIndex(keyPair =>
                     keyPair.tag[0].id === actions.tag

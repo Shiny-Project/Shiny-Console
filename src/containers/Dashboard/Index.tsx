@@ -3,7 +3,7 @@ import * as actions from '@/actions/dashboard/error';
 import { StoreState } from '@/types';
 import { connect } from 'react-redux';
 import { ErrorAction } from '@/actions/dashboard/error';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from '@/types/action';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -19,14 +19,7 @@ export function mapStateToProps(state: StoreState) {
     };
 }
 
-// Hack 第二弹 自己弄了个接口 
-interface Dispatch {
-    (action: ErrorAction | ThunkAction<void, StoreState, null>): void;
-}
-
-// 原来代码: dispatch: Dispatch<actions.UserAction>
-// 加上 redux-thunk 之后这个类型不知道咋配 先 Hack 掉了
-export function mapDispatchToProps(dispatch: Dispatch) {
+export function mapDispatchToProps(dispatch: Dispatch<ErrorAction>) {
     return {
         raiseError: (error: Error) => {
             dispatch(actions.raiseError(error));

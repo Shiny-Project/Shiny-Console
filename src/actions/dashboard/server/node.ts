@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Server/node';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { ServerListResponse, ServerNode } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetServerList {
     type: constants.GET_SERVER_LIST;
@@ -128,7 +127,7 @@ export function closeCreateServerModal(): CloseCreateServerModal {
 /** 
  * 获得服务器节点列表
  */
-export function getServerList(): ThunkAction<void, StoreState, null> {
+export function getServerList(): DeferredAction<GetServerList | GetServerListSuccess | GetServerListFailure> {
     return async (dispatch) => {
         dispatch(getServerListStart());
         try {
@@ -145,7 +144,7 @@ export function getServerList(): ThunkAction<void, StoreState, null> {
  * 删除服务器节点
  * @param id 节点 ID
  */
-export function deleteServer(id: number): ThunkAction<void, StoreState, null> {
+export function deleteServer(id: number): DeferredAction<DeleteServer | DeleteServerSuccess | DeleteServerFailure> {
     return async (dispatch) => {
         dispatch(deleteServerStart());
         try {
@@ -167,7 +166,7 @@ export function deleteServer(id: number): ThunkAction<void, StoreState, null> {
  * @param host 服务器地址
  */
 export function addServer(type: string, name: string, host: string, group: string[]): 
-    ThunkAction<void, StoreState, null> {
+    DeferredAction<AddServer | AddServerSuccess | AddServerFailure> {
     return async (dispatch) => {
         dispatch(addServerStart());
         try {

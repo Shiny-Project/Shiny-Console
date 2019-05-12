@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Dashboard/overview';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import { StatisticsResponse } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetStatistic {
     type: constants.GET_STATISTICS;
@@ -20,7 +19,8 @@ export interface GetStatisticFailure {
 
 export type OverviewAction = GetStatistic | GetStatisticSuccess | GetStatisticFailure;
 
-export function getStatistics(): ThunkAction<void, StoreState, null> {
+export function getStatistics():
+    DeferredAction<GetStatistic | GetStatisticSuccess | GetStatisticFailure> {
     return async (dispatch) => {
         dispatch(getStatisticsStart());
         try {

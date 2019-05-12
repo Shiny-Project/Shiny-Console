@@ -1,10 +1,9 @@
 import * as constants from '@/constants/Dashboard/realtime';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
 import * as DashboardTypes from '@/types/dashboard';
 import io from 'socket.io-client';
+import { DeferredAction } from '@/types/action';
 
 export interface GetRecentEvent {
     type: constants.GET_RECENT_EVENTS;
@@ -36,12 +35,13 @@ export interface UpdateJob {
 
 export type RealtimeAction =
     GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure | AddRecentEvent |
-    AddJob | UpdateJob | RaiseError;
+    AddJob | UpdateJob;
 
 /**
  * 获得最近事件
  */
-export function getRecentEvents(publishers?: string[], page?: number): ThunkAction<void, StoreState, null> {
+export function getRecentEvents(publishers?: string[], page?: number): 
+    DeferredAction<GetRecentEvent | GetRecentEventSuccess | GetRecentEventFailure> {
     return async (dispatch) => {
         dispatch(getRecentEventsStart());
         try {
@@ -63,7 +63,8 @@ export function getRecentEvents(publishers?: string[], page?: number): ThunkActi
 /**
  * 开始监听新事件
  */
-export function listenNewEvents(): ThunkAction<void, StoreState, null> {
+export function listenNewEvents():
+    DeferredAction<AddRecentEvent> {
     return async (dispatch) => {
         const socketClient = io('http://websocket.shiny.kotori.moe:3737');
         socketClient.on('event', (event: string) => {
@@ -81,7 +82,8 @@ export function listenNewEvents(): ThunkAction<void, StoreState, null> {
 /**
  * 监听任务执行状态
  */
-export function listenJobStatus(): ThunkAction<void, StoreState, null> {
+export function listenJobStatus():
+    DeferredAction<AddJob | UpdateJob> {
     return async (dispatch) => {
         const socketClient = io('/', {
             path: '/API/socket.io'

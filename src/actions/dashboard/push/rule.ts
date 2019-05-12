@@ -1,9 +1,8 @@
 import * as constants from '@/constants/Push/rule';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
+import { raiseError } from '@/actions/dashboard/error';
 import request from '@/services/request';
-import { PushRuleList, PushRule, PushRuleItem } from '@/types/dashboard';
+import { PushRuleList, PushRuleItem } from '@/types/dashboard';
+import { DeferredAction } from '@/types/action';
 
 export interface GetRuleList {
     type: constants.GET_RULE_LIST;
@@ -185,7 +184,8 @@ export function editRuleFailure(): EditRuleFailure {
 /**
  * 获得推送规则列表
  */
-export function getRuleList(): ThunkAction<void, StoreState, null> {
+export function getRuleList(): 
+    DeferredAction<GetRuleList | GetRuleListSuccess | GetRuleListFailure> {
     return async (dispatch) => {
         dispatch(getRuleListStart());
         try {
@@ -201,7 +201,8 @@ export function getRuleList(): ThunkAction<void, StoreState, null> {
 /**
  * 创建推送规则
  */
-export function createRule(spiderName: string, rule: string): ThunkAction<void, StoreState, null> {
+export function createRule(spiderName: string, rule: string): 
+    DeferredAction<CreateRule | CreateRuleSuccess | CreateRuleFailure> {
     return async (dispatch) => {
         dispatch(createRuleStart());
         try {
@@ -220,7 +221,8 @@ export function createRule(spiderName: string, rule: string): ThunkAction<void, 
  * 删除推送规则
  * @param id
  */
-export function deleteRule(id: number): ThunkAction<void, StoreState, null> {
+export function deleteRule(id: number): 
+    DeferredAction<DeleteRule | DeleteRuleSuccess | DeleteRuleFailure> {
     return async (dispatch) => {
         dispatch(deleteRuleStart());
         try {
@@ -244,7 +246,7 @@ export function deleteRule(id: number): ThunkAction<void, StoreState, null> {
  */
 export function editRule(
     id: number, spiderName: string, rule: string
-): ThunkAction<void, StoreState, null> {
+): DeferredAction<EditRule | EditRuleSuccess | EditRuleFailure> {
     return async (dispatch) => {
         dispatch(editRuleStart());
         try {
