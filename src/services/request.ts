@@ -34,7 +34,7 @@ class Fetch {
     // tslint:disable-next-line:max-line-length
     request<T>(method: 'GET' | 'POST' | 'PATCH' | 'DELETE' = 'GET', path: string = '/', payload: object = {}): Promise<T> {
         console.log(`[${new Date().toISOString()}] ${method} ${path}`);
-        let options = {
+        const options = {
             method: method,
             url: path,
             params: {},

@@ -31,6 +31,9 @@ export function mapDispatchToProps(dispatch: Dispatch<RuleAction>) {
         getRuleList: () => {
             dispatch(actions.getRuleList());
         },
+        createRule: (spiderName: string, rule: string) => {
+            dispatch(actions.createRule(spiderName, rule));
+        },
         editRule: (ruleId: number, spiderName: string, rule: string) => {
             dispatch(actions.editRule(ruleId, spiderName, rule));
         },
