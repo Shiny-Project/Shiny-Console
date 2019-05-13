@@ -1,3 +1,4 @@
+import { StoreState } from '@/types';
 import { combineReducers } from 'redux';
 import { user } from '@/reducers/user';
 import { errors } from '@/reducers/Dashboard/errors';
@@ -11,7 +12,7 @@ import { identity } from '@/reducers/Dashboard/Spider/identity';
 import { pushAccount } from '@/reducers/Dashboard/Push/account';
 import { pushHistory } from '@/reducers/Dashboard/Push/history';
 import { pushRule } from '@/reducers/Dashboard/Push/rule';
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<StoreState>({
     user,
     dashboard: combineReducers({
         errors,
