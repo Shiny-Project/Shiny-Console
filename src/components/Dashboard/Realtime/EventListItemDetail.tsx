@@ -21,6 +21,14 @@ class EventListItemDetail extends React.Component<EventListItemDetailProps> {
                 <Col lg={10} xs={24}>
                     <Row>
                         <Col span={8} className="column-label">
+                            Event ID
+                        </Col>
+                        <Col span={16}>
+                            {this.props.event.id}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={8} className="column-label">
                             Spider Name
                         </Col>
                         <Col span={16}>
@@ -53,6 +61,14 @@ class EventListItemDetail extends React.Component<EventListItemDetailProps> {
                     </Row>
                     <Row>
                         <Col span={8} className="column-label">
+                            结束处理时刻
+                        </Col>
+                        <Col span={16}>
+                            <TimeDiff time={this.props.event.updatedAt} diffMode={false} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={8} className="column-label">
                             Hash
                         </Col>
                         <Col span={16}>
@@ -62,9 +78,6 @@ class EventListItemDetail extends React.Component<EventListItemDetailProps> {
                 </Col>
                 <Col lg={14} xs={24}>
                     <Row>
-                        <Col span={24} className="column-label">
-                            推送任务
-                        </Col>
                         <Col span={24}>
                             <JobList jobs={this.props.eventDetail.jobs} />
                         </Col>

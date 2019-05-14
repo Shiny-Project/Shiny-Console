@@ -53,6 +53,7 @@ class JobList extends React.Component<JobListProps> {
     render() {
         return (
             <Table
+                title={() => (<span>推送任务</span>)}
                 dataSource={this.props.jobs}
                 columns={this.columns}
                 pagination={false}
