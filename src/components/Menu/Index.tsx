@@ -64,7 +64,7 @@ class Sider extends React.Component<Props, State> {
             <Link to="/dashboard/push/account">推送渠道账号管理</Link>
           </Menu.Item>
           <Menu.Item key="push-history">
-            <Link to="/dashboard/push/history">推送历史</Link>
+            <Link to="/dashboard/push/history">推送历史（旧）</Link>
           </Menu.Item>
           <Menu.Item key="push-rules">
             <Link to="/dashboard/push/rule">推送规则</Link>

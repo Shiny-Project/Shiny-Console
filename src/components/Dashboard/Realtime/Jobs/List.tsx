@@ -3,6 +3,7 @@ import { ShinyPushJob } from '@/types/dashboard';
 import { Table, Divider } from 'antd';
 import JSONViewer from '@/components/Common/JSONViewer';
 import JobLogList from './Log/List';
+import PushChannel from '../../Push/PushChannel';
 export interface JobListProps {
     jobs: ShinyPushJob[];
 }
@@ -13,8 +14,10 @@ class JobList extends React.Component<JobListProps> {
         key: 'id'
     }, {
         title: '推送渠道',
-        dataIndex: 'channel',
-        key: 'channel'
+        key: 'channel',
+        render: (text: string, record: ShinyPushJob) => {
+            return <PushChannel channel={record.channel} />;
+        }
     }, {
         title: '状态',
         key: 'status',

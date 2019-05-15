@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spin, Card, Table, Button, Popover, Modal } from 'antd';
+import { Spin, Card, Table, Button, Popover, Modal, Alert } from 'antd';
 import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
 import PushJobStatus from '@/components/Dashboard/Push/PushJobStatus';
 import PushChannel from '@/components/Dashboard/Push/PushChannel';
@@ -32,8 +32,15 @@ class PushHistory extends React.Component<Props, State> {
         }
     }, {
         title: '推送内容',
-        dataIndex: 'info.text',
-        key: 'info.text'
+        key: 'info.text',
+        render: (text: string, record: PushJob) => {
+            return (
+                <div style={{ wordWrap: 'break-word', wordBreak: 'break-all' }}>
+                    {record.info.text}
+                </div>
+            );
+        },
+        width: 800
     }, {
         title: '渠道',
         key: 'info.channel',
@@ -58,7 +65,7 @@ class PushHistory extends React.Component<Props, State> {
                                     dangerouslySetInnerHTML={{
                                         __html:
                                             `<pre>${JSON.stringify(JSON.parse(record.info.response), null, 2)}</pre>`
-                                    }} 
+                                    }}
                                 />
                             ),
                             width: '80vw',
@@ -83,6 +90,11 @@ class PushHistory extends React.Component<Props, State> {
     render() {
         return (
             <Spin spinning={this.props.isLoading}>
+                <Alert
+                    message="本页面已经废弃，请前往「实时」面板查看各个事件的推送任务。"
+                    banner={true}
+                    closable={true}
+                />
                 <Card title="推送历史">
                     <Table
                         dataSource={this.props.pushHistory.jobs}
