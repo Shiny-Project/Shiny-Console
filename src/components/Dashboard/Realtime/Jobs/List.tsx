@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShinyPushJob } from '@/types/dashboard';
-import { Table } from 'antd';
+import { Table, Divider } from 'antd';
 import JSONViewer from '@/components/Common/JSONViewer';
 import JobLogList from './Log/List';
 export interface JobListProps {
@@ -37,16 +37,26 @@ class JobList extends React.Component<JobListProps> {
             );
         }
     }, {
-        title: '内容',
+        title: '详细',
         key: 'content',
         render: (text: string, record: ShinyPushJob) => {
             return (
-                <JSONViewer
-                    json={{
-                        content: record.text,
-                        images: record.image
-                    }}
-                />
+                <div>
+                    <JSONViewer
+                        json={{
+                            content: record.text,
+                            images: record.image
+                        }}
+                    >
+                        内容
+                    </JSONViewer>
+                    <Divider type="vertical" />
+                    <JSONViewer
+                        json={JSON.parse(record.info)}
+                    >
+                        响应内容
+                    </JSONViewer>
+                </div>
             );
         }
     }];

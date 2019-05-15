@@ -17,7 +17,7 @@ class JobLogStatus extends React.Component<JobLogStatusProps> {
                 <div>
                     <span className="text-success">任务完成</span>
                     <Divider type="vertical" />
-                    <JSONViewer json={JSON.parse(this.props.job.info)} text="查看响应" />
+                    <JSONViewer json={JSON.parse(this.props.job.info)}>查看响应</JSONViewer>
                 </div>
             );
         }
@@ -26,7 +26,7 @@ class JobLogStatus extends React.Component<JobLogStatusProps> {
                 <div>
                     <span>上传图片</span>
                     <Divider type="vertical" />
-                    <JSONViewer json={JSON.parse(this.props.job.info)} text="图片信息" />
+                    <JSONViewer json={JSON.parse(this.props.job.info)}>图片信息</JSONViewer>
                 </div>
             );
         }
@@ -35,7 +35,7 @@ class JobLogStatus extends React.Component<JobLogStatusProps> {
                 <div>
                     <span className="text-success">上传图片成功</span>
                     <Divider type="vertical" />
-                    <JSONViewer json={JSON.parse(this.props.job.info)} text="图片信息" />
+                    <JSONViewer json={JSON.parse(this.props.job.info)}>图片信息</JSONViewer>
                 </div>
             );
         }
@@ -44,7 +44,7 @@ class JobLogStatus extends React.Component<JobLogStatusProps> {
                 <div>
                     <span className="text-fail">失败重试（第{JSON.parse(this.props.job.info).retry}次）</span>
                     <Divider type="vertical" />
-                    <JSONViewer json={JSON.parse(this.props.job.info)} text="详细信息" />
+                    <JSONViewer json={JSON.parse(this.props.job.info)}>详细信息</JSONViewer>
                 </div>
             );
         }

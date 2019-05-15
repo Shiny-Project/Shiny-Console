@@ -34,7 +34,7 @@ class JSONViewer extends React.Component<Props> {
                 }}
             >
                 {
-                    this.props.text || (JSON.stringify(this.props.json).length > 20
+                    this.props.children || (JSON.stringify(this.props.json).length > 20
                         ? JSON.stringify(this.props.json).slice(0, 20) + '...'
                         : JSON.stringify(this.props.json))
                 }
