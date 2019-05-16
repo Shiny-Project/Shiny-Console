@@ -20,12 +20,9 @@ class JSONViewer extends React.Component<Props> {
                     Modal.info({
                         title: 'JSON 查看器',
                         content: (
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        `<pre>${JSON.stringify(this.props.json, null, 2)}</pre>`
-                                }} 
-                            />
+                            <div>
+                                <pre>{String.raw`${JSON.stringify(this.props.json, null, 2)}`}</pre>
+                            </div>
                         ),
                         width: '80vw',
                         icon: 'code',

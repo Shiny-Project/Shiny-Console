@@ -4,6 +4,7 @@ import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
 import PushJobStatus from '@/components/Dashboard/Push/PushJobStatus';
 import PushChannel from '@/components/Dashboard/Push/PushChannel';
 import TimeDiff from '@/components/Common/TimeDiff';
+import JSONViewer from '@/components/Common/JSONViewer';
 
 interface Props {
     isLoading: boolean;
@@ -56,25 +57,7 @@ class PushHistory extends React.Component<Props, State> {
         key: 'response',
         render: (text: string, record: PushJob) => {
             return (
-                <a
-                    onClick={() => {
-                        Modal.info({
-                            title: '响应内容',
-                            content: (
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html:
-                                            `<pre>${JSON.stringify(JSON.parse(record.info.response), null, 2)}</pre>`
-                                    }}
-                                />
-                            ),
-                            width: '80vw',
-                            iconType: ''
-                        });
-                    }}
-                >
-                    查看响应内容
-                </a>
+                <JSONViewer json={JSON.parse(record.info.response)}>查看响应内容</JSONViewer>
             );
         }
     }, {
