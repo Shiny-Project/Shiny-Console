@@ -17,12 +17,16 @@ export interface SpiderRanking {
 }
 
 export interface SpiderRankingItem {
-    publisher: string; // 发布者
-    count: number; // 事件数
+    /** 发布者 */
+    publisher: string;
+    /** 事件数 */
+    count: number;
 }
 
 export interface LevelRankingItem {
-    level: string; // 事件等级
+    /** 事件等级 */
+    level: string;
+    /** 事件数 */
     count: number; // 事件数
 }
 
@@ -98,30 +102,40 @@ export interface ShinyEventData {
     title: string;
 }
 
-// Shiny 事件等级
+/** Shiny 事件等级  */
 export type ShinyEventLevel = 1 | 2 | 3 | 4 | 5;
 
-// Shiny Websocket 广播消息
+/** Shiny Websocket 广播消息 */
 export interface EventSocketMessage {
-    level: ShinyEventLevel; // 事件等级
-    spiderName: string; // 爬虫名
-    hash: string; // 事件 Hash
-    data: ShinyEventData; // 事件详细数据
+    /** 事件等级 */
+    level: ShinyEventLevel;
+    /** 爬虫名 */
+    spiderName: string;
+    /** 事件 Hash */
+    hash: string;
+    /** 事件详细数据 */
+    data: ShinyEventData;
 }
 
 export interface BaseJob {
     type: string;
-    status: string; // 任务状态
-    done_by: string; // 完成者
+    /** 任务状态 */
+    status: string;
+    /** 完成节点 */
+    done_by: string;
     createdAt: string;
     updatedAt: string;
 }
 
 export interface DataRefreshJob extends BaseJob {
-    id: number; // 任务 ID
-    type: 'data_refresh'; // 任务类型
-    spider: string; // 任务爬虫
-    path: string; // 爬虫路径
+    /** 任务ID */
+    id: number;
+    type: 'data_refresh';
+    /** 任务爬虫 */
+    spider: string;
+    /** 爬虫路径 */
+    path: string;
+    /** 任务附加信息 */
     info?: string; // 任务附加信息
 }
 
@@ -131,18 +145,24 @@ export interface PushJob extends BaseJob {
 }
 
 export interface PushJobInfo {
-    channel: string; // 推送渠道
-    account: string; // 推送账号
-    text: string; // 推送内容
-    response: string; // 推送返回结果
+    /** 推送渠道 */
+    channel: string;
+    /** 推送账号 */
+    account: string;
+    /** 推送内容 */
+    text: string;
+    /** 推送返回结果 */
+    response: string;
 }
 
 export type Job = DataRefreshJob;
 
-// 任务状态广播信息
+/** 任务状态广播信息 */
 export interface JobStatusMessage {
-    type: 'create' | 'update'; // 状态更新类型
-    job: Job; // 更新事件
+    /** 状态更新类型  */
+    type: 'create' | 'update';
+    /** 更新事件 */
+    job: Job;
 }
 
 // Dashboard/Server/Node
@@ -150,37 +170,51 @@ export interface JobStatusMessage {
 export type ServerListResponse = ServerNodeWithKeyPair[];
 
 export interface ServerNode {
-    id: number; // ID
-    name: string; // 服务器节点名
-    type: string; // 服务器节点类型
-    host: string; // 服务器节点地址
-    group: string[]; // 服务器组
+    id: number;
+    /** 服务器节点名 */
+    name: string;
+    /** 服务器节点类型 */
+    type: string;
+    /** 服务器节点地址 */
+    host: string;
+    /** 服务器组 */
+    group: string[];
     createdAt: string;
     updatedAt: string;
-    key_pair: number | APIKeyPair; // 服务器密钥对 展开或不展开
+    /** 服务器密钥对 展开或不展开 */
+    key_pair: number | APIKeyPair;
 }
 
 export interface ServerNodeWithKeyPair extends ServerNode {
-    key_pair: APIKeyPair; // 服务器密钥对 展开
+    /** 服务器密钥对 展开 */
+    key_pair: APIKeyPair;
 }
 
 // Dashboard/Server/Application
 
 export interface APIKeyPairsResponse {
-    keyPairs: APIKeyPair[]; // 全部服务器密钥对
-    serverList: ServerNode[]; // 全部服务器节点列表
+    /** 全部服务器密钥对 */
+    keyPairs: APIKeyPair[];
+    /** 全部服务器节点列表 */
+    serverList: ServerNode[];
 }
 
 export interface APIKeyPair {
     id: number;
-    api_key: string; // API_KEY
-    api_secret_key: string; // API_SECRET_KEY
-    tag: ServerNode[]; // 绑定服务器标签
+    /** API_KEY */
+    api_key: string;
+    /** API_SECRET_KEY */
+    api_secret_key: string;
+    /** 绑定服务器标签 */
+    tag: ServerNode[];
 }
 
 export interface SpiderInfo {
+    /** 数据过期时间 */
     expires: number;
+    /** 爬虫凭据 */
     identity?: string;
+    /** 冷却时间 */
     cooldown?: number;
 }
 
@@ -197,7 +231,9 @@ export type ConfigListResponse = ConfigItem[];
 
 export interface SpiderIdentityItem {
     id: number;
+    /** 凭据识别名 */
     name: string;
+    /** 凭据内容 */
     identity: object;
 }
 
@@ -207,12 +243,19 @@ export type SpiderIdentityListResponse = SpiderIdentityItem[];
 
 export interface Spider {
     id: number;
+    /** 爬虫名 */
     name: string;
+    /** 路径 */
     path: string;
+    /** 分组 */
     group: string;
+    /** 描述 */
     description: string;
+    /** 附加信息 */
     info: SpiderInfo;
+    /** 执行次数 */
     trigger_count: number;
+    /** 上次执行时间 */
     trigger_time: string;
 }
 
@@ -229,8 +272,11 @@ export type PushAccountList = PushAccount[];
 
 export interface PushAccount {
     id: number;
+    /** 平台名 */
     platform: string;
+    /** 账号名 */
     name: string;
+    /** 账号凭据 */
     credential: object;
 }
 

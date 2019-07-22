@@ -83,7 +83,7 @@ class PushHistory extends React.Component<Props, State> {
                         dataSource={this.props.pushHistory.jobs}
                         columns={this.pushHistoryColumns}
                         pagination={false}
-                        rowKey={'id'}
+                        rowKey="id"
                     />
                 </Card>
             </Spin>
