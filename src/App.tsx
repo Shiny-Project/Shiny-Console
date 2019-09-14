@@ -4,28 +4,12 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import Loadable from 'react-loadable';
-import Loading from '@/components/Common/Loading';
 import Login from '@/containers/User/Login/Login';
-import nprogress from 'nprogress';
+import createAsyncComponent from './utils/createAsyncComponent';
 import 'nprogress/nprogress.css';
 import './App.css';
 
-const createAsyncComp = (path: string) => {
-  return Loadable({
-    loader: () => {
-      const promise = import(`./containers/${path}`);
-      nprogress.start();
-      promise.then(() => {
-        nprogress.done();
-      });
-      return promise;
-    },
-    loading: Loading,
-  });
-};
-
-const AsyncDashboard = createAsyncComp('Dashboard/Index');
+const AsyncDashboard = createAsyncComponent('Dashboard/Index');
 
 class App extends React.Component {
   componentDidCatch(error: Error) {

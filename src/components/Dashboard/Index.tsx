@@ -2,19 +2,10 @@ import React from 'react';
 import { Row, Col, Layout, message } from 'antd';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from '@/components/Menu/Index';
-import ServerNodes from '@/containers/Dashboard/Server/Node';
-import ServerApplication from '@/containers/Dashboard/Server/Application';
-import Overview from '@/containers/Dashboard/Overview/Overview';
-import Realtime from '@/containers/Dashboard/Realtime/Realtime';
-import SpiderList from '@/containers/Dashboard/Spider/List';
-import SpiderIdentity from '@/containers/Dashboard/Spider/Identity';
-import PushHistory from '@/containers/Dashboard/Push/History';
-import PushAccount from '@/containers/Dashboard/Push/Account';
-import PushRule from '@/containers/Dashboard/Push/Rule';
-import Config from '@/containers/Dashboard/Server/Config';
 import './Index.css';
 import { ErrorState } from '@/types';
 import Auth from '@/services/auth';
+import createAsyncComponent from '@/utils/createAsyncComponent';
 const { Header, Content } = Layout;
 
 class RedirectToOverview extends React.Component {
@@ -24,6 +15,17 @@ class RedirectToOverview extends React.Component {
         );
     }
 }
+
+const AsyncServerNodes = createAsyncComponent('Dashboard/Server/Node');
+const AsyncServerApplication = createAsyncComponent('Dashboard/Server/Application');
+const AsyncOverview = createAsyncComponent('Dashboard/Overview/Overview');
+const AsyncRealtime = createAsyncComponent('Dashboard/Realtime/Realtime');
+const AsyncSpiderList = createAsyncComponent('Dashboard/Spider/List');
+const AsyncSpiderIdentity = createAsyncComponent('Dashboard/Spider/Identity');
+const AsyncPushHistory = createAsyncComponent('Dashboard/Push/History');
+const AsyncPushAccount = createAsyncComponent('Dashboard/Push/Account');
+const AsyncPushRule = createAsyncComponent('Dashboard/Push/Rule');
+const AsyncConfig = createAsyncComponent('Dashboard/Server/Config');
 
 export interface Props {
     errors?: ErrorState;
@@ -61,19 +63,19 @@ class Dashboard extends React.Component<Props, {}> {
                                 <Switch>
                                     <Route exact={true} path="/dashboard" component={RedirectToOverview} />
                                     {/* Overview */}
-                                    <Route path="/dashboard/overview" component={Overview} />
+                                    <Route path="/dashboard/overview" component={AsyncOverview} />
                                     {/* Server Control */}
-                                    <Route path="/dashboard/server/nodes" component={ServerNodes}/>
-                                    <Route path="/dashboard/server/applications" component={ServerApplication}/>
-                                    <Route path="/dashboard/server/config" component={Config} />
+                                    <Route path="/dashboard/server/nodes" component={AsyncServerNodes}/>
+                                    <Route path="/dashboard/server/applications" component={AsyncServerApplication}/>
+                                    <Route path="/dashboard/server/config" component={AsyncConfig} />
                                     {/**/}
-                                    <Route path="/dashboard/realtime" component={Realtime} />
-                                    <Route path="/dashboard/spider/list" component={SpiderList} />
-                                    <Route path="/dashboard/spider/identity" component={SpiderIdentity} />
+                                    <Route path="/dashboard/realtime" component={AsyncRealtime} />
+                                    <Route path="/dashboard/spider/list" component={AsyncSpiderList} />
+                                    <Route path="/dashboard/spider/identity" component={AsyncSpiderIdentity} />
                                     {/* Push */}
-                                    <Route path="/dashboard/push/history" component={PushHistory} />
-                                    <Route path="/dashboard/push/account" component={PushAccount} />
-                                    <Route path="/dashboard/push/rule" component={PushRule} />
+                                    <Route path="/dashboard/push/history" component={AsyncPushHistory} />
+                                    <Route path="/dashboard/push/account" component={AsyncPushAccount} />
+                                    <Route path="/dashboard/push/rule" component={AsyncPushRule} />
                                 </Switch>
                             </Col>
                         </Row>
