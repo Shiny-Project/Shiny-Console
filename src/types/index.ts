@@ -49,7 +49,7 @@ export interface ServerNodeState {
     isLoading: boolean;
     modalVisible: boolean;
     modalLoading: boolean;
-    serverList: ServerListResponse;
+    serverList: ServerNode[];
 }
 // Dashboard/Server/Application
 export interface ApplicationState {

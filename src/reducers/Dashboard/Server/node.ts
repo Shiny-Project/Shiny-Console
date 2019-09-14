@@ -3,7 +3,10 @@ import { ServerNodeState } from '@/types';
 import initState from '@/stores/initState';
 import * as ActionTypes from '@/constants/Server/node';
 
-export function node(state: ServerNodeState = initState.dashboard.server.node, actions: ServerNodeAction) {
+export function node(
+        state: ServerNodeState = initState.dashboard.server.node,
+        actions: ServerNodeAction
+    ): ServerNodeState {
     switch (actions.type) {
         case ActionTypes.GET_SERVER_LIST:
             return {

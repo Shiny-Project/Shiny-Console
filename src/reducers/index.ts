@@ -1,4 +1,4 @@
-import { StoreState } from '@/types';
+import { StoreState, DashboardState, ServerState, SpiderState, PushState } from '@/types';
 import { combineReducers } from 'redux';
 import { user } from '@/reducers/user';
 import { errors } from '@/reducers/Dashboard/errors';
