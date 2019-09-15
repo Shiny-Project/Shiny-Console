@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Spin, Table, Divider, Button, Popconfirm, Form, Modal, Input, Select } from 'antd';
-import { APIKeyPairsResponse, APIKeyPair, ServerNode } from '@/types/dashboard';
+import { Card, Spin, Table, Divider, Button, Popconfirm, Form, Modal, Select } from 'antd';
+import { APIKeyPair, ServerNode } from 'types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
 export interface Props {
@@ -53,11 +53,12 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
                             this.props.deleteKeyPair(record.id);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             吊销
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );
@@ -68,7 +69,7 @@ class APIKeys extends React.Component<Props & FormComponentProps, {}> {
         this.props.getKeyPairs();
     }
 
-    handleCreateSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleCreateSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {

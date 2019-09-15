@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, Divider, Spin, Row, Col } from 'antd';
-import { ShinyEvent, ShinyEventDetail } from '@/types/dashboard';
-import TimeDiff from '@/components/Common/TimeDiff';
+import { Spin, Row, Col } from 'antd';
+import { ShinyEvent, ShinyEventDetail } from 'types/dashboard';
+import TimeDiff from 'components/Common/TimeDiff';
 import JobList from './Jobs/List';
 export interface EventListItemDetailProps {
     event: ShinyEvent;

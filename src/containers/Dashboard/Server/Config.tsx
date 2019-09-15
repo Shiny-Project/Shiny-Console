@@ -1,10 +1,10 @@
-import Config from '@/components/Dashboard/Server/Config';
-import * as actions from '@/actions/dashboard/server/config';
-import { StoreState } from '@/types';
+import Config from 'components/Dashboard/Server/Config';
+import * as actions from 'actions/dashboard/server/config';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { ConfigAction } from '@/actions/dashboard/server/config';
-import { ConfigItem } from '@/types/dashboard';
+import { Dispatch } from 'types/action';
+import { ConfigAction } from 'actions/dashboard/server/config';
+import { ConfigItem } from 'types/dashboard';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -54,5 +54,5 @@ export function mapDispatchToProps(dispatch: Dispatch<ConfigAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Config);

@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable';
-import Loading from '@/components/Common/Loading';
+import Loading from 'components/Common/Loading';
 import nprogress from 'nprogress';
 const createAsyncComponent = (path: string) => {
     return Loadable({

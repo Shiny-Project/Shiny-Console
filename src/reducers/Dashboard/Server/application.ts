@@ -1,7 +1,7 @@
-import { ApplicationAction } from '@/actions/dashboard/server/application';
-import { ApplicationState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Server/application';
+import { ApplicationAction } from 'actions/dashboard/server/application';
+import { ApplicationState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Server/application';
 
 // tslint:disable-next-line:max-line-length
 export function application(state: ApplicationState = initState.dashboard.server.application, actions: ApplicationAction)

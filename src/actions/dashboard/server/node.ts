@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Server/node';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { ServerListResponse, ServerNode } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Server/node';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { ServerListResponse, ServerNode } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetServerList {
     type: constants.GET_SERVER_LIST;
@@ -148,7 +148,7 @@ export function deleteServer(id: number): DeferredAction<DeleteServer | DeleteSe
     return async (dispatch) => {
         dispatch(deleteServerStart());
         try {
-            const result = await request.post('/Server/delete', {
+            await request.post('/Server/delete', {
                 serverId: id
             });
             dispatch(deleteServerSuccess(id));

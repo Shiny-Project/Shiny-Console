@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Spin, Table, Popconfirm, Modal, Form, Input, Divider, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { PushAccountList, PushAccount } from '@/types/dashboard';
-import PushChannel from '@/components/Dashboard/Push/PushChannel';
-import JSONViewer from '@/components/Common/JSONViewer';
+import { PushAccountList, PushAccount } from 'types/dashboard';
+import PushChannel from 'components/Dashboard/Push/PushChannel';
+import JSONViewer from 'components/Common/JSONViewer';
 
 export interface CreateAccountFormProps {
     visible: boolean;
@@ -13,7 +13,7 @@ export interface CreateAccountFormProps {
 }
 
 class CreateAccountForm extends React.Component<CreateAccountFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -72,7 +72,7 @@ export interface EditAccountFormProps {
 }
 
 class EditAccountForm extends React.Component<EditAccountFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -178,13 +178,14 @@ class Account extends React.Component<Props> {
         render: (text: string, record: PushAccount) => {
             return (
                 <div>
-                    <a
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.showEditAccountModal(record);
                         }}
                     >
                         编辑
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -192,11 +193,12 @@ class Account extends React.Component<Props> {
                             this.props.deleteAccount(record.id);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             删除
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );

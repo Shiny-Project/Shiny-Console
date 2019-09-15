@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Dashboard/overview';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { StatisticsResponse } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Dashboard/overview';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { StatisticsResponse } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetStatistic {
     type: constants.GET_STATISTICS;

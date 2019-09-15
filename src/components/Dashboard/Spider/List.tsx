@@ -1,16 +1,16 @@
 import React from 'react';
-import { SpiderListResponse, Spider } from '@/types/dashboard';
-import { Spin, Card, Table, Divider, Popconfirm, Form, Modal, Input, Row, Col } from 'antd';
+import { SpiderListResponse, Spider } from 'types/dashboard';
+import { Spin, Card, Table, Divider, Popconfirm, Form, Modal, Input, Row, Col, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
-import TimeDiff from '@/components/Common/TimeDiff';
+import TimeDiff from 'components/Common/TimeDiff';
 
 interface FormModalProps {
     visible: boolean;
     form: WrappedFormUtils;
     confirmLoading?: boolean;
     onCancel: () => void;
-    onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onSubmit: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export interface FrequencyUpdateFormProps extends FormModalProps {
@@ -191,23 +191,25 @@ class List extends React.Component<Props & FormComponentProps, State> {
         render: (text: string, record: Spider): JSX.Element => {
             return (
                 <div>
-                    <a
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.form.resetFields();
                             this.props.showFrequencyUpdateModal(record.id);
                         }}
                     >
                         修改刷新频率
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
-                    <a
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.form.resetFields();
                             this.props.showEditSpiderModal(record.id);
                         }}
                     >
                         编辑
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -215,7 +217,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
                             this.props.deleteSpider(record.id);
                         }}
                     >
-                        <a href="javascript:;" className="danger-text">删除</a>
+                        <Button type="link" className="danger-text">删除</Button>
                     </Popconfirm>
                 </div>
             );
@@ -224,7 +226,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
     componentDidMount() {
         this.props.getSpiderList();
     }
-    handleFrequencyUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleFrequencyUpdate = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -232,7 +234,7 @@ class List extends React.Component<Props & FormComponentProps, State> {
             }
         });
     }
-    handleEditFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleEditFormSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {

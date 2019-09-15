@@ -1,7 +1,7 @@
-import { OverviewAction } from '@/actions/dashboard/overview';
-import { OverviewState } from '@/types';
-import { GET_STATISTICS, GET_STATISTICS_SUCCESS, GET_STATISTIC_FAILURE } from '@/constants/Dashboard/overview';
-import initState from '@/stores/initState';
+import { OverviewAction } from 'actions/dashboard/overview';
+import { OverviewState } from 'types';
+import { GET_STATISTICS, GET_STATISTICS_SUCCESS, GET_STATISTIC_FAILURE } from 'constants/Dashboard/overview';
+import initState from 'stores/initState';
 
 export function overview(state: OverviewState = initState.dashboard.overview, action: OverviewAction): OverviewState {
     switch (action.type) {

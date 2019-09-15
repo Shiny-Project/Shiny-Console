@@ -1,9 +1,9 @@
-import Overview from '@/components/Dashboard/Overview/Overview';
-import * as actions from '@/actions/dashboard/overview';
-import { StoreState } from '@/types';
+import Overview from 'components/Dashboard/Overview/Overview';
+import * as actions from 'actions/dashboard/overview';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { OverviewAction } from '@/actions/dashboard/overview';
+import { Dispatch } from 'types/action';
+import { OverviewAction } from 'actions/dashboard/overview';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -27,5 +27,5 @@ export function mapDispatchToProps(dispatch: Dispatch<OverviewAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Overview);

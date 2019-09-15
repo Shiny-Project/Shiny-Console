@@ -1,9 +1,9 @@
-import Application from '@/components/Dashboard/Server/Application';
-import * as actions from '@/actions/dashboard/server/application';
-import { StoreState } from '@/types';
+import Application from 'components/Dashboard/Server/Application';
+import * as actions from 'actions/dashboard/server/application';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { ApplicationAction } from '@/actions/dashboard/server/application';
+import { Dispatch } from 'types/action';
+import { ApplicationAction } from 'actions/dashboard/server/application';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -42,5 +42,5 @@ export function mapDispatchToProps(dispatch: Dispatch<ApplicationAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Application);

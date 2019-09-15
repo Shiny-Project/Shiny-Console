@@ -1,7 +1,7 @@
-import { ServerNodeAction } from '@/actions/dashboard/server/node';
-import { ServerNodeState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Server/node';
+import { ServerNodeAction } from 'actions/dashboard/server/node';
+import { ServerNodeState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Server/node';
 
 export function node(
         state: ServerNodeState = initState.dashboard.server.node,

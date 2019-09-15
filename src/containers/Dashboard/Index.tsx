@@ -1,9 +1,8 @@
-import Dashboard from '@/components/Dashboard/Index';
-import * as actions from '@/actions/dashboard/error';
-import { StoreState } from '@/types';
+import Dashboard from 'components/Dashboard/Index';
+import * as actions from 'actions/dashboard/error';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { ErrorAction } from '@/actions/dashboard/error';
-import { Dispatch } from '@/types/action';
+import { Dispatch } from 'redux';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -19,7 +18,7 @@ export function mapStateToProps(state: StoreState) {
     };
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<ErrorAction>) {
+export function mapDispatchToProps(dispatch: Dispatch) {
     return {
         raiseError: (error: Error) => {
             dispatch(actions.raiseError(error));

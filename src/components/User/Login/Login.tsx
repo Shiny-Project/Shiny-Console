@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Layout, Row, Col, Card, Spin, message } from 'antd';
-import LoginForm from '@/components/User/Login/LoginForm';
+import LoginForm from 'components/User/Login/LoginForm';
 import './Login.css';
-import Auth from '@/services/auth';
+import Auth from 'services/auth';
 const { Content } = Layout;
 
 export interface Props {

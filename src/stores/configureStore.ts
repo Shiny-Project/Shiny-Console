@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from '@/reducers';
-import { StoreState } from '@/types';
+import reducers from 'reducers';
+import { StoreState } from 'types';
 export default function configureStore(initialState: StoreState) {
   const store = createStore(reducers, initialState, applyMiddleware(thunk));
   if (module.hot) {

@@ -1,10 +1,10 @@
-import Account from '@/components/Dashboard/Push/Account';
-import * as actions from '@/actions/dashboard/push/account';
-import { StoreState } from '@/types';
+import Account from 'components/Dashboard/Push/Account';
+import * as actions from 'actions/dashboard/push/account';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { AccountAction } from '@/actions/dashboard/push/account';
-import { PushAccount } from '@/types/dashboard';
+import { Dispatch } from 'types/action';
+import { AccountAction } from 'actions/dashboard/push/account';
+import { PushAccount } from 'types/dashboard';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -54,5 +54,5 @@ export function mapDispatchToProps(dispatch: Dispatch<AccountAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Account);

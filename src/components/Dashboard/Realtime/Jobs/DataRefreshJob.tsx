@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, List } from 'antd';
-import { Job } from '@/types/dashboard';
+import { List } from 'antd';
+import { Job } from 'types/dashboard';
 
 interface JobStatusItemProps {
     job: Job;

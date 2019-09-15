@@ -4,7 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import Login from '@/containers/User/Login/Login';
+import Login from 'containers/User/Login/Login';
 import createAsyncComponent from './utils/createAsyncComponent';
 import 'nprogress/nprogress.css';
 import './App.css';

@@ -1,9 +1,9 @@
-import Realtime from '@/components/Dashboard/Realtime/Realtime';
-import * as actions from '@/actions/dashboard/realtime';
-import { StoreState } from '@/types';
+import Realtime from 'components/Dashboard/Realtime/Realtime';
+import * as actions from 'actions/dashboard/realtime';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { RealtimeAction } from '@/actions/dashboard/realtime';
+import { Dispatch } from 'types/action';
+import { RealtimeAction } from 'actions/dashboard/realtime';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -34,5 +34,5 @@ export function mapDispatchToProps(dispatch: Dispatch<RealtimeAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Realtime);

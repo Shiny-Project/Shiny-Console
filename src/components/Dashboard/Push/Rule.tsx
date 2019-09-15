@@ -1,8 +1,8 @@
 import React from 'react';
 import { Spin, Card, Table, Popconfirm, Form, Modal, Input, Divider, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { PushRuleItem } from '@/types/dashboard';
-import JSONViewer from '@/components/Common/JSONViewer';
+import { PushRuleItem } from 'types/dashboard';
+import JSONViewer from 'components/Common/JSONViewer';
 
 export interface CreateRuleFormProps {
     visible: boolean;
@@ -12,7 +12,7 @@ export interface CreateRuleFormProps {
 }
 
 class CreateRuleForm extends React.Component<CreateRuleFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -64,7 +64,7 @@ export interface EditRuleFormProps {
 }
 
 class EditRuleForm extends React.Component<EditRuleFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -158,13 +158,14 @@ class PushRule extends React.Component<Props> {
         render: (text: string, record: PushRuleItem) => {
             return (
                 <div>
-                    <a
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.showEditRuleModal(record);
                         }}
                     >
                         编辑
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -172,11 +173,12 @@ class PushRule extends React.Component<Props> {
                             this.props.deleteRule(record.id);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             删除
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );

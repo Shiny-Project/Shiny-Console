@@ -1,7 +1,7 @@
 import React from 'react';
-import { ShinyPushJob } from '@/types/dashboard';
+import { ShinyPushJob } from 'types/dashboard';
 import { Table, Divider } from 'antd';
-import JSONViewer from '@/components/Common/JSONViewer';
+import JSONViewer from 'components/Common/JSONViewer';
 import JobLogList from './Log/List';
 import PushChannel from '../../Push/PushChannel';
 export interface JobListProps {

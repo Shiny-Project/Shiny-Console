@@ -1,10 +1,8 @@
-import * as constants from '@/constants/Spider/list';
-import { StoreState } from '@/types';
-import { ThunkAction } from 'redux-thunk';
-import { RaiseError, raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { SpiderListResponse, Spider } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Spider/list';
+import { RaiseError, raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { SpiderListResponse, Spider } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetSpiderList {
     type: constants.GET_SPIDER_LIST;
@@ -139,7 +137,7 @@ export function updateFrequency(spiderId: number, frequency: number):
     return async (dispatch) => {
         dispatch(updateFrequencyStart());
         try {
-            const response = await request.post('/Spider/updateFrequency', {
+            await request.post('/Spider/updateFrequency', {
                 spiderId,
                 frequency
             });

@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Push/rule';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { PushRuleList, PushRuleItem } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Push/rule';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { PushRuleList, PushRuleItem } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetRuleList {
     type: constants.GET_RULE_LIST;

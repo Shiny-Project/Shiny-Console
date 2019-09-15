@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorPage from '@/components/Common/Error';
+import ErrorPage from 'components/Common/Error';
 
 export interface LoadingProps {
     isLoading: boolean;

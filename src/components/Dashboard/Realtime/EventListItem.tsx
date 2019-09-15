@@ -1,7 +1,7 @@
 import React from 'react';
-import request from '@/services/request';
+import request from 'services/request';
 import { Card, Divider } from 'antd';
-import { ShinyEvent, ShinyEventDetail } from '@/types/dashboard';
+import { ShinyEvent, ShinyEventDetail } from 'types/dashboard';
 import EventListItemDetail from './EventListItemDetail';
 
 export interface EventListItemProps {
@@ -52,7 +52,7 @@ class EventListItem extends React.Component<EventListItemProps, EventListItemSta
                         <Card.Meta
                             title={this.props.event.data.title}
                             description={<div dangerouslySetInnerHTML={{ __html: this.props.event.data.content }} />}
-                            avatar={<img src={this.props.event.data.cover} className="event-cover" />}
+                            avatar={<img src={this.props.event.data.cover} alt="事件封面" className="event-cover" />}
                         />
                     </div>
                     {this.state.showDetail

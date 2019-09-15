@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconfirm, Tag } from 'antd';
-import { ServerListResponse, ServerNode } from '@/types/dashboard';
+import { ServerListResponse, ServerNode } from 'types/dashboard';
 import { FormComponentProps } from 'antd/lib/form';
 
 interface ServerNodeProps {
@@ -83,11 +83,12 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                             this.props.deleteServer(record.id);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             删除
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );
@@ -98,7 +99,7 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         this.props.getServerList();
     }
 
-    handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {

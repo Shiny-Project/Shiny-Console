@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Server/config';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { ConfigItem, ConfigListResponse } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Server/config';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { ConfigItem, ConfigListResponse } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetConfigList {
     type: constants.GET_CONFIG_LIST;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 
 export interface Props {
     json: object;
@@ -12,7 +12,8 @@ export interface Props {
 class JSONViewer extends React.Component<Props> {
     render() {
         return (
-            <a
+            <Button
+                type="link"
                 style={{
                     fontFamily: 'Consola'
                 }}
@@ -35,7 +36,7 @@ class JSONViewer extends React.Component<Props> {
                         ? JSON.stringify(this.props.json).slice(0, 20) + '...'
                         : JSON.stringify(this.props.json))
                 }
-            </a>
+            </Button>
         );
     }
 }

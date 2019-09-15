@@ -1,9 +1,8 @@
 import React from 'react';
-import { Card, Row, Col, Icon, Spin, List, Tabs } from 'antd';
-import { RecentEventsResponse, Job, ShinyEvent } from '@/types/dashboard';
-import JobStatus from '@/components/Dashboard/Realtime/JobStatus';
-import EventList from '@/components/Dashboard/Realtime/EventList';
-import { Link } from 'react-router-dom';
+import { Card, Spin, Tabs } from 'antd';
+import { RecentEventsResponse, Job } from 'types/dashboard';
+import JobStatus from 'components/Dashboard/Realtime/JobStatus';
+import EventList from 'components/Dashboard/Realtime/EventList';
 import './Realtime.css';
 
 export interface Props {

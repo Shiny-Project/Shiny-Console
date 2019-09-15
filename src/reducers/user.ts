@@ -1,7 +1,7 @@
-import { UserAction } from '@/actions/user';
-import { UserState } from '@/types';
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '@/constants';
-import initState from '@/stores/initState';
+import { UserAction } from 'actions/user';
+import { UserState } from 'types';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from 'constants/index';
+import initState from 'stores/initState';
 
 export function user(state: UserState = initState.user, action: UserAction): UserState {
     switch (action.type) {

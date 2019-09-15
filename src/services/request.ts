@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
-import auth from '@/services/auth';
+import auth from 'services/auth';
 
 const isAxiosResponse = (e: AxiosError | AxiosResponse): e is AxiosResponse => {
     return !!((e as AxiosResponse).status);

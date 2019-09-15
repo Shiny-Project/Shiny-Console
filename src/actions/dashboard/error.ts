@@ -1,5 +1,5 @@
-import * as constants from '@/constants/Dashboard';
-// import { StoreState } from '@/types/index';
+import * as constants from 'constants/Dashboard';
+// import { StoreState } from 'types/index';
 
 export interface RaiseError {
     type: constants.RAISE_ERROR;

@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Push/account';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { PushAccountList, PushAccount } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Push/account';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { PushAccountList, PushAccount } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetAccountList {
     type: constants.GET_ACCOUNT_LIST;

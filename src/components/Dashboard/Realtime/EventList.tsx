@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, Select, Spin, Button, Pagination } from 'antd';
-import { RecentEventsResponse, Spider, SpiderListResponse } from '@/types/dashboard';
-import request from '@/services/request';
+import { Select, Spin, Button, Pagination } from 'antd';
+import { RecentEventsResponse, SpiderListResponse } from 'types/dashboard';
+import request from 'services/request';
 import debounce from 'lodash/debounce';
 import EventListItem from './EventListItem';
 const Option = Select.Option;

@@ -1,7 +1,7 @@
-import { ConfigAction } from '@/actions/dashboard/server/config';
-import { ConfigState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Server/config';
+import { ConfigAction } from 'actions/dashboard/server/config';
+import { ConfigState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Server/config';
 
 export function config(state: ConfigState = initState.dashboard.server.config, actions: ConfigAction): ConfigState {
     switch (actions.type) {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Spin, Card, Table, Button, Popover, Modal, Alert } from 'antd';
-import { PushHistoryResponse, Job, PushJob } from '@/types/dashboard';
-import PushJobStatus from '@/components/Dashboard/Push/PushJobStatus';
-import PushChannel from '@/components/Dashboard/Push/PushChannel';
-import TimeDiff from '@/components/Common/TimeDiff';
-import JSONViewer from '@/components/Common/JSONViewer';
+import { Spin, Card, Table, Alert } from 'antd';
+import { PushHistoryResponse, PushJob } from 'types/dashboard';
+import PushJobStatus from 'components/Dashboard/Push/PushJobStatus';
+import PushChannel from 'components/Dashboard/Push/PushChannel';
+import TimeDiff from 'components/Common/TimeDiff';
+import JSONViewer from 'components/Common/JSONViewer';
 
 interface Props {
     isLoading: boolean;

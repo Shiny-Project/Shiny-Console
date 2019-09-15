@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Spin, Table, Button, Divider, Form, Modal, Input, Popconfirm } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { SpiderIdentityItem } from '@/types/dashboard';
-import JSONViewer from '@/components/Common/JSONViewer';
+import { SpiderIdentityItem } from 'types/dashboard';
+import JSONViewer from 'components/Common/JSONViewer';
 
 export interface CreateIdentityFormProps {
     visible: boolean;
@@ -12,7 +12,7 @@ export interface CreateIdentityFormProps {
 }
 
 class CreateIdentityForm extends React.Component<CreateIdentityFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -64,7 +64,7 @@ export interface EditIdentityFormProps {
 }
 
 class EditIdentityForm extends React.Component<EditIdentityFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -155,13 +155,14 @@ class Identity extends React.Component<Props> {
         render: (text: string, record: SpiderIdentityItem) => {
             return (
                 <div>
-                    <a
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.showEditIdentityModal(record);
                         }}
                     >
                         编辑
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -169,11 +170,12 @@ class Identity extends React.Component<Props> {
                             this.props.deleteIdentity(record.id);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             删除
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );

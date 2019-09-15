@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Server/application';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { APIKeyPairsResponse, APIKeyPair, ServerNode } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Server/application';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { APIKeyPairsResponse, APIKeyPair, ServerNode } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetKeyPairs {
     type: constants.GET_KEY_PAIRS;
@@ -155,7 +155,7 @@ export function deleteKeyPair(applicationId: number):
     return async (dispatch) => {
         dispatch(deleteKeyPairStart());
         try {
-            const result = await request.post('/Application/delete', {
+            await request.post('/Application/delete', {
                 applicationId
             });
             dispatch(deleteKeyPairSuccess(applicationId));

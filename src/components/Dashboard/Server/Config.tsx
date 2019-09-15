@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, Spin, Table, Button, Divider, Form, Modal, Input, Popconfirm } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { WrappedFormUtils } from 'antd/lib/form/Form';
-import { ConfigItem } from '@/types/dashboard';
+import { ConfigItem } from 'types/dashboard';
 
 interface CreateConfigFormProps {
     visible: boolean;
@@ -12,7 +11,7 @@ interface CreateConfigFormProps {
 }
 
 class CreateConfigForm extends React.Component<CreateConfigFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -64,7 +63,7 @@ export interface EditConfigFormProps {
 }
 
 class EditConfigForm extends React.Component<EditConfigFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -140,13 +139,14 @@ class Config extends React.Component<Props & FormComponentProps, State> {
         render: (text: string, record: ConfigItem) => {
             return (
                 <div>
-                    <a 
+                    <Button
+                        type="link"
                         onClick={() => {
                             this.props.showEditConfigModal(record);
                         }}
                     >
                         编辑
-                    </a>
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -154,11 +154,12 @@ class Config extends React.Component<Props & FormComponentProps, State> {
                             this.props.deleteConfig(record.key);
                         }}
                     >
-                        <a
+                        <Button
+                            type="link"
                             className="danger-text"
                         >
                             删除
-                        </a>
+                        </Button>
                     </Popconfirm>
                 </div>
             );

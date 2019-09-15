@@ -1,9 +1,9 @@
-import * as constants from '@/constants/Dashboard/realtime';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import * as DashboardTypes from '@/types/dashboard';
+import * as constants from 'constants/Dashboard/realtime';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import * as DashboardTypes from 'types/dashboard';
 import io from 'socket.io-client';
-import { DeferredAction } from '@/types/action';
+import { DeferredAction } from 'types/action';
 
 export interface GetRecentEvent {
     type: constants.GET_RECENT_EVENTS;

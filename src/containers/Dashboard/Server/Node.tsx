@@ -1,9 +1,9 @@
-import Node from '@/components/Dashboard/Server/Node';
-import * as actions from '@/actions/dashboard/server/node';
-import { StoreState } from '@/types';
+import Node from 'components/Dashboard/Server/Node';
+import * as actions from 'actions/dashboard/server/node';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { ServerNodeAction } from '@/actions/dashboard/server/node';
+import { Dispatch } from 'types/action';
+import { ServerNodeAction } from 'actions/dashboard/server/node';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -41,5 +41,5 @@ export function mapDispatchToProps(dispatch: Dispatch<ServerNodeAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Node);

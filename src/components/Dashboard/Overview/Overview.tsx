@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Table, Spin } from 'antd';
-import * as DashboardTypes from '@/types/dashboard';
+import * as DashboardTypes from 'types/dashboard';
 import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from 'viser-react';
 const DataSet = require('@antv/data-set');
 

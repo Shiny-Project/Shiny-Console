@@ -1,7 +1,7 @@
-import { RuleAction } from '@/actions/dashboard/push/rule';
-import { PushRuleState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Push/rule';
+import { RuleAction } from 'actions/dashboard/push/rule';
+import { PushRuleState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Push/rule';
 
 export function pushRule(
     state: PushRuleState = initState.dashboard.push.rule, actions: RuleAction): PushRuleState {

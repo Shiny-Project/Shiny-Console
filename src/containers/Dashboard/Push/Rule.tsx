@@ -1,10 +1,10 @@
-import Rule from '@/components/Dashboard/Push/Rule';
-import * as actions from '@/actions/dashboard/push/rule';
-import { StoreState } from '@/types';
+import Rule from 'components/Dashboard/Push/Rule';
+import * as actions from 'actions/dashboard/push/rule';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { RuleAction } from '@/actions/dashboard/push/rule';
-import { PushRuleItem } from '@/types/dashboard';
+import { Dispatch } from 'types/action';
+import { RuleAction } from 'actions/dashboard/push/rule';
+import { PushRuleItem } from 'types/dashboard';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -54,5 +54,5 @@ export function mapDispatchToProps(dispatch: Dispatch<RuleAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Rule);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Col, Layout, message } from 'antd';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Menu from '@/components/Menu/Index';
+import Menu from 'components/Menu/Index';
 import './Index.css';
-import { ErrorState } from '@/types';
-import Auth from '@/services/auth';
-import createAsyncComponent from '@/utils/createAsyncComponent';
+import { ErrorState } from 'types';
+import Auth from 'services/auth';
+import createAsyncComponent from 'utils/createAsyncComponent';
 const { Header, Content } = Layout;
 
 class RedirectToOverview extends React.Component {

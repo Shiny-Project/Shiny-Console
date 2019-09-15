@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Spider/identity';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { SpiderIdentityItem, SpiderIdentityListResponse } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Spider/identity';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { SpiderIdentityItem, SpiderIdentityListResponse } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetIdentityList {
     type: constants.GET_IDENTITY_LIST;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 
 interface Props {
     time: Date | string;
@@ -33,7 +34,8 @@ class TimeDiff extends React.Component<Props, State> {
         const diffTime = typeof this.props.time === 'string' ? new Date(this.props.time) : this.props.time;
         if (this.state.diffMode) {
             return (
-                <a
+                <Button
+                    type="link"
                     onClick={() => {
                         this.setState({
                             diffMode: !this.state.diffMode
@@ -41,11 +43,12 @@ class TimeDiff extends React.Component<Props, State> {
                     }}
                 >
                     {this.diffText(diffTime)}
-                </a>
+                </Button>
             );
         } else {
             return (
-                <a
+                <Button
+                    type="link"
                     onClick={() => {
                         this.setState({
                             diffMode: !this.state.diffMode
@@ -53,7 +56,7 @@ class TimeDiff extends React.Component<Props, State> {
                     }}
                 >
                     {diffTime.toISOString()}
-                </a>
+                </Button>
             );
         }
     }

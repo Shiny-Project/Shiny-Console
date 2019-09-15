@@ -1,10 +1,10 @@
-import Identity from '@/components/Dashboard/Spider/Identity';
-import * as actions from '@/actions/dashboard/spider/identity';
-import { StoreState } from '@/types';
+import Identity from 'components/Dashboard/Spider/Identity';
+import * as actions from 'actions/dashboard/spider/identity';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { IdentityAction } from '@/actions/dashboard/spider/identity';
-import { SpiderIdentityItem } from '@/types/dashboard';
+import { Dispatch } from 'types/action';
+import { IdentityAction } from 'actions/dashboard/spider/identity';
+import { SpiderIdentityItem } from 'types/dashboard';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -54,5 +54,5 @@ export function mapDispatchToProps(dispatch: Dispatch<IdentityAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Identity);

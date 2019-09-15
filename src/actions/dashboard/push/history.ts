@@ -1,8 +1,8 @@
-import * as constants from '@/constants/Push/history';
-import { raiseError } from '@/actions/dashboard/error';
-import request from '@/services/request';
-import { PushHistoryResponse } from '@/types/dashboard';
-import { DeferredAction } from '@/types/action';
+import * as constants from 'constants/Push/history';
+import { raiseError } from 'actions/dashboard/error';
+import request from 'services/request';
+import { PushHistoryResponse } from 'types/dashboard';
+import { DeferredAction } from 'types/action';
 
 export interface GetPushHistory {
     type: constants.GET_PUSH_HISTORY;

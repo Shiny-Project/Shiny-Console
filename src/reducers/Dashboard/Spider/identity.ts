@@ -1,7 +1,7 @@
-import { IdentityAction } from '@/actions/dashboard/spider/identity';
-import { SpiderIdentityState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Spider/identity';
+import { IdentityAction } from 'actions/dashboard/spider/identity';
+import { SpiderIdentityState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Spider/identity';
 
 export function identity(
     state: SpiderIdentityState = initState.dashboard.spider.identity, actions: IdentityAction): SpiderIdentityState {

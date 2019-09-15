@@ -1,7 +1,7 @@
-import { AccountAction } from '@/actions/dashboard/push/account';
-import { PushAccountState } from '@/types';
-import initState from '@/stores/initState';
-import * as ActionTypes from '@/constants/Push/account';
+import { AccountAction } from 'actions/dashboard/push/account';
+import { PushAccountState } from 'types';
+import initState from 'stores/initState';
+import * as ActionTypes from 'constants/Push/account';
 
 export function pushAccount(
     state: PushAccountState = initState.dashboard.push.account, actions: AccountAction): PushAccountState {

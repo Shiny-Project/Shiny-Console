@@ -1,8 +1,8 @@
-import * as constants from '@/constants';
-import request from '@/services/request';
+import * as constants from 'constants/index';
+import request from 'services/request';
 import { message } from 'antd';
-import Auth from '@/services/auth';
-import { DeferredAction } from '@/types/action';
+import Auth from 'services/auth';
+import { DeferredAction } from 'types/action';
 
 export interface LoginResponse {
     uid: number;

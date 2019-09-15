@@ -1,9 +1,9 @@
-import List from '@/components/Dashboard/Spider/List';
-import * as actions from '@/actions/dashboard/spider/list';
-import { StoreState } from '@/types';
+import List from 'components/Dashboard/Spider/List';
+import * as actions from 'actions/dashboard/spider/list';
+import { StoreState } from 'types';
 import { connect } from 'react-redux';
-import { Dispatch } from '@/types/action';
-import { SpiderListAction } from '@/actions/dashboard/spider/list';
+import { Dispatch } from 'types/action';
+import { SpiderListAction } from 'actions/dashboard/spider/list';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -53,5 +53,5 @@ export function mapDispatchToProps(dispatch: Dispatch<SpiderListAction>) {
         }
     };
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);

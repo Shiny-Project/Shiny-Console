@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, List } from 'antd';
-import { Job } from '@/types/dashboard';
-import DataRefreshJob from '@/components/Dashboard/Realtime/Jobs/DataRefreshJob';
+import { Job } from 'types/dashboard';
+import DataRefreshJob from 'components/Dashboard/Realtime/Jobs/DataRefreshJob';
 
 interface JobStatusItemProps {
     job: Job;
