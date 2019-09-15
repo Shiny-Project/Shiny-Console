@@ -32,16 +32,6 @@ interface Props {
 }
 
 class Overview extends React.Component<Props, State> {
-    state: State = {
-        spiderRanking: {
-            '1day': [],
-            '3days': [],
-            '21days': [],
-        },
-        levelRanking: [],
-        jobStatus: [],
-    };
-
     levelRankingScale = [{
         dataKey: 'count',
         min: 0,
@@ -58,7 +48,7 @@ class Overview extends React.Component<Props, State> {
     }];
 
     processJobStatusData = () => {
-        const dv = new DataSet.View().source(this.state.jobStatus);
+        const dv = new DataSet.View().source(this.props.statistics.jobStatus);
         dv.transform({
             type: 'percent',
             field: 'count',
@@ -71,19 +61,11 @@ class Overview extends React.Component<Props, State> {
     componentDidMount() {
         this.props.getStatistics();
     }
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.statistics) {
-            this.setState({
-                spiderRanking: nextProps.statistics.spiderRanking,
-                levelRanking: nextProps.statistics.levelRanking,
-                jobStatus: nextProps.statistics.jobStatus,
-            });
-        }
-    }
+
     render() {
         return (
             <Spin spinning={this.props.isLoading}>
-                <Card title="Overview">
+                {this.props.statistics && <Card title="Overview">
                     <Row gutter={16}>
                         <Col lg={12} xs={24}>
                             <Card title="本月事件等级分布" bordered={false}>
@@ -91,7 +73,7 @@ class Overview extends React.Component<Props, State> {
                                     forceFit={true}
                                     height={300}
                                     scale={this.levelRankingScale}
-                                    data={this.state.levelRanking}
+                                    data={this.props.statistics.levelRanking}
                                 >
                                     <Tooltip />
                                     <Axis />
@@ -129,7 +111,7 @@ class Overview extends React.Component<Props, State> {
                         <Col lg={8} xs={24}>
                             <Card title="近1日" bordered={false}>
                                 <Table
-                                    dataSource={this.state.spiderRanking['1day']}
+                                    dataSource={this.props.statistics.spiderRanking['1day']}
                                     columns={spiderRankingColumns}
                                     pagination={false}
                                     rowKey="publisher"
@@ -139,7 +121,7 @@ class Overview extends React.Component<Props, State> {
                         <Col lg={8} xs={24}>
                             <Card title="近3日" bordered={false}>
                                 <Table
-                                    dataSource={this.state.spiderRanking['3days']}
+                                    dataSource={this.props.statistics.spiderRanking['3days']}
                                     columns={spiderRankingColumns}
                                     pagination={false}
                                     rowKey="publisher"
@@ -149,7 +131,7 @@ class Overview extends React.Component<Props, State> {
                         <Col lg={8} xs={24}>
                             <Card title="近21日" bordered={false}>
                                 <Table
-                                    dataSource={this.state.spiderRanking['21days']}
+                                    dataSource={this.props.statistics.spiderRanking['21days']}
                                     columns={spiderRankingColumns}
                                     pagination={false}
                                     rowKey="publisher"
@@ -157,7 +139,7 @@ class Overview extends React.Component<Props, State> {
                             </Card>
                         </Col>
                     </Row>
-                </Card>
+                </Card>}
             </Spin>
         );
     }

@@ -37,11 +37,11 @@ export interface Props {
 }
 
 class Dashboard extends React.Component<Props, {}> {
-    componentWillReceiveProps(nextProps: Props) {
+    componentDidUpdate(prevProps: Props) {
         // tslint:disable-next-line:max-line-length
-        if (nextProps.errors.lastError.name !== 'initial_error' && nextProps.errors.errorId !== this.props.errors.errorId) {
-            message.error(nextProps.errors.lastError.message);
-            if (['need_login', 'need_admin'].includes(nextProps.errors.lastError.name)) {
+        if (this.props.errors.lastError.name !== 'initial_error' && prevProps.errors.errorId !== this.props.errors.errorId) {
+            message.error(this.props.errors.lastError.message);
+            if (['need_login', 'need_admin'].includes(this.props.errors.lastError.name)) {
                 Auth.logout();
                 this.props.history.push('/');
             }

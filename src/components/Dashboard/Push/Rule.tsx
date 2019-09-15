@@ -72,7 +72,7 @@ class EditRuleForm extends React.Component<EditRuleFormProps & FormComponentProp
             }
         });
     }
-    componentWillReceiveProps() {
+    componentDidUpdate() {
         this.props.form.resetFields();
     }
     render() {

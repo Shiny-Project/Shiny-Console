@@ -31,12 +31,10 @@ class Login extends React.Component<Props, State> {
         }
         return this.props.login && this.props.login(userName, password);
     }
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.isLogin) {
-            this.setState({
-                isLogin: true
-            });
-        }
+    static getDerivedStateFromProps(props: Props) {
+        return {
+            isLogin: !!props.isLogin
+        };
     }
     render() {
         if (this.state.isLogin) {
