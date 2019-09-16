@@ -291,3 +291,22 @@ export interface PushRuleItem {
 export interface PushRule {}
 
 export type PushRuleList = PushRuleItem[];
+
+// Dashboard/Deploy/Repository
+export type RepositoryList = Repository[];
+export interface Repository {
+    id: number;
+    name: string;
+    description: string;
+    revisions: Revision[];
+}
+
+export interface Revision {
+    id: number;
+    repository_id: number;
+    commit_id: string;
+    compare_url: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+}

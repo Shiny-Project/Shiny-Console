@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { StatisticsResponse, RecentEventsResponse, Job, ServerListResponse, APIKeyPairsResponse, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem, PushAccountList, PushAccount, PushRuleList, PushRuleItem } from 'types/dashboard';
+import { StatisticsResponse, RecentEventsResponse, Job, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem, PushAccountList, PushAccount, PushRuleList, PushRuleItem, RepositoryList } from 'types/dashboard';
 
 export interface StoreState {
     user: UserState;
@@ -17,6 +17,7 @@ export interface UserState {
 export interface DashboardState {
     errors?: ErrorState;
     overview: OverviewState;
+    deploy: DeployState;
     realtime: RealtimeState;
     server: ServerState;
     spider: SpiderState;
@@ -134,4 +135,15 @@ export interface PushRuleState {
     createRuleModalLoading: boolean;
     editRuleModalVisible: boolean;
     editRuleModalLoading: boolean;
+}
+
+// Dashboard/Deploy
+export interface DeployState {
+    repository: DeployRepositoryState;
+}
+
+// Dashboard/Depoly/Repository
+export interface DeployRepositoryState {
+    isLoading: boolean;
+    repositories: RepositoryList;
 }

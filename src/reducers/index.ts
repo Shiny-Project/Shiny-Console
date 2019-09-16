@@ -12,6 +12,7 @@ import { identity } from 'reducers/Dashboard/Spider/identity';
 import { pushAccount } from 'reducers/Dashboard/Push/account';
 import { pushHistory } from 'reducers/Dashboard/Push/history';
 import { pushRule } from 'reducers/Dashboard/Push/rule';
+import { deployRepository } from 'reducers/Dashboard/Deploy/repository';
 const rootReducer = combineReducers<StoreState>({
     user,
     dashboard: combineReducers<DashboardState>({
@@ -31,6 +32,9 @@ const rootReducer = combineReducers<StoreState>({
             history: pushHistory,
             account: pushAccount,
             rule: pushRule
+        }),
+        deploy: combineReducers({
+            repository: deployRepository
         })
     }),
 });

@@ -26,6 +26,7 @@ const AsyncPushHistory = createAsyncComponent('Dashboard/Push/History');
 const AsyncPushAccount = createAsyncComponent('Dashboard/Push/Account');
 const AsyncPushRule = createAsyncComponent('Dashboard/Push/Rule');
 const AsyncConfig = createAsyncComponent('Dashboard/Server/Config');
+const AsyncDeployRepository = createAsyncComponent('Dashboard/Deploy/Repository');
 
 export interface Props {
     errors?: ErrorState;
@@ -76,6 +77,8 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route path="/dashboard/push/history" component={AsyncPushHistory} />
                                     <Route path="/dashboard/push/account" component={AsyncPushAccount} />
                                     <Route path="/dashboard/push/rule" component={AsyncPushRule} />
+                                    {/* Deploy */}
+                                    <Route path="/dashboard/deploy/repository" component={AsyncDeployRepository} />
                                 </Switch>
                             </Col>
                         </Row>

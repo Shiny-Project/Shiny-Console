@@ -56,6 +56,11 @@ class Sider extends React.Component<Props, State> {
             <Link to="/dashboard/spider/identity">爬虫统一凭据管理</Link>
           </Menu.Item>
         </SubMenu>
+        <SubMenu key="deploy-menu" title={<span><Icon type="deployment-unit" />部署</span>}>
+          <Menu.Item key="deploy-repository">
+            <Link to="/dashboard/deploy/repository">仓库管理</Link>
+          </Menu.Item>
+        </SubMenu>
         <Menu.Item key="realtime">
           <Link to="/dashboard/realtime">{<span><Icon type="line-chart" /><span>实时</span></span>}</Link>
         </Menu.Item>

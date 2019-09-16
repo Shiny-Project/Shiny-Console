@@ -98,6 +98,12 @@ export default {
                 editRuleModalVisible: false,
                 nowEditingRule: {}
             }
+        },
+        deploy: {
+            repository: {
+                isLoading: false,
+                repositories: []
+            }
         }
     },
 } as StoreState;
