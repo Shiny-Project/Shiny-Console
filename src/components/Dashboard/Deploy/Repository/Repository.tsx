@@ -2,10 +2,16 @@ import React from 'react';
 import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
 import { RepositoryList, Repository as RepositoryItem, Revision } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
+import CreateRepositoryForm from './CreateRepositoryForm';
 export interface Props {
     isLoading: boolean;
+    createRepositoryModalVisible: boolean;
+    createRepositoryModalLoading: boolean;
     repositories: RepositoryList;
     getRepositoryList: () => void;
+    createRepository: (name: string, description: string) => void;
+    showCreateRepositoryModal: () => void;
+    hideCreateRepositoryModal: () => void;
 }
 export interface State {
 
@@ -88,6 +94,13 @@ class Repository extends React.Component<Props, State> {
                         rowKey="id"
                         expandedRowRender={this.revisionsRenderer}
                     ></Table>
+                    <Button onClick={this.props.showCreateRepositoryModal}>创建新仓库</Button>
+                    <CreateRepositoryForm
+                        visible={this.props.createRepositoryModalVisible}
+                        loading={this.props.createRepositoryModalLoading}
+                        onSubmit={this.props.createRepository}
+                        onCancel={this.props.hideCreateRepositoryModal}
+                    />
                 </Card>
             </Spin>
         );

@@ -146,4 +146,6 @@ export interface DeployState {
 export interface DeployRepositoryState {
     isLoading: boolean;
     repositories: RepositoryList;
+    createRepositoryModalVisible: boolean;
+    createRepositoryModalLoading: boolean;
 }

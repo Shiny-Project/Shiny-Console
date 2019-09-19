@@ -102,7 +102,9 @@ export default {
         deploy: {
             repository: {
                 isLoading: false,
-                repositories: []
+                repositories: [],
+                createRepositoryModalVisible: false,
+                createRepositoryModalLoading: false
             }
         }
     },

@@ -1,4 +1,4 @@
-import Repository from 'components/Dashboard/Deploy/Repository';
+import Repository from 'components/Dashboard/Deploy/Repository/Repository';
 import * as actions from 'actions/dashboard/deploy/repository';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';
@@ -16,7 +16,9 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
       isLoading: state.dashboard.deploy.repository.isLoading,
-      repositories: state.dashboard.deploy.repository.repositories
+      repositories: state.dashboard.deploy.repository.repositories,
+      createRepositoryModalVisible: state.dashboard.deploy.repository.createRepositoryModalVisible,
+      createRepositoryModalLoading: state.dashboard.deploy.repository.createRepositoryModalLoading
     };
 }
 
@@ -24,6 +26,15 @@ export function mapDispatchToProps(dispatch: Dispatch<RepositoryAction>) {
     return {
         getRepositoryList: () => {
             dispatch(actions.getRepositoryList());
+        },
+        showCreateRepositoryModal: () => {
+            dispatch(actions.showCreateRepositoryModal());
+        },
+        hideCreateRepositoryModal: () => {
+            dispatch(actions.hideCreateRepositoryModal());
+        },
+        createRepository: (name: string, description: string) => {
+            dispatch(actions.createRepository(name, description));
         }
     };
 }
