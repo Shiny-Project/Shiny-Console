@@ -12,6 +12,7 @@ export interface Props {
     createRepository: (name: string, description: string) => void;
     showCreateRepositoryModal: () => void;
     hideCreateRepositoryModal: () => void;
+    deleteRepository: (repositoryId: number) => void;
 }
 export interface State {
 
@@ -39,6 +40,9 @@ class Repository extends React.Component<Props, State> {
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
+                        onConfirm={() => {
+                            this.props.deleteRepository(record.id);
+                        }}
                     >
                         <Button
                             type="link"

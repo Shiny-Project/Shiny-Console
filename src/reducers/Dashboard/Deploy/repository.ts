@@ -64,6 +64,29 @@ export function deployRepository(
                 createRepositoryModalLoading: false
             }
         }
+        case ActionTypes.DELETE_REPOSITORY_START: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case ActionTypes.DELETE_REPOSITORY_SUCCESS: {
+            const index = state.repositories.findIndex(repository => repository.id === actions.repositoryId);
+            return {
+                ...state,
+                isLoading: false,
+                repositories: [
+                    ...state.repositories.slice(0, index),
+                    ...state.repositories.slice(index + 1)
+                ]
+            }
+        }
+        case ActionTypes.DELETE_REPOSITORY_FAILURE: {
+            return {
+                ...state,
+                isLoading: false
+            }
+        }
         default: {
             return state;
         }

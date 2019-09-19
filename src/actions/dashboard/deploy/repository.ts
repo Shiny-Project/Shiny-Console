@@ -38,8 +38,22 @@ export interface CreateRepositoryFailure {
     type: constants.CREATE_REPOSITORY_FAILURE;
 }
 
+export interface DeleteRepositoryStart {
+    type: constants.DELETE_REPOSITORY_START;
+}
+
+export interface DeleteRepositorySuccess {
+    type: constants.DELETE_REPOSITORY_SUCCESS;
+    repositoryId: number;
+}
+
+export interface DeleteRepositoryFailure {
+    type: constants.DELETE_REPOSITORY_FAILURE
+}
+
 export type RepositoryAction = GetRepositoryList | GetRepositoryListSuccess | GetRepositoryListFailure |
-                               CreateRepositoryStart | CreateRepositorySuccess | CreateRepositoryFailure | ShowCreateRepositoryModal | HideCreateRepositoryModal;
+    CreateRepositoryStart | CreateRepositorySuccess | CreateRepositoryFailure | ShowCreateRepositoryModal | HideCreateRepositoryModal |
+    DeleteRepositoryStart | DeleteRepositorySuccess | DeleteRepositoryFailure;
 
 export function getRepositoryListStart(): GetRepositoryList {
     return {
@@ -91,6 +105,25 @@ export function hideCreateRepositoryModal(): HideCreateRepositoryModal {
     };
 }
 
+export function deleteRepositoryStart(): DeleteRepositoryStart {
+    return {
+        type: constants.DELETE_REPOSITORY_START
+    };
+}
+
+export function deleteRepositorySuccess(repositoryId: number): DeleteRepositorySuccess {
+    return {
+        type: constants.DELETE_REPOSITORY_SUCCESS,
+        repositoryId
+    };
+}
+
+export function deleteRepositoryFailure(): DeleteRepositoryFailure {
+    return {
+        type: constants.DELETE_REPOSITORY_FAILURE
+    }
+}
+
 /**
  * 获得 Repository 列表
  */
@@ -112,7 +145,7 @@ export function getRepositoryList(): DeferredAction<GetRepositoryList | GetRepos
  * @param name 仓库名
  * @param description 仓库说明
  */
-export function createRepository(name: string, description: string): 
+export function createRepository(name: string, description: string):
     DeferredAction<CreateRepositoryStart | CreateRepositorySuccess | CreateRepositoryFailure> {
     return async (dispatch) => {
         dispatch(createRepositoryStart());
@@ -125,6 +158,26 @@ export function createRepository(name: string, description: string):
         } catch (e) {
             dispatch(raiseError(e));
             dispatch(createRepositoryFailure());
+        }
+    }
+}
+
+/**
+ * 删除仓库
+ * @param repositoryId 仓库ID
+ */
+export function deleteRepository(repositoryId: number):
+    DeferredAction<DeleteRepositoryStart | DeleteRepositorySuccess | DeleteRepositoryFailure> {
+    return async (dispatch) => {
+        dispatch(deleteRepositoryStart());
+        try {
+            await request.post('/Repository/delete', {
+                id: repositoryId
+            });
+            dispatch(deleteRepositorySuccess(repositoryId));
+        } catch (e) {
+            dispatch(raiseError(e));
+            dispatch(deleteRepositoryFailure());
         }
     }
 }

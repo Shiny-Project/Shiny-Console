@@ -35,6 +35,9 @@ export function mapDispatchToProps(dispatch: Dispatch<RepositoryAction>) {
         },
         createRepository: (name: string, description: string) => {
             dispatch(actions.createRepository(name, description));
+        },
+        deleteRepository: (repositoryId: number) => {
+            dispatch(actions.deleteRepository(repositoryId));
         }
     };
 }
