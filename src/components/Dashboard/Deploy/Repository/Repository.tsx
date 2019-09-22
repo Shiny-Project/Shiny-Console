@@ -3,16 +3,23 @@ import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
 import { RepositoryList, Repository as RepositoryItem, Revision } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
 import CreateRepositoryForm from './CreateRepositoryForm';
+import EditRepositoryForm from './EditRepositoryForm';
 export interface Props {
     isLoading: boolean;
     createRepositoryModalVisible: boolean;
     createRepositoryModalLoading: boolean;
+    editRepositoryModalVisible: boolean;
+    editRepositoryModalLoading: boolean;
     repositories: RepositoryList;
+    nowEditingRepository: RepositoryItem;
     getRepositoryList: () => void;
     createRepository: (name: string, description: string) => void;
     showCreateRepositoryModal: () => void;
     hideCreateRepositoryModal: () => void;
     deleteRepository: (repositoryId: number) => void;
+    showEditRepositoryModal: (repository: RepositoryItem) => void;
+    hideEditRepositoryModal: () => void;
+    editRepository: (repositoryId: number, name: string, description: string) => void;
 }
 export interface State {
 
@@ -36,7 +43,14 @@ class Repository extends React.Component<Props, State> {
         render: (text: string, record: RepositoryItem) => {
             return (
                 <div>
-                    <Button type="link">编辑</Button>
+                    <Button 
+                        type="link"
+                        onClick={() => {
+                            this.props.showEditRepositoryModal(record);
+                        }}
+                    >
+                        编辑
+                    </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title="危险操作确认"
@@ -104,6 +118,13 @@ class Repository extends React.Component<Props, State> {
                         loading={this.props.createRepositoryModalLoading}
                         onSubmit={this.props.createRepository}
                         onCancel={this.props.hideCreateRepositoryModal}
+                    />
+                    <EditRepositoryForm
+                        repository={this.props.nowEditingRepository}
+                        visible={this.props.editRepositoryModalVisible}
+                        loading={this.props.editRepositoryModalLoading}
+                        onSubmit={this.props.editRepository}
+                        onCancel={this.props.hideEditRepositoryModal}
                     />
                 </Card>
             </Spin>

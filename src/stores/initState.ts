@@ -103,8 +103,11 @@ export default {
             repository: {
                 isLoading: false,
                 repositories: [],
+                nowEditingRepository: {},
                 createRepositoryModalVisible: false,
-                createRepositoryModalLoading: false
+                createRepositoryModalLoading: false,
+                editRepositoryModalLoading: false,
+                editRepositoryModalVisible: false
             }
         }
     },

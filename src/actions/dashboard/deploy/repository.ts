@@ -51,9 +51,32 @@ export interface DeleteRepositoryFailure {
     type: constants.DELETE_REPOSITORY_FAILURE
 }
 
+export interface EditRepositoryStart {
+    type: constants.EDIT_REPOSITORY_START;
+}
+
+export interface EditRepositorySuccess {
+    type: constants.EDIT_REPOSITORY_SUCCESS;
+    repository: Repository
+}
+
+export interface EditRepositoryFailure {
+    type: constants.EDIT_REPOSITORY_FAILURE;
+}
+
+export interface ShowEditRepositoryModal {
+    type: constants.SHOW_EDIT_REPOSITORY_MODAL;
+    repository: Repository
+};
+
+export interface HideEditRepositoryModal {
+    type: constants.HIDE_EDIT_REPOSITORY_MODAL;
+}
+
 export type RepositoryAction = GetRepositoryList | GetRepositoryListSuccess | GetRepositoryListFailure |
     CreateRepositoryStart | CreateRepositorySuccess | CreateRepositoryFailure | ShowCreateRepositoryModal | HideCreateRepositoryModal |
-    DeleteRepositoryStart | DeleteRepositorySuccess | DeleteRepositoryFailure;
+    DeleteRepositoryStart | DeleteRepositorySuccess | DeleteRepositoryFailure |
+    EditRepositoryStart | EditRepositorySuccess | EditRepositoryFailure | ShowEditRepositoryModal | HideEditRepositoryModal;
 
 export function getRepositoryListStart(): GetRepositoryList {
     return {
@@ -121,6 +144,38 @@ export function deleteRepositorySuccess(repositoryId: number): DeleteRepositoryS
 export function deleteRepositoryFailure(): DeleteRepositoryFailure {
     return {
         type: constants.DELETE_REPOSITORY_FAILURE
+    };
+}
+
+export function editRepositoryStart(): EditRepositoryStart {
+    return {
+        type: constants.EDIT_REPOSITORY_START
+    };
+}
+
+export function editRepositorySuccess(updatedRepository: Repository): EditRepositorySuccess {
+    return {
+        type: constants.EDIT_REPOSITORY_SUCCESS,
+        repository: updatedRepository
+    };
+}
+
+export function editRepositoryFailure(): EditRepositoryFailure {
+    return {
+        type: constants.EDIT_REPOSITORY_FAILURE
+    };
+}
+
+export function showEditRepositoryModal(editRepository: Repository): ShowEditRepositoryModal {
+    return {
+        type: constants.SHOW_EDIT_REPOSITORY_MODAL,
+        repository: editRepository
+    };
+}
+
+export function hideEditRepositoryModal(): HideEditRepositoryModal {
+    return {
+        type: constants.HIDE_EDIT_REPOSITORY_MODAL
     }
 }
 
@@ -161,6 +216,30 @@ export function createRepository(name: string, description: string):
         }
     }
 }
+
+/**
+ * 更新仓库信息
+ * @param repositoryId 仓库ID
+ * @param name 仓库名
+ * @param description 仓库说明
+ */
+export function editRepository(repositoryId: number, name: string, description: string):
+    DeferredAction<EditRepositoryStart | EditRepositorySuccess | EditRepositoryFailure> {
+        return async (dispatch) => {
+            dispatch(editRepositoryStart());
+            try {
+                const updatedRepository = await request.post<Repository>('/Repository/update', {
+                    id: repositoryId,
+                    name,
+                    description
+                });
+                dispatch(editRepositorySuccess(updatedRepository));
+            } catch (e) {
+                dispatch(raiseError(e));
+                dispatch(editRepositoryFailure());
+            }
+        }
+    }
 
 /**
  * 删除仓库

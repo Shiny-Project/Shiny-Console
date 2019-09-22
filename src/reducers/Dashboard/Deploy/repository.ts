@@ -87,6 +87,47 @@ export function deployRepository(
                 isLoading: false
             }
         }
+        case ActionTypes.EDIT_REPOSITORY_START: {
+            return {
+                ...state,
+                editRepositoryModalLoading: true,
+            }
+        }
+        case ActionTypes.EDIT_REPOSITORY_SUCCESS: {
+            const index = state.repositories.findIndex(repository => repository.id === actions.repository.id);
+            return {
+                ...state,
+                repositories: [
+                    ...state.repositories.slice(0, index),
+                    {
+                        ...actions.repository,
+                        revisions: []
+                    },
+                    ...state.repositories.slice(index + 1)
+                ],
+                editRepositoryModalLoading: false,
+                editRepositoryModalVisible: false
+            }
+        }
+        case ActionTypes.EDIT_REPOSITORY_FAILURE: {
+            return {
+                ...state,
+                editRepositoryModalLoading: false,
+            }
+        }
+        case ActionTypes.SHOW_EDIT_REPOSITORY_MODAL: {
+            return {
+                ...state,
+                editRepositoryModalVisible: true,
+                nowEditingRepository: actions.repository
+            }
+        }
+        case ActionTypes.HIDE_EDIT_REPOSITORY_MODAL: {
+            return {
+                ...state,
+                editRepositoryModalVisible: false
+            }
+        }
         default: {
             return state;
         }
