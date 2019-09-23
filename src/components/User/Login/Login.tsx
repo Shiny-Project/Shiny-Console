@@ -14,15 +14,7 @@ export interface Props {
     loading?: boolean;
     history: History
 }
-
-export interface State {
-    isLogin: boolean;
-}
-
-class Login extends React.Component<Props, State> {
-    state = {
-        isLogin: false
-    };
+class Login extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
@@ -33,20 +25,8 @@ class Login extends React.Component<Props, State> {
         }
         return this.props.login && this.props.login(userName, password);
     }
-    static getDerivedStateFromProps(props: Props) {
-        return {
-            isLogin: !!props.isLogin
-        };
-    }
     render() {
-        if (this.state.isLogin) {
-            return (
-                this.props.history.location.search ? 
-                    <Redirect to={this.props.history.location.search.replace('?returnTo=', '')} /> : 
-                    <Redirect to="/dashboard" />
-            );
-        }
-        if (Auth.isLogin()) {
+        if (this.props.isLogin || Auth.isLogin()) {
             return (
                 this.props.history.location.search ? 
                     <Redirect to={this.props.history.location.search.replace('?returnTo=', '')} /> : 
