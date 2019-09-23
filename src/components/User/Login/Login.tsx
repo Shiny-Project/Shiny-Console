@@ -4,6 +4,7 @@ import { Layout, Row, Col, Card, Spin, message } from 'antd';
 import LoginForm from 'components/User/Login/LoginForm';
 import './Login.css';
 import Auth from 'services/auth';
+import { History } from 'history';
 const { Content } = Layout;
 
 export interface Props {
@@ -11,6 +12,7 @@ export interface Props {
     userName: string;
     login?: (userName: string, password: string) => void;
     loading?: boolean;
+    history: History
 }
 
 export interface State {
@@ -39,12 +41,16 @@ class Login extends React.Component<Props, State> {
     render() {
         if (this.state.isLogin) {
             return (
-                <Redirect to="/dashboard" />
+                this.props.history.location.search ? 
+                    <Redirect to={this.props.history.location.search.replace('?returnTo=', '')} /> : 
+                    <Redirect to="/dashboard" />
             );
         }
         if (Auth.isLogin()) {
             return (
-                <Redirect to="/dashboard" />
+                this.props.history.location.search ? 
+                    <Redirect to={this.props.history.location.search.replace('?returnTo=', '')} /> : 
+                    <Redirect to="/dashboard" />
             );
         }
         return (
