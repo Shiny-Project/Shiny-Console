@@ -9,7 +9,7 @@ install:
   - npm install
 
 script:
-  - npm run build
+  - CI=false npm run build
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker run -v $(pwd):/data:ro mbologna/docker-tokei | awk '/Total/{print $4 + $5}'>temp.txt;
       cat temp.txt;
