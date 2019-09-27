@@ -38,6 +38,10 @@ class Repository extends React.Component<Props, State> {
         dataIndex: 'description',
         key: 'description'
     }, {
+        title: '总行数',
+        dataIndex: 'line',
+        key: 'line'
+    }, {
         title: '操作',
         key: 'operations',
         render: (text: string, record: RepositoryItem) => {

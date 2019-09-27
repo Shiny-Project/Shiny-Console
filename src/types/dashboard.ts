@@ -298,6 +298,7 @@ export interface Repository {
     id: number;
     name: string;
     description: string;
+    line: number;
     revisions: Revision[];
 }
 
