@@ -72,8 +72,10 @@ class EditRuleForm extends React.Component<EditRuleFormProps & FormComponentProp
             }
         });
     }
-    componentDidUpdate() {
-        this.props.form.resetFields();
+    componentDidUpdate(prevProps: EditRuleFormProps & FormComponentProps) {
+        if (prevProps.rule.id !== this.props.rule.id) {
+            this.props.form.resetFields();
+        }
     }
     render() {
         const { getFieldDecorator } = this.props.form;
