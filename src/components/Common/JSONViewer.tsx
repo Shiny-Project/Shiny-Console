@@ -1,4 +1,5 @@
 import React from 'react';
+import { CodeOutlined } from '@ant-design/icons';
 import { Modal, Button } from 'antd';
 
 export interface Props {
@@ -26,7 +27,7 @@ class JSONViewer extends React.Component<Props> {
                             </div>
                         ),
                         width: '80vw',
-                        icon: 'code',
+                        icon: <CodeOutlined />,
                         maskClosable: true,
                     });
                 }}

@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Menu, Icon } from 'antd';
+
+import {
+  ApiOutlined,
+  CloudOutlined,
+  DeploymentUnitOutlined,
+  LineChartOutlined,
+  RocketOutlined,
+} from '@ant-design/icons';
+
+import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
@@ -37,7 +46,7 @@ class Sider extends React.Component<Props, State> {
         <Menu.Item key="overview">
           <Link to="/dashboard/overview">概览</Link>
         </Menu.Item>
-        <SubMenu key="server-menu" title={<span><Icon type="cloud" /><span>服务器</span></span>}>
+        <SubMenu key="server-menu" title={<span><CloudOutlined /><span>服务器</span></span>}>
           <Menu.Item key="server-nodes">
             <Link to="/dashboard/server/nodes">服务器节点管理</Link>
           </Menu.Item>
@@ -48,7 +57,7 @@ class Sider extends React.Component<Props, State> {
             <Link to="/dashboard/server/config">全局设置项管理</Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="spider-menu" title={<span><Icon type="api" /><span>爬虫</span></span>}>
+        <SubMenu key="spider-menu" title={<span><ApiOutlined /><span>爬虫</span></span>}>
           <Menu.Item key="spider-list">
             <Link to="/dashboard/spider/list">爬虫定义管理</Link>
           </Menu.Item>
@@ -56,15 +65,15 @@ class Sider extends React.Component<Props, State> {
             <Link to="/dashboard/spider/identity">爬虫统一凭据管理</Link>
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="deploy-menu" title={<span><Icon type="deployment-unit" />部署</span>}>
+        <SubMenu key="deploy-menu" title={<span><DeploymentUnitOutlined />部署</span>}>
           <Menu.Item key="deploy-repository">
             <Link to="/dashboard/deploy/repository">仓库管理</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="realtime">
-          <Link to="/dashboard/realtime">{<span><Icon type="line-chart" /><span>实时</span></span>}</Link>
+          <Link to="/dashboard/realtime">{<span><LineChartOutlined /><span>实时</span></span>}</Link>
         </Menu.Item>
-        <SubMenu key="push-menu" title={<span><Icon type="rocket" /><span>推送</span></span>}>
+        <SubMenu key="push-menu" title={<span><RocketOutlined /><span>推送</span></span>}>
           <Menu.Item key="push-account">
             <Link to="/dashboard/push/account">推送渠道账号管理</Link>
           </Menu.Item>

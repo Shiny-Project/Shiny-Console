@@ -1,50 +1,55 @@
-import React from 'react';
-import { Form, Modal, Input } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import React, { useCallback } from "react";
+import { Modal, Form, Input } from "antd";
+
+export interface CreateRepositoryFormValues {
+    name: string;
+    description: string;
+}
 export interface CreateRepositoryFormProps {
     visible: boolean;
     loading: boolean;
-    onSubmit: (name: string, description: string) => void;
+    onSubmit: (formValues: CreateRepositoryFormValues) => void;
     onCancel: () => void;
 }
 
-class CreateRepositoryForm extends React.Component<CreateRepositoryFormProps & FormComponentProps> {
-    handleSubmitClick = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.onSubmit(values.name, values.description);
-            }
-        });
-    }
-    render() {
-        const { getFieldDecorator } = this.props.form;
-        return (
-            <Modal
-                visible={this.props.visible}
-                confirmLoading={this.props.loading}
-                onCancel={this.props.onCancel}
-                onOk={this.handleSubmitClick}
-            >
-                <Form layout="vertical">
-                    <Form.Item label="仓库名">
-                        {getFieldDecorator('name', {
-                            rules: [{ required: true }],
-                        })(
-                            <Input />
-                        )}
-                    </Form.Item>
-                    <Form.Item label="说明">
-                        {getFieldDecorator('description', {
-                            rules: [{ required: true }],
-                        })(
-                            <Input />
-                        )}
-                    </Form.Item>
-                </Form>
-            </Modal>
-        )
-    }
+function CreateRepositoryForm(props: CreateRepositoryFormProps) {
+    const { visible, loading, onSubmit, onCancel } = props;
+    const [form] = Form.useForm<CreateRepositoryFormValues>();
+
+    const handleSubmitClick = useCallback(
+        async (e: React.MouseEvent<HTMLElement>) => {
+            e.preventDefault();
+            const values = await form.validateFields();
+            onSubmit(values);
+        },
+        [form, onSubmit]
+    );
+
+    return (
+        <Modal
+            visible={visible}
+            confirmLoading={loading}
+            onCancel={onCancel}
+            onOk={handleSubmitClick}
+        >
+            <Form form={form} layout="vertical">
+                <Form.Item
+                    name="name"
+                    label="仓库名"
+                    rules={[{ required: true }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="description"
+                    label="说明"
+                    rules={[{ required: true }]}
+                >
+                    <Input />
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
 }
 
-export default Form.create<CreateRepositoryFormProps & FormComponentProps>()(CreateRepositoryForm);
+export default CreateRepositoryForm;

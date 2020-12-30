@@ -13,7 +13,7 @@ interface EventListProps {
 interface EventListState {
     fetching: boolean;
     data: { text: string, value: string }[];
-    value: {key: string, label: string}[];
+    value: string[];
     currentPage: number;
 }
 class EventList extends React.Component<EventListProps, EventListState> {
@@ -54,14 +54,14 @@ class EventList extends React.Component<EventListProps, EventListState> {
             });
         });
     }
-    handleChange = (value: {key: string, label: string}[]) => {
+    handleChange = (value: string[]) => {
         this.setState({
             value
         });
     }
     handleFilterApply = (): void => {
         if (this.state.value.length > 0) {
-            this.props.getRecentEvents(Array.from(this.state.value, v => v.key));
+            this.props.getRecentEvents(this.state.value);
         } else {
             this.props.getRecentEvents();
         }
@@ -71,7 +71,7 @@ class EventList extends React.Component<EventListProps, EventListState> {
     }
     handlePageChange = (page: number) => {
         if (this.state.value.length > 0) {
-            this.props.getRecentEvents(Array.from(this.state.value, v => v.key), page);
+            this.props.getRecentEvents(this.state.value, page);
         } else {
             this.props.getRecentEvents([], page);
         }
@@ -101,7 +101,7 @@ class EventList extends React.Component<EventListProps, EventListState> {
                         style={{ width: '30%' }}
                     >
                         {data.map(d => {
-                            return <Option key={d.value}>{d.text}</Option>;
+                            return <Option key={d.value} value={d.value}>{d.text}</Option>;
                         })}
                     </Select>
                     <Button onClick={this.handleFilterApply} className="filter-apply-button">Apply</Button>

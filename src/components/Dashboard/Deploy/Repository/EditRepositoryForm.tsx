@@ -1,7 +1,9 @@
 import React from 'react';
 import { Repository } from 'types/dashboard';
-import { FormComponentProps } from 'antd/lib/form';
-import { Modal, Form, Input } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Modal, Input } from 'antd';
 
 export interface EditRepositoryFormProps {
     repository: Repository;

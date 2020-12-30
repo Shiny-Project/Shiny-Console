@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Spin, Table, Divider, Button, Popconfirm, Form, Modal, Select } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card, Spin, Table, Divider, Button, Popconfirm, Modal, Select } from 'antd';
 import { APIKeyPair, ServerNode } from 'types/dashboard';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 
 export interface Props {
     getKeyPairs: () => void;

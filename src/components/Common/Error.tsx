@@ -10,7 +10,7 @@ class ErrorPage extends React.Component<Props, {}> {
         return (
             <Layout>
                 <Content>
-                    <Row type="flex" justify="space-around" align="middle" className="login-container">
+                    <Row justify="space-around" align="middle" className="login-container">
                         <Col span={8}>
                             <Card title="Error">
                                 <p>{this.props.message}</p>

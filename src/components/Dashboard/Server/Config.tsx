@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, Spin, Table, Button, Divider, Form, Modal, Input, Popconfirm } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card, Spin, Table, Button, Divider, Modal, Input, Popconfirm } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 import { ConfigItem } from 'types/dashboard';
 
 interface CreateConfigFormProps {

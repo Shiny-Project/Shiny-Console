@@ -3,6 +3,7 @@ import { raiseError } from 'actions/dashboard/error';
 import { DeferredAction } from 'types/action';
 import request from 'services/request';
 import { RepositoryList, Repository } from 'types/dashboard';
+import { CreateRepositoryFormValues } from 'components/Dashboard/Deploy/Repository/CreateRepositoryForm';
 
 export interface GetRepositoryList {
     type: constants.GET_REPOSITORY_LIST;
@@ -200,7 +201,7 @@ export function getRepositoryList(): DeferredAction<GetRepositoryList | GetRepos
  * @param name 仓库名
  * @param description 仓库说明
  */
-export function createRepository(name: string, description: string):
+export function createRepository({ name, description }: CreateRepositoryFormValues):
     DeferredAction<CreateRepositoryStart | CreateRepositorySuccess | CreateRepositoryFailure> {
     return async (dispatch) => {
         dispatch(createRepositoryStart());

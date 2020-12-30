@@ -1,6 +1,8 @@
 import React from 'react';
-import { Spin, Card, Table, Popconfirm, Form, Modal, Input, Divider, Button } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Spin, Card, Table, Popconfirm, Modal, Input, Divider, Button } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 import { PushRuleItem } from 'types/dashboard';
 import JSONViewer from 'components/Common/JSONViewer';
 

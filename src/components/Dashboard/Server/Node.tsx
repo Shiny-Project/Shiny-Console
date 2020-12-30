@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Table, Divider, Spin, Button, Modal, Form, Input, Select, Popconfirm, Tag } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card, Table, Divider, Spin, Button, Modal, Input, Select, Popconfirm, Tag } from 'antd';
 import { ServerListResponse, ServerNode } from 'types/dashboard';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 
 interface ServerNodeProps {
     type: string;
@@ -174,8 +176,8 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                                     style={{ width: '100%' }}
                                     placeholder="Please select"
                                 >
-                                    <Select.Option key="default">default</Select.Option>
-                                    <Select.Option key="china_mainland">china_mainland</Select.Option>
+                                    <Select.Option key="default" value="default">default</Select.Option>
+                                    <Select.Option key="china_mainland" value="china_mainland">china_mainland</Select.Option>
                                 </Select>,
                             )}
                         </Form.Item>

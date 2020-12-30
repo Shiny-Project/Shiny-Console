@@ -1,8 +1,10 @@
 import React from 'react';
 import { SpiderListResponse, Spider } from 'types/dashboard';
-import { Spin, Card, Table, Divider, Popconfirm, Form, Modal, Input, Row, Col, Button } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Spin, Card, Table, Divider, Popconfirm, Modal, Input, Row, Col, Button } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
+import { WrappedFormUtils } from '@ant-design/compatible/lib/form/Form';
 import TimeDiff from 'components/Common/TimeDiff';
 
 interface FormModalProps {

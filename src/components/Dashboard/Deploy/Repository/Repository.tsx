@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
 import { RepositoryList, Repository as RepositoryItem, Revision } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
-import CreateRepositoryForm from './CreateRepositoryForm';
+import CreateRepositoryForm, { CreateRepositoryFormValues } from './CreateRepositoryForm';
 import EditRepositoryForm from './EditRepositoryForm';
 export interface Props {
     isLoading: boolean;
@@ -13,7 +13,7 @@ export interface Props {
     repositories: RepositoryList;
     nowEditingRepository: RepositoryItem;
     getRepositoryList: () => void;
-    createRepository: (name: string, description: string) => void;
+    createRepository: (formValues: CreateRepositoryFormValues) => void;
     showCreateRepositoryModal: () => void;
     hideCreateRepositoryModal: () => void;
     deleteRepository: (repositoryId: number) => void;
