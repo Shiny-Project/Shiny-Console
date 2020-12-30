@@ -80,6 +80,11 @@ class EditAccountForm extends React.Component<EditAccountFormProps & FormCompone
             }
         });
     }
+    componentDidUpdate(prevProps: EditAccountFormProps & FormComponentProps) {
+        if (prevProps.account.id !== this.props.account.id) {
+            this.props.form.resetFields();
+        }
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

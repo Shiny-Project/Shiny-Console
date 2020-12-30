@@ -20,6 +20,11 @@ class EditRepositoryForm extends React.Component<EditRepositoryFormProps & FormC
             }
         });
     }
+    componentDidUpdate(prevProps: EditRepositoryFormProps & FormComponentProps) {
+        if (prevProps.repository.id !== this.props.repository.id) {
+            this.props.form.resetFields();
+        }
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

@@ -72,6 +72,11 @@ class EditIdentityForm extends React.Component<EditIdentityFormProps & FormCompo
             }
         });
     }
+    componentDidUpdate(prevProps: EditIdentityFormProps & FormComponentProps) {
+        if (prevProps.identityItem.id !== this.props.identityItem.id) {
+            this.props.form.resetFields();
+        }
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
