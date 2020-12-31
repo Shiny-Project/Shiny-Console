@@ -1,10 +1,12 @@
-import Account from 'components/Dashboard/Push/Account';
+import Account from 'components/Dashboard/Push/Account/Account';
 import * as actions from 'actions/dashboard/push/account';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'types/action';
 import { AccountAction } from 'actions/dashboard/push/account';
 import { PushAccount } from 'types/dashboard';
+import { CreateAccountFormValues } from 'components/Dashboard/Push/Account/CreateAccountForm';
+import { EditAccountFormValues } from 'components/Dashboard/Push/Account/EditAccountForm';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -31,14 +33,14 @@ export function mapDispatchToProps(dispatch: Dispatch<AccountAction>) {
         getAccountList: () => {
             dispatch(actions.getAccountList());
         },
-        createAccount: (platform: string, name: string, credential: string) => {
-            dispatch(actions.createAccount(platform, name, credential));
+        createAccount: (formValues: CreateAccountFormValues) => {
+            dispatch(actions.createAccount(formValues));
         },
         deleteAccount: (id: number) => {
             dispatch(actions.deleteAccount(id));
         },
-        editAccount: (id: number, platform: string, name: string, credential: string) => {
-            dispatch(actions.editAccount(id, platform, name, credential));
+        editAccount: (formValues: EditAccountFormValues) => {
+            dispatch(actions.editAccount(formValues));
         },
         showCreateAccountModal: () => {
             dispatch(actions.showCreateAccountModal());

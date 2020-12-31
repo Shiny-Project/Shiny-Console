@@ -3,7 +3,7 @@ import { Spin, Card, Table, Button, Divider, Popconfirm } from 'antd';
 import { RepositoryList, Repository as RepositoryItem, Revision } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
 import CreateRepositoryForm, { CreateRepositoryFormValues } from './CreateRepositoryForm';
-import EditRepositoryForm from './EditRepositoryForm';
+import EditRepositoryForm, { EditRepositoryFormValues } from './EditRepositoryForm';
 export interface Props {
     isLoading: boolean;
     createRepositoryModalVisible: boolean;
@@ -19,7 +19,7 @@ export interface Props {
     deleteRepository: (repositoryId: number) => void;
     showEditRepositoryModal: (repository: RepositoryItem) => void;
     hideEditRepositoryModal: () => void;
-    editRepository: (repositoryId: number, name: string, description: string) => void;
+    editRepository: (formValues: EditRepositoryFormValues) => void;
 }
 export interface State {
 

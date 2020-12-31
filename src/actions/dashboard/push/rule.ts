@@ -3,6 +3,7 @@ import { raiseError } from 'actions/dashboard/error';
 import request from 'services/request';
 import { PushRuleList, PushRuleItem } from 'types/dashboard';
 import { DeferredAction } from 'types/action';
+import { CreateRuleFormValues } from 'components/Dashboard/Push/Rule/CreateRuleForm';
 
 export interface GetRuleList {
     type: constants.GET_RULE_LIST;
@@ -201,13 +202,13 @@ export function getRuleList():
 /**
  * 创建推送规则
  */
-export function createRule(spiderName: string, rule: string): 
+export function createRule({ spider_name, rule }: CreateRuleFormValues): 
     DeferredAction<CreateRule | CreateRuleSuccess | CreateRuleFailure> {
     return async (dispatch) => {
         dispatch(createRuleStart());
         try {
             const response = await request.post<PushRuleItem>('/PushRule/create', {
-                spiderName,
+                spiderName: spider_name,
                 rule
             });
             dispatch(createRuleSuccess(response));

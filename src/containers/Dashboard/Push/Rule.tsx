@@ -1,10 +1,11 @@
-import Rule from 'components/Dashboard/Push/Rule';
+import Rule from 'components/Dashboard/Push/Rule/Rule';
 import * as actions from 'actions/dashboard/push/rule';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'types/action';
 import { RuleAction } from 'actions/dashboard/push/rule';
 import { PushRuleItem } from 'types/dashboard';
+import { CreateRuleFormValues } from 'components/Dashboard/Push/Rule/CreateRuleForm';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -31,8 +32,8 @@ export function mapDispatchToProps(dispatch: Dispatch<RuleAction>) {
         getRuleList: () => {
             dispatch(actions.getRuleList());
         },
-        createRule: (spiderName: string, rule: string) => {
-            dispatch(actions.createRule(spiderName, rule));
+        createRule: (formValues: CreateRuleFormValues) => {
+            dispatch(actions.createRule(formValues));
         },
         editRule: (ruleId: number, spiderName: string, rule: string) => {
             dispatch(actions.editRule(ruleId, spiderName, rule));

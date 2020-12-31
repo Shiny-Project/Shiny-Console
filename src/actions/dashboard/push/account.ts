@@ -1,8 +1,10 @@
-import * as constants from 'constants/Push/account';
-import { raiseError } from 'actions/dashboard/error';
-import request from 'services/request';
-import { PushAccountList, PushAccount } from 'types/dashboard';
-import { DeferredAction } from 'types/action';
+import * as constants from "constants/Push/account";
+import { raiseError } from "actions/dashboard/error";
+import request from "services/request";
+import { PushAccountList, PushAccount } from "types/dashboard";
+import { DeferredAction } from "types/action";
+import { CreateAccountFormValues } from "components/Dashboard/Push/Account/CreateAccountForm";
+import { EditAccountFormValues } from "components/Dashboard/Push/Account/EditAccountForm";
 
 export interface GetAccountList {
     type: constants.GET_ACCOUNT_LIST;
@@ -73,86 +75,103 @@ export interface EditAccountFailure {
     type: constants.EDIT_ACCOUNT_FAILURE;
 }
 
-export type AccountAction = 
-    GetAccountList | GetAccountListSuccess | GetAccountListFailure |
-    ShowCreateAccountModal | HideCreateAccountModal | 
-    CreateAccount | CreateAccountSuccess | CreateAccountFailure |
-    DeleteAccount | DeleteAccountSuccess | DeleteAccountFailure |
-    ShowEditAccountModal | HideEditAccountModal | EditAccount | EditAccountSuccess | EditAccountFailure;
+export type AccountAction =
+    | GetAccountList
+    | GetAccountListSuccess
+    | GetAccountListFailure
+    | ShowCreateAccountModal
+    | HideCreateAccountModal
+    | CreateAccount
+    | CreateAccountSuccess
+    | CreateAccountFailure
+    | DeleteAccount
+    | DeleteAccountSuccess
+    | DeleteAccountFailure
+    | ShowEditAccountModal
+    | HideEditAccountModal
+    | EditAccount
+    | EditAccountSuccess
+    | EditAccountFailure;
 
 export function getAccountListStart(): GetAccountList {
     return {
-        type: constants.GET_ACCOUNT_LIST
+        type: constants.GET_ACCOUNT_LIST,
     };
 }
 
-export function getAccountListSuccess(accounts: PushAccountList): GetAccountListSuccess {
+export function getAccountListSuccess(
+    accounts: PushAccountList
+): GetAccountListSuccess {
     return {
         type: constants.GET_ACCOUNT_LIST_SUCCESS,
-        accounts
+        accounts,
     };
 }
 
 export function getAccountListFailure(): GetAccountListFailure {
     return {
-        type: constants.GET_ACCOUNT_LIST_FAILURE
+        type: constants.GET_ACCOUNT_LIST_FAILURE,
     };
 }
 
 export function showCreateAccountModal(): ShowCreateAccountModal {
     return {
-        type: constants.SHOW_CREATE_ACCOUNT_MODAL
+        type: constants.SHOW_CREATE_ACCOUNT_MODAL,
     };
 }
 
 export function hideCreateAccountModal(): HideCreateAccountModal {
     return {
-        type: constants.HIDE_CREATE_ACCOUNT_MODAL
+        type: constants.HIDE_CREATE_ACCOUNT_MODAL,
     };
 }
 
 export function createAccountStart(): CreateAccount {
     return {
-        type: constants.CREATE_ACCOUNT
+        type: constants.CREATE_ACCOUNT,
     };
 }
 
-export function createAccountSuccess(account: PushAccount): CreateAccountSuccess {
+export function createAccountSuccess(
+    account: PushAccount
+): CreateAccountSuccess {
     return {
         type: constants.CREATE_ACCOUNT_SUCCESS,
-        account
+        account,
     };
 }
 
 export function createAccountFailure(): CreateAccountFailure {
     return {
-        type: constants.CREATE_ACCOUNT_FAILURE
+        type: constants.CREATE_ACCOUNT_FAILURE,
     };
 }
 
 export function deleteAccountStart(): DeleteAccount {
     return {
-        type: constants.DELETE_ACCOUNT
+        type: constants.DELETE_ACCOUNT,
     };
 }
 
 export function deleteAccountSuccess(id: number): DeleteAccountSuccess {
     return {
         type: constants.DELETE_ACCOUNT_SUCCESS,
-        id
+        id,
     };
 }
 
 export function deleteAccountFailure(): DeleteAccountFailure {
     return {
-        type: constants.DELETE_ACCOUNT_FAILURE
+        type: constants.DELETE_ACCOUNT_FAILURE,
     };
 }
 
-export function showEditAccountModal(account: PushAccount): ShowEditAccountModal {
+export function showEditAccountModal(
+    account: PushAccount
+): ShowEditAccountModal {
     return {
         type: constants.SHOW_EDIT_ACCOUNT_MODAL,
-        account
+        account,
     };
 }
 
@@ -171,25 +190,28 @@ export function editAccountStart(): EditAccount {
 export function editAccountSuccess(account: PushAccount): EditAccountSuccess {
     return {
         type: constants.EDIT_ACCOUNT_SUCCESS,
-        account
+        account,
     };
 }
 
 export function editAccountFailure(): EditAccountFailure {
     return {
-        type: constants.EDIT_ACCOUNT_FAILURE
+        type: constants.EDIT_ACCOUNT_FAILURE,
     };
 }
 
 /**
  * 获得账号列表
  */
-export function getAccountList():
-    DeferredAction<GetAccountList | GetAccountListSuccess | GetAccountListFailure> {
+export function getAccountList(): DeferredAction<
+    GetAccountList | GetAccountListSuccess | GetAccountListFailure
+> {
     return async (dispatch) => {
         dispatch(getAccountListStart());
         try {
-            const response = await request.get<PushAccountList>('/PushAccount/list');
+            const response = await request.get<PushAccountList>(
+                "/PushAccount/list"
+            );
             dispatch(getAccountListSuccess(response));
         } catch (e) {
             dispatch(raiseError(e));
@@ -201,16 +223,24 @@ export function getAccountList():
 /**
  * 创建账号
  */
-export function createAccount(platform: string, name: string, credential: string):
-    DeferredAction<CreateAccount | CreateAccountSuccess | CreateAccountFailure> {
+export function createAccount({
+    platform,
+    name,
+    credential,
+}: CreateAccountFormValues): DeferredAction<
+    CreateAccount | CreateAccountSuccess | CreateAccountFailure
+> {
     return async (dispatch) => {
         dispatch(createAccountStart());
         try {
-            const response = await request.post<PushAccount>('/PushAccount/create', {
-                platform,
-                name,
-                credential
-            });
+            const response = await request.post<PushAccount>(
+                "/PushAccount/create",
+                {
+                    platform,
+                    name,
+                    credential,
+                }
+            );
             dispatch(createAccountSuccess(response));
         } catch (e) {
             dispatch(raiseError(e));
@@ -222,13 +252,14 @@ export function createAccount(platform: string, name: string, credential: string
  * 删除账号
  * @param id
  */
-export function deleteAccount(id: number):
-    DeferredAction<DeleteAccount | DeleteAccountSuccess | DeleteAccountFailure> {
+export function deleteAccount(
+    id: number
+): DeferredAction<DeleteAccount | DeleteAccountSuccess | DeleteAccountFailure> {
     return async (dispatch) => {
         dispatch(deleteAccountStart());
         try {
-            await request.post('/PushAccount/delete', {
-                accountId: id
+            await request.post("/PushAccount/delete", {
+                accountId: id,
             });
             dispatch(deleteAccountSuccess(id));
         } catch (e) {
@@ -240,23 +271,31 @@ export function deleteAccount(id: number):
 
 /**
  * 编辑账号
- * @param id 
+ * @param id
  * @param platform
- * @param name 
+ * @param name
  * @param account
  */
-export function editAccount(
-    id: number, platform: string, name: string, credential: string
-): DeferredAction<EditAccount | EditAccountSuccess | EditAccountFailure> {
+export function editAccount({
+    id,
+    platform,
+    name,
+    credential,
+}: EditAccountFormValues): DeferredAction<
+    EditAccount | EditAccountSuccess | EditAccountFailure
+> {
     return async (dispatch) => {
         dispatch(editAccountStart());
         try {
-            const response = await request.post<PushAccount>('/PushAccount/edit', {
-                accountId: id,
-                platform,
-                name,
-                credential
-            });
+            const response = await request.post<PushAccount>(
+                "/PushAccount/edit",
+                {
+                    accountId: id,
+                    platform,
+                    name,
+                    credential,
+                }
+            );
             dispatch(editAccountSuccess(response));
         } catch (e) {
             dispatch(raiseError(e));

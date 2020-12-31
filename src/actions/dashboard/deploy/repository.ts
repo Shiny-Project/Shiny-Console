@@ -4,6 +4,7 @@ import { DeferredAction } from 'types/action';
 import request from 'services/request';
 import { RepositoryList, Repository } from 'types/dashboard';
 import { CreateRepositoryFormValues } from 'components/Dashboard/Deploy/Repository/CreateRepositoryForm';
+import { EditRepositoryFormValues } from 'components/Dashboard/Deploy/Repository/EditRepositoryForm';
 
 export interface GetRepositoryList {
     type: constants.GET_REPOSITORY_LIST;
@@ -224,13 +225,13 @@ export function createRepository({ name, description }: CreateRepositoryFormValu
  * @param name 仓库名
  * @param description 仓库说明
  */
-export function editRepository(repositoryId: number, name: string, description: string):
+export function editRepository({ id, name, description }: EditRepositoryFormValues):
     DeferredAction<EditRepositoryStart | EditRepositorySuccess | EditRepositoryFailure> {
         return async (dispatch) => {
             dispatch(editRepositoryStart());
             try {
                 const updatedRepository = await request.post<Repository>('/Repository/update', {
-                    id: repositoryId,
+                    id,
                     name,
                     description
                 });

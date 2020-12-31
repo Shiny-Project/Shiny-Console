@@ -6,6 +6,7 @@ import { RepositoryAction } from 'actions/dashboard/deploy/repository';
 import { Repository as RepositoryItem } from 'types/dashboard';
 import Repository from 'components/Dashboard/Deploy/Repository/Repository';
 import { CreateRepositoryFormValues } from 'components/Dashboard/Deploy/Repository/CreateRepositoryForm';
+import { EditRepositoryFormValues } from 'components/Dashboard/Deploy/Repository/EditRepositoryForm';
 
 export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
     return {
@@ -50,8 +51,8 @@ export function mapDispatchToProps(dispatch: Dispatch<RepositoryAction>) {
         hideEditRepositoryModal: () => {
             dispatch(actions.hideEditRepositoryModal());
         },
-        editRepository: (repositoryId: number, name: string, description: string) => {
-            dispatch(actions.editRepository(repositoryId, name, description));
+        editRepository: (formValues: EditRepositoryFormValues) => {
+            dispatch(actions.editRepository(formValues));
         }
     };
 }

@@ -1,38 +1,42 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { Modal, Form, Input } from "antd";
-import { Repository } from "types/dashboard";
+import { PushRuleItem } from "types/dashboard";
 
-export interface EditRepositoryFormValues {
+export interface EditRuleFormValues {
     id: number;
-    name: string;
-    description: string;
+    spider_name: string;
+    rule: string;
 }
 
-export interface EditRepositoryFormProps {
-    repository: Repository;
+export interface EditRuleFormProps {
+    rule: PushRuleItem;
     visible: boolean;
     loading: boolean;
-    onSubmit: (formValues: EditRepositoryFormValues) => void;
+    onSubmit: (id: number, spiderName: string, rule: string) => void;
     onCancel: () => void;
 }
 
-function EditRepositoryForm(props: EditRepositoryFormProps) {
-    const [form] = Form.useForm<EditRepositoryFormValues>();
-    const { repository, visible, loading, onSubmit, onCancel } = props;
+function EditRuleForm(props: EditRuleFormProps) {
+    const [form] = Form.useForm<EditRuleFormValues>();
+    const { rule, visible, loading, onCancel, onSubmit } = props;
     const handleSubmitClick = useCallback(
         async (e: React.MouseEvent<HTMLElement>) => {
             const values = await form.validateFields();
-            onSubmit(values);
+            onSubmit(values.id, values.spider_name, values.rule);
         },
         [form, onSubmit]
     );
-
+    const formInitialValues = useMemo(() => {
+        return {
+            ...rule,
+            rule: JSON.stringify(rule.rule),
+        };
+    }, [rule]);
     useEffect(() => {
         if (visible) {
             form.resetFields();
         }
     }, [visible, form]);
-
     return (
         <Modal
             visible={visible}
@@ -40,27 +44,31 @@ function EditRepositoryForm(props: EditRepositoryFormProps) {
             onOk={handleSubmitClick}
             onCancel={onCancel}
         >
-            <Form form={form} layout="vertical" initialValues={repository}>
+            <Form
+                form={form}
+                initialValues={formInitialValues}
+                layout="vertical"
+            >
                 <Form.Item name="id" label="ID" rules={[{ required: true }]}>
                     <Input disabled={true} />
                 </Form.Item>
                 <Form.Item
-                    name="name"
-                    label="仓库名"
+                    name="spider_name"
+                    label="Spider Name"
                     rules={[{ required: true }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="description"
-                    label="说明"
+                    name="rule"
+                    label="规则 (JSON)"
                     rules={[{ required: true }]}
                 >
-                    <Input />
+                    <Input.TextArea />
                 </Form.Item>
             </Form>
         </Modal>
     );
 }
 
-export default EditRepositoryForm;
+export default EditRuleForm;
