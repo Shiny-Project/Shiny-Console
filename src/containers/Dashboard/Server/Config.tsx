@@ -1,4 +1,4 @@
-import Config from 'components/Dashboard/Server/Config';
+import Config from 'components/Dashboard/Server/Config/Config';
 import * as actions from 'actions/dashboard/server/config';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';

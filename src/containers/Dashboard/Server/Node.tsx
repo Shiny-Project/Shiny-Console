@@ -1,4 +1,4 @@
-import Node from 'components/Dashboard/Server/Node';
+import Node from 'components/Dashboard/Server/Node/Node';
 import * as actions from 'actions/dashboard/server/node';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';
