@@ -1,4 +1,4 @@
-import List from 'components/Dashboard/Spider/List';
+import List from 'components/Dashboard/Spider/List/List';
 import * as actions from 'actions/dashboard/spider/list';
 import { StoreState } from 'types';
 import { connect } from 'react-redux';

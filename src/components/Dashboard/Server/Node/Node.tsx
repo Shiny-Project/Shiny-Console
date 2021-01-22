@@ -1,9 +1,7 @@
 import React from 'react';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Card, Table, Divider, Spin, Button, Modal, Input, Select, Popconfirm, Tag } from 'antd';
+import { Card, Table, Divider, Spin, Button, Popconfirm, Tag } from 'antd';
 import { ServerListResponse, ServerNode } from 'types/dashboard';
-import { FormComponentProps } from '@ant-design/compatible/lib/form';
+import CreateNodeForm from './CreateNodeForm';
 
 interface ServerNodeProps {
     type: string;
@@ -49,7 +47,7 @@ export interface State {
     showModal: boolean;
 }
 
-class Node extends React.Component<Props & FormComponentProps, State> {
+class Node extends React.Component<Props, State> {
     serverListColumns = [{
         title: 'ID',
         dataIndex: 'id',
@@ -101,17 +99,7 @@ class Node extends React.Component<Props & FormComponentProps, State> {
         this.props.getServerList();
     }
 
-    handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.addServer(values.type, values.name, values.host, values.group);
-            }
-        });
-    }
-
     render() {
-        const { getFieldDecorator } = this.props.form;
         return (
             <div>
                 <Spin spinning={this.props.isLoading}>
@@ -125,7 +113,6 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                         <Divider />
                         <Button
                             onClick={() => {
-                                this.props.form.resetFields();
                                 this.props.showModal();
                             }}
                         >
@@ -133,59 +120,15 @@ class Node extends React.Component<Props & FormComponentProps, State> {
                         </Button>
                     </Card>
                 </Spin>
-                <Modal
+                <CreateNodeForm
                     visible={this.props.modalVisible}
-                    title="添加服务器"
-                    confirmLoading={this.props.modalLoading}
-                    onOk={this.handleSubmit}
+                    loading={this.props.modalLoading}
+                    onSubmit={this.props.addServer}
                     onCancel={this.props.closeModal}
-                >
-                    <Form layout="vertical">
-                        <Form.Item label="服务器名">
-                            {getFieldDecorator('name', {
-                                rules: [{ required: true }]
-                            })(
-                                <Input />
-                            )}
-                        </Form.Item>
-                        <Form.Item label="服务器类型">
-                            {getFieldDecorator('type', {
-                                rules: [{ required: true }]
-                            })(
-                                <Select>
-                                    <Select.Option value="central">中控</Select.Option>
-                                    <Select.Option value="spider">爬虫</Select.Option>
-                                    <Select.Option value="websocket">转发</Select.Option>
-                                </Select>
-                            )}
-                        </Form.Item>
-                        <Form.Item label="服务器地址">
-                            {getFieldDecorator('host', {
-                                rules: [{ required: true }]
-                            })(
-                                <Input />
-                            )}
-                        </Form.Item>
-                        <Form.Item label="服务器组">
-                            {getFieldDecorator('group', {
-                                rules: [{ required: true }],
-                                initialValue: ['default']
-                            })(
-                                <Select
-                                    mode="multiple"
-                                    style={{ width: '100%' }}
-                                    placeholder="Please select"
-                                >
-                                    <Select.Option key="default" value="default">default</Select.Option>
-                                    <Select.Option key="china_mainland" value="china_mainland">china_mainland</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item>
-                    </Form>
-                </Modal>
+                />
             </div>
         );
     }
 }
 
-export default Form.create<Props & FormComponentProps>()(Node);
+export default Node;

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Modal, Form, Input, Select } from "antd";
 
 export interface CreateNodeFormProps {
@@ -23,6 +23,11 @@ function CreateNodeForm(props: CreateNodeFormProps) {
         },
         [form, onSubmit]
     );
+    useEffect(() => {
+        if (visible) {
+            form.resetFields();
+        }
+    }, [visible, form]);
     return (
         <Modal
             title="添加服务器"
