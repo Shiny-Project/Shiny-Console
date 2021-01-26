@@ -3,6 +3,7 @@ import { Spin, Row, Col } from 'antd';
 import { ShinyEvent, ShinyEventDetail } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
 import JobList from './Jobs/List';
+import './index.css';
 export interface EventListItemDetailProps {
     event: ShinyEvent;
     eventDetail: ShinyEventDetail;
