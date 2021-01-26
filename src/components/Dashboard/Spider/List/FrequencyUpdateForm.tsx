@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Modal, Form, Input } from "antd";
 
 export interface FrequencyUpdateFormValues {
@@ -19,7 +19,12 @@ function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
     const handleSubmit = useCallback(async () => {
         const values = await form.validateFields();
         onSubmit(values.frequency);
-    }, [form, onSubmit])
+    }, [form, onSubmit]);
+    useEffect(() => {
+        if (visible) {
+            form.resetFields();
+        }
+    }, [visible, form]);
     return (
         <Modal
             visible={visible}

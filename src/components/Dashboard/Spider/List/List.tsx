@@ -1,85 +1,9 @@
 import React from "react";
 import { SpiderListResponse, Spider } from "types/dashboard";
-import { Form } from "@ant-design/compatible";
-import "@ant-design/compatible/assets/index.css";
-import {
-    Spin,
-    Card,
-    Table,
-    Divider,
-    Popconfirm,
-    Modal,
-    Input,
-    Row,
-    Col,
-    Button,
-} from "antd";
-import { FormComponentProps } from "@ant-design/compatible/lib/form";
-import { WrappedFormUtils } from "@ant-design/compatible/lib/form/Form";
+import { Spin, Card, Table, Divider, Popconfirm, Row, Col, Button } from "antd";
 import TimeDiff from "components/Common/TimeDiff";
 import FrequencyUpdateForm from "./FrequencyUpdateForm";
-
-interface FormModalProps {
-    visible: boolean;
-    form: WrappedFormUtils;
-    confirmLoading?: boolean;
-    onCancel: () => void;
-    onSubmit: (e: React.MouseEvent<HTMLElement>) => void;
-}
-
-interface EditSpiderFormProps extends FormModalProps {
-    spiderInfo: Spider;
-}
-
-class EditSpiderForm extends React.Component<EditSpiderFormProps> {
-    render() {
-        const {
-            visible,
-            onCancel,
-            onSubmit,
-            spiderInfo,
-            confirmLoading,
-            form,
-        } = this.props;
-        const { getFieldDecorator } = form;
-        return (
-            <Modal
-                visible={visible}
-                onCancel={onCancel}
-                onOk={onSubmit}
-                confirmLoading={confirmLoading}
-                title="编辑"
-            >
-                <Form layout="vertical">
-                    <Form.Item label="爬虫名">
-                        {getFieldDecorator("name", {
-                            rules: [{ required: true }],
-                            initialValue: spiderInfo.name,
-                        })(<Input />)}
-                    </Form.Item>
-                    <Form.Item label="爬虫路径">
-                        {getFieldDecorator("path", {
-                            rules: [{ required: true }],
-                            initialValue: spiderInfo.path,
-                        })(<Input />)}
-                    </Form.Item>
-                    <Form.Item label="Group">
-                        {getFieldDecorator("group", {
-                            rules: [{ required: true }],
-                            initialValue: spiderInfo.group,
-                        })(<Input />)}
-                    </Form.Item>
-                    <Form.Item label="描述">
-                        {getFieldDecorator("description", {
-                            rules: [{ required: true }],
-                            initialValue: spiderInfo.description,
-                        })(<Input />)}
-                    </Form.Item>
-                </Form>
-            </Modal>
-        );
-    }
-}
+import EditSpiderForm, { EditSpiderFormValues } from "./EditSpiderForm";
 
 export interface Props {
     spiderList: SpiderListResponse;
@@ -140,7 +64,7 @@ class SpiderDetail extends React.Component<SpiderDetailProps> {
     }
 }
 
-class List extends React.Component<Props & FormComponentProps, State> {
+class List extends React.Component<Props, State> {
     spiderListColumns = [
         {
             title: "ID",
@@ -187,7 +111,6 @@ class List extends React.Component<Props & FormComponentProps, State> {
                         <Button
                             type="link"
                             onClick={() => {
-                                this.props.form.resetFields();
                                 this.props.showFrequencyUpdateModal(record.id);
                             }}
                         >
@@ -197,7 +120,6 @@ class List extends React.Component<Props & FormComponentProps, State> {
                         <Button
                             type="link"
                             onClick={() => {
-                                this.props.form.resetFields();
                                 this.props.showEditSpiderModal(record.id);
                             }}
                         >
@@ -225,19 +147,14 @@ class List extends React.Component<Props & FormComponentProps, State> {
     handleFrequencyUpdate = (frequency: number) => {
         this.props.updateFrequency(this.props.nowEditingSpider.id, frequency);
     };
-    handleEditFormSubmit = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.editSpider(
-                    this.props.nowEditingSpider.id,
-                    values.name,
-                    values.description,
-                    values.group,
-                    values.path
-                );
-            }
-        });
+    handleEditFormSubmit = (values: EditSpiderFormValues) => {
+        this.props.editSpider(
+            this.props.nowEditingSpider.id,
+            values.name,
+            values.description,
+            values.group,
+            values.path
+        );
     };
     render() {
         return (
@@ -264,11 +181,10 @@ class List extends React.Component<Props & FormComponentProps, State> {
                     }
                 />
                 <EditSpiderForm
-                    form={this.props.form}
                     visible={this.props.editSpiderModalVisible}
                     onSubmit={this.handleEditFormSubmit}
                     onCancel={this.props.hideEditSpiderModal}
-                    confirmLoading={this.props.editSpiderLoading}
+                    loading={this.props.editSpiderLoading}
                     spiderInfo={this.props.nowEditingSpider}
                 />
             </Spin>
@@ -276,4 +192,4 @@ class List extends React.Component<Props & FormComponentProps, State> {
     }
 }
 
-export default Form.create<Props & FormComponentProps>()(List);
+export default List;
