@@ -1,23 +1,15 @@
-import React from 'react';
-import { Card, Row, Col, Table, Spin } from 'antd';
-import * as DashboardTypes from 'types/dashboard';
-import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from 'viser-react';
-const DataSet = require('@antv/data-set');
+import React from "react";
+import { Card, Row, Col, Spin } from "antd";
+import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from "viser-react";
+import DataSet from "@antv/data-set";
+import * as DashboardTypes from "types/dashboard";
+import CurrentTime from "./Statistics/CurrentTime";
+import "./index.css";
 
 export interface SpiderCount {
     publisher: string;
     count: number;
 }
-
-const spiderRankingColumns = [{
-    title: 'Spider Name',
-    dataIndex: 'publisher',
-    key: 'name',
-}, {
-    title: '计数',
-    dataIndex: 'count',
-    key: 'count',
-}];
 
 interface State {
     spiderRanking: DashboardTypes.SpiderRanking;
@@ -32,30 +24,69 @@ interface Props {
 }
 
 class Overview extends React.Component<Props, State> {
-    levelRankingScale = [{
-        dataKey: 'count',
-        min: 0,
-    }, {
-        dataKey: 'level',
-        min: 0,
-        max: 1,
-    }];
+    levelRankingScale = [
+        {
+            dataKey: "count",
+            min: 0,
+        },
+        {
+            dataKey: "level",
+            min: 0,
+            max: 1,
+        },
+    ];
 
-    jobStatusScale = [{
-        dataKey: 'percent',
-        min: 0,
-        formatter: '.0%',
-    }];
+    jobStatusScale = [
+        {
+            dataKey: "percent",
+            min: 0,
+            formatter: ".0%",
+        },
+    ];
 
     processJobStatusData = () => {
         const dv = new DataSet.View().source(this.props.statistics.jobStatus);
         dv.transform({
-            type: 'percent',
-            field: 'count',
-            dimension: 'status',
-            as: 'percent'
+            type: "percent",
+            field: "count",
+            dimension: "status",
+            as: "percent",
         });
         return dv.rows;
+    };
+
+    get dailySuccessRate() {
+        if (!this.props.statistics?.jobStatus) {
+            return "";
+        }
+        const successCount = this.props.statistics.jobStatus.find(
+            (item) => item.status === "success"
+        ).count;
+        const totalCount = this.props.statistics.jobStatus.reduce(
+            (prev, current) => prev + current.count,
+            0
+        );
+        return `${((successCount / totalCount) * 100).toFixed(2)}%`;
+    }
+
+    get dailyJobCount() {
+        if (!this.props.statistics?.jobStatus) {
+            return "";
+        }
+        return this.props.statistics.jobStatus.reduce(
+            (prev, current) => prev + current.count,
+            0
+        );
+    }
+
+    get dailyEventsCount() {
+        if (!this.props.statistics?.jobStatus) {
+            return "";
+        }
+        return this.props.statistics.spiderRanking["1day"].reduce(
+            (prev, current) => prev + current.count,
+            0
+        );
     }
 
     componentDidMount() {
@@ -65,81 +96,115 @@ class Overview extends React.Component<Props, State> {
     render() {
         return (
             <Spin spinning={this.props.isLoading}>
-                {this.props.statistics && <Card title="Overview">
-                    <Row gutter={16}>
-                        <Col lg={12} xs={24}>
-                            <Card title="本月事件等级分布" bordered={false}>
-                                <Chart
-                                    forceFit={true}
-                                    height={300}
-                                    scale={this.levelRankingScale}
-                                    data={this.props.statistics.levelRanking}
-                                >
-                                    <Tooltip />
-                                    <Axis />
-                                    <Bar position="level*count" />
-                                </Chart>
-                            </Card>
-                        </Col>
-                        <Col lg={12} xs={24}>
-                            <Card title="本日任务处理情况" bordered={false}>
-                                <Chart 
-                                    forceFit={true} 
-                                    height={300} 
-                                    data={this.processJobStatusData()} 
-                                    scale={this.jobStatusScale}
-                                >
-                                    <Tooltip showTitle={false} />
-                                    <Coord type="theta" />
-                                    <Axis />
-                                    <Legend dataKey="status" />
-                                    <Pie
-                                        position="percent"
-                                        color="status"
-                                        style={{ stroke: '#fff', lineWidth: 1 }}
-                                        label={['percent', {
-                                            formatter: (val: string, item: {point: {status: string}}) => {
-                                                return item.point.status + ': ' + val;
-                                            }
-                                        }]}
-                                    />
-                                </Chart>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col lg={8} xs={24}>
-                            <Card title="近1日" bordered={false}>
-                                <Table
-                                    dataSource={this.props.statistics.spiderRanking['1day']}
-                                    columns={spiderRankingColumns}
-                                    pagination={false}
-                                    rowKey="publisher"
-                                />
-                            </Card>
-                        </Col>
-                        <Col lg={8} xs={24}>
-                            <Card title="近3日" bordered={false}>
-                                <Table
-                                    dataSource={this.props.statistics.spiderRanking['3days']}
-                                    columns={spiderRankingColumns}
-                                    pagination={false}
-                                    rowKey="publisher"
-                                />
-                            </Card>
-                        </Col>
-                        <Col lg={8} xs={24}>
-                            <Card title="近21日" bordered={false}>
-                                <Table
-                                    dataSource={this.props.statistics.spiderRanking['21days']}
-                                    columns={spiderRankingColumns}
-                                    pagination={false}
-                                    rowKey="publisher"
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
-                </Card>}
+                {this.props.statistics && (
+                    <Card title="Overview">
+                        <Row>
+                            <Col lg={24} xs={24}>
+                                <div className="time-container">
+                                    <CurrentTime />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col lg={24} xs={24}>
+                                <Card title="核心指标" bordered={false}>
+                                    <Row>
+                                        <Col lg={8} xs={24}>
+                                            <div className="metrics-block">
+                                                <div className="metrics-value">
+                                                    {this.dailySuccessRate}
+                                                </div>
+                                                <div className="metrics-desc">
+                                                    当日任务处理成功率
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col lg={8} xs={24}>
+                                            <div className="metrics-block">
+                                                <div className="metrics-value">
+                                                    {this.dailyJobCount}
+                                                </div>
+                                                <div className="metrics-desc">
+                                                    当日任务数
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col lg={8} xs={24}>
+                                            <div className="metrics-block">
+                                                <div className="metrics-value">
+                                                    {this.dailyEventsCount}
+                                                </div>
+                                                <div className="metrics-desc">
+                                                    当日事件数
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+                            <Col lg={12} xs={24}>
+                                <Card title="本月事件等级分布" bordered={false}>
+                                    <Chart
+                                        forceFit={true}
+                                        height={300}
+                                        scale={this.levelRankingScale}
+                                        data={
+                                            this.props.statistics.levelRanking
+                                        }
+                                    >
+                                        <Tooltip />
+                                        <Axis />
+                                        <Bar position="level*count" />
+                                    </Chart>
+                                </Card>
+                            </Col>
+                            <Col lg={12} xs={24}>
+                                <Card title="本日任务处理情况" bordered={false}>
+                                    <Chart
+                                        forceFit={true}
+                                        height={300}
+                                        data={this.processJobStatusData()}
+                                        scale={this.jobStatusScale}
+                                    >
+                                        <Tooltip showTitle={false} />
+                                        <Coord type="theta" />
+                                        <Axis />
+                                        <Legend dataKey="status" />
+                                        <Pie
+                                            position="percent"
+                                            color="status"
+                                            style={{
+                                                stroke: "#fff",
+                                                lineWidth: 1,
+                                            }}
+                                            label={[
+                                                "percent",
+                                                {
+                                                    formatter: (
+                                                        val: string,
+                                                        item: {
+                                                            point: {
+                                                                status: string;
+                                                            };
+                                                        }
+                                                    ) => {
+                                                        return (
+                                                            item.point.status +
+                                                            ": " +
+                                                            val
+                                                        );
+                                                    },
+                                                },
+                                            ]}
+                                        />
+                                    </Chart>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Card>
+                )}
             </Spin>
         );
     }

@@ -1,0 +1,15 @@
+.time-container {
+    text-align: center;
+}
+.metrics-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.metrics-value {
+    font-size: 36px;
+}
+.metrics-desc {
+    font-size: 14px;
+    color: #aaa;
+}
