@@ -30,6 +30,13 @@ export interface LevelRankingItem {
     count: number; // 事件数
 }
 
+export type LatencyGraphResponse = LatencyDataItem[];
+
+export interface LatencyDataItem {
+    time: string;
+    websocket: number;
+}
+
 // Dashboard/Realtime
 
 export type RecentEventsResponse = {

@@ -14,7 +14,9 @@ export default {
             errorId: Math.random()
         },
         overview: {
-            isLoading: false
+            isLoading: false,
+            isLoadingLatencyGraph: false,
+            latencyData: [],
         },
         realtime: {
             isLoading: false,

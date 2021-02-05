@@ -5,25 +5,23 @@ import DataSet from "@antv/data-set";
 import * as DashboardTypes from "types/dashboard";
 import CurrentTime from "./Statistics/CurrentTime";
 import "./index.css";
+import LatencyGraph from "./Statistics/LatencyGraph";
 
 export interface SpiderCount {
     publisher: string;
     count: number;
 }
 
-interface State {
-    spiderRanking: DashboardTypes.SpiderRanking;
-    levelRanking: DashboardTypes.LevelRankingItem[];
-    jobStatus: DashboardTypes.StatusItem[];
-}
-
 interface Props {
     isLoading: boolean;
+    isLoadingLatencyGraph: boolean;
     statistics: DashboardTypes.StatisticsResponse;
+    latencyData: DashboardTypes.LatencyGraphResponse;
     getStatistics: () => void;
+    getLatencyData: () => void;
 }
 
-class Overview extends React.Component<Props, State> {
+class Overview extends React.Component<Props> {
     levelRankingScale = [
         {
             dataKey: "count",
@@ -91,6 +89,7 @@ class Overview extends React.Component<Props, State> {
 
     componentDidMount() {
         this.props.getStatistics();
+        this.props.getLatencyData();
     }
 
     render() {
@@ -141,6 +140,14 @@ class Overview extends React.Component<Props, State> {
                                         </Col>
                                     </Row>
                                 </Card>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+                            <Col lg={24} xs={24}>
+                                <LatencyGraph
+                                    latencyData={this.props.latencyData}
+                                    loading={this.props.isLoadingLatencyGraph}
+                                />
                             </Col>
                         </Row>
                         <Row gutter={16}>

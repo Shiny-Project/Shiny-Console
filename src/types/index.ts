@@ -1,5 +1,23 @@
 // tslint:disable-next-line:max-line-length
-import { StatisticsResponse, RecentEventsResponse, Job, APIKeyPair, ServerNode, SpiderListResponse, Spider, PushHistoryResponse, ConfigItem, SpiderIdentityItem, PushAccountList, PushAccount, PushRuleList, PushRuleItem, RepositoryList, Repository } from 'types/dashboard';
+import {
+    StatisticsResponse,
+    RecentEventsResponse,
+    Job,
+    APIKeyPair,
+    ServerNode,
+    SpiderListResponse,
+    Spider,
+    PushHistoryResponse,
+    ConfigItem,
+    SpiderIdentityItem,
+    PushAccountList,
+    PushAccount,
+    PushRuleList,
+    PushRuleItem,
+    RepositoryList,
+    Repository,
+    LatencyGraphResponse,
+} from "types/dashboard";
 
 export interface StoreState {
     user: UserState;
@@ -30,7 +48,9 @@ export interface ErrorState {
 // Dashboard/Overview
 export interface OverviewState {
     isLoading: boolean;
+    isLoadingLatencyGraph: boolean;
     statistics?: StatisticsResponse;
+    latencyData?: LatencyGraphResponse;
 }
 // Dashboard/Realtime
 export interface RealtimeState {

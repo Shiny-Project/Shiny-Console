@@ -1,8 +1,8 @@
-import * as constants from 'constants/Dashboard/overview';
-import { raiseError } from 'actions/dashboard/error';
-import request from 'services/request';
-import { StatisticsResponse } from 'types/dashboard';
-import { DeferredAction } from 'types/action';
+import * as constants from "constants/Dashboard/overview";
+import { raiseError } from "actions/dashboard/error";
+import request from "services/request";
+import { LatencyGraphResponse, StatisticsResponse } from "types/dashboard";
+import { DeferredAction } from "types/action";
 
 export interface GetStatistic {
     type: constants.GET_STATISTICS;
@@ -17,14 +17,36 @@ export interface GetStatisticFailure {
     type: constants.GET_STATISTIC_FAILURE;
 }
 
-export type OverviewAction = GetStatistic | GetStatisticSuccess | GetStatisticFailure;
+export interface GetLatencyGraph {
+    type: constants.GET_LATENCY_GRAPH;
+}
 
-export function getStatistics():
-    DeferredAction<GetStatistic | GetStatisticSuccess | GetStatisticFailure> {
+export interface GetLatencyGraphSuccess {
+    type: constants.GET_LATENCY_GRAPH_SUCCESS;
+    latencyData: LatencyGraphResponse;
+}
+
+export interface GetLatencyGraphFailure {
+    type: constants.GET_LATENCY_GRAPH_FAILURE;
+}
+
+export type OverviewAction =
+    | GetStatistic
+    | GetStatisticSuccess
+    | GetStatisticFailure
+    | GetLatencyGraph
+    | GetLatencyGraphSuccess
+    | GetLatencyGraphFailure;
+
+export function getStatistics(): DeferredAction<
+    GetStatistic | GetStatisticSuccess | GetStatisticFailure
+> {
     return async (dispatch) => {
         dispatch(getStatisticsStart());
         try {
-            const response = await request.get<StatisticsResponse>('/Data/statistics');
+            const response = await request.get<StatisticsResponse>(
+                "/Data/statistics"
+            );
             dispatch(getStatisticsSuccess(response));
         } catch (e) {
             dispatch(raiseError(e));
@@ -35,19 +57,59 @@ export function getStatistics():
 
 export function getStatisticsStart(): GetStatistic {
     return {
-        type: constants.GET_STATISTICS
+        type: constants.GET_STATISTICS,
     };
 }
 
-export function getStatisticsSuccess(statistics: StatisticsResponse): GetStatisticSuccess {
+export function getStatisticsSuccess(
+    statistics: StatisticsResponse
+): GetStatisticSuccess {
     return {
         type: constants.GET_STATISTICS_SUCCESS,
-        statistics
+        statistics,
     };
 }
 
 export function getStatisticsFailure(): GetStatisticFailure {
     return {
         type: constants.GET_STATISTIC_FAILURE,
+    };
+}
+
+export function getLatencyGraph(): DeferredAction<
+    GetLatencyGraph | GetLatencyGraphSuccess | GetLatencyGraphFailure
+> {
+    return async (dispatch) => {
+        dispatch(getLatencyGraphStart());
+        try {
+            const latencyData = await request.get<LatencyGraphResponse>(
+                "/System/latency"
+            );
+            dispatch(getLatencyGraphSuccess(latencyData));
+        } catch (e) {
+            dispatch(raiseError(e));
+            dispatch(getLatencyGraphFailure());
+        }
+    };
+}
+
+export function getLatencyGraphStart(): GetLatencyGraph {
+    return {
+        type: constants.GET_LATENCY_GRAPH,
+    };
+}
+
+export function getLatencyGraphSuccess(
+    latencyData: LatencyGraphResponse
+): GetLatencyGraphSuccess {
+    return {
+        type: constants.GET_LATENCY_GRAPH_SUCCESS,
+        latencyData,
+    };
+}
+
+export function getLatencyGraphFailure(): GetLatencyGraphFailure {
+    return {
+        type: constants.GET_LATENCY_GRAPH_FAILURE,
     };
 }

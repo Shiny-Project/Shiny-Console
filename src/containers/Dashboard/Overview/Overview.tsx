@@ -16,7 +16,9 @@ export function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: 
 export function mapStateToProps(state: StoreState) {
     return {
       statistics: state.dashboard.overview.statistics,
-      isLoading: state.dashboard.overview.isLoading
+      isLoading: state.dashboard.overview.isLoading,
+      isLoadingLatencyGraph: state.dashboard.overview.isLoadingLatencyGraph,
+      latencyData: state.dashboard.overview.latencyData,
     };
 }
 
@@ -24,6 +26,9 @@ export function mapDispatchToProps(dispatch: Dispatch<OverviewAction>) {
     return {
         getStatistics: () => {
             dispatch(actions.getStatistics());
+        },
+        getLatencyData: () => {
+            dispatch(actions.getLatencyGraph());
         }
     };
 }
