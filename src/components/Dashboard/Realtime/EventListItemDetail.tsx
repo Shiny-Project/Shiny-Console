@@ -2,6 +2,7 @@ import React from 'react';
 import { Spin, Row, Col } from 'antd';
 import { ShinyEvent, ShinyEventDetail } from 'types/dashboard';
 import TimeDiff from 'components/Common/TimeDiff';
+import JSONViewer from 'components/Common/JSONViewer';
 import JobList from './Jobs/List';
 import './index.css';
 export interface EventListItemDetailProps {
@@ -74,6 +75,14 @@ class EventListItemDetail extends React.Component<EventListItemDetailProps> {
                         </Col>
                         <Col span={16}>
                             {this.props.event.hash}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={8} className="column-label">
+                            Raw Data
+                        </Col>
+                        <Col span={16}>
+                            <JSONViewer json={this.props.event.data}>事件数据</JSONViewer>
                         </Col>
                     </Row>
                 </Col>

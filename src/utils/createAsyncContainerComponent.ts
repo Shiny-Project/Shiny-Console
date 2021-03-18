@@ -2,14 +2,14 @@ import Loadable from "react-loadable";
 import Loading from "components/Common/Loading";
 import nprogress from "nprogress";
 
-interface CreateAsyncComponentParams {
+interface CreateAsyncContainerComponentParams {
     path: string;
 }
 
-const createAsyncComponent = ({ path }: CreateAsyncComponentParams) => {
+const createAsyncContainerComponent = ({ path }: CreateAsyncContainerComponentParams) => {
     return Loadable({
         loader: () => {
-            const promise = import(`../components/${path}`);
+            const promise = import(`../containers/${path}`);
             nprogress.start();
             promise.then(() => {
                 nprogress.done();
@@ -19,4 +19,4 @@ const createAsyncComponent = ({ path }: CreateAsyncComponentParams) => {
         loading: Loading,
     });
 };
-export default createAsyncComponent;
+export default createAsyncContainerComponent;

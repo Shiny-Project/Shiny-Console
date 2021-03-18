@@ -4,8 +4,8 @@ import { Chart, Tooltip, Axis, Bar, Pie, Coord, Legend } from "viser-react";
 import DataSet from "@antv/data-set";
 import * as DashboardTypes from "types/dashboard";
 import CurrentTime from "./Statistics/CurrentTime";
-import "./index.css";
 import LatencyGraph from "./Statistics/LatencyGraph";
+import "./index.css";
 
 export interface SpiderCount {
     publisher: string;
@@ -57,9 +57,10 @@ class Overview extends React.Component<Props> {
         if (!this.props.statistics?.jobStatus) {
             return "";
         }
-        const successCount = this.props.statistics.jobStatus.find(
-            (item) => item.status === "success"
-        ).count;
+        const successCount =
+            this.props.statistics.jobStatus.find(
+                (item) => item.status === "success"
+            )?.count || 0;
         const totalCount = this.props.statistics.jobStatus.reduce(
             (prev, current) => prev + current.count,
             0
@@ -93,63 +94,84 @@ class Overview extends React.Component<Props> {
     }
 
     render() {
+        const pieLabel = [
+            "percent",
+            {
+                formatter: (
+                    val: string,
+                    item: {
+                        point: {
+                            status: string;
+                        };
+                    }
+                ) => {
+                    return item.point.status + ": " + val;
+                },
+            },
+        ];
+        const pieStyle = {
+            stroke: "#fff",
+            lineWidth: 1,
+        };
         return (
-            <Spin spinning={this.props.isLoading}>
-                {this.props.statistics && (
-                    <Card title="Overview">
-                        <Row>
-                            <Col lg={24} xs={24}>
-                                <div className="time-container">
-                                    <CurrentTime />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col lg={24} xs={24}>
-                                <Card title="核心指标" bordered={false}>
-                                    <Row>
-                                        <Col lg={8} xs={24}>
-                                            <div className="metrics-block">
-                                                <div className="metrics-value">
-                                                    {this.dailySuccessRate}
-                                                </div>
-                                                <div className="metrics-desc">
-                                                    当日任务处理成功率
-                                                </div>
+            <Card title="Overview">
+                <Row>
+                    <Col lg={24} xs={24}>
+                        <div className="time-container">
+                            <CurrentTime />
+                        </div>
+                    </Col>
+                </Row>
+                <Spin spinning={this.props.isLoading}>
+                    <Row>
+                        <Col lg={24} xs={24}>
+                            <Card title="核心指标" bordered={false}>
+                                <Row>
+                                    <Col lg={8} xs={24}>
+                                        <div className="metrics-block">
+                                            <div className="metrics-value">
+                                                {this.dailySuccessRate}
                                             </div>
-                                        </Col>
-                                        <Col lg={8} xs={24}>
-                                            <div className="metrics-block">
-                                                <div className="metrics-value">
-                                                    {this.dailyJobCount}
-                                                </div>
-                                                <div className="metrics-desc">
-                                                    当日任务数
-                                                </div>
+                                            <div className="metrics-desc">
+                                                当日任务处理成功率
                                             </div>
-                                        </Col>
-                                        <Col lg={8} xs={24}>
-                                            <div className="metrics-block">
-                                                <div className="metrics-value">
-                                                    {this.dailyEventsCount}
-                                                </div>
-                                                <div className="metrics-desc">
-                                                    当日事件数
-                                                </div>
+                                        </div>
+                                    </Col>
+                                    <Col lg={8} xs={24}>
+                                        <div className="metrics-block">
+                                            <div className="metrics-value">
+                                                {this.dailyJobCount}
                                             </div>
-                                        </Col>
-                                    </Row>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row gutter={16}>
-                            <Col lg={24} xs={24}>
-                                <LatencyGraph
-                                    latencyData={this.props.latencyData}
-                                    loading={this.props.isLoadingLatencyGraph}
-                                />
-                            </Col>
-                        </Row>
+                                            <div className="metrics-desc">
+                                                当日任务数
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col lg={8} xs={24}>
+                                        <div className="metrics-block">
+                                            <div className="metrics-value">
+                                                {this.dailyEventsCount}
+                                            </div>
+                                            <div className="metrics-desc">
+                                                当日事件数
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Spin>
+                <Row gutter={16}>
+                    <Col lg={24} xs={24}>
+                        <LatencyGraph
+                            latencyData={this.props.latencyData}
+                            loading={this.props.isLoadingLatencyGraph}
+                        />
+                    </Col>
+                </Row>
+                <Spin spinning={this.props.isLoading}>
+                    {this.props.statistics && (
                         <Row gutter={16}>
                             <Col lg={12} xs={24}>
                                 <Card title="本月事件等级分布" bordered={false}>
@@ -182,37 +204,16 @@ class Overview extends React.Component<Props> {
                                         <Pie
                                             position="percent"
                                             color="status"
-                                            style={{
-                                                stroke: "#fff",
-                                                lineWidth: 1,
-                                            }}
-                                            label={[
-                                                "percent",
-                                                {
-                                                    formatter: (
-                                                        val: string,
-                                                        item: {
-                                                            point: {
-                                                                status: string;
-                                                            };
-                                                        }
-                                                    ) => {
-                                                        return (
-                                                            item.point.status +
-                                                            ": " +
-                                                            val
-                                                        );
-                                                    },
-                                                },
-                                            ]}
+                                            style={pieStyle}
+                                            label={pieLabel}
                                         />
                                     </Chart>
                                 </Card>
                             </Col>
                         </Row>
-                    </Card>
-                )}
-            </Spin>
+                    )}
+                </Spin>
+            </Card>
         );
     }
 }

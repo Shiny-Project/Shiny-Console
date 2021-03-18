@@ -1,7 +1,8 @@
-.logo{
+.logo {
     color: white;
     user-select: none;
 }
-.dashboard-main-container{
+.dashboard-main-container {
     margin-top: 1rem;
+    padding-right: 12px !important;
 }
