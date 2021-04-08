@@ -1,0 +1,17 @@
+.event-info-container {
+    display: flex;
+    margin-top: 20px;
+}
+.time {
+    color: #aaa;
+    font-size: smaller;
+}
+.time-diff {
+    text-decoration: underline;
+}
+.success {
+    color: #52c41a;
+}
+.info {
+    color: #1890ff;
+}

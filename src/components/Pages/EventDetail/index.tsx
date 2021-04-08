@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Card, message } from "antd";
 import { useParams } from "react-router";
 import { ShinyEventDetail } from "types/dashboard";
-import Loading from "components/Common/Loading";
+
 import request from "services/request";
+import EventBody from "./components/EventBody";
 
 interface Props {}
 
@@ -33,13 +34,7 @@ function EventDetail(props: Props): JSX.Element {
     }, [id]);
     return (
         <Card title="事件详情">
-            {!eventData && (
-                <Loading
-                    isLoading={loading}
-                    loadingText="数据加载中"
-                    errorText="数据加载失败"
-                />
-            )}
+            <EventBody eventDetail={eventData} loading={loading} />
         </Card>
     );
 }

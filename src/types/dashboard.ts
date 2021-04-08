@@ -63,6 +63,7 @@ export interface ShinyEvent {
 }
 /** Shiny 事件关联信息 */
 export interface ShinyEventDetail {
+    event: ShinyEvent;
     /** 事件ID */
     id: number;
     jobs: ShinyPushJob[];
