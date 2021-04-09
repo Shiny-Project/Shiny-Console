@@ -2,7 +2,9 @@ import React from "react";
 import Loading from "components/Common/Loading";
 import { ShinyEventDetail } from "types/dashboard";
 import EventTimeline from "./Timeline";
-import './index.css';
+import EventBasicInfo from "./EventBasicInfo";
+import EventContent from "./EventContent";
+import "./index.css";
 
 interface Props {
     eventDetail?: ShinyEventDetail;
@@ -24,8 +26,14 @@ const EventBody: React.FC<Props> = (props) => {
         <div className="event-body">
             <h2 className="title">{eventDetail.event.data.title}</h2>
             <div className="event-info-container">
+                <div className="event-desc">
+                    <EventBasicInfo event={eventDetail} />
+                </div>
                 <div className="timeline-container">
                     <EventTimeline event={eventDetail} />
+                </div>
+                <div className="event-content-container">
+                    <EventContent event={eventDetail} />
                 </div>
             </div>
         </div>

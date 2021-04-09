@@ -1,10 +1,29 @@
 .event-info-container {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
-.time {
+.event-desc {
+    margin: 0 0 32px;
+    width: 100%;
+    flex-grow: 1;
+}
+.timeline-container {
+    max-width: 30%;
+    padding-top: 9px;
+}
+.event-content-container {
+    flex-grow: 1;
+}
+.event-content-card {
+    width: 100%;
+}
+.time, .error-log {
     color: #aaa;
     font-size: smaller;
+}
+.error-log {
+    font-family: Consolas, monospace;
 }
 .time-diff {
     text-decoration: underline;
@@ -14,4 +33,7 @@
 }
 .info {
     color: #1890ff;
+}
+.error {
+    color: #ff4d4f;
 }

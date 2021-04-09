@@ -20,16 +20,25 @@ const PushJobChannelTextMap = {
 const PushJobStatusTextMap = {
     job_created: "创建",
     finished: "完成",
+    upload_image: "开始上传图片",
+    upload_image_success: "上传图片成功",
+    retry: "重试",
 };
 
 const PushJobStatusClassNameMap = {
     job_created: "info",
     finished: "success",
+    upload_image: "info",
+    upload_image_success: "success",
+    retry: "error",
 };
 
 const PushJobStatusColorNameMap = {
     job_created: "blue",
     finished: "green",
+    upload_image: "blue",
+    upload_image_success: "green",
+    retry: "red",
 };
 
 function PushJobItem(props: PushJobItemProps) {
@@ -44,6 +53,11 @@ function PushJobItem(props: PushJobItemProps) {
             </span>
             <TimeDiff startTime={startTime} time={logTime} />
             <div className="time">{logTime.toISOString()}</div>
+            {PushJobStatusColorNameMap[log.status] === "red" && (
+                <div className="error-log">
+                    {log.info}
+                </div>
+            )}
         </Timeline.Item>
     );
 }
@@ -64,7 +78,7 @@ function EventTimeline(props: Props) {
         }
         return result;
     }, [event.jobs, jobs.length]);
-    console.log(sortedLogs);
+
     return (
         <Timeline>
             <Timeline.Item>
