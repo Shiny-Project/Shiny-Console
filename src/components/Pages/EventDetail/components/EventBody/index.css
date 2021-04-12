@@ -1,19 +1,9 @@
-.event-info-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-.event-desc {
-    margin: 0 0 32px;
-    width: 100%;
-    flex-grow: 1;
-}
 .timeline-container {
-    max-width: 30%;
-    padding-top: 9px;
+    margin-top: 16px;
+    padding-top: 8px;
 }
 .event-content-container {
-    flex-grow: 1;
+    margin-top: 16px;
 }
 .event-content-card {
     width: 100%;
