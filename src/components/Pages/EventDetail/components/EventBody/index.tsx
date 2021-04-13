@@ -1,10 +1,11 @@
 import React from "react";
-import { Row, Col } from 'antd';
+import { Row, Col, Divider } from "antd";
 import Loading from "components/Common/Loading";
 import { ShinyEventDetail } from "types/dashboard";
 import EventTimeline from "./Timeline";
 import EventBasicInfo from "./EventBasicInfo";
 import EventContent from "./EventContent";
+import EventExtendContent from './EventExtendContent';
 import "./index.css";
 
 interface Props {
@@ -34,7 +35,15 @@ const EventBody: React.FC<Props> = (props) => {
                     <EventTimeline event={eventDetail} />
                 </Col>
                 <Col xs={24} lg={16} className="event-content-container">
-                    <EventContent event={eventDetail} />
+                    <Row>
+                        <Col span={24}>
+                            <EventContent event={eventDetail} />
+                        </Col>
+                        <Divider />
+                        <Col span={24}>
+                            <EventExtendContent event={eventDetail} />
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </div>

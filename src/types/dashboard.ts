@@ -61,6 +61,16 @@ export interface ShinyEvent {
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface ShinyEEWEventData extends ShinyEventData {
+    /** EEW 电文 */
+    code: string;
+}
+
+export interface ShinyEEWEvent extends ShinyEvent {
+    data: ShinyEEWEventData;
+}
+
 /** Shiny 事件关联信息 */
 export interface ShinyEventDetail {
     event: ShinyEvent;
