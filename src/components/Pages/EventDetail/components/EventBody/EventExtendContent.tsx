@@ -17,6 +17,7 @@ function EventExtendContent(props: Props) {
     if (isEEWEvent(event.event)) {
         return <EEW event={event.event} />;
     }
+    return null;
 }
 
 export default EventExtendContent;

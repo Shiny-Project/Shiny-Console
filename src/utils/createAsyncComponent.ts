@@ -4,15 +4,19 @@ import nprogress from "nprogress";
 
 interface CreateAsyncComponentParams {
     path: string;
+    disableProgress?: boolean;
 }
 
-const createAsyncComponent = ({ path }: CreateAsyncComponentParams) => {
+const createAsyncComponent = ({
+    path,
+    disableProgress = false,
+}: CreateAsyncComponentParams): any => {
     return Loadable({
         loader: () => {
             const promise = import(`../components/${path}`);
-            nprogress.start();
+            !disableProgress && nprogress.start();
             promise.then(() => {
-                nprogress.done();
+                !disableProgress && nprogress.done();
             });
             return promise;
         },

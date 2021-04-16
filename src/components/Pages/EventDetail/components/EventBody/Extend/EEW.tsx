@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Card, Descriptions, Tabs } from "antd";
+import { Card, Descriptions, Divider, List, Tabs } from "antd";
 import { ShinyEEWEvent } from "types/dashboard";
 import EEWParser from "eew-parser";
 
@@ -14,12 +14,11 @@ function EEW(props: Props) {
     const parsedCode = useMemo(() => {
         return new EEWParser(code);
     }, [code]);
-    console.log(parsedCode);
     return (
         <Card title="电文">
             <Tabs defaultActiveKey="1">
                 <Tabs.TabPane tab="解析" key="1">
-                    <Descriptions bordered column={3}>
+                    <Descriptions bordered column={3} size="small">
                         <Descriptions.Item label="电文类型" span={3}>
                             {parsedCode.type}
                         </Descriptions.Item>
@@ -101,10 +100,103 @@ function EEW(props: Props) {
                         <Descriptions.Item label="最大预测震度下降标记">
                             {parsedCode.isMaximumSeismicIntensityDecreased.toString()}
                         </Descriptions.Item>
-                        <Descriptions.Item label="最大预测震度变化理由">
+                        <Descriptions.Item
+                            label="最大预测震度变化理由"
+                            span={3}
+                        >
                             {parsedCode.maximumSeismicIntensityChangeReason}
                         </Descriptions.Item>
+                        {parsedCode.isWarning && (
+                            <>
+                                <Descriptions.Item label="警报编号">
+                                    {parsedCode.warningNumber}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="警报震中" span={2}>
+                                    {parsedCode.warningEpicenter}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="警报地区追加标记">
+                                    {parsedCode.hasAdditionalWarningRegion.toString()}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="警报都道府县追加标记">
+                                    {parsedCode.hasAdditionalWarningPrefecture.toString()}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="警报区域追加标记">
+                                    {parsedCode.hasAdditionalWarningArea.toString()}
+                                </Descriptions.Item>
+                                <Descriptions.Item
+                                    label="警报地域追加理由"
+                                    span={3}
+                                >
+                                    {parsedCode.additionReason}
+                                </Descriptions.Item>
+                                <Descriptions.Item
+                                    label="警报地域预报方法"
+                                    span={3}
+                                >
+                                    {parsedCode.warningForecastMethod}
+                                </Descriptions.Item>
+                            </>
+                        )}
                     </Descriptions>
+                    {parsedCode.isWarning && (
+                        <>
+                            <Divider />
+                            <Descriptions bordered size="small">
+                                <Descriptions.Item label="警报详细">
+                                    警报地方:
+                                    <br />
+                                    {parsedCode.warningRegion.join(" ")}
+                                    <br />
+                                    <br />
+                                    警报都道府県:
+                                    <br />
+                                    {parsedCode.warningPrefecture.join(" ")}
+                                    <br />
+                                    <br />
+                                    警报地域: <br />
+                                    {parsedCode.warningArea.join(" ")}
+                                    <br />
+                                    <br />
+                                    <List>
+                                        {parsedCode.warningDetails.map(
+                                            (detail) => (
+                                                <List.Item
+                                                    key={detail.areaName}
+                                                >
+                                                    <span>
+                                                        {detail.areaName}
+                                                    </span>
+                                                    <span>
+                                                        到达时间：
+                                                        {detail.arrivalTime.toISOString()}
+                                                    </span>
+                                                    <span>
+                                                        预计震度:
+                                                        {
+                                                            detail
+                                                                .seismicIntensity
+                                                                .min
+                                                        }
+                                                        ~
+                                                        {
+                                                            detail
+                                                                .seismicIntensity
+                                                                .max
+                                                        }
+                                                    </span>
+                                                    <span>
+                                                        {detail.arrival}/
+                                                        {detail.type}
+                                                    </span>
+                                                    <br />
+                                                </List.Item>
+                                            )
+                                        )}
+                                    </List>
+                                </Descriptions.Item>
+                            </Descriptions>
+                        </>
+                    )}
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="原文" key="2">
                     <pre

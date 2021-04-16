@@ -49,14 +49,12 @@ function PushJobItem(props: PushJobItemProps) {
             <span>{PushJobChannelTextMap[log.channel]}推送任务 </span>
             <span className={PushJobStatusClassNameMap[log.status]}>
                 {PushJobStatusTextMap[log.status]}
-                {" / "}
             </span>
+            <span> / </span>
             <TimeDiff startTime={startTime} time={logTime} />
             <div className="time">{logTime.toISOString()}</div>
             {PushJobStatusColorNameMap[log.status] === "red" && (
-                <div className="error-log">
-                    {log.info}
-                </div>
+                <div className="error-log">{log.info}</div>
             )}
         </Timeline.Item>
     );

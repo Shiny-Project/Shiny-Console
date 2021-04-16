@@ -1,12 +1,16 @@
 import React from "react";
 import { Row, Col, Divider } from "antd";
 import Loading from "components/Common/Loading";
+import createAsyncComponent from "utils/createAsyncComponent";
 import { ShinyEventDetail } from "types/dashboard";
 import EventTimeline from "./Timeline";
 import EventBasicInfo from "./EventBasicInfo";
 import EventContent from "./EventContent";
-import EventExtendContent from './EventExtendContent';
 import "./index.css";
+
+const AsyncEventExtendContent = createAsyncComponent({
+    path: "Pages/EventDetail/components/EventBody/EventExtendContent",
+});
 
 interface Props {
     eventDetail?: ShinyEventDetail;
@@ -41,7 +45,7 @@ const EventBody: React.FC<Props> = (props) => {
                         </Col>
                         <Divider />
                         <Col span={24}>
-                            <EventExtendContent event={eventDetail} />
+                            <AsyncEventExtendContent event={eventDetail} />
                         </Col>
                     </Row>
                 </Col>
