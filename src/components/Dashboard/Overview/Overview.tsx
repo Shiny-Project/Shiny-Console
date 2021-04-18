@@ -174,7 +174,10 @@ class Overview extends React.Component<Props> {
                     {this.props.statistics && (
                         <Row gutter={16}>
                             <Col lg={12} xs={24}>
-                                <Card title="本月事件等级分布" bordered={false}>
+                                <Card
+                                    title="24小时事件等级分布"
+                                    bordered={false}
+                                >
                                     <Chart
                                         forceFit={true}
                                         height={300}
@@ -190,7 +193,10 @@ class Overview extends React.Component<Props> {
                                 </Card>
                             </Col>
                             <Col lg={12} xs={24}>
-                                <Card title="本日任务处理情况" bordered={false}>
+                                <Card
+                                    title="24小时任务处理情况"
+                                    bordered={false}
+                                >
                                     <Chart
                                         forceFit={true}
                                         height={300}
