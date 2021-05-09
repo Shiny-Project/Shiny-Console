@@ -1,6 +1,7 @@
 import React from "react";
-import request from "services/request";
+import { Link } from 'react-router-dom';
 import { Card, Divider } from "antd";
+import request from "services/request";
 import { ShinyEvent, ShinyEventDetail } from "types/dashboard";
 import EventListItemDetail from "./EventListItemDetail";
 
@@ -56,10 +57,16 @@ class EventListItem extends React.Component<
                     ].join(" ")}
                     type="inner"
                     hoverable={true}
+                    extra={
+                        <span>
+                            <Link to={`/dashboard/event/${this.props.event.id}`}>详细信息</Link>
+                        </span>
+                    }
+                    title={this.props.event.data.title}
                 >
                     <div onClick={this.toggleDetailPanel}>
                         <Card.Meta
-                            title={this.props.event.data.title}
+                            
                             description={
                                 <div
                                     className="event-content"

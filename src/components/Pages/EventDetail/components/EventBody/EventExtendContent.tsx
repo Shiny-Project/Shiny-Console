@@ -9,7 +9,7 @@ interface Props {
 const isEEWEvent = (
     event: ShinyEvent | ShinyEEWEvent
 ): event is ShinyEEWEvent => {
-    return "code" in event.data;
+    return event.publisher === "eew";
 };
 
 function EventExtendContent(props: Props) {
