@@ -6,6 +6,7 @@ import { ShinyEventDetail } from "types/dashboard";
 import EventTimeline from "./Timeline";
 import EventBasicInfo from "./EventBasicInfo";
 import EventContent from "./EventContent";
+import EventImages from './EventImages';
 import "./index.css";
 
 const AsyncEventExtendContent = createAsyncComponent({
@@ -14,11 +15,12 @@ const AsyncEventExtendContent = createAsyncComponent({
 
 interface Props {
     eventDetail?: ShinyEventDetail;
+    images?: string[];
     loading: boolean;
 }
 
 const EventBody: React.FC<Props> = (props) => {
-    const { eventDetail, loading } = props;
+    const { eventDetail, images = [], loading } = props;
     if (!eventDetail) {
         return (
             <Loading
@@ -43,6 +45,12 @@ const EventBody: React.FC<Props> = (props) => {
                         <Col span={24}>
                             <EventContent event={eventDetail} />
                         </Col>
+                        {images.length > 0 && (
+                            <>
+                                <Divider />
+                                <EventImages images={images} />
+                            </>
+                        )}
                         <Divider />
                         <Col span={24}>
                             <AsyncEventExtendContent event={eventDetail} />

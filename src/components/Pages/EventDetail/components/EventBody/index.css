@@ -5,8 +5,12 @@
 .event-content-container {
     margin-top: 16px;
 }
-.event-content-card {
+.event-content-card, .event-image-card {
     width: 100%;
+}
+.event-image-item {
+    object-fit: contain;
+    max-height: 500px;
 }
 .time, .error-log {
     color: #aaa;
