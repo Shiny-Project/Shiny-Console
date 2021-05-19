@@ -12,15 +12,24 @@ function EEW(props: Props) {
     const { data } = event;
     const { code } = data;
     const parsedCode = useMemo(() => {
-        return new EEWParser(code);
+        if (code) {
+            return new EEWParser(code);
+        }
     }, [code]);
-    return (
+    return parsedCode ? (
         <Card title="电文">
             <Tabs defaultActiveKey="1">
                 <Tabs.TabPane tab="解析" key="1">
                     <Descriptions
                         bordered
-                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{
+                            xxl: 4,
+                            xl: 3,
+                            lg: 3,
+                            md: 3,
+                            sm: 2,
+                            xs: 1,
+                        }}
                         size="small"
                     >
                         <Descriptions.Item label="电文类型" span={3}>
@@ -211,7 +220,7 @@ function EEW(props: Props) {
                 </Tabs.TabPane>
             </Tabs>
         </Card>
-    );
+    ) : null;
 }
 
 export default EEW;
