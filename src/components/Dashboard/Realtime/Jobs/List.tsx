@@ -3,7 +3,7 @@ import { ShinyPushJob } from 'types/dashboard';
 import { Table, Divider } from 'antd';
 import JSONViewer from 'components/Common/JSONViewer';
 import JobLogList from './Log/List';
-import PushChannel from '../../Push/PushChannel';
+import PushChannel from '../PushChannel';
 export interface JobListProps {
     jobs: ShinyPushJob[];
 }

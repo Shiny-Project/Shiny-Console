@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Spin, Table, Popconfirm, Divider, Button } from 'antd';
 import { PushAccountList, PushAccount } from 'types/dashboard';
-import PushChannel from 'components/Dashboard/Push/PushChannel';
+import PushChannel from 'components/Dashboard/Realtime/PushChannel';
 import JSONViewer from 'components/Common/JSONViewer';
 import CreateAccountForm, { CreateAccountFormValues } from './CreateAccountForm';
 import EditAccountForm, { EditAccountFormValues } from './EditAccountForm';

@@ -1,4 +1,3 @@
-import React from "react";
 import { ShinyEEWEvent, ShinyEvent, ShinyEventDetail } from "types/dashboard";
 import EEW from "./Extend/EEW";
 

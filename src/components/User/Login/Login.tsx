@@ -39,7 +39,7 @@ class Login extends React.Component<Props> {
                     <Row justify="space-around" align="middle" className="login-container">
                         <Col lg={8} xs={24}>
                             <Spin spinning={this.props.loading}>
-                                <Card title="Login">
+                                <Card title="Sign In">
                                     <LoginForm handleLogin={this.handleLogin} />
                                 </Card>
                             </Spin>

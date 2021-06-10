@@ -35,9 +35,6 @@ const AsyncSpiderList = createAsyncContainerComponent({
 const AsyncSpiderIdentity = createAsyncContainerComponent({
     path: "Dashboard/Spider/Identity",
 });
-const AsyncPushHistory = createAsyncContainerComponent({
-    path: "Dashboard/Push/History",
-});
 const AsyncPushAccount = createAsyncContainerComponent({
     path: "Dashboard/Push/Account",
 });
@@ -133,11 +130,6 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route
                                         path="/dashboard/spider/identity"
                                         component={AsyncSpiderIdentity}
-                                    />
-                                    {/* Push */}
-                                    <Route
-                                        path="/dashboard/push/history"
-                                        component={AsyncPushHistory}
                                     />
                                     <Route
                                         path="/dashboard/push/account"
