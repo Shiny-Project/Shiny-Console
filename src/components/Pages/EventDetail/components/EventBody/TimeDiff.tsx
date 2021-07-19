@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.css';
+import React from "react";
+import "./index.css";
 
 interface Props {
     startTime: Date;
@@ -8,8 +8,16 @@ interface Props {
 
 function TimeDiff(props: Props) {
     const { time, startTime } = props;
-    const diff = Math.round((time.valueOf() - startTime.valueOf()) / 1000);
-    return <span className="time-diff" title={time.toISOString()}>T+{diff}{diff !== 0 && 's'}</span>
+    const diff = (time.valueOf() - startTime.valueOf()) / 1000;
+    return (
+        <span className="time-diff" title={time.toISOString()}>
+            T+
+            {diff < 10
+                ? `${diff * 1000}${diff !== 0 ? "m" : ""}`
+                : diff.toFixed(3)}
+            {diff !== 0 && "s"}
+        </span>
+    );
 }
 
 export default TimeDiff;

@@ -104,6 +104,7 @@ export interface ShinyPushJobLog {
     /** 状态 */
     status: string;
     info: string;
+    time?: string;
     createdAt: string;
     updatedAt: string;
 }

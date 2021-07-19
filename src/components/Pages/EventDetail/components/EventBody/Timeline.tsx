@@ -43,7 +43,7 @@ const PushJobStatusColorNameMap = {
 
 function PushJobItem(props: PushJobItemProps) {
     const { log, startTime } = props;
-    const logTime = new Date(log.createdAt);
+    const logTime = new Date(log.time ?? log.createdAt);
     return (
         <Timeline.Item color={PushJobStatusColorNameMap[log.status]}>
             <span>{PushJobChannelTextMap[log.channel]}推送任务 </span>
@@ -70,7 +70,11 @@ function EventTimeline(props: Props) {
             const logs = Array.from(event.jobs, (job) => job.logs)
                 .flat()
                 .sort(
-                    (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+                    (a, b) => {
+                        const timeA = a.time ?? a.createdAt;
+                        const timeB = b.time ?? b.createdAt;
+                        return Date.parse(timeA) - Date.parse(timeB)
+                    }
                 );
             result.push(...logs);
         }
