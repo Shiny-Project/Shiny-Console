@@ -23,6 +23,8 @@ const PushJobStatusTextMap = {
     upload_image: "开始上传图片",
     upload_image_success: "上传图片成功",
     retry: "重试",
+    parsing_start: "解析/绘图开始",
+    parsing_end: "解析/绘图结束",
 };
 
 const PushJobStatusClassNameMap = {
@@ -31,6 +33,8 @@ const PushJobStatusClassNameMap = {
     upload_image: "info",
     upload_image_success: "success",
     retry: "error",
+    parsing_start: "info",
+    parsing_end: "success",
 };
 
 const PushJobStatusColorNameMap = {
@@ -39,6 +43,8 @@ const PushJobStatusColorNameMap = {
     upload_image: "blue",
     upload_image_success: "green",
     retry: "red",
+    parsing_start: "blue",
+    parsing_end: "green",
 };
 
 function PushJobItem(props: PushJobItemProps) {
@@ -69,13 +75,11 @@ function EventTimeline(props: Props) {
         if (jobs.length > 0) {
             const logs = Array.from(event.jobs, (job) => job.logs)
                 .flat()
-                .sort(
-                    (a, b) => {
-                        const timeA = a.time ?? a.createdAt;
-                        const timeB = b.time ?? b.createdAt;
-                        return Date.parse(timeA) - Date.parse(timeB)
-                    }
-                );
+                .sort((a, b) => {
+                    const timeA = a.time ?? a.createdAt;
+                    const timeB = b.time ?? b.createdAt;
+                    return Date.parse(timeA) - Date.parse(timeB);
+                });
             result.push(...logs);
         }
         return result;
