@@ -45,7 +45,7 @@ const EventBody: React.FC<Props> = (props) => {
                         <Col span={24}>
                             <EventContent event={eventDetail} />
                         </Col>
-                        {images.length > 0 && (
+                        {images?.length > 0 && (
                             <>
                                 <Divider />
                                 <EventImages images={images} />

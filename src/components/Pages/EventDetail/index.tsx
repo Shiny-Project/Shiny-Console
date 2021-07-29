@@ -1,53 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { Card, message } from "antd";
+import { useMemo } from "react";
+import { Card } from "antd";
 import { useParams } from "react-router";
 import { ShinyEventDetail } from "types/dashboard";
-
 import request from "services/request";
 import EventBody from "./components/EventBody";
-
-interface Props {}
+import useRequest from "hooks/useRequest";
 
 interface UrlParams {
     id: string;
 }
 
-function EventDetail(props: Props): JSX.Element {
+const EventDetail: React.FC = () => {
     const { id } = useParams<UrlParams>();
-    const [loading, setLoading] = useState(false);
-    const [eventData, setEventData] = useState<ShinyEventDetail>(null);
-    const [images, setImages] = useState<string[]>([]);
-    useEffect(() => {
-        setLoading(true);
-        request
-            .get<ShinyEventDetail>("/Data/detail", {
+    const detailFetcher = useMemo(
+        () =>
+            request.get<ShinyEventDetail>("/Data/detail", {
                 eventId: id,
-            })
-            .then((data) => {
-                setEventData(data);
-            })
-            .catch((e) => {
-                message.error(e.message);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-        request
-            .get<string[]>("/Data/event_images", {
+            }),
+        [id]
+    );
+    const imagesFetcher = useMemo(
+        () =>
+            request.get<string[]>("/Data/event_images", {
                 eventId: id,
-            })
-            .then((data) => {
-                setImages(data);
-            })
-            .catch((e) => {
-                // no images or unauthorized, ignore.
-            });
-    }, [id]);
+            }),
+        [id]
+    );
+    const [eventData, loading] = useRequest(detailFetcher);
+    const [images] = useRequest(imagesFetcher);
     return (
         <Card title="事件详情">
-            <EventBody eventDetail={eventData} images={images} loading={loading} />
+            <EventBody
+                eventDetail={eventData}
+                images={images}
+                loading={loading}
+            />
         </Card>
     );
-}
+};
 
 export default EventDetail;

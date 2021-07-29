@@ -50,6 +50,9 @@ const AsyncDeployRepository = createAsyncContainerComponent({
 const AsyncEventDetailPage = createAsyncComponent({
     path: "Pages/EventDetail",
 });
+const AsyncManualPushPage = createAsyncComponent({
+    path: "Pages/ManualPush",
+});
 
 export interface Props {
     errors?: ErrorState;
@@ -138,6 +141,11 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route
                                         path="/dashboard/push/rule"
                                         component={AsyncPushRule}
+                                    />
+                                    {/* Pages - ManualPush */}
+                                    <Route
+                                        path="/dashboard/push/manual_push"
+                                        component={AsyncManualPushPage}
                                     />
                                     {/* Deploy */}
                                     <Route
