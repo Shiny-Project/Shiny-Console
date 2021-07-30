@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { Card } from "antd";
 import { useParams } from "react-router";
-import { ShinyEventDetail } from "types/dashboard";
-import request from "services/request";
-import EventBody from "./components/EventBody";
 import useRequest from "hooks/useRequest";
+import { fetchEventDetail, fetchEventImages } from "./services";
+import EventBody from "./components/EventBody";
 
 interface UrlParams {
     id: string;
@@ -12,22 +11,10 @@ interface UrlParams {
 
 const EventDetail: React.FC = () => {
     const { id } = useParams<UrlParams>();
-    const detailFetcher = useMemo(
-        () =>
-            request.get<ShinyEventDetail>("/Data/detail", {
-                eventId: id,
-            }),
-        [id]
-    );
-    const imagesFetcher = useMemo(
-        () =>
-            request.get<string[]>("/Data/event_images", {
-                eventId: id,
-            }),
-        [id]
-    );
-    const [eventData, loading] = useRequest(detailFetcher);
-    const [images] = useRequest(imagesFetcher);
+    const fetchEventDetailById = useMemo(() => () => fetchEventDetail(+id), [id]);
+    const fetchEventImagesById = useMemo(() => () => fetchEventImages(+id), [id]);
+    const [eventData, loading] = useRequest(fetchEventDetailById);
+    const [images] = useRequest(fetchEventImagesById);
     return (
         <Card title="事件详情">
             <EventBody

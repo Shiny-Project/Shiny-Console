@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
     Row,
     Col,
@@ -10,22 +9,33 @@ import {
     Button,
     message,
 } from "antd";
-import request from "services/request";
+import useRequest from "hooks/useRequest";
+import { fetchAvailableChannels, manualPush } from "./services";
 import "./index.css";
+import { useState } from "react";
+
+interface ManualPushForm {
+    channels: string[];
+    text: string;
+}
 
 const ManualPush: React.FC = () => {
-    const [form] = Form.useForm();
-    const [availableChannels, setAvailableChannels] = useState<string[]>(null);
-    useEffect(() => {
-        request
-            .get<string[]>("/push/channels")
-            .then((channels) => {
-                setAvailableChannels(channels);
-            })
-            .catch((e) => {
-                message.error(e.message);
-            });
-    }, []);
+    const [form] = Form.useForm<ManualPushForm>();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [availableChannels, loading] = useRequest(fetchAvailableChannels);
+    const onSubmit = async () => {
+        const values = await form.validateFields();
+        setIsSubmitting(true);
+        try {
+            await manualPush(values.channels, values.text);
+            message.success("推送任务已创建");
+            form.resetFields();
+        } catch (e) {
+            message.error(e.message);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <Card title="手动推送">
@@ -38,7 +48,11 @@ const ManualPush: React.FC = () => {
                             text: "",
                         }}
                     >
-                        <Form.Item label="渠道" name="channels">
+                        <Form.Item
+                            label="渠道"
+                            name="channels"
+                            rules={[{ required: true }]}
+                        >
                             <Select
                                 mode="multiple"
                                 notFoundContent={
@@ -59,13 +73,18 @@ const ManualPush: React.FC = () => {
                                     ))}
                             </Select>
                         </Form.Item>
-                        <Form.Item label="内容" name="text">
+                        <Form.Item
+                            label="内容"
+                            name="text"
+                            rules={[{ required: true }]}
+                        >
                             <Input.TextArea placeholder="140字上限 自己把握一下"></Input.TextArea>
                         </Form.Item>
                         <Button
                             type="primary"
-                            loading={!availableChannels}
-                            disabled={!availableChannels}
+                            loading={loading || isSubmitting}
+                            disabled={loading || isSubmitting}
+                            onClick={onSubmit}
                         >
                             确认
                         </Button>

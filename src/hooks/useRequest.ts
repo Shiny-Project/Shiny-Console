@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { message } from "antd";
 
-const useRequest = <T>(fetcher: Promise<T>): [T, boolean] => {
+const useRequest = <T>(fetcher: () => Promise<T>): [T, boolean] => {
     const [response, setResponse] = useState<T>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const fetcherRef = useRef(fetcher);
     useEffect(() => {
         setIsLoading(true);
-        fetcher
+        fetcherRef.current()
             .then((data) => {
                 setResponse(data);
             })
@@ -16,7 +17,7 @@ const useRequest = <T>(fetcher: Promise<T>): [T, boolean] => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [fetcher]);
+    }, []);
     return [response, isLoading];
 };
 
