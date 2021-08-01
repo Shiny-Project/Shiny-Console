@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import {
     Row,
     Col,
@@ -11,8 +12,8 @@ import {
 } from "antd";
 import useRequest from "hooks/useRequest";
 import { fetchAvailableChannels, manualPush } from "./services";
+import { ShinyPushJob } from "types/dashboard";
 import "./index.css";
-import { useState } from "react";
 
 interface ManualPushForm {
     channels: string[];
@@ -21,7 +22,9 @@ interface ManualPushForm {
 
 const ManualPush: React.FC = () => {
     const [form] = Form.useForm<ManualPushForm>();
+    const refreshJobTimer = useRef(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [jobs, setJobs] = useState<ShinyPushJob[]>([]);
     const [availableChannels, loading] = useRequest(fetchAvailableChannels);
     const onSubmit = async () => {
         const values = await form.validateFields();
@@ -34,6 +37,11 @@ const ManualPush: React.FC = () => {
             message.error(e.message);
         } finally {
             setIsSubmitting(false);
+        }
+    };
+    const startRefreshingJobStatus = () => {
+        if (refreshJobTimer.current) {
+            clearInterval(refreshJobTimer.current);
         }
     };
 

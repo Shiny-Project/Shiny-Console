@@ -10,7 +10,6 @@ import { config } from 'reducers/Dashboard/Server/config';
 import { list } from 'reducers/Dashboard/Spider/list';
 import { identity } from 'reducers/Dashboard/Spider/identity';
 import { pushAccount } from 'reducers/Dashboard/Push/account';
-import { pushHistory } from 'reducers/Dashboard/Push/history';
 import { pushRule } from 'reducers/Dashboard/Push/rule';
 import { deployRepository } from 'reducers/Dashboard/Deploy/repository';
 const rootReducer = combineReducers<StoreState>({
@@ -29,7 +28,6 @@ const rootReducer = combineReducers<StoreState>({
             identity
         }),
         push: combineReducers({
-            history: pushHistory,
             account: pushAccount,
             rule: pushRule
         }),

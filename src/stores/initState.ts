@@ -75,13 +75,6 @@ export default {
             }
         },
         push: {
-            history: {
-                isLoading: false,
-                pushHistory: {
-                    total: 0,
-                    jobs: []
-                }
-            },
             account: {
                 isLoading: false,
                 accounts: [],

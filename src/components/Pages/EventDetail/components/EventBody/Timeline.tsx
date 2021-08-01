@@ -1,10 +1,11 @@
 import { Timeline } from "antd";
-import React, { useMemo } from "react";
-import { ShinyEventDetail, ShinyPushJobLog } from "types/dashboard";
+import { useMemo } from "react";
+import { ShinyPushJob, ShinyPushJobLog } from "types/dashboard";
 import TimeDiff from "./TimeDiff";
 
 interface Props {
-    event: ShinyEventDetail;
+    jobs: ShinyPushJob[];
+    baseTime: string;
 }
 
 interface PushJobItemProps {
@@ -67,13 +68,12 @@ function PushJobItem(props: PushJobItemProps) {
 }
 
 function EventTimeline(props: Props) {
-    const { event } = props;
-    const { jobs } = event;
-    const startTime = new Date(event.event.createdAt);
+    const { jobs, baseTime } = props;
+    const startTime = new Date(baseTime);
     const sortedLogs = useMemo(() => {
         const result: ShinyPushJobLog[] = [];
         if (jobs.length > 0) {
-            const logs = Array.from(event.jobs, (job) => job.logs)
+            const logs = Array.from(jobs, (job) => job.logs)
                 .flat()
                 .sort((a, b) => {
                     const timeA = a.time ?? a.createdAt;
@@ -83,7 +83,7 @@ function EventTimeline(props: Props) {
             result.push(...logs);
         }
         return result;
-    }, [event.jobs, jobs.length]);
+    }, [jobs]);
 
     return (
         <Timeline>

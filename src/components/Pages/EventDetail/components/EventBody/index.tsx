@@ -38,7 +38,7 @@ const EventBody: React.FC<Props> = (props) => {
                     <EventBasicInfo event={eventDetail} />
                 </Col>
                 <Col xs={24} lg={8} className="timeline-container">
-                    <EventTimeline event={eventDetail} />
+                    <EventTimeline jobs={eventDetail.jobs} baseTime={eventDetail.event.createdAt} />
                 </Col>
                 <Col xs={24} lg={16} className="event-content-container">
                     <Row>

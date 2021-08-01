@@ -7,7 +7,6 @@ import {
     ServerNode,
     SpiderListResponse,
     Spider,
-    PushHistoryResponse,
     ConfigItem,
     SpiderIdentityItem,
     PushAccountList,
@@ -121,16 +120,8 @@ export interface SpiderIdentityState {
 // Dashboard/Push
 
 export interface PushState {
-    history: PushHistoryState;
     account: PushAccountState;
     rule: PushRuleState;
-}
-
-// Dashboard/Push/History
-
-export interface PushHistoryState {
-    isLoading: boolean;
-    pushHistory: PushHistoryResponse;
 }
 
 // Dashboard/Push/Account

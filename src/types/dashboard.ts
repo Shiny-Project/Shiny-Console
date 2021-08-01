@@ -158,22 +158,6 @@ export interface DataRefreshJob extends BaseJob {
     info?: string; // 任务附加信息
 }
 
-export interface PushJob extends BaseJob {
-    type: 'push';
-    info: PushJobInfo;
-}
-
-export interface PushJobInfo {
-    /** 推送渠道 */
-    channel: string;
-    /** 推送账号 */
-    account: string;
-    /** 推送内容 */
-    text: string;
-    /** 推送返回结果 */
-    response: string;
-}
-
 export type Job = DataRefreshJob;
 
 /** 任务状态广播信息 */
@@ -279,13 +263,6 @@ export interface Spider {
 }
 
 export type SpiderListResponse = Spider[];
-
-// Dashboard/Push/History
-
-export interface PushHistoryResponse {
-    total: number;
-    jobs: PushJob[];
-}
 
 export type PushAccountList = PushAccount[];
 
