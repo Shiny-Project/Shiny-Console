@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     Row,
     Col,
@@ -11,8 +11,9 @@ import {
     message,
 } from "antd";
 import useRequest from "hooks/useRequest";
-import { fetchAvailableChannels, manualPush } from "./services";
 import { ShinyPushJob } from "types/dashboard";
+import EventTimeline from "../EventDetail/components/EventBody/Timeline";
+import { fetchAvailableChannels, manualPush, queryJobStatus } from "./services";
 import "./index.css";
 
 interface ManualPushForm {
@@ -23,6 +24,8 @@ interface ManualPushForm {
 const ManualPush: React.FC = () => {
     const [form] = Form.useForm<ManualPushForm>();
     const refreshJobTimer = useRef(null);
+    const initialTime = useRef<string>(null);
+    const jobIds = useRef<number[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [jobs, setJobs] = useState<ShinyPushJob[]>([]);
     const [availableChannels, loading] = useRequest(fetchAvailableChannels);
@@ -30,8 +33,11 @@ const ManualPush: React.FC = () => {
         const values = await form.validateFields();
         setIsSubmitting(true);
         try {
-            await manualPush(values.channels, values.text);
+            const createdJobs = await manualPush(values.channels, values.text);
             message.success("推送任务已创建");
+            initialTime.current = new Date().toISOString();
+            jobIds.current = Array.from(createdJobs, (job) => job.id);
+            startRefreshingJobStatus();
             form.resetFields();
         } catch (e) {
             message.error(e.message);
@@ -43,7 +49,18 @@ const ManualPush: React.FC = () => {
         if (refreshJobTimer.current) {
             clearInterval(refreshJobTimer.current);
         }
+        refreshJobTimer.current = setInterval(async () => {
+            const jobs = await queryJobStatus(jobIds.current);
+            setJobs(jobs);
+        }, 3000);
     };
+
+    useEffect(() => {
+        const ref = refreshJobTimer;
+        return () => {
+            clearInterval(ref.current);
+        };
+    }, []);
 
     return (
         <Card title="手动推送">
@@ -97,6 +114,14 @@ const ManualPush: React.FC = () => {
                             确认
                         </Button>
                     </Form>
+                </Col>
+                <Col lg={8} xs={24}>
+                    {jobs.length > 0 && (
+                        <EventTimeline
+                            jobs={jobs}
+                            baseTime={initialTime.current}
+                        />
+                    )}
                 </Col>
             </Row>
         </Card>

@@ -18,3 +18,8 @@ export const manualPush = (channels: string[], text: string) =>
         text,
         account: "shiny",
     });
+
+export const queryJobStatus = (jobIds: number[]) =>
+    request.get<ShinyPushJob[]>("/Push/query", {
+        jobIds: jobIds.join(","),
+    });
