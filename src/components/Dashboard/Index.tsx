@@ -48,10 +48,10 @@ const AsyncDeployRepository = createAsyncContainerComponent({
     path: "Dashboard/Deploy/Repository",
 });
 const AsyncEventDetailPage = createAsyncComponent({
-    path: "Pages/EventDetail",
+    path: "pages/EventDetail",
 });
 const AsyncManualPushPage = createAsyncComponent({
-    path: "Pages/ManualPush",
+    path: "pages/ManualPush",
 });
 
 export interface Props {

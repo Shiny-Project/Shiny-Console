@@ -12,7 +12,7 @@ import {
 } from "antd";
 import useRequest from "hooks/useRequest";
 import { ShinyPushJob } from "types/dashboard";
-import EventTimeline from "../EventDetail/components/EventBody/Timeline";
+import EventTimeline from "pages/EventDetail/components/EventBody/Timeline";
 import { fetchAvailableChannels, manualPush, queryJobStatus } from "./services";
 import "./index.css";
 

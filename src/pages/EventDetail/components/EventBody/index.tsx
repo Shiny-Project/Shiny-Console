@@ -10,7 +10,7 @@ import EventImages from "./EventImages";
 import "./index.css";
 
 const AsyncEventExtendContent = createAsyncComponent({
-    path: "Pages/EventDetail/components/EventBody/EventExtendContent",
+    path: "pages/EventDetail/components/EventBody/EventExtendContent",
     disableProgress: true,
 });
 

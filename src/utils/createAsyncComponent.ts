@@ -13,7 +13,7 @@ const createAsyncComponent = ({
 }: CreateAsyncComponentParams): any => {
     return Loadable({
         loader: () => {
-            const promise = import(`../components/${path}`);
+            const promise = import(`../${path}`);
             !disableProgress && nprogress.start();
             promise.then(() => {
                 !disableProgress && nprogress.done();
