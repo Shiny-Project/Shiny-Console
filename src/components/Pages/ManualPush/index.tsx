@@ -64,7 +64,7 @@ const ManualPush: React.FC = () => {
 
     return (
         <Card title="手动推送">
-            <Row className="container">
+            <Row className="container" gutter={16}>
                 <Col lg={8} xs={24}>
                     <Form
                         form={form}

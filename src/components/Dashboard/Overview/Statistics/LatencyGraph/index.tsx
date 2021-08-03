@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { Card, Spin } from "antd";
 import dayjs from "dayjs";
 import { Chart, Tooltip, Axis, Line } from "viser-react";
@@ -10,24 +10,27 @@ interface Props {
     loading: boolean;
 }
 
+const scale = [
+    {
+        dataKey: "time",
+        tickCount: 12,
+    },
+    {
+        dataKey: "websocket",
+        min: 0,
+    },
+];
+const labelFormatter = {
+    formatter: function formatter(text: number | string) {
+        return dayjs(text).format("HH:mm");
+    },
+};
+
 function LatencyGraph(props: Props) {
-    const scale = [
-        {
-            dataKey: "time",
-            tickCount: 12,
-        },
-        {
-            dataKey: "websocket",
-            min: 0,
-        },
-    ];
-    const labelFormatter = {
-        formatter: function formatter(text: number | string) {
-            return dayjs(text).format("HH:mm");
-        },
-    };
+    const { loading, latencyData } = props;
+
     return (
-        <Spin spinning={props.loading}>
+        <Spin spinning={loading}>
             <Card
                 title="中控 - Websocket中继时延"
                 bordered={false}
@@ -37,7 +40,7 @@ function LatencyGraph(props: Props) {
                     forceFit={true}
                     height={300}
                     scale={scale}
-                    data={props.latencyData}
+                    data={latencyData}
                 >
                     <Tooltip />
                     <Axis dataKey="time" label={labelFormatter} />
@@ -49,4 +52,4 @@ function LatencyGraph(props: Props) {
     );
 }
 
-export default LatencyGraph;
+export default memo(LatencyGraph);

@@ -89,15 +89,18 @@ class Overview extends React.Component<Props> {
     }
 
     statisticTimer: NodeJS.Timer;
+    latencyTimer: NodeJS.Timer;
 
     componentDidMount() {
         this.props.getLatencyData();
         this.statisticTimer = setInterval(this.props.getStatistics, 5000);
+        this.latencyTimer = setInterval(this.props.getLatencyData, 60000);
         this.props.getStatistics();
     }
 
     componentWillUnmount() {
         clearInterval(this.statisticTimer);
+        clearInterval(this.latencyTimer);
     }
 
     render() {

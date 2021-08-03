@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { Card } from "antd";
 import { useParams } from "react-router";
+import { Card } from "antd";
 import useRequest from "hooks/useRequest";
 import { fetchEventDetail, fetchEventImages } from "./services";
 import EventBody from "./components/EventBody";

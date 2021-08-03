@@ -6,11 +6,12 @@ import { ShinyEventDetail } from "types/dashboard";
 import EventTimeline from "./Timeline";
 import EventBasicInfo from "./EventBasicInfo";
 import EventContent from "./EventContent";
-import EventImages from './EventImages';
+import EventImages from "./EventImages";
 import "./index.css";
 
 const AsyncEventExtendContent = createAsyncComponent({
     path: "Pages/EventDetail/components/EventBody/EventExtendContent",
+    disableProgress: true,
 });
 
 interface Props {
@@ -38,7 +39,10 @@ const EventBody: React.FC<Props> = (props) => {
                     <EventBasicInfo event={eventDetail} />
                 </Col>
                 <Col xs={24} lg={8} className="timeline-container">
-                    <EventTimeline jobs={eventDetail.jobs} baseTime={eventDetail.event.createdAt} />
+                    <EventTimeline
+                        jobs={eventDetail.jobs}
+                        baseTime={eventDetail.event.createdAt}
+                    />
                 </Col>
                 <Col xs={24} lg={16} className="event-content-container">
                     <Row>
