@@ -12,7 +12,7 @@ function TimeDiff(props: Props) {
         <span className="time-diff" title={time.toISOString()}>
             T+
             {diff < 10
-                ? `${diff * 1000}${diff !== 0 ? "m" : ""}`
+                ? `${Math.round(diff * 1000)}${diff !== 0 ? "m" : ""}`
                 : diff.toFixed(3)}
             {diff !== 0 && "s"}
         </span>
