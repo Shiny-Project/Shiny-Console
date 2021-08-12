@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Form, Modal, Input } from "antd";
+import { Form, Modal, Input, Select } from "antd";
 import { Spider } from "types/dashboard";
 
 export interface EditSpiderFormProps {
@@ -56,9 +56,13 @@ function EditSpiderForm(props: EditSpiderFormProps) {
                 <Form.Item
                     name="group"
                     label="Group"
-                    rules={[{ required: true }]}
                 >
-                    <Input />
+                    <Select>
+                        <Select.Option value={null}>无</Select.Option>
+                        <Select.Option value="china_mainland">
+                            china_mainland
+                        </Select.Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     name="description"

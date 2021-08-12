@@ -1,9 +1,18 @@
 import React from "react";
 import { SpiderListResponse, Spider } from "types/dashboard";
-import { Spin, Card, Table, Divider, Popconfirm, Row, Col, Button } from "antd";
+import {
+    Spin,
+    Card,
+    Table,
+    Divider,
+    Popconfirm,
+    Button,
+    Descriptions,
+} from "antd";
 import TimeDiff from "components/Common/TimeDiff";
 import FrequencyUpdateForm from "./FrequencyUpdateForm";
 import EditSpiderForm, { EditSpiderFormValues } from "./EditSpiderForm";
+import { Link } from "react-router-dom";
 
 export interface Props {
     spiderList: SpiderListResponse;
@@ -38,28 +47,25 @@ export interface SpiderDetailProps {
 class SpiderDetail extends React.Component<SpiderDetailProps> {
     render() {
         return (
-            <Row>
-                <Col span={2}>
-                    <div className="column-label">刷新间隔</div>
-                </Col>
-                <Col span={10}>
-                    <div>
-                        <span>{this.props.spider.info.expires}秒</span>
-                    </div>
-                </Col>
-                <Col span={2}>
-                    <div className="column-label">凭证</div>
-                </Col>
-                <Col span={10}>
-                    <div>{this.props.spider.info.identity || "无"}</div>
-                </Col>
-                <Col span={2}>
-                    <div className="column-label">冷却</div>
-                </Col>
-                <Col span={10}>
-                    <div>{this.props.spider.info.cooldown || "0"}秒</div>
-                </Col>
-            </Row>
+            <Descriptions bordered column={2}>
+                <Descriptions.Item label="刷新间隔">
+                    {this.props.spider.info.expires}秒
+                </Descriptions.Item>
+                <Descriptions.Item label="凭证">
+                    {this.props.spider.info.identity ? (
+                        <Link
+                            to={`/dashboard/spider/identity?focus=${this.props.spider.info.identity}`}
+                        >
+                            {this.props.spider.info.identity}
+                        </Link>
+                    ) : (
+                        "无"
+                    )}
+                </Descriptions.Item>
+                <Descriptions.Item label="冷却">
+                    {this.props.spider.info.cooldown || "0"}秒
+                </Descriptions.Item>
+            </Descriptions>
         );
     }
 }

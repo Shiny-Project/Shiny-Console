@@ -1,0 +1,11 @@
+.focus {
+    animation: focus 2s forwards;
+}
+@keyframes focus {
+    from {
+        color: #00b0ff;
+    }
+    to {
+        color: #000;
+    }
+}
