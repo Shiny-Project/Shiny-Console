@@ -120,7 +120,7 @@ class List extends React.Component<Props, State> {
                                 this.props.showFrequencyUpdateModal(record.id);
                             }}
                         >
-                            修改刷新频率
+                            修改刷新频率和冷却时间
                         </Button>
                         <Divider type="vertical" />
                         <Button
@@ -184,6 +184,10 @@ class List extends React.Component<Props, State> {
                     frequency={
                         this.props.nowEditingSpider.info &&
                         this.props.nowEditingSpider.info.expires
+                    }
+                    cooldown={
+                        this.props.nowEditingSpider.info &&
+                        this.props.nowEditingSpider.info.cooldown
                     }
                 />
                 <EditSpiderForm

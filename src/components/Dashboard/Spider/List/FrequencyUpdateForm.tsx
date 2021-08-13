@@ -3,6 +3,7 @@ import { Modal, Form, Input } from "antd";
 
 export interface FrequencyUpdateFormValues {
     frequency: number;
+    cooldown: number;
 }
 
 export interface FrequencyUpdateFormProps {
@@ -11,11 +12,12 @@ export interface FrequencyUpdateFormProps {
     onCancel: () => void;
     onSubmit: (frequency: number) => void;
     frequency: number;
+    cooldown: number;
 }
 
 function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
     const [form] = Form.useForm<FrequencyUpdateFormValues>();
-    const { frequency, visible, loading, onSubmit, onCancel } = props;
+    const { frequency, cooldown, visible, loading, onSubmit, onCancel } = props;
     const handleSubmit = useCallback(async () => {
         const values = await form.validateFields();
         onSubmit(values.frequency);
@@ -39,6 +41,15 @@ function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
                     label="刷新频率(秒)"
                     rules={[{ required: true }]}
                     initialValue={frequency}
+                    tooltip="当最近数据已经超过该值没有更新时，会生成任务下发给爬虫节点"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="cooldown"
+                    label="冷却(秒)"
+                    initialValue={cooldown || 0}
+                    tooltip="在刷新频率基础上设定最小任务执行间隔，即使任务失败也会进入冷却"
                 >
                     <Input />
                 </Form.Item>
