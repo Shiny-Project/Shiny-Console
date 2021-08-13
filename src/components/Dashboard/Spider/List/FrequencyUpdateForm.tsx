@@ -10,7 +10,7 @@ export interface FrequencyUpdateFormProps {
     visible: boolean;
     loading?: boolean;
     onCancel: () => void;
-    onSubmit: (frequency: number) => void;
+    onSubmit: (frequency: number, cooldown?: number) => void;
     frequency: number;
     cooldown: number;
 }
@@ -20,7 +20,7 @@ function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
     const { frequency, cooldown, visible, loading, onSubmit, onCancel } = props;
     const handleSubmit = useCallback(async () => {
         const values = await form.validateFields();
-        onSubmit(values.frequency);
+        onSubmit(values.frequency, values.cooldown);
     }, [form, onSubmit]);
     useEffect(() => {
         if (visible) {

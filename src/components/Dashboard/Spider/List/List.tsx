@@ -29,7 +29,7 @@ export interface Props {
     hideFrequencyUpdateModal: () => void;
     showEditSpiderModal: (spider: number) => void;
     hideEditSpiderModal: () => void;
-    updateFrequency: (spiderId: number, frequency: number) => void;
+    updateFrequency: (spiderId: number, frequency: number, cooldown?: number) => void;
     editSpider: (
         spiderId: number,
         name: string,
@@ -150,8 +150,8 @@ class List extends React.Component<Props, State> {
     componentDidMount() {
         this.props.getSpiderList();
     }
-    handleFrequencyUpdate = (frequency: number) => {
-        this.props.updateFrequency(this.props.nowEditingSpider.id, frequency);
+    handleFrequencyUpdate = (frequency: number, cooldown?: number) => {
+        this.props.updateFrequency(this.props.nowEditingSpider.id, frequency, cooldown);
     };
     handleEditFormSubmit = (values: EditSpiderFormValues) => {
         this.props.editSpider(

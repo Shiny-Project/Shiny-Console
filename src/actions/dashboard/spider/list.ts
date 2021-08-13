@@ -132,14 +132,15 @@ export function showFrequencyUpdateModal(spiderId: number): UpdateFrequencyShowM
     };
 }
 
-export function updateFrequency(spiderId: number, frequency: number):
+export function updateFrequency(spiderId: number, frequency: number, cooldown?: number):
     DeferredAction<UpdateFrequencyStart | UpdateFrequencySuccess | UpdateFrequencyFailure> {
     return async (dispatch) => {
         dispatch(updateFrequencyStart());
         try {
             await request.post('/Spider/updateFrequency', {
                 spiderId,
-                frequency
+                frequency,
+                cooldown,
             });
             dispatch(updateFrequencySuccess(spiderId, frequency));
         } catch (e) {

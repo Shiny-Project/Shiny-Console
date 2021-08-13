@@ -39,8 +39,8 @@ export function mapDispatchToProps(dispatch: Dispatch<SpiderListAction>) {
         hideFrequencyUpdateModal: () => {
             dispatch(actions.hideFrequencyUpdateModal());
         },
-        updateFrequency: (spiderId: number, frequency: number) => {
-            dispatch(actions.updateFrequency(spiderId, frequency));
+        updateFrequency: (spiderId: number, frequency: number, cooldown?: number) => {
+            dispatch(actions.updateFrequency(spiderId, frequency, cooldown));
         },
         showEditSpiderModal: (spiderId: number) => {
             dispatch(actions.showEditSpiderModal(spiderId));
