@@ -65,6 +65,11 @@ class Sider extends React.Component<Props, State> {
                             全局设置项管理
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="server-effect">
+                        <Link to="/dashboard/server/effect">
+                            全局效果管理
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
                 <SubMenu
                     key="spider-menu"

@@ -8,6 +8,7 @@ import createAsyncContainerComponent from "utils/createAsyncContainerComponent";
 import createAsyncComponent from "utils/createAsyncComponent";
 import Menu from "components/Menu/Index";
 import "./Index.css";
+import { ErrorStateContext } from "hooks/useErrorState";
 
 const { Header, Content } = Layout;
 
@@ -53,6 +54,9 @@ const AsyncEventDetailPage = createAsyncComponent({
 const AsyncManualPushPage = createAsyncComponent({
     path: "pages/ManualPush",
 });
+const AsyncEffect = createAsyncComponent({
+    path: "pages/Effect",
+});
 
 export interface Props {
     errors?: ErrorState;
@@ -62,7 +66,6 @@ export interface Props {
 
 class Dashboard extends React.Component<Props, {}> {
     componentDidUpdate(prevProps: Props) {
-        // tslint:disable-next-line:max-line-length
         if (
             this.props.errors.lastError.name !== "initial_error" &&
             prevProps.errors.errorId !== this.props.errors.errorId
@@ -82,7 +85,13 @@ class Dashboard extends React.Component<Props, {}> {
     }
     render() {
         return (
-            <div>
+            <ErrorStateContext.Provider
+                value={{
+                    errors: this.props.errors,
+                    raiseError: this.props.raiseError,
+                    history: this.props.history,
+                }}
+            >
                 <Layout>
                     <Header>
                         <h2 className="logo">Shiny-Console</h2>
@@ -120,6 +129,10 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route
                                         path="/dashboard/server/config"
                                         component={AsyncConfig}
+                                    />
+                                    <Route
+                                        path="/dashboard/server/effect"
+                                        component={AsyncEffect}
                                     />
                                     {/**/}
                                     <Route
@@ -162,7 +175,7 @@ class Dashboard extends React.Component<Props, {}> {
                         </Row>
                     </Content>
                 </Layout>
-            </div>
+            </ErrorStateContext.Provider>
         );
     }
 }
