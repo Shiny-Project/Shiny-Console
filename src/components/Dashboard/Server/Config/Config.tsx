@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Spin, Table, Button, Divider, Popconfirm } from 'antd';
 import { ConfigItem } from 'types/dashboard';
+import JSONViewer from 'components/Common/JSONViewer';
 import CreateConfigForm from './CreateConfigForm';
 import EditConfigForm from './EditConfigForm';
 
@@ -12,9 +13,9 @@ interface Props {
     createConfigModalLoading: boolean;
     editConfigModalVisible: boolean;
     editConfigModalLoading: boolean;
-    createConfig: (key: string, value: string) => void;
+    createConfig: (key: string, value: string, contentType: string) => void;
     deleteConfig: (key: string) => void;
-    editConfig: (key: string, value: string) => void;
+    editConfig: (key: string, value: string, contentType: string) => void;
     getConfigList: () => void;
     showCreateConfigModal: () => void;
     hideCreateConfigModal: () => void;
@@ -30,8 +31,10 @@ class Config extends React.Component<Props, State> {
         key: 'key'
     }, {
         title: 'Value',
-        dataIndex: 'value',
-        key: 'value'
+        key: 'value',
+        render: (text: string, record: ConfigItem) => {
+            return record.contentType === 'json' ? <JSONViewer json={record.value} /> : record.value;
+        }
     }, {
         title: '操作',
         key: 'operations',

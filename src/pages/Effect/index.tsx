@@ -71,7 +71,7 @@ const EffectIndex: React.FC = () => {
     const onDelete = async (key: string) => {
         try {
             await deleteEffect(key);
-            setEffectList(effects.filter((effect) => effect.key !== key));
+            setEffectList(effectList.filter((effect) => effect.key !== key));
         } catch (e) {
             raiseError(e);
         }

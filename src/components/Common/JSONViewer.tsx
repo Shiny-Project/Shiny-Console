@@ -3,7 +3,7 @@ import { CodeOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
 export interface Props {
-    json: object;
+    json: any;
     text?: string;
 }
 

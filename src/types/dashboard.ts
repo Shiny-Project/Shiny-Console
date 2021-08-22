@@ -225,7 +225,8 @@ export interface SpiderInfo {
 
 export interface ConfigItem {
     key: string;
-    value: string;
+    value: string | object;
+    contentType: string;
 }
 
 export type ConfigListResponse = ConfigItem[];

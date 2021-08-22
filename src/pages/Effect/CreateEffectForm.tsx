@@ -66,12 +66,14 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                             <DatePicker
                                 showTime={{ format: "HH:mm" }}
                                 format="YYYY-MM-DD HH:mm"
+                                placeholder="选择时间"
                             />
                         </Form.Item>
                         <Form.Item label="结束时间" name="end">
                             <DatePicker
                                 showTime={{ format: "HH:mm" }}
                                 format="YYYY-MM-DD HH:mm"
+                                placeholder="选择时间"
                             />
                         </Form.Item>
                     </>

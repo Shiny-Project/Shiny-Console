@@ -31,14 +31,14 @@ export function mapDispatchToProps(dispatch: Dispatch<ConfigAction>) {
         getConfigList: () => {
             dispatch(actions.getConfigList());
         },
-        createConfig: (key: string, value: string) => {
-            dispatch(actions.createConfig(key, value));
+        createConfig: (key: string, value: string, contentType: string) => {
+            dispatch(actions.createConfig(key, value, contentType));
         },
         deleteConfig: (key: string) => {
             dispatch(actions.deleteConfig(key));
         },
-        editConfig: (key: string, value: string) => {
-            dispatch(actions.editConfig(key, value));
+        editConfig: (key: string, value: string, contentType: string) => {
+            dispatch(actions.editConfig(key, value, contentType));
         },
         showCreateConfigModal: () => {
             dispatch(actions.showCreateConfigModal());

@@ -6,9 +6,9 @@ import { ErrorState } from "types";
 import Auth from "services/auth";
 import createAsyncContainerComponent from "utils/createAsyncContainerComponent";
 import createAsyncComponent from "utils/createAsyncComponent";
+import { ErrorStateContext } from "hooks/useErrorState";
 import Menu from "components/Menu/Index";
 import "./Index.css";
-import { ErrorStateContext } from "hooks/useErrorState";
 
 const { Header, Content } = Layout;
 
