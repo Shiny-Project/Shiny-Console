@@ -10,6 +10,7 @@ export interface CreateEffectParams {
     start?: string;
     end?: string;
     desc?: string;
+    contentType: string;
 }
 
 export const createEffect = (values: CreateEffectParams) => {

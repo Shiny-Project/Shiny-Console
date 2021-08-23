@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Radio, DatePicker } from "antd";
+import { Modal, Form, Input, Select, Radio, DatePicker } from "antd";
+import { ValidateStatus } from "antd/lib/form/FormItem";
+import { validateValueByType } from "utils/validate";
 import { EffectType } from "./types";
 
 interface Props {
@@ -16,28 +18,45 @@ export interface CreateEffectFormValues {
     start?: string;
     end?: string;
     desc?: string;
+    contentType: string;
 }
 
 const CreateEffectForm: React.FC<Props> = (props) => {
     const { visible, loading, onCancel, onSubmit } = props;
     const [form] = Form.useForm<CreateEffectFormValues>();
     const [effectType, setEffectType] = useState(EffectType.PERMANENT);
+    const [contentType, setContentType] = useState("string");
+    const [valueValidateStatus, setValueValidateStatus] =
+        useState<ValidateStatus>("success");
+    const [valueValidateText, setValueValidateText] = useState("");
+    const onContentTypeChange = () => {
+        setContentType(form.getFieldValue("contentType"));
+    };
+    const onConfirm = async () => {
+        const values = await form.validateFields();
+        try {
+            validateValueByType(values.value, contentType);
+        } catch (e) {
+            setValueValidateStatus("error");
+            setValueValidateText(e.message);
+            return;
+        }
+        onSubmit(values);
+    };
     return (
         <Modal
             title="创建全局效果"
             visible={visible}
             confirmLoading={loading}
             onCancel={onCancel}
-            onOk={async () => {
-                const values = await form.validateFields();
-                onSubmit(values);
-            }}
+            onOk={onConfirm}
         >
             <Form
                 form={form}
                 layout="vertical"
                 initialValues={{
                     type: EffectType.PERMANENT,
+                    contentType: "string",
                 }}
             >
                 <Form.Item label="类型" name="type">
@@ -50,12 +69,22 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                         <Radio value={EffectType.TEMPORARY}>期间限定</Radio>
                     </Radio.Group>
                 </Form.Item>
+                <Form.Item name="contentType" label="数据类型">
+                    <Select onChange={onContentTypeChange}>
+                        <Select.Option value="string">string</Select.Option>
+                        <Select.Option value="integer">integer</Select.Option>
+                        <Select.Option value="boolean">boolean</Select.Option>
+                        <Select.Option value="json">JSON</Select.Option>
+                    </Select>
+                </Form.Item>
                 <Form.Item label="Key" name="key" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="Value"
                     name="value"
+                    validateStatus={valueValidateStatus}
+                    help={valueValidateText}
                     rules={[{ required: true }]}
                 >
                     <Input />

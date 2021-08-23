@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Table, Spin, Popconfirm, Button, Divider } from "antd";
 import useRequest from "hooks/useRequest";
 import useErrorState from "hooks/useErrorState";
+import JSONViewer from "components/Common/JSONViewer";
 import { deleteEffect, getEffectList, createEffect } from "./service";
 import { EffectItem, EffectType } from "./types";
 import CreateEffectForm, { CreateEffectFormValues } from "./CreateEffectForm";
@@ -27,8 +28,14 @@ const EffectIndex: React.FC = () => {
         },
         {
             title: "Value",
-            dataIndex: "value",
             key: "value",
+            render: (text: string, record: EffectItem) => {
+                return record.contentType === "json" ? (
+                    <JSONViewer json={record.value} />
+                ) : (
+                    record.value
+                );
+            },
         },
         {
             title: "说明",

@@ -11,6 +11,7 @@ export interface EffectItem {
     key: string;
     value: string;
     desc?: string;
+    contentType: string;
     createdAt: string;
     updatedAt: string;
 }
