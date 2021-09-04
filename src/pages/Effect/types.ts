@@ -15,3 +15,18 @@ export interface EffectItem {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface EffectTemplate {
+    name: string;
+    template: string;
+    parameters: EffectTemplateParameter[];
+}
+
+export type EffectTemplateParameterTypes = "array" | "string";
+
+export interface EffectTemplateParameter {
+    type: EffectTemplateParameterTypes;
+    name: string;
+    label: string;
+    required?: boolean;
+}

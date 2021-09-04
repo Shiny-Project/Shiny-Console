@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Select, Radio, DatePicker } from "antd";
+import { Modal, Form, Input, Select, Radio, DatePicker, Button } from "antd";
 import { ValidateStatus } from "antd/lib/form/FormItem";
 import { validateValueByType } from "utils/validate";
-import { EffectType } from "./types";
+import { EffectType } from "../types";
+import EffectTemplate from "./EffectTemplate";
 
 interface Props {
     visible: boolean;
@@ -29,6 +30,8 @@ const CreateEffectForm: React.FC<Props> = (props) => {
     const [valueValidateStatus, setValueValidateStatus] =
         useState<ValidateStatus>("success");
     const [valueValidateText, setValueValidateText] = useState("");
+    const [effectTemplateModalVisible, setEffectTemplateModalVisible] =
+        useState(false);
     const onContentTypeChange = () => {
         setContentType(form.getFieldValue("contentType"));
     };
@@ -69,7 +72,11 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                         <Radio value={EffectType.TEMPORARY}>期间限定</Radio>
                     </Radio.Group>
                 </Form.Item>
-                <Form.Item name="contentType" label="数据类型">
+                <Form.Item
+                    name="contentType"
+                    label="数据类型"
+                    rules={[{ required: true }]}
+                >
                     <Select onChange={onContentTypeChange}>
                         <Select.Option value="string">string</Select.Option>
                         <Select.Option value="integer">integer</Select.Option>
@@ -87,7 +94,7 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                     help={valueValidateText}
                     rules={[{ required: true }]}
                 >
-                    <Input />
+                    <Input.TextArea />
                 </Form.Item>
                 {effectType === EffectType.TEMPORARY && (
                     <>
@@ -110,7 +117,29 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                 <Form.Item label="说明" name="desc">
                     <Input.TextArea />
                 </Form.Item>
+                <Form.Item>
+                    <Button
+                        size="small"
+                        onClick={() => {
+                            setEffectTemplateModalVisible(true);
+                        }}
+                    >
+                        从模板创建
+                    </Button>
+                </Form.Item>
             </Form>
+            <EffectTemplate
+                visible={effectTemplateModalVisible}
+                onCancel={() => {
+                    setEffectTemplateModalVisible(false);
+                }}
+                onConfirm={(result: string) => {
+                    form.setFieldsValue({
+                        value: result,
+                    });
+                    setEffectTemplateModalVisible(false);
+                }}
+            />
         </Modal>
     );
 };

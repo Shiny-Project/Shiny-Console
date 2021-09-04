@@ -5,7 +5,7 @@ import useErrorState from "hooks/useErrorState";
 import JSONViewer from "components/Common/JSONViewer";
 import { deleteEffect, getEffectList, createEffect } from "./service";
 import { EffectItem, EffectType } from "./types";
-import CreateEffectForm, { CreateEffectFormValues } from "./CreateEffectForm";
+import CreateEffectForm, { CreateEffectFormValues } from "./components/CreateEffectForm";
 
 const EffectIndex: React.FC = () => {
     const [effects, loading] = useRequest(getEffectList);

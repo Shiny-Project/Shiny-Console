@@ -1,4 +1,5 @@
 import request from "services/request";
+import { Spider } from "types/dashboard";
 import { EffectItem, EffectType } from "./types";
 
 export const getEffectList = () => request.get<EffectItem[]>("/Effect/list");
@@ -24,3 +25,5 @@ export const createEffect = (values: CreateEffectParams) => {
 
 export const deleteEffect = (key: string) =>
     request.post<void>("/Effect/delete", { key });
+
+export const getSpiderList = () => request.get<Spider[]>("/Spider/list");
