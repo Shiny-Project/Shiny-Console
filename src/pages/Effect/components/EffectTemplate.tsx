@@ -10,7 +10,7 @@ import fillStringTemplate from "utils/string_template";
 
 interface Props {
     visible: boolean;
-    onConfirm: (result: string) => void;
+    onConfirm: (key: string, value: string) => void;
     onCancel: () => void;
 }
 
@@ -47,13 +47,17 @@ const EffectTemplateForm: React.FC<Props> = (props: Props) => {
     };
     const onEffectTemplateConfirm = async () => {
         const values = await form.validateFields();
+        const spiderName = form.getFieldValue("spider");
         let templateStr = selectedTemplate.template;
         for (const parameter of selectedTemplate.parameters) {
             templateStr = fillStringTemplate(templateStr, {
                 [parameter.name]: values[parameter.name],
             });
         }
-        onConfirm(JSON.stringify(JSON.parse(templateStr), null, 2));
+        onConfirm(
+            `spider_${spiderName}`,
+            JSON.stringify(JSON.parse(templateStr), null, 2)
+        );
     };
     return (
         <Modal

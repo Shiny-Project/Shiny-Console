@@ -133,9 +133,10 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                 onCancel={() => {
                     setEffectTemplateModalVisible(false);
                 }}
-                onConfirm={(result: string) => {
+                onConfirm={(key: string, value: string) => {
                     form.setFieldsValue({
-                        value: result,
+                        key,
+                        value,
                     });
                     setEffectTemplateModalVisible(false);
                 }}
