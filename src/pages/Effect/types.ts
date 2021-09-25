@@ -18,6 +18,7 @@ export interface EffectItem {
 
 export interface EffectTemplate {
     name: string;
+    contentType: string;
     template: string;
     parameters: EffectTemplateParameter[];
 }

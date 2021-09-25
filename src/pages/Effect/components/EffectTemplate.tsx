@@ -10,7 +10,7 @@ import fillStringTemplate from "utils/string_template";
 
 interface Props {
     visible: boolean;
-    onConfirm: (key: string, value: string) => void;
+    onConfirm: (type: string, key: string, value: string) => void;
     onCancel: () => void;
 }
 
@@ -55,6 +55,7 @@ const EffectTemplateForm: React.FC<Props> = (props: Props) => {
             });
         }
         onConfirm(
+            selectedTemplate.contentType,
             `spider_${spiderName}`,
             JSON.stringify(JSON.parse(templateStr), null, 2)
         );
