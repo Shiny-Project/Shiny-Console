@@ -26,7 +26,12 @@ function EventBasicInfo(props: Props) {
                 {event.event.publisher}
             </Descriptions.Item>
             <Descriptions.Item label="子频道">
-                {event.event.channel || '/'}
+                {event.event.channel || "/"}
+            </Descriptions.Item>
+            <Descriptions.Item label="链接">
+                <a href={event.event.data.link} target="_blank" rel="noreferrer">
+                    {event.event.data.link}
+                </a>
             </Descriptions.Item>
         </Descriptions>
     );
