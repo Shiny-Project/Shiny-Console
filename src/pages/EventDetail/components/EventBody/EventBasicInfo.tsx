@@ -1,4 +1,3 @@
-import React from "react";
 import { Descriptions } from "antd";
 import { ShinyEventDetail } from "types/dashboard";
 
@@ -29,7 +28,11 @@ function EventBasicInfo(props: Props) {
                 {event.event.channel || "/"}
             </Descriptions.Item>
             <Descriptions.Item label="链接">
-                <a href={event.event.data.link} target="_blank" rel="noreferrer">
+                <a
+                    href={event.event.data.link}
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     {event.event.data.link}
                 </a>
             </Descriptions.Item>

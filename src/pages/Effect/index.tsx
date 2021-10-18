@@ -30,7 +30,7 @@ const EffectIndex: React.FC = () => {
             title: "Value",
             key: "value",
             render: (text: string, record: EffectItem) => {
-                return record.contentType === "json" ? (
+                return record.contentType === "JSON" ? (
                     <JSONViewer json={record.value} />
                 ) : (
                     record.value
