@@ -16,6 +16,7 @@ interface PushJobItemProps {
 const PushJobChannelTextMap = {
     twitter: "Twitter",
     weibo: "微博",
+    telegram: "Telegram",
 };
 
 const PushJobStatusTextMap = {
