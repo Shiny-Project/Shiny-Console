@@ -94,7 +94,7 @@ class Sider extends React.Component<Props, State> {
                     title={
                         <span>
                             <DeploymentUnitOutlined />
-                            部署
+                            <span>部署</span>
                         </span>
                     }
                 >

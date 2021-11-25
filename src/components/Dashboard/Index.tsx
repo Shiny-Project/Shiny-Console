@@ -94,7 +94,7 @@ class Dashboard extends React.Component<Props, {}> {
             >
                 <Layout>
                     <Header>
-                        <h2 className="logo">Shiny-Console</h2>
+                        <h2 className="logo">Shiny Console</h2>
                     </Header>
                     <Content>
                         <Row gutter={8}>
