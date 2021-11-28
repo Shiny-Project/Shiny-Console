@@ -132,6 +132,9 @@ class Sider extends React.Component<Props, State> {
                     <Menu.Item key="push-manual-push">
                         <Link to="/dashboard/push/manual_push">手动推送</Link>
                     </Menu.Item>
+                    <Menu.Item key="push-special-push">
+                        <Link to="/dashboard/push/special_push">特殊推送</Link>
+                    </Menu.Item>
                 </SubMenu>
             </Menu>
         );

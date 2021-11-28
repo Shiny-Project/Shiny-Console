@@ -57,6 +57,9 @@ const AsyncManualPushPage = createAsyncComponent({
 const AsyncEffect = createAsyncComponent({
     path: "pages/Effect",
 });
+const AsyncSpecialPushHistory = createAsyncComponent({
+    path: "pages/SpecialPushHistory",
+});
 
 export interface Props {
     errors?: ErrorState;
@@ -159,6 +162,11 @@ class Dashboard extends React.Component<Props, {}> {
                                     <Route
                                         path="/dashboard/push/manual_push"
                                         component={AsyncManualPushPage}
+                                    />
+                                    {/* Pages - SpecialPushHistory */}
+                                    <Route
+                                        path="/dashboard/push/special_push"
+                                        component={AsyncSpecialPushHistory}
                                     />
                                     {/* Deploy */}
                                     <Route
