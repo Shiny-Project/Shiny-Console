@@ -4,6 +4,7 @@ const {
     addLessLoader,
     addBabelPlugin,
     addWebpackAlias,
+    adjustStyleLoaders,
 } = require("customize-cra");
 const path = require("path");
 
@@ -19,7 +20,14 @@ module.exports = override(
         style: true,
     }),
     addLessLoader({
-        javascriptEnabled: true,
+        lessOptions: {
+            javascriptEnabled: true,
+        },
+    }),
+    // https://github.com/arackaf/customize-cra/issues/315
+    adjustStyleLoaders(({ use: [, , postcss] }) => {
+        const postcssOptions = postcss.options;
+        postcss.options = { postcssOptions };
     }),
     addWebpackAlias({
         "@": resolve("src"),
