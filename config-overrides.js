@@ -33,6 +33,10 @@ module.exports = override(
         "@": resolve("src"),
     }),
     (config) => {
+        config.module.rules[0].exclude = path.resolve(
+            __dirname,
+            "node_modules"
+        );
         config.devtool =
             config.mode === "development" ? "cheap-module-source-map" : false;
         return config;

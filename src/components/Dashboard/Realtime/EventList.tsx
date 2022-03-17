@@ -62,7 +62,6 @@ class EventList extends React.Component<EventListProps, EventListState> {
     };
     handleFilterApply = (): void => {
         if (this.state.value.length > 0) {
-            console.log(this.state.value);
             this.props.getRecentEvents(
                 this.state.value.map((item) => item.value as string)
             );

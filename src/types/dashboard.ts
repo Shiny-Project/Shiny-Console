@@ -11,9 +11,9 @@ export interface StatusItem {
 }
 
 export interface SpiderRanking {
-    '1day': SpiderRankingItem[];
-    '3days': SpiderRankingItem[];
-    '21days': SpiderRankingItem[];
+    "1day": SpiderRankingItem[];
+    "3days": SpiderRankingItem[];
+    "21days": SpiderRankingItem[];
 }
 
 export interface SpiderRankingItem {
@@ -71,6 +71,23 @@ export interface ShinyEEWEvent extends ShinyEvent {
     data: ShinyEEWEventData;
 }
 
+export interface ShinyTsunamiObservationItem {
+    /** 观测点名称 */
+    name: string;
+    /** 时间 */
+    time: string;
+    /** 高度 */
+    height: string;
+}
+
+export interface ShinyTsunamiObservationData extends ShinyEventData {
+    observation: ShinyTsunamiObservationItem[];
+}
+
+export interface ShinyTsunamiObservationEvent extends ShinyEvent {
+    data: ShinyTsunamiObservationData;
+}
+
 /** Shiny 事件关联信息 */
 export interface ShinyEventDetail {
     event: ShinyEvent;
@@ -86,7 +103,7 @@ export interface ShinyPushJob {
     /** 推送渠道  */
     channel: string;
     /** 任务状态 */
-    status: 'success' | 'fail';
+    status: "success" | "fail";
     info: string;
     text: string;
     image?: string;
@@ -149,7 +166,7 @@ export interface BaseJob {
 export interface DataRefreshJob extends BaseJob {
     /** 任务ID */
     id: number;
-    type: 'data_refresh';
+    type: "data_refresh";
     /** 任务爬虫 */
     spider: string;
     /** 爬虫路径 */
@@ -163,7 +180,7 @@ export type Job = DataRefreshJob;
 /** 任务状态广播信息 */
 export interface JobStatusMessage {
     /** 状态更新类型  */
-    type: 'create' | 'update';
+    type: "create" | "update";
     /** 更新事件 */
     job: Job;
 }
