@@ -1,12 +1,12 @@
 import { Card, Table } from "antd";
 import React from "react";
-import { ShinyTsunamiObservationEvent } from "types/dashboard";
+import { ShinyTsunamiEstimationEvent } from "types/dashboard";
 
 interface Props {
-    event: ShinyTsunamiObservationEvent;
+    event: ShinyTsunamiEstimationEvent;
 }
 
-const TsunamiObservation: React.FC<Props> = (props) => {
+const TsunamiEstimation: React.FC<Props> = (props) => {
     const { event } = props;
     const columns = [
         {
@@ -15,24 +15,21 @@ const TsunamiObservation: React.FC<Props> = (props) => {
             key: "name",
         },
         {
-            title: "观测时间",
+            title: "到达时间",
             dataIndex: "time",
             key: "time",
         },
         {
-            title: "海啸高度",
+            title: "预测海啸高度",
             dataIndex: "height",
             key: "height",
         },
     ];
     return (
-        <Card title="海啸观测情报">
-            <Table
-                columns={columns}
-                dataSource={event.data.observation}
-            ></Table>
+        <Card title="海啸到达时间和高度预测">
+            <Table columns={columns} dataSource={event.data.estimation}></Table>
         </Card>
     );
 };
 
-export default TsunamiObservation;
+export default TsunamiEstimation;

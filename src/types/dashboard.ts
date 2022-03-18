@@ -88,6 +88,22 @@ export interface ShinyTsunamiObservationEvent extends ShinyEvent {
     data: ShinyTsunamiObservationData;
 }
 
+interface ShinyTsunamiEstimationEventItem {
+    /** 观测点名称 */
+    name: string;
+    /** 到达时间 */
+    time: string;
+    /** 高度 */
+    height: string;
+}
+export interface ShinyTsunamiEstimationEventData extends ShinyEventData {
+    estimation: ShinyTsunamiEstimationEventItem[];
+}
+
+export interface ShinyTsunamiEstimationEvent extends ShinyEvent {
+    data: ShinyTsunamiEstimationEventData;
+}
+
 /** Shiny 事件关联信息 */
 export interface ShinyEventDetail {
     event: ShinyEvent;

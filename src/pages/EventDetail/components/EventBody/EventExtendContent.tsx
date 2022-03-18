@@ -2,25 +2,31 @@ import {
     ShinyEEWEvent,
     ShinyEvent,
     ShinyEventDetail,
+    ShinyTsunamiEstimationEvent,
     ShinyTsunamiObservationEvent,
 } from "types/dashboard";
 import EEW from "./Extend/EEW";
+import TsunamiEstimation from "./Extend/TsunamiEstimation";
 import TsunamiObservation from "./Extend/TsunamiObservation";
 
 interface Props {
     event: ShinyEventDetail;
 }
 
-const isEEWEvent = (
-    event: ShinyEvent | ShinyEEWEvent
-): event is ShinyEEWEvent => {
+const isEEWEvent = (event: ShinyEvent): event is ShinyEEWEvent => {
     return event.publisher === "eew";
 };
 
 const isTsunamiObservationEvent = (
-    event: ShinyEvent | ShinyEEWEvent
+    event: ShinyEvent
 ): event is ShinyTsunamiObservationEvent => {
     return event.publisher === "tsunami_observation";
+};
+
+const isTsunamiEstimationEvent = (
+    event: ShinyEvent | ShinyEEWEvent
+): event is ShinyTsunamiEstimationEvent => {
+    return event.publisher === "tsunami_estimation";
 };
 
 function EventExtendContent(props: Props) {
@@ -30,6 +36,9 @@ function EventExtendContent(props: Props) {
     }
     if (isTsunamiObservationEvent(event.event)) {
         return <TsunamiObservation event={event.event} />;
+    }
+    if (isTsunamiEstimationEvent(event.event)) {
+        return <TsunamiEstimation event={event.event} />;
     }
     return null;
 }
