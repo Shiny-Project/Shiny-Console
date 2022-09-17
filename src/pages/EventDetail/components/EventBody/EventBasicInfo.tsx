@@ -1,4 +1,5 @@
 import { Descriptions } from "antd";
+import JSONViewer from "components/Common/JSONViewer";
 import { ShinyEventDetail } from "types/dashboard";
 
 interface Props {
@@ -35,6 +36,11 @@ function EventBasicInfo(props: Props) {
                 >
                     {event.event.data.link}
                 </a>
+            </Descriptions.Item>
+            <Descriptions.Item label="原始数据">
+                <JSONViewer json={event.event.data} >
+                    点击查看
+                </JSONViewer>
             </Descriptions.Item>
         </Descriptions>
     );
