@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Card, Divider } from "antd";
 import request from "services/request";
 import { ShinyEvent, ShinyEventDetail } from "types/dashboard";
@@ -59,14 +59,17 @@ class EventListItem extends React.Component<
                     hoverable={true}
                     extra={
                         <span>
-                            <Link to={`/dashboard/event/${this.props.event.id}`}>详细信息</Link>
+                            <Link
+                                to={`/dashboard/event/${this.props.event.id}`}
+                            >
+                                详细信息
+                            </Link>
                         </span>
                     }
                     title={this.props.event.data.title}
                 >
                     <div onClick={this.toggleDetailPanel}>
                         <Card.Meta
-                            
                             description={
                                 <div
                                     className="event-content"
@@ -76,11 +79,15 @@ class EventListItem extends React.Component<
                                 />
                             }
                             avatar={
-                                <img
-                                    src={this.props.event.data.cover}
-                                    alt="事件封面"
-                                    className="event-cover"
-                                />
+                                <>
+                                    {this.props.event.data.cover ? (
+                                        <img
+                                            src={this.props.event.data.cover}
+                                            alt="事件封面"
+                                            className="event-cover"
+                                        />
+                                    ) : null}
+                                </>
                             }
                         />
                     </div>
