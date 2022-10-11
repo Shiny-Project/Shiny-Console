@@ -1,4 +1,5 @@
 import { Timeline } from "antd";
+import JSONViewer from "components/Common/JSONViewer";
 import { useMemo } from "react";
 import { ShinyPushJob, ShinyPushJobLog } from "types/dashboard";
 import TimeDiff from "./TimeDiff";
@@ -9,7 +10,7 @@ interface Props {
 }
 
 interface PushJobItemProps {
-    log: ShinyPushJobLog;
+    log: ShinyPushJobLog & { jobResult?: string };
     startTime: Date;
 }
 
@@ -62,7 +63,18 @@ function PushJobItem(props: PushJobItemProps) {
             <TimeDiff startTime={startTime} time={logTime} />
             <div className="time">{logTime.toISOString()}</div>
             {PushJobStatusColorNameMap[log.status] === "red" && (
-                <div className="error-log">{log.info}</div>
+                <div className="log-viewer">
+                    <JSONViewer json={JSON.parse(log.info)}>
+                        查看响应
+                    </JSONViewer>
+                </div>
+            )}
+            {log.status === "finished" && (
+                <div className="log-viewer">
+                    <JSONViewer json={JSON.parse(log.jobResult)}>
+                        查看响应
+                    </JSONViewer>
+                </div>
             )}
         </Timeline.Item>
     );
@@ -81,7 +93,18 @@ function EventTimeline(props: Props) {
                     const timeB = b.time ?? b.createdAt;
                     return Date.parse(timeA) - Date.parse(timeB);
                 });
-            result.push(...logs);
+            result.push(
+                ...logs.map((log) => ({
+                    ...log,
+                    ...(PushJobStatusColorNameMap[log.status] === "green"
+                        ? {
+                              jobResult: jobs.find(
+                                  (job) => job.id === log.job_id
+                              ).info,
+                          }
+                        : {}),
+                }))
+            );
         }
         return result;
     }, [jobs]);

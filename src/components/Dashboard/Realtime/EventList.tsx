@@ -118,7 +118,7 @@ class EventList extends React.Component<EventListProps, EventListState> {
                         onClick={this.handleFilterApply}
                         className="filter-apply-button"
                     >
-                        Apply
+                        搜索
                     </Button>
                 </div>
                 {eventList}

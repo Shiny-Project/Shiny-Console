@@ -12,13 +12,17 @@
     object-fit: contain;
     max-height: 500px;
 }
-.time, .error-log {
+.time, .log-viewer {
     color: #aaa;
     font-size: smaller;
 }
-.error-log {
-    font-family: Consolas, monospace;
+
+.log-viewer .ant-btn {
+    padding: 0;
+    font-size: smaller;
+    height: unset;
 }
+
 .time-diff {
     text-decoration: underline;
 }
