@@ -104,6 +104,65 @@ export interface ShinyTsunamiEstimationEvent extends ShinyEvent {
     data: ShinyTsunamiEstimationEventData;
 }
 
+interface TyphoonWindCircle {
+    /** 方向 */
+    direction: string;
+    /** 半径 */
+    radius: string;
+}
+
+interface TyphoonWindArea {
+    narrow_side: TyphoonWindCircle;
+    wide_side: TyphoonWindCircle;
+}
+
+interface ShinyTyphoonInfoItem {
+    /** 时刻 */
+    time: Date;
+    /** 日文名 */
+    name_ja: string;
+    /** 英文名 */
+    name_en: string;
+    /** 编号 */
+    number: string;
+    /** 附加信息 */
+    remark: string;
+    /** 台风等级 */
+    typhoon_class: string;
+    /** 台风范围等级 */
+    area_class: string;
+    /** 台风强度等级 */
+    intensity_class: string;
+    /** 坐标 */
+    coordinate: string;
+    /** 位置（相对位置描述） */
+    location: string;
+    /** 移动方向 */
+    direction: string;
+    /** 移动速度 */
+    move_speed: string;
+    /** 中心气压 */
+    pressure: string;
+    /** 近中心最大风速（m/s） */
+    near_center_wind_speed: string;
+    /** 最大阵风风速（m/s） */
+    max_instantaneous_wind_speed: string;
+    /**  */
+    storm_wind_area: TyphoonWindArea;
+    strong_wind_area: TyphoonWindArea;
+}
+
+export interface ShinyTyphoonEventData extends ShinyEventData {
+    typhoon_data: {
+        current: ShinyTyphoonInfoItem;
+        estimations: ShinyTyphoonInfoItem[];
+    };
+}
+
+export interface ShinyTyphoonInfoEvent extends ShinyEvent {
+    data: ShinyTyphoonEventData;
+}
+
 /** Shiny 事件关联信息 */
 export interface ShinyEventDetail {
     event: ShinyEvent;
