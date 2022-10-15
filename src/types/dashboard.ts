@@ -116,7 +116,7 @@ interface TyphoonWindArea {
     wide_side: TyphoonWindCircle;
 }
 
-interface ShinyTyphoonInfoItem {
+export interface ShinyTyphoonInfoItem {
     /** 时刻 */
     time: Date;
     /** 日文名 */
