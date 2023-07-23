@@ -116,6 +116,21 @@ interface TyphoonWindArea {
     wide_side: TyphoonWindCircle;
 }
 
+export enum TyphoonStatus {
+    /** 台风存续 */
+    NORMAL = 1,
+    /** 移出管辖区域 */
+    MOVE_OUT = 2,
+    /** 减弱为热带低压 */
+    WEAKEN_TO_TD = 3,
+    /** 变性为温带气旋 */
+    DEGENERATION = 4,
+    /** 即将生成 */
+    GALE_WARNING = 5,
+    /** 台风命名 */
+    NAMING = 6,
+}
+
 export interface ShinyTyphoonInfoItem {
     /** 时刻 */
     time: Date;
