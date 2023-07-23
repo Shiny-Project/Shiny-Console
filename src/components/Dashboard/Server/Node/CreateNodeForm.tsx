@@ -29,9 +29,9 @@ function CreateNodeForm(props: CreateNodeFormProps) {
         }
     }, [visible, form]);
     return (
-        <Modal
+        (<Modal
             title="添加服务器"
-            visible={visible}
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmit}
             onCancel={onCancel}
@@ -85,7 +85,7 @@ function CreateNodeForm(props: CreateNodeFormProps) {
                     </Select>
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

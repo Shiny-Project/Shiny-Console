@@ -28,8 +28,8 @@ function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
         }
     }, [visible, form]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onCancel={onCancel}
             onOk={handleSubmit}
@@ -54,7 +54,7 @@ function FrequencyUpdateForm(props: FrequencyUpdateFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

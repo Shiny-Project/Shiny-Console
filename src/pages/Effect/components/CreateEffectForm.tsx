@@ -47,9 +47,9 @@ const CreateEffectForm: React.FC<Props> = (props) => {
         onSubmit(values);
     };
     return (
-        <Modal
+        (<Modal
             title="创建全局效果"
-            visible={visible}
+            open={visible}
             confirmLoading={loading}
             onCancel={onCancel}
             onOk={onConfirm}
@@ -142,7 +142,7 @@ const CreateEffectForm: React.FC<Props> = (props) => {
                     setEffectTemplateModalVisible(false);
                 }}
             />
-        </Modal>
+        </Modal>)
     );
 };
 

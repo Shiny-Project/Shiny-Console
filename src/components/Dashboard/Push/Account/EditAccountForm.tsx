@@ -40,8 +40,8 @@ function EditAccountForm(props: EditAccountFormProps) {
         }
     }, [visible, form]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -76,7 +76,7 @@ function EditAccountForm(props: EditAccountFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

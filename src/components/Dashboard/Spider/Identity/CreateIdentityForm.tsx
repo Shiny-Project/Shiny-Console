@@ -21,8 +21,8 @@ function CreateIdentityForm(props: CreateIdentityFormProps) {
         onSubmit(values.name, values.identity);
     };
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -43,7 +43,7 @@ function CreateIdentityForm(props: CreateIdentityFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

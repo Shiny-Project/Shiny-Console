@@ -34,8 +34,8 @@ function EditRepositoryForm(props: EditRepositoryFormProps) {
     }, [visible, form]);
 
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -59,7 +59,7 @@ function EditRepositoryForm(props: EditRepositoryFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

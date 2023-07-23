@@ -22,8 +22,8 @@ function CreateApplicationForm(props: CreateApplicationFormProps) {
         onSubmit(values.tag);
     };
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             title="生成密钥对"
             confirmLoading={loading}
             onOk={handleCreateSubmit}
@@ -50,7 +50,7 @@ function CreateApplicationForm(props: CreateApplicationFormProps) {
                     </Select>
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

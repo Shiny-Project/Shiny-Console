@@ -55,8 +55,8 @@ function EditConfigForm(props: EditConfigFormProps) {
         }
     }, [form, visible]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -83,7 +83,7 @@ function EditConfigForm(props: EditConfigFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

@@ -25,8 +25,8 @@ function CreateRuleForm(props: CreateRuleFormProps) {
         [form, onSubmit]
     );
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             onOk={handleSubmitClick}
             onCancel={onCancel}
             confirmLoading={loading}
@@ -47,7 +47,7 @@ function CreateRuleForm(props: CreateRuleFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

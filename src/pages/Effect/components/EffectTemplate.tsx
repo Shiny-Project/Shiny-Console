@@ -61,8 +61,8 @@ const EffectTemplateForm: React.FC<Props> = (props: Props) => {
         );
     };
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             title="从模板创建效果"
             onCancel={onCancel}
             onOk={onEffectTemplateConfirm}
@@ -114,7 +114,7 @@ const EffectTemplateForm: React.FC<Props> = (props: Props) => {
                     <SimpleSchemaForm schema={selectedTemplate.parameters} />
                 )}
             </Form>
-        </Modal>
+        </Modal>)
     );
 };
 

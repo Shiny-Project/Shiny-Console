@@ -35,8 +35,8 @@ function EditIdentityForm(props: EditIdentityFormProps) {
         }
     }, [form, visible, identityItem]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -64,7 +64,7 @@ function EditIdentityForm(props: EditIdentityFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

@@ -26,8 +26,8 @@ function CreateRepositoryForm(props: CreateRepositoryFormProps) {
     );
 
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onCancel={onCancel}
             onOk={handleSubmitClick}
@@ -48,7 +48,7 @@ function CreateRepositoryForm(props: CreateRepositoryFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

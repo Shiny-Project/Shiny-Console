@@ -39,8 +39,8 @@ function CreateConfigForm(props: CreateConfigFormProps) {
         setContentType(form.getFieldValue("contentType"));
     };
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -71,7 +71,7 @@ function CreateConfigForm(props: CreateConfigFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

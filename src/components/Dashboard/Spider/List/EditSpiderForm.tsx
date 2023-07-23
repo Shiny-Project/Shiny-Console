@@ -31,8 +31,8 @@ function EditSpiderForm(props: EditSpiderFormProps) {
         }
     }, [visible, form]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             onCancel={onCancel}
             onOk={handleSubmit}
             confirmLoading={loading}
@@ -72,7 +72,7 @@ function EditSpiderForm(props: EditSpiderFormProps) {
                     <Input />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

@@ -38,8 +38,8 @@ function EditRuleForm(props: EditRuleFormProps) {
         }
     }, [visible, form]);
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             confirmLoading={loading}
             onOk={handleSubmitClick}
             onCancel={onCancel}
@@ -67,7 +67,7 @@ function EditRuleForm(props: EditRuleFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 

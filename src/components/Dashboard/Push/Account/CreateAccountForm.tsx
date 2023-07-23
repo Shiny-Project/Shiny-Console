@@ -26,8 +26,8 @@ function CreateAccountForm(props: CreateAccountFormProps) {
         [form, onSubmit]
     );
     return (
-        <Modal
-            visible={visible}
+        (<Modal
+            open={visible}
             onOk={handleSubmitClick}
             onCancel={onCancel}
             confirmLoading={loading}
@@ -58,7 +58,7 @@ function CreateAccountForm(props: CreateAccountFormProps) {
                     <Input.TextArea />
                 </Form.Item>
             </Form>
-        </Modal>
+        </Modal>)
     );
 }
 
