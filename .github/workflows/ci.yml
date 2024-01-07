@@ -1,0 +1,20 @@
+name: Default CI
+
+on:
+    push:
+        branches: ["master"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repository to the runner
+            uses: actions/checkout@v4  
+          - name: Count lines
+            env:
+              SHINY_TOKEN: ${{ secrets.SHINY_TOKEN }}
+            run: |
+              docker run -v $(pwd):/data:ro mbologna/docker-tokei | awk '/Total/{print $4 + $5}'>temp.txt;
+              cat temp.txt;
+              curl -H "Content-Type:application/json" -H "X-Shiny-Token:$SHINY_TOKEN" -X POST -d '{"line":'$(cat temp.txt)', "name":"Shiny-Console"}' "https://shiny.kotori.moe/Repository/updateLines";
+              rm -f temp.txt;
